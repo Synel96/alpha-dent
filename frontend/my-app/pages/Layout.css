@@ -24,3 +24,25 @@
     border-color: #1c1c20;
   }
 }
+
+/* Loading screen – glowing alpha animation */
+@keyframes loading-glow {
+  0%,
+  100% {
+    text-shadow:
+      0 0 8px #c9a84c,
+      0 0 20px rgba(201, 168, 76, 0.5);
+    opacity: 0.75;
+  }
+  50% {
+    text-shadow:
+      0 0 16px #c9a84c,
+      0 0 40px #c9a84c,
+      0 0 70px rgba(201, 168, 76, 0.4);
+    opacity: 1;
+  }
+}
+
+.loading-alpha-glow {
+  animation: loading-glow 1.6s ease-in-out infinite;
+}
