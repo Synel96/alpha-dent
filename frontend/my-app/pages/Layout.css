@@ -1,0 +1,26 @@
+@font-face {
+  font-family: "Geist Variable";
+  src: url("@fontsource-variable/geist/files/geist-latin-wght-normal.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    background-color: #08080a;
+    color: #c9a84c;
+    font-family: "Geist Variable", Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    border-color: #1c1c20;
+  }
+}
