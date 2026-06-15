@@ -1,6 +1,7 @@
 import React from "react";
 import { usePageContext } from "vike-react/usePageContext";
 import { useTranslation } from "react-i18next";
+import "../../lib/i18n";
 import { AlphaGlyph } from "../../components/ui/alpha-glyph";
 
 export default function Page() {
