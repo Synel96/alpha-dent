@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import "./Layout.css";
 import "../lib/i18n";
 import { Footer } from "../components/ui/footer";
+import { LoadingScreen } from "../components/ui/loading-screen";
+import { AlphaGlyph } from "../components/ui/alpha-glyph";
 import {
   LanguageSwitcher,
   LanguageSwitcherCompact,
@@ -26,19 +28,34 @@ const navLinks = [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
   const { t } = useTranslation();
+
+  React.useEffect(() => {
+    // Hide initial loader after first render
+    setLoading(false);
+
+    // Show/hide loader during page transitions
+    const show = () => setLoading(true);
+    const hide = () => setLoading(false);
+    window.addEventListener("alphadent:loading:start", show);
+    window.addEventListener("alphadent:loading:end", hide);
+    return () => {
+      window.removeEventListener("alphadent:loading:start", show);
+      window.removeEventListener("alphadent:loading:end", hide);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-brand-black font-sans antialiased text-brand-gold flex flex-col">
+      <LoadingScreen visible={loading} />
       <header className="border-b border-brand-border bg-brand-black/90 backdrop-blur sticky top-0 z-50">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <a
             href="/"
             className="flex items-center gap-2 text-lg font-semibold text-brand-gold transition-colors hover:text-brand-gold-light"
           >
-            <span className="text-4xl leading-none text-brand-gold">
-              &alpha;
-            </span>
+            <AlphaGlyph glow className="text-4xl" />
             <span className="uppercase tracking-[0.32em]">Alphadent</span>
           </a>
 

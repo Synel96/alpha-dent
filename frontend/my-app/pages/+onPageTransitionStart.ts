@@ -6,4 +6,5 @@ export async function onPageTransitionStart(pageContext: Partial<PageContextClie
   console.log("Page transition start");
   console.log("pageContext.isBackwardNavigation", pageContext.isBackwardNavigation);
   document.body.classList.add("page-transition");
+  window.dispatchEvent(new CustomEvent("alphadent:loading:start"));
 }
