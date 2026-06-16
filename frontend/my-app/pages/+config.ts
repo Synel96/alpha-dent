@@ -5,6 +5,7 @@ const config: Config = {
   title: "Alpha Dent",
   description: "Alpha Dent fogászati rendelő weboldala",
   extends: [vikeReact],
+  prerender: true,
 };
 
 export default config;
