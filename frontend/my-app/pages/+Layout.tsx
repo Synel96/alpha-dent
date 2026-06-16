@@ -1,5 +1,4 @@
 import React from "react";
-import "@fontsource-variable/geist";
 import { useTranslation } from "react-i18next";
 import "./Layout.css";
 import "../lib/i18n";
@@ -16,7 +15,12 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "../components/ui/navigation-menu";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "../components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+} from "../components/ui/sheet";
 
 const navLinks = [
   { labelKey: "nav.home", href: "/" },
