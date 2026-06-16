@@ -5,7 +5,7 @@ export const commonResources = {
       clinic: "Klinikánk",
       services: "Szolgáltatásaink",
       story: "Történetünk",
-      faq: "Kérdések",
+      faq: "GYIK",
       contact: "Kapcsolat",
     },
     common: {
@@ -21,7 +21,7 @@ export const commonResources = {
       clinic: "Our Clinic",
       services: "Services",
       story: "Our Story",
-      faq: "Questions",
+      faq: "FAQ",
       contact: "Contact",
     },
     common: {
@@ -37,7 +37,7 @@ export const commonResources = {
       clinic: "Unsere Klinik",
       services: "Dienstleistungen",
       story: "Unsere Geschichte",
-      faq: "Häufig gestellte Fragen",
+      faq: "FAQ",
       contact: "Kontakt",
     },
     common: {
@@ -53,7 +53,7 @@ export const commonResources = {
       clinic: "La nostra clinica",
       services: "Servizi",
       story: "La nostra storia",
-      faq: "Domande frequenti",
+      faq: "FAQ",
       contact: "Contatti",
     },
     common: {
