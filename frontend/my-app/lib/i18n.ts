@@ -8,6 +8,11 @@ import { errorResources } from "./i18n/error";
 import { faqResources } from "./i18n/faq";
 
 const isBrowser = typeof window !== "undefined";
+const supportedLngs = ["hu", "en", "de", "it"] as const;
+
+function normalizeLng(lng: string) {
+  return lng.toLowerCase().split("-")[0];
+}
 
 const resources = {
   hu: {
@@ -44,6 +49,18 @@ const resources = {
   },
 } as const;
 
+function syncResourceBundles() {
+  for (const lng of supportedLngs) {
+    i18n.addResourceBundle(
+      lng,
+      "translation",
+      resources[lng].translation,
+      true,
+      true
+    );
+  }
+}
+
 if (!i18n.isInitialized) {
   if (isBrowser) {
     i18n.use(LanguageDetector);
@@ -54,7 +71,7 @@ if (!i18n.isInitialized) {
     fallbackLng: "hu",
     lng: "hu",
     initImmediate: false,
-    supportedLngs: ["hu", "en", "de", "it"],
+    supportedLngs,
     ns: ["translation"],
     defaultNS: "translation",
     interpolation: {
@@ -68,6 +85,20 @@ if (!i18n.isInitialized) {
       caches: ["localStorage"],
     },
   });
+
+  // Keep SSR hydration stable with "hu" first, then restore persisted client language.
+  if (isBrowser) {
+    const persisted = window.localStorage.getItem("i18nextLng");
+    if (persisted) {
+      const normalized = normalizeLng(persisted);
+      if (supportedLngs.includes(normalized as (typeof supportedLngs)[number]) && normalized !== i18n.language) {
+        void i18n.changeLanguage(normalized);
+      }
+    }
+  }
+} else {
+  // Keep server/client resources in sync across HMR and route-level module loads.
+  syncResourceBundles();
 }
 
 export default i18n;

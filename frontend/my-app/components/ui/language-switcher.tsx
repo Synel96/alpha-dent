@@ -1,6 +1,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+function applyLanguage(code: string, changeLanguage: (lng?: string) => Promise<unknown>) {
+  if (typeof window !== "undefined") {
+    window.localStorage.setItem("i18nextLng", code);
+    document.documentElement.lang = code;
+  }
+  void changeLanguage(code);
+}
+
 export function LanguageSwitcher() {
   const { i18n } = useTranslation();
 
@@ -16,7 +24,7 @@ export function LanguageSwitcher() {
       {languages.map((lang) => (
         <button
           key={lang.code}
-          onClick={() => i18n.changeLanguage(lang.code)}
+          onClick={() => applyLanguage(lang.code, i18n.changeLanguage.bind(i18n))}
           className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors ${
             i18n.language === lang.code
               ? "bg-brand-gold text-brand-black"
@@ -59,7 +67,7 @@ export function LanguageSwitcherCompact() {
             <button
               key={lang.code}
               onClick={() => {
-                i18n.changeLanguage(lang.code);
+                applyLanguage(lang.code, i18n.changeLanguage.bind(i18n));
                 setIsOpen(false);
               }}
               className={`w-full text-left px-3 py-2 text-xs font-semibold rounded-md transition-colors ${
