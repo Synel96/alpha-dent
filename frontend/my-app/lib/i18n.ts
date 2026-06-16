@@ -5,14 +5,43 @@ import { initReactI18next } from "react-i18next";
 import { commonResources } from "./i18n/common";
 import { contactResources } from "./i18n/contact";
 import { errorResources } from "./i18n/error";
+import { faqResources } from "./i18n/faq";
 
 const isBrowser = typeof window !== "undefined";
 
 const resources = {
-  hu: { translation: { ...commonResources.hu, ...errorResources.hu, ...contactResources.hu } },
-  en: { translation: { ...commonResources.en, ...errorResources.en, ...contactResources.en } },
-  de: { translation: { ...commonResources.de, ...errorResources.de, ...contactResources.de } },
-  it: { translation: { ...commonResources.it, ...errorResources.it, ...contactResources.it } },
+  hu: {
+    translation: {
+      ...commonResources.hu,
+      ...errorResources.hu,
+      ...contactResources.hu,
+      ...faqResources.hu,
+    },
+  },
+  en: {
+    translation: {
+      ...commonResources.en,
+      ...errorResources.en,
+      ...contactResources.en,
+      ...faqResources.en,
+    },
+  },
+  de: {
+    translation: {
+      ...commonResources.de,
+      ...errorResources.de,
+      ...contactResources.de,
+      ...faqResources.de,
+    },
+  },
+  it: {
+    translation: {
+      ...commonResources.it,
+      ...errorResources.it,
+      ...contactResources.it,
+      ...faqResources.it,
+    },
+  },
 } as const;
 
 if (!i18n.isInitialized) {
