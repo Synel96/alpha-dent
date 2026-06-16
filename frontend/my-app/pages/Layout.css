@@ -1,4 +1,5 @@
 @import "@fontsource-variable/geist/wght.css";
+@import "@fontsource-variable/geist/wght-italic.css";
 
 @tailwind base;
 @tailwind components;
