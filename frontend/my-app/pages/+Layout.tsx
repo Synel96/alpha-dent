@@ -1,4 +1,5 @@
 import React from "react";
+import "@fontsource-variable/geist";
 import { useTranslation } from "react-i18next";
 import "./Layout.css";
 import "../lib/i18n";
