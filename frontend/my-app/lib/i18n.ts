@@ -6,6 +6,7 @@ import { commonResources } from "./i18n/common";
 import { contactResources } from "./i18n/contact";
 import { errorResources } from "./i18n/error";
 import { faqResources } from "./i18n/faq";
+import { servicesResources } from "./i18n/services";
 
 const isBrowser = typeof window !== "undefined";
 const supportedLngs = ["hu", "en", "de", "it"] as const;
@@ -21,6 +22,7 @@ const resources = {
       ...errorResources.hu,
       ...contactResources.hu,
       ...faqResources.hu,
+      ...servicesResources.hu,
     },
   },
   en: {
@@ -29,6 +31,7 @@ const resources = {
       ...errorResources.en,
       ...contactResources.en,
       ...faqResources.en,
+      ...servicesResources.en,
     },
   },
   de: {
@@ -37,6 +40,7 @@ const resources = {
       ...errorResources.de,
       ...contactResources.de,
       ...faqResources.de,
+      ...servicesResources.de,
     },
   },
   it: {
@@ -45,6 +49,7 @@ const resources = {
       ...errorResources.it,
       ...contactResources.it,
       ...faqResources.it,
+      ...servicesResources.it,
     },
   },
 } as const;
@@ -97,7 +102,9 @@ if (!i18n.isInitialized) {
     },
     detection: {
       order: ["querystring", "localStorage", "navigator", "htmlTag"],
-      caches: ["localStorage"],
+      // We persist language ourselves in the switcher.
+      // Disabling detector caches prevents accidental reset to "hu" on init.
+      caches: [],
     },
   });
 
