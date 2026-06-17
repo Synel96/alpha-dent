@@ -84,7 +84,7 @@ export function TextImageReveal({
         style={{ transitionDelay: `${delayMs}ms` }}
         className={cn(
           "space-y-4 transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none",
-          visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
+          visible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-100",
           contentClassName
         )}
       >
@@ -110,7 +110,7 @@ export function TextImageReveal({
         className={cn(
           "overflow-hidden rounded-2xl border border-brand-border bg-brand-surface/70 shadow-[0_18px_36px_-24px_rgba(201,168,76,0.45)]",
           "transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none",
-          visible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0",
+          visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-100",
           imageClassName
         )}
       >
