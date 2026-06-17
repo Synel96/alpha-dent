@@ -6,6 +6,7 @@ type ServiceTileProps = {
   imageUrl?: string;
   className?: string;
   delayMs?: number;
+  onClick?: () => void;
 };
 
 export function ServiceTile({
@@ -13,6 +14,7 @@ export function ServiceTile({
   imageUrl,
   className,
   delayMs = 0,
+  onClick,
 }: ServiceTileProps) {
   const rootRef = React.useRef<HTMLElement | null>(null);
   const [visible, setVisible] = React.useState(false);
@@ -59,7 +61,11 @@ export function ServiceTile({
         className
       )}
     >
-      <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
+      <button
+        type="button"
+        onClick={onClick}
+        className="relative block w-full aspect-[4/3] overflow-hidden rounded-xl text-left"
+      >
         {imageUrl ? (
           <img
             src={imageUrl}
@@ -85,7 +91,7 @@ export function ServiceTile({
             {title}
           </h3>
         </div>
-      </div>
+      </button>
     </article>
   );
 }
