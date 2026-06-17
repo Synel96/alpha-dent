@@ -1,4 +1,5 @@
 import React from "react";
+import { navigate } from "vike/client/router";
 import { useTranslation } from "react-i18next";
 import "./Layout.css";
 import "../lib/i18n";
@@ -36,6 +37,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = React.useState(true);
   const { t } = useTranslation();
 
+  const handleInternalLink = React.useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement>, href: string, closeMenu = false) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.altKey ||
+        event.ctrlKey ||
+        event.shiftKey
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      if (closeMenu) setOpen(false);
+      void navigate(href);
+    },
+    []
+  );
+
   React.useEffect(() => {
     // Hide initial loader after first render
     setLoading(false);
@@ -58,6 +79,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <a
             href="/"
+            onClick={(event) => handleInternalLink(event, "/")}
             className="flex items-center gap-2 text-lg font-semibold text-brand-gold transition-colors hover:text-brand-gold-light"
           >
             <AlphaGlyph glow className="text-4xl" />
@@ -71,6 +93,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <NavigationMenuItem key={link.href}>
                     <NavigationMenuLink
                       href={link.href}
+                      onClick={(event) => handleInternalLink(event, link.href)}
                       className="px-3 py-2 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold rounded-md transition-colors"
                     >
                       {t(link.labelKey)}
@@ -126,7 +149,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                       <a
                         key={link.href}
                         href={link.href}
-                        onClick={() => setOpen(false)}
+                        onClick={(event) => handleInternalLink(event, link.href, true)}
                         className="rounded-md px-3 py-2.5 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold transition-colors"
                       >
                         {t(link.labelKey)}

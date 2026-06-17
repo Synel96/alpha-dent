@@ -61,6 +61,21 @@ function syncResourceBundles() {
   }
 }
 
+function applyPersistedLanguage() {
+  if (!isBrowser) return;
+
+  const persisted = window.localStorage.getItem("i18nextLng");
+  if (!persisted) return;
+
+  const normalized = normalizeLng(persisted);
+  if (
+    supportedLngs.includes(normalized as (typeof supportedLngs)[number]) &&
+    normalized !== i18n.language
+  ) {
+    void i18n.changeLanguage(normalized);
+  }
+}
+
 if (!i18n.isInitialized) {
   if (isBrowser) {
     i18n.use(LanguageDetector);
@@ -69,7 +84,7 @@ if (!i18n.isInitialized) {
   i18n.use(initReactI18next).init({
     resources,
     fallbackLng: "hu",
-    lng: "hu",
+    ...(isBrowser ? {} : { lng: "hu" }),
     initImmediate: false,
     supportedLngs,
     ns: ["translation"],
@@ -86,19 +101,12 @@ if (!i18n.isInitialized) {
     },
   });
 
-  // Keep SSR hydration stable with "hu" first, then restore persisted client language.
-  if (isBrowser) {
-    const persisted = window.localStorage.getItem("i18nextLng");
-    if (persisted) {
-      const normalized = normalizeLng(persisted);
-      if (supportedLngs.includes(normalized as (typeof supportedLngs)[number]) && normalized !== i18n.language) {
-        void i18n.changeLanguage(normalized);
-      }
-    }
-  }
+  // On client, keep selected language sticky across route changes and error pages.
+  applyPersistedLanguage();
 } else {
   // Keep server/client resources in sync across HMR and route-level module loads.
   syncResourceBundles();
+  applyPersistedLanguage();
 }
 
 export default i18n;
