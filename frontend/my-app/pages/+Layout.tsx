@@ -1,8 +1,10 @@
 import React from "react";
 import { navigate } from "vike/client/router";
 import { useTranslation } from "react-i18next";
+import { usePageContext } from "vike-react/usePageContext";
 import "./Layout.css";
 import "../lib/i18n";
+import { localizeHref } from "../lib/locale";
 import { Footer } from "../components/ui/footer";
 import { LoadingScreen } from "../components/ui/loading-screen";
 import { AlphaGlyph } from "../components/ui/alpha-glyph";
@@ -35,7 +37,22 @@ const navLinks = [
 export function Layout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
-  const { t } = useTranslation();
+  const { locale } = usePageContext();
+  const { t, i18n } = useTranslation();
+
+  // The URL locale prefix is the source of truth for the active language.
+  // This must run synchronously during render (not in an effect) so that
+  // this component's own t() calls below, and every descendant Page's,
+  // already see the right language on the very first render (SSR + hydration).
+  if (i18n.language !== locale) {
+    i18n.changeLanguage(locale);
+  }
+
+  const localizedNavLinks = navLinks.map((link) => ({
+    ...link,
+    href: localizeHref(locale, link.href),
+  }));
+  const homeHref = localizeHref(locale, "/");
 
   const handleInternalLink = React.useCallback(
     (event: React.MouseEvent<HTMLAnchorElement>, href: string, closeMenu = false) => {
@@ -78,8 +95,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <header className="border-b border-brand-border bg-brand-black/90 backdrop-blur sticky top-0 z-50">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <a
-            href="/"
-            onClick={(event) => handleInternalLink(event, "/")}
+            href={homeHref}
+            onClick={(event) => handleInternalLink(event, homeHref)}
             className="flex items-center gap-2 text-lg font-semibold text-brand-gold transition-colors hover:text-brand-gold-light"
           >
             <AlphaGlyph glow className="text-4xl" />
@@ -89,7 +106,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <div className="hidden md:flex flex-1 justify-center">
             <NavigationMenu viewport={false}>
               <NavigationMenuList className="gap-1">
-                {navLinks.map((link) => (
+                {localizedNavLinks.map((link) => (
                   <NavigationMenuItem key={link.href}>
                     <NavigationMenuLink
                       href={link.href}
@@ -145,7 +162,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 >
                   <SheetTitle className="sr-only">Navigáció</SheetTitle>
                   <nav className="flex flex-col gap-1 px-4 pt-4">
-                    {navLinks.map((link) => (
+                    {localizedNavLinks.map((link) => (
                       <a
                         key={link.href}
                         href={link.href}

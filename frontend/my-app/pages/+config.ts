@@ -6,6 +6,7 @@ const config: Config = {
   description: "Alpha Dent fogászati rendelő weboldala",
   extends: [vikeReact],
   prerender: true,
+  passToClient: ["locale"],
 };
 
 export default config;

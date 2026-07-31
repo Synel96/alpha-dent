@@ -1,5 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { usePageContext } from "vike-react/usePageContext";
+import { localizeHref } from "../../lib/locale";
 import { CtaButton } from "../../components/ui/cta-button";
 import { FaqAccordion } from "../../components/ui/faq-accordion";
 import { PageContainer } from "../../components/ui/page-container";
@@ -27,6 +29,7 @@ export { Page };
 
 function Page() {
   const { t } = useTranslation();
+  const { locale } = usePageContext();
 
   const items: FaqItem[] = FAQ_KEYS.map((key) => ({
     question: t(`faqPage.items.${key}.question`),
@@ -50,7 +53,7 @@ function Page() {
         </p>
         <div className="mt-5">
           <CtaButton
-            href="/kapcsolat"
+            href={localizeHref(locale, "/kapcsolat")}
             badge={t("nav.contact")}
             title={t("faqPage.ctaButton")}
             className="min-w-[260px]"

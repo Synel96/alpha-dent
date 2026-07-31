@@ -1,5 +1,4 @@
 import i18n from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
 import { commonResources } from "./i18n/common";
@@ -7,13 +6,7 @@ import { contactResources } from "./i18n/contact";
 import { errorResources } from "./i18n/error";
 import { faqResources } from "./i18n/faq";
 import { servicesResources } from "./i18n/services";
-
-const isBrowser = typeof window !== "undefined";
-const supportedLngs = ["hu", "en", "de", "it"] as const;
-
-function normalizeLng(lng: string) {
-  return lng.toLowerCase().split("-")[0];
-}
+import { DEFAULT_LOCALE, LOCALES } from "./locale";
 
 const resources = {
   hu: {
@@ -55,43 +48,20 @@ const resources = {
 } as const;
 
 function syncResourceBundles() {
-  for (const lng of supportedLngs) {
-    i18n.addResourceBundle(
-      lng,
-      "translation",
-      resources[lng].translation,
-      true,
-      true
-    );
-  }
-}
-
-function applyPersistedLanguage() {
-  if (!isBrowser) return;
-
-  const persisted = window.localStorage.getItem("i18nextLng");
-  if (!persisted) return;
-
-  const normalized = normalizeLng(persisted);
-  if (
-    supportedLngs.includes(normalized as (typeof supportedLngs)[number]) &&
-    normalized !== i18n.language
-  ) {
-    void i18n.changeLanguage(normalized);
+  for (const lng of LOCALES) {
+    i18n.addResourceBundle(lng, "translation", resources[lng].translation, true, true);
   }
 }
 
 if (!i18n.isInitialized) {
-  if (isBrowser) {
-    i18n.use(LanguageDetector);
-  }
-
+  // The active language is driven by the URL locale prefix (see
+  // pages/+onBeforeRoute.ts), not by browser detection or localStorage.
+  // pages/+Layout.tsx syncs i18n to pageContext.locale on every render.
   i18n.use(initReactI18next).init({
     resources,
-    fallbackLng: "hu",
-    ...(isBrowser ? {} : { lng: "hu" }),
-    initImmediate: false,
-    supportedLngs,
+    lng: DEFAULT_LOCALE,
+    fallbackLng: DEFAULT_LOCALE,
+    supportedLngs: LOCALES,
     ns: ["translation"],
     defaultNS: "translation",
     interpolation: {
@@ -100,20 +70,10 @@ if (!i18n.isInitialized) {
     react: {
       useSuspense: false,
     },
-    detection: {
-      order: ["querystring", "localStorage", "navigator", "htmlTag"],
-      // We persist language ourselves in the switcher.
-      // Disabling detector caches prevents accidental reset to "hu" on init.
-      caches: [],
-    },
   });
-
-  // On client, keep selected language sticky across route changes and error pages.
-  applyPersistedLanguage();
 } else {
   // Keep server/client resources in sync across HMR and route-level module loads.
   syncResourceBundles();
-  applyPersistedLanguage();
 }
 
 export default i18n;

@@ -14,7 +14,10 @@ export function ServiceModal({ open, onOpenChange, title, items }: ServiceModalP
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/65 backdrop-blur-sm" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[92vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-brand-border bg-brand-black p-0 text-brand-gold shadow-2xl outline-none">
+        <Dialog.Content
+          className="fixed left-1/2 top-1/2 z-50 w-[92vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-brand-border bg-brand-black p-0 text-brand-gold shadow-2xl outline-none"
+          aria-describedby={undefined}
+        >
           <div className="border-b border-brand-border px-5 py-4 pr-12">
             <Dialog.Title className="text-lg font-semibold text-brand-gold-light">
               {title}
