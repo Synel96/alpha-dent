@@ -68,4 +68,34 @@ describe("LanguageSwitcherCompact", () => {
     fireEvent.click(screen.getByText("IT"));
     expect(mockNavigate).toHaveBeenCalledWith("/it/kerdesek");
   });
+
+  it("aria-expanded és aria-haspopup jelzi a menü állapotát", () => {
+    render(<LanguageSwitcherCompact />);
+    const toggle = screen.getByLabelText("Switch language");
+    expect(toggle).toHaveAttribute("aria-haspopup", "menu");
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    fireEvent.click(toggle);
+    expect(toggle).toHaveAttribute("aria-expanded", "true");
+  });
+
+  it("Escape lenyomására bezáródik a menü", () => {
+    render(<LanguageSwitcherCompact />);
+    fireEvent.click(screen.getByLabelText("Switch language"));
+    expect(screen.getByText("IT")).toBeInTheDocument();
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(screen.queryByText("IT")).not.toBeInTheDocument();
+  });
+
+  it("a menün kívülre kattintva bezáródik a menü", () => {
+    render(
+      <div>
+        <div data-testid="outside">kívül</div>
+        <LanguageSwitcherCompact />
+      </div>
+    );
+    fireEvent.click(screen.getByLabelText("Switch language"));
+    expect(screen.getByText("IT")).toBeInTheDocument();
+    fireEvent.pointerDown(screen.getByTestId("outside"));
+    expect(screen.queryByText("IT")).not.toBeInTheDocument();
+  });
 });

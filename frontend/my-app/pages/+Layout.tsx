@@ -97,7 +97,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <a
             href={homeHref}
             onClick={(event) => handleInternalLink(event, homeHref)}
-            className="flex items-center gap-2 text-lg font-semibold text-brand-gold transition-colors hover:text-brand-gold-light"
+            className="flex items-center gap-2 rounded-md text-lg font-semibold text-brand-gold transition-colors hover:text-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
           >
             <AlphaGlyph glow className="text-4xl" />
             <span className="uppercase tracking-[0.32em]">Alphadent</span>
@@ -131,7 +131,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <SheetTrigger asChild>
                   <button
                     aria-label={t("common.menuOpen")}
-                    className="flex h-8 w-8 flex-col items-center justify-center gap-[5px] rounded-md hover:bg-brand-surface"
+                    className="flex h-8 w-8 flex-col items-center justify-center gap-[5px] rounded-md hover:bg-brand-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black"
                   >
                     <span
                       className={`block h-[2px] w-[18px] bg-brand-gold transition-all duration-300 ${
@@ -160,21 +160,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   className="w-3/4"
                   aria-describedby={undefined}
                 >
-                  <SheetTitle className="sr-only">Navigáció</SheetTitle>
+                  <SheetTitle className="sr-only">{t("common.navigation")}</SheetTitle>
                   <nav className="flex flex-col gap-1 px-4 pt-4">
                     {localizedNavLinks.map((link) => (
                       <a
                         key={link.href}
                         href={link.href}
                         onClick={(event) => handleInternalLink(event, link.href, true)}
-                        className="rounded-md px-3 py-2.5 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold transition-colors"
+                        className="rounded-md px-3 py-2.5 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 transition-colors"
                       >
                         {t(link.labelKey)}
                       </a>
                     ))}
                     <div className="mt-4 border-t border-brand-border pt-4">
                       <p className="mb-2 text-xs uppercase tracking-wide text-brand-gold-muted">
-                        Nyelv
+                        {t("common.language")}
                       </p>
                       <LanguageSwitcher />
                     </div>

@@ -1,5 +1,8 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import { cloudinarySrcSet, cloudinaryUrl, TILE_IMAGE_WIDTHS } from "@/lib/cloudinary";
+
+const TILE_SIZES = "(min-width: 1280px) 22vw, (min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw";
 
 type ServiceTileProps = {
   title: string;
@@ -64,11 +67,13 @@ export function ServiceTile({
       <button
         type="button"
         onClick={onClick}
-        className="relative block w-full aspect-[4/3] overflow-hidden rounded-xl text-left"
+        className="relative block w-full aspect-[4/3] overflow-hidden rounded-xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/80 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black"
       >
         {imageUrl ? (
           <img
-            src={imageUrl}
+            src={cloudinaryUrl(imageUrl, { width: TILE_IMAGE_WIDTHS.at(-1) })}
+            srcSet={cloudinarySrcSet(imageUrl, TILE_IMAGE_WIDTHS)}
+            sizes={TILE_SIZES}
             alt={title}
             loading="lazy"
             decoding="async"

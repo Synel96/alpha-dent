@@ -69,7 +69,7 @@ export function FaqAccordion({
             <button
               type="button"
               onClick={() => setOpenIndex(open ? -1 : index)}
-              className="flex w-full items-start gap-4 px-5 py-4 text-left transition-colors hover:bg-brand-surface/50"
+              className="flex w-full items-start gap-4 px-5 py-4 text-left transition-colors hover:bg-brand-surface/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-gold-light/70"
               aria-expanded={open}
               aria-controls={`faq-panel-${index}`}
             >
@@ -96,7 +96,7 @@ export function FaqAccordion({
               }`}
             >
               <div className="overflow-hidden">
-                <p className="px-16 pb-5 text-sm leading-relaxed text-brand-gold-muted">
+                <p className="pl-16 pr-5 pb-5 text-sm leading-relaxed text-brand-gold-muted">
                   {item.answer}
                 </p>
               </div>

@@ -2,8 +2,9 @@
   "name": "my-app",
   "scripts": {
     "dev": "vike dev",
-    "build": "vike build",
-    "preview": "vike build && vike preview",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "build": "npm run generate:sitemap && vike build",
+    "preview": "npm run build && vike preview",
     "test": "vitest",
     "test:coverage": "vitest --coverage"
   },

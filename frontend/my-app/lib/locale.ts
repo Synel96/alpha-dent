@@ -39,3 +39,14 @@ export function localizeHref(locale: Locale, pathname: string): string {
   if (locale === DEFAULT_LOCALE) return pathname;
   return `/${locale}${pathname === "/" ? "" : pathname}`;
 }
+
+// Logical (locale-less) pathname of every real page, kept in sync by hand
+// with pages/*/+Page.tsx. Used by the sitemap generator.
+export const PAGE_PATHNAMES = [
+  "/",
+  "/klinikank",
+  "/szolgaltatasaink",
+  "/tortenetunk",
+  "/kerdesek",
+  "/kapcsolat",
+] as const;

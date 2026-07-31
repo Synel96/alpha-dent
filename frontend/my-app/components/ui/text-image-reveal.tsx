@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import { cloudinarySrcSet, cloudinaryUrl, REVEAL_IMAGE_WIDTHS } from "@/lib/cloudinary";
 
 type TextImageRevealProps = {
   title: string;
@@ -116,7 +117,8 @@ export function TextImageReveal({
       >
         {imageSrc ? (
           <img
-            src={imageSrc}
+            src={cloudinaryUrl(imageSrc, { width: imageWidth })}
+            srcSet={cloudinarySrcSet(imageSrc, REVEAL_IMAGE_WIDTHS)}
             alt={imageAlt ?? ""}
             width={imageWidth}
             height={imageHeight}
