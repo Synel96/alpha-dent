@@ -95,7 +95,7 @@ export function TextImageReveal({
           </p>
         ) : null}
 
-        <h2 className="text-2xl font-semibold leading-tight text-brand-gold-light md:text-3xl">
+        <h2 className="text-3xl font-semibold leading-tight tracking-tight text-brand-gold-light md:text-4xl lg:text-5xl">
           {title}
         </h2>
 

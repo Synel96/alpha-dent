@@ -38,9 +38,9 @@ function Page() {
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+          <p className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
             {t("contactPage.cards.address")}
-          </h3>
+          </p>
           <p className="mb-3 text-sm text-brand-white">{CONTACT_INFO.address}</p>
           <a
             href={CONTACT_INFO.mapUrl}
@@ -53,9 +53,9 @@ function Page() {
         </article>
 
         <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+          <p className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
             {t("contactPage.cards.mobile")}
-          </h3>
+          </p>
           <a
             href={CONTACT_INFO.mobileHref}
             className="text-sm text-brand-gold hover:text-brand-gold-light"
@@ -65,9 +65,9 @@ function Page() {
         </article>
 
         <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+          <p className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
             {t("contactPage.cards.phone")}
-          </h3>
+          </p>
           <div className="space-y-2">
             <a
               href={CONTACT_INFO.phoneMainHref}
@@ -85,9 +85,9 @@ function Page() {
         </article>
 
         <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+          <p className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
             {t("contactPage.cards.email")}
-          </h3>
+          </p>
           <a
             href={CONTACT_INFO.emailHref}
             className="text-sm text-brand-gold hover:text-brand-gold-light"
@@ -97,9 +97,9 @@ function Page() {
         </article>
 
         <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5 sm:col-span-2 lg:col-span-2">
-          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+          <p className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
             {t("contactPage.cards.gps")}
-          </h3>
+          </p>
           <p className="mb-3 text-sm text-brand-white">{CONTACT_INFO.gps}</p>
           <div className="flex flex-wrap gap-4">
             <a
@@ -122,9 +122,9 @@ function Page() {
         </article>
 
         <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+          <p className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
             {t("contactPage.cards.hours")}
-          </h3>
+          </p>
           <p className="text-sm text-brand-white">
             {t("contactPage.hours.weekdays")}: {CONTACT_INFO.openingHours.weekdays.opens}–
             {CONTACT_INFO.openingHours.weekdays.closes}
