@@ -41,7 +41,7 @@ function Page() {
           <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
             {t("contactPage.cards.address")}
           </h3>
-          <p className="mb-3 text-sm text-brand-gold-muted">{CONTACT_INFO.address}</p>
+          <p className="mb-3 text-sm text-brand-white">{CONTACT_INFO.address}</p>
           <a
             href={CONTACT_INFO.mapUrl}
             target="_blank"
@@ -100,7 +100,7 @@ function Page() {
           <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
             {t("contactPage.cards.gps")}
           </h3>
-          <p className="mb-3 text-sm text-brand-gold-muted">{CONTACT_INFO.gps}</p>
+          <p className="mb-3 text-sm text-brand-white">{CONTACT_INFO.gps}</p>
           <div className="flex flex-wrap gap-4">
             <a
               href={CONTACT_INFO.gpsMapUrl}
@@ -125,11 +125,11 @@ function Page() {
           <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
             {t("contactPage.cards.hours")}
           </h3>
-          <p className="text-sm text-brand-gold-muted">
+          <p className="text-sm text-brand-white">
             {t("contactPage.hours.weekdays")}: {CONTACT_INFO.openingHours.weekdays.opens}–
             {CONTACT_INFO.openingHours.weekdays.closes}
           </p>
-          <p className="text-sm text-brand-gold-muted">
+          <p className="text-sm text-brand-white">
             {t("contactPage.hours.weekend")}: {t("contactPage.hours.closed")}
           </p>
         </article>

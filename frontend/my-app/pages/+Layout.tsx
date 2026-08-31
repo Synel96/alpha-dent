@@ -90,7 +90,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-brand-black font-sans antialiased text-brand-gold flex flex-col">
+    <div className="min-h-screen bg-brand-black font-sans antialiased text-brand-white flex flex-col">
       <LoadingScreen visible={loading} />
       <header className="border-b border-brand-border bg-brand-black/90 backdrop-blur sticky top-0 z-50">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">

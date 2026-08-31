@@ -15,6 +15,7 @@ export default {
           gold: "#C9A84C",
           "gold-light": "#E4C46A",
           "gold-muted": "#A68A4C",
+          white: "#F3F0E8",
           muted: "#5a5a62",
         },
       },

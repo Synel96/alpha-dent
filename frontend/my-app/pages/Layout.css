@@ -9,7 +9,9 @@
   html,
   body {
     background-color: #08080a;
-    color: #c9a84c;
+    /* Default reading color is off-white; gold is reserved for headings,
+       labels, links and other accents via explicit text-brand-gold* classes. */
+    color: #f3f0e8;
     font-family: "Geist Variable", Inter, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }

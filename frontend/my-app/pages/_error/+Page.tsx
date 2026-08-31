@@ -42,7 +42,7 @@ export default function Page() {
         {t(titleKey)}
       </h1>
 
-      <p className="mb-8 max-w-sm text-sm leading-relaxed text-brand-gold-muted">
+      <p className="mb-8 max-w-sm text-sm leading-relaxed text-brand-white">
         {t(descKey)}
       </p>
 
