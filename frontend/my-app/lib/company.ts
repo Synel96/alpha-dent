@@ -28,4 +28,12 @@ export const COMPANY_INFO = {
   },
   gpsMapUrl: "https://www.google.com/maps?q=47.6777786,16.5896789",
   websiteUrl: "https://alpha-dent.eu/hu/",
+  openingHours: {
+    weekdays: {
+      days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "17:00",
+    },
+    closedDays: ["Saturday", "Sunday"],
+  },
 } as const;

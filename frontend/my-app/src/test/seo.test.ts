@@ -64,4 +64,17 @@ describe("dentistJsonLd", () => {
       longitude: COMPANY_INFO.geo.longitude,
     });
   });
+
+  it("a hétköznapi nyitvatartást OpeningHoursSpecification-ként adja vissza", () => {
+    const jsonLd = dentistJsonLd();
+
+    expect(jsonLd.openingHoursSpecification).toEqual([
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: COMPANY_INFO.openingHours.weekdays.days,
+        opens: COMPANY_INFO.openingHours.weekdays.opens,
+        closes: COMPANY_INFO.openingHours.weekdays.closes,
+      },
+    ]);
+  });
 });

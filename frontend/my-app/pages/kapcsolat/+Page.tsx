@@ -120,6 +120,19 @@ function Page() {
             </a>
           </div>
         </article>
+
+        <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
+          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+            {t("contactPage.cards.hours")}
+          </h3>
+          <p className="text-sm text-brand-gold-muted">
+            {t("contactPage.hours.weekdays")}: {CONTACT_INFO.openingHours.weekdays.opens}–
+            {CONTACT_INFO.openingHours.weekdays.closes}
+          </p>
+          <p className="text-sm text-brand-gold-muted">
+            {t("contactPage.hours.weekend")}: {t("contactPage.hours.closed")}
+          </p>
+        </article>
       </section>
     </PageContainer>
   );

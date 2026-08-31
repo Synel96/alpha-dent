@@ -12,6 +12,12 @@ export const contactResources = {
         phone: "Telefon",
         email: "Email",
         gps: "GPS koordináták",
+        hours: "Nyitvatartás",
+      },
+      hours: {
+        weekdays: "Hétfő – Péntek",
+        weekend: "Szombat – Vasárnap",
+        closed: "Zárva",
       },
       actions: {
         openMap: "Megnyitás térképen",
@@ -35,6 +41,12 @@ export const contactResources = {
         phone: "Phone",
         email: "Email",
         gps: "GPS coordinates",
+        hours: "Opening hours",
+      },
+      hours: {
+        weekdays: "Monday – Friday",
+        weekend: "Saturday – Sunday",
+        closed: "Closed",
       },
       actions: {
         openMap: "Open in maps",
@@ -58,6 +70,12 @@ export const contactResources = {
         phone: "Telefon",
         email: "Email",
         gps: "GPS-Koordinaten",
+        hours: "Öffnungszeiten",
+      },
+      hours: {
+        weekdays: "Montag – Freitag",
+        weekend: "Samstag – Sonntag",
+        closed: "Geschlossen",
       },
       actions: {
         openMap: "In Karten öffnen",
@@ -81,6 +99,12 @@ export const contactResources = {
         phone: "Telefono",
         email: "Email",
         gps: "Coordinate GPS",
+        hours: "Orario di apertura",
+      },
+      hours: {
+        weekdays: "Lunedì – Venerdì",
+        weekend: "Sabato – Domenica",
+        closed: "Chiuso",
       },
       actions: {
         openMap: "Apri in mappa",

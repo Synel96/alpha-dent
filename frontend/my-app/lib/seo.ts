@@ -29,8 +29,8 @@ export function hreflangAlternates(pathnameWithoutLocale: string): Array<{
 
 // schema.org structured data for the clinic, sourced from COMPANY_INFO so the
 // site's contact page and this JSON-LD never drift apart. Fields that aren't
-// verifiable from the codebase (opening hours, social profiles, a logo image)
-// are intentionally omitted rather than guessed.
+// verifiable from the codebase (social profiles, a logo image) are
+// intentionally omitted rather than guessed.
 export function dentistJsonLd(): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
@@ -54,5 +54,13 @@ export function dentistJsonLd(): Record<string, unknown> {
       longitude: COMPANY_INFO.geo.longitude,
     },
     hasMap: COMPANY_INFO.mapUrl,
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: COMPANY_INFO.openingHours.weekdays.days,
+        opens: COMPANY_INFO.openingHours.weekdays.opens,
+        closes: COMPANY_INFO.openingHours.weekdays.closes,
+      },
+    ],
   };
 }
