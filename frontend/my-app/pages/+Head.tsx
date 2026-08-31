@@ -1,5 +1,5 @@
 import { usePageContext } from "vike-react/usePageContext";
-import { hreflangAlternates, absoluteLocalizedUrl } from "../lib/seo";
+import { hreflangAlternates, absoluteLocalizedUrl, dentistJsonLd } from "../lib/seo";
 
 export function Head() {
   const { locale, urlPathname } = usePageContext();
@@ -12,6 +12,10 @@ export function Head() {
       {hreflangAlternates(urlPathname).map(({ hreflang, href }) => (
         <link key={hreflang} rel="alternate" hrefLang={hreflang} href={href} />
       ))}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(dentistJsonLd()) }}
+      />
     </>
   );
 }
