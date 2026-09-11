@@ -139,45 +139,27 @@ export function Hero({
       {hasCopy ? (
         <div className="relative z-10 flex max-w-xl flex-col items-start gap-5 px-6 text-left sm:px-10 lg:px-16">
           {eyebrow ? (
-            <p
-              style={{ animationDelay: "0ms" }}
-              className="hero-rise-in text-xs uppercase tracking-[0.32em] text-brand-gold-light/90"
-            >
+            <p className="text-xs uppercase tracking-[0.32em] text-brand-gold-light/90">
               {eyebrow}
             </p>
           ) : null}
           {quote ? (
             <h1
-              style={{
-                fontFamily: '"Geist Variable", Georgia, "Times New Roman", serif',
-                animationDelay: "140ms",
-              }}
-              className="hero-rise-in text-2xl italic font-light leading-snug text-brand-gold-light md:text-4xl"
+              style={{ fontFamily: '"Geist Variable", Georgia, "Times New Roman", serif' }}
+              className="text-2xl italic font-light leading-snug text-brand-gold-light md:text-4xl"
             >
               {quote}
             </h1>
           ) : null}
           {brandMark ? (
-            <p
-              style={{ animationDelay: "320ms" }}
-              className="hero-rise-in text-sm font-semibold uppercase tracking-[0.32em] text-brand-gold"
-            >
+            <p className="text-sm font-semibold uppercase tracking-[0.32em] text-brand-gold">
               {brandMark}
             </p>
           ) : null}
           {subtitle ? (
-            <p
-              style={{ animationDelay: "460ms" }}
-              className="hero-rise-in max-w-2xl text-sm text-brand-gold-muted md:text-base"
-            >
-              {subtitle}
-            </p>
+            <p className="max-w-2xl text-sm text-brand-gold-muted md:text-base">{subtitle}</p>
           ) : null}
-          {children ? (
-            <div style={{ animationDelay: "580ms" }} className="hero-rise-in">
-              {children}
-            </div>
-          ) : null}
+          {children}
         </div>
       ) : null}
     </section>

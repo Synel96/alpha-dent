@@ -12,12 +12,13 @@ export { Page };
 const HERO_IMAGE =
   "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789138056/IMG_3392_faedmf.webp";
 
-// Translate-only reveal (opacity always stays 100 - see lib/use-reveal.ts)
-// staggered across the heading/paragraph/CTA of the intro section below.
-// Deliberately not used in <Hero>: that's above the fold, so animating it
-// would only add cost against Lighthouse without anything to gain.
+// Fade + float up, staggered across the heading/paragraph/CTA of the intro
+// section below, triggered once that section scrolls into view. Deliberately
+// not used in <Hero>: that's above the fold and already visible on first
+// paint, so gating it behind a scroll observer would only add cost against
+// Lighthouse without anything to gain.
 const REVEAL_CLASS =
-  "transition-[transform] duration-700 ease-out motion-reduce:transition-none";
+  "transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none";
 
 function Page() {
   const { t } = useTranslation();
@@ -43,25 +44,29 @@ function Page() {
               style={{ transitionDelay: "0ms" }}
               className={cn(
                 REVEAL_CLASS,
-                introVisible ? "translate-y-0" : "translate-y-8",
+                introVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
                 "text-2xl font-semibold leading-tight text-brand-gold-light md:text-4xl"
               )}
             >
               {t("home.intro.title")}
             </h2>
             <p
-              style={{ transitionDelay: "90ms" }}
+              style={{ transitionDelay: "140ms" }}
               className={cn(
                 REVEAL_CLASS,
-                introVisible ? "translate-y-0" : "translate-y-8",
+                introVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
                 "max-w-2xl text-sm leading-relaxed text-white md:text-base"
               )}
             >
               {t("home.intro.description")}
             </p>
             <div
-              style={{ transitionDelay: "180ms" }}
-              className={cn(REVEAL_CLASS, introVisible ? "translate-y-0" : "translate-y-8", "mt-2")}
+              style={{ transitionDelay: "280ms" }}
+              className={cn(
+                REVEAL_CLASS,
+                introVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
+                "mt-2"
+              )}
             >
               <CtaButton
                 href={localizeHref(locale, "/kapcsolat")}
