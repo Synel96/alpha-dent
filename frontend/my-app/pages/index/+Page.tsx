@@ -29,7 +29,7 @@ function Page() {
             <h2 className="text-2xl font-semibold leading-tight text-brand-gold-light md:text-4xl">
               {t("home.intro.title")}
             </h2>
-            <p className="max-w-2xl text-sm leading-relaxed text-brand-gold-muted md:text-base">
+            <p className="max-w-2xl text-sm leading-relaxed text-white md:text-base">
               {t("home.intro.description")}
             </p>
             <CtaButton
