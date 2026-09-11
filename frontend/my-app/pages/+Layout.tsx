@@ -53,6 +53,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     getHeroProgress,
     getHeroProgressServerSnapshot
   );
+  const headerRef = React.useRef<HTMLElement | null>(null);
   const { locale } = usePageContext();
   const { t, i18n } = useTranslation();
 
@@ -90,6 +91,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
     []
   );
 
+  React.useLayoutEffect(() => {
+    // The header is `fixed` (so it can sit transparently over a page's
+    // hero media) rather than taking up space in normal flow, so every
+    // page needs its content pushed down by the header's real height via
+    // this --nav-height var - <Hero> then cancels it out with a matching
+    // negative margin to sit at y=0, underneath the header.
+    const header = headerRef.current;
+    if (!header || typeof ResizeObserver === "undefined") return;
+
+    const root = document.documentElement;
+    const updateHeight = () => {
+      root.style.setProperty("--nav-height", `${header.offsetHeight}px`);
+    };
+
+    updateHeight();
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
+
   React.useEffect(() => {
     // Hide initial loader after first render
     setLoading(false);
@@ -109,7 +130,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-brand-black font-sans antialiased text-brand-gold flex flex-col">
       <LoadingScreen visible={loading} />
       <header
-        className="sticky top-0 z-50 border-b transition-[background-color,border-color] duration-200"
+        ref={headerRef}
+        className="fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color] duration-200"
         style={{
           backgroundColor: `rgba(8, 8, 10, ${0.9 * heroProgress})`,
           borderColor: `rgba(28, 28, 32, ${heroProgress})`,
@@ -209,7 +231,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      <main className="flex-1">{children}</main>
+      <main className="flex-1" style={{ paddingTop: "var(--nav-height, 72px)" }}>
+        {children}
+      </main>
 
       <Footer />
     </div>

@@ -95,6 +95,11 @@ export function Hero({
   return (
     <section
       ref={sectionRef}
+      // The header is `fixed` and adds matching top padding to <main> (see
+      // pages/+Layout.tsx) so it can float transparently over page content
+      // without pushing it down - Hero cancels that padding here so its
+      // media fills the viewport from y=0, right behind the header.
+      style={{ marginTop: "calc(-1 * var(--nav-height, 72px))" }}
       className={cn(
         "relative flex min-h-screen w-full items-center overflow-hidden bg-brand-black",
         hasCopy ? "justify-start" : "justify-center",
