@@ -105,10 +105,11 @@ export function Hero({
             fetchPriority="high"
           />
         )}
-        {/* Flat scrim so the motto stays legible regardless of the media
-            behind it, layered under the bottom-anchored gradient that also
-            hands off into the (initially transparent) navbar. */}
-        <div className="absolute inset-0 bg-black/35" />
+        {hasCopy ? (
+          // Soft, localized darkening behind the copy only - the rest of
+          // the media stays untouched.
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_50%_50%,rgba(0,0,0,0.55),transparent_70%)]" />
+        ) : null}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/10 to-transparent" />
       </div>
 
