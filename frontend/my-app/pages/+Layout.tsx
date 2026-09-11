@@ -167,21 +167,34 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </a>
 
           <div className="hidden md:flex flex-1 justify-center">
-            <NavigationMenu viewport={false}>
-              <NavigationMenuList className="gap-1">
-                {localizedNavLinks.map((link) => (
-                  <NavigationMenuItem key={link.href}>
-                    <NavigationMenuLink
-                      href={link.href}
-                      onClick={(event) => handleInternalLink(event, link.href)}
-                      className="px-3 py-2 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold rounded-md transition-colors"
-                    >
-                      {t(link.labelKey)}
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
+            <div className="relative">
+              {/* Faint backdrop so the gold nav text stays legible over a
+                  bright hero photo before the header itself goes solid -
+                  fades out as heroProgress rises, since the header's own
+                  background already gives enough contrast by then.
+                  Desktop only: on mobile these links are hidden behind the
+                  sheet trigger, so there's nothing here to lose in a photo. */}
+              <div
+                aria-hidden
+                className="absolute -inset-x-4 -inset-y-2 rounded-full bg-black/35 backdrop-blur-sm transition-opacity duration-200"
+                style={{ opacity: 1 - heroProgress }}
+              />
+              <NavigationMenu viewport={false}>
+                <NavigationMenuList className="gap-1">
+                  {localizedNavLinks.map((link) => (
+                    <NavigationMenuItem key={link.href}>
+                      <NavigationMenuLink
+                        href={link.href}
+                        onClick={(event) => handleInternalLink(event, link.href)}
+                        className="px-3 py-2 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold rounded-md transition-colors"
+                      >
+                        {t(link.labelKey)}
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                  ))}
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
           </div>
 
           <div className="flex items-center gap-4">
