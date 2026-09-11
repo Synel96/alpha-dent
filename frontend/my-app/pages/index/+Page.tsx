@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { Hero } from "../../components/ui/hero";
-import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
 import { localizeHref } from "../../lib/locale";
 import { useReveal } from "../../lib/use-reveal";
@@ -62,20 +61,6 @@ function Page() {
             >
               {t("home.intro.description")}
             </p>
-            <div
-              style={{ transitionDelay: "280ms" }}
-              className={cn(
-                REVEAL_CLASS,
-                introVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
-                "mt-2"
-              )}
-            >
-              <CtaButton
-                href={localizeHref(locale, "/kapcsolat")}
-                badge={t("nav.contact")}
-                title={t("home.intro.ctaButton")}
-              />
-            </div>
           </div>
         </PageContainer>
       </section>
