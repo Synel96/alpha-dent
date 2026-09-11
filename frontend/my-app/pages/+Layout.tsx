@@ -7,8 +7,11 @@ import "../lib/i18n";
 import { localizeHref } from "../lib/locale";
 import { Footer } from "../components/ui/footer";
 import { LoadingScreen } from "../components/ui/loading-screen";
-import { AlphaGlyph } from "../components/ui/alpha-glyph";
-import { HERO_SCROLL_EVENT, type HeroScrollEventDetail } from "../components/ui/hero";
+import {
+  subscribeHeroProgress,
+  getHeroProgress,
+  getHeroProgressServerSnapshot,
+} from "../components/ui/hero";
 import {
   LanguageSwitcher,
   LanguageSwitcherCompact,
@@ -41,7 +44,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
   // 1 = fully opaque navbar (the default for pages without a hero). Pages
   // rendering <Hero> drive this down to 0 while its media fills the
   // viewport, then back up to 1 by the time the hero's bottom is reached.
-  const [heroProgress, setHeroProgress] = React.useState(1);
+  // useSyncExternalStore (rather than state + a window event listener)
+  // guarantees this reads Hero's real initial value on the very first
+  // paint, even though Hero's own mount effect fires before this
+  // component's effects ever get a chance to subscribe.
+  const heroProgress = React.useSyncExternalStore(
+    subscribeHeroProgress,
+    getHeroProgress,
+    getHeroProgressServerSnapshot
+  );
   const { locale } = usePageContext();
   const { t, i18n } = useTranslation();
 
@@ -94,15 +105,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  React.useEffect(() => {
-    const handleHeroScroll = (event: Event) => {
-      const { progress } = (event as CustomEvent<HeroScrollEventDetail>).detail;
-      setHeroProgress(progress);
-    };
-    window.addEventListener(HERO_SCROLL_EVENT, handleHeroScroll);
-    return () => window.removeEventListener(HERO_SCROLL_EVENT, handleHeroScroll);
-  }, []);
-
   return (
     <div className="min-h-screen bg-brand-black font-sans antialiased text-brand-gold flex flex-col">
       <LoadingScreen visible={loading} />
@@ -119,9 +121,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <a
             href={homeHref}
             onClick={(event) => handleInternalLink(event, homeHref)}
-            className="flex items-center gap-2 rounded-md text-lg font-semibold text-brand-gold transition-colors hover:text-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
+            className="flex items-center rounded-md text-lg font-semibold text-brand-gold transition-colors hover:text-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
           >
-            <AlphaGlyph glow className="text-4xl" />
             <span className="uppercase tracking-[0.32em]">Alphadent</span>
           </a>
 

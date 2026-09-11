@@ -2,12 +2,31 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { cloudinaryUrl, cloudinarySrcSet } from "@/lib/cloudinary";
 
-// Layout's navbar listens for this to fade from transparent (over the hero
-// media) to fully opaque by the time the hero's bottom edge reaches the top
-// of the viewport. See pages/+Layout.tsx.
-export const HERO_SCROLL_EVENT = "alphadent:hero-scroll";
+// Layout's navbar reads this to fade from transparent (over the hero media)
+// to fully opaque by the time the hero's bottom edge reaches the top of the
+// viewport. A tiny external store (rather than a window CustomEvent) so
+// useSyncExternalStore can hand the layout the correct value on its very
+// first paint instead of racing Hero's mount effect. See pages/+Layout.tsx.
+let heroProgress = 1;
+const listeners = new Set<() => void>();
 
-export type HeroScrollEventDetail = { progress: number };
+function setHeroProgress(value: number) {
+  heroProgress = value;
+  listeners.forEach((listener) => listener());
+}
+
+export function subscribeHeroProgress(listener: () => void) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
+export function getHeroProgress() {
+  return heroProgress;
+}
+
+export function getHeroProgressServerSnapshot() {
+  return 1;
+}
 
 const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1920, 2560] as const;
 
@@ -18,7 +37,8 @@ type HeroProps = {
   // logic below - it only cares about the section's scroll position.
   videoSrc?: string;
   eyebrow?: string;
-  title?: React.ReactNode;
+  quote?: React.ReactNode;
+  brandMark?: React.ReactNode;
   subtitle?: React.ReactNode;
   children?: React.ReactNode;
   className?: string;
@@ -29,7 +49,8 @@ export function Hero({
   imageAlt = "",
   videoSrc,
   eyebrow,
-  title,
+  quote,
+  brandMark,
   subtitle,
   children,
   className,
@@ -47,9 +68,7 @@ export function Hero({
       frame = 0;
       const rect = section.getBoundingClientRect();
       const progress = rect.height > 0 ? Math.min(1, Math.max(0, -rect.top / rect.height)) : 1;
-      window.dispatchEvent(
-        new CustomEvent<HeroScrollEventDetail>(HERO_SCROLL_EVENT, { detail: { progress } })
-      );
+      setHeroProgress(progress);
     };
 
     const requestUpdate = () => {
@@ -67,13 +86,11 @@ export function Hero({
       if (frame) window.cancelAnimationFrame(frame);
       // Leaving the hero page (client-side nav) - hand the navbar back its
       // default fully-opaque state.
-      window.dispatchEvent(
-        new CustomEvent<HeroScrollEventDetail>(HERO_SCROLL_EVENT, { detail: { progress: 1 } })
-      );
+      setHeroProgress(1);
     };
   }, []);
 
-  const hasCopy = Boolean(title || subtitle || eyebrow || children);
+  const hasCopy = Boolean(quote || subtitle || eyebrow || children);
 
   return (
     <section
@@ -115,14 +132,24 @@ export function Hero({
       </div>
 
       {hasCopy ? (
-        <div className="relative z-10 flex max-w-xl flex-col items-start gap-4 px-6 text-left sm:px-10 lg:px-16">
+        <div className="relative z-10 flex max-w-xl flex-col items-start gap-5 px-6 text-left sm:px-10 lg:px-16">
           {eyebrow ? (
             <p className="text-xs uppercase tracking-[0.32em] text-brand-gold-light/90">
               {eyebrow}
             </p>
           ) : null}
-          {title ? (
-            <h1 className="text-3xl font-semibold text-brand-gold-light md:text-5xl">{title}</h1>
+          {quote ? (
+            <h1
+              style={{ fontFamily: '"Geist Variable", Georgia, "Times New Roman", serif' }}
+              className="text-2xl italic font-light leading-snug text-brand-gold-light md:text-4xl"
+            >
+              {quote}
+            </h1>
+          ) : null}
+          {brandMark ? (
+            <p className="text-sm font-semibold uppercase tracking-[0.32em] text-brand-gold">
+              {brandMark}
+            </p>
           ) : null}
           {subtitle ? (
             <p className="max-w-2xl text-sm text-brand-gold-muted md:text-base">{subtitle}</p>

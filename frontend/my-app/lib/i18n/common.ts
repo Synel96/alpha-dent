@@ -20,7 +20,7 @@ export const commonResources = {
     },
     home: {
       hero: {
-        motto: "A szép mosoly nem csak esztétikai igény, hanem az egészség záloga is.",
+        motto: "„A szép mosoly nem csak esztétikai igény, hanem az egészség záloga is.”",
       },
     },
     footer: {
@@ -48,7 +48,7 @@ export const commonResources = {
     },
     home: {
       hero: {
-        motto: "A beautiful smile isn't just an aesthetic wish - it's also the key to good health.",
+        motto: "“A beautiful smile isn't just an aesthetic wish - it's also the key to good health.”",
       },
     },
     footer: {
@@ -76,7 +76,7 @@ export const commonResources = {
     },
     home: {
       hero: {
-        motto: "Ein schönes Lächeln ist nicht nur ein ästhetischer Wunsch, sondern auch die Grundlage für Gesundheit.",
+        motto: "„Ein schönes Lächeln ist nicht nur ein ästhetischer Wunsch, sondern auch die Grundlage für Gesundheit.“",
       },
     },
     footer: {
@@ -104,7 +104,7 @@ export const commonResources = {
     },
     home: {
       hero: {
-        motto: "Un bel sorriso non è solo un desiderio estetico, ma anche la chiave della salute.",
+        motto: "«Un bel sorriso non è solo un desiderio estetico, ma anche la chiave della salute.»",
       },
     },
     footer: {

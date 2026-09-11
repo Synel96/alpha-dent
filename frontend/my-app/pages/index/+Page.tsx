@@ -11,7 +11,12 @@ function Page() {
 
   return (
     <>
-      <Hero imageSrc={HERO_IMAGE} imageAlt="Alphadent" title={t("home.hero.motto")} />
+      <Hero
+        imageSrc={HERO_IMAGE}
+        imageAlt="Alphadent"
+        quote={t("home.hero.motto")}
+        brandMark="Alphadent"
+      />
       <section className="min-h-[calc(100vh-140px)]" />
     </>
   );
