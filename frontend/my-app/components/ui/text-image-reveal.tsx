@@ -1,6 +1,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { cloudinarySrcSet, cloudinaryUrl, REVEAL_IMAGE_WIDTHS } from "@/lib/cloudinary";
+import { useReveal } from "@/lib/use-reveal";
 
 type TextImageRevealProps = {
   title: string;
@@ -39,38 +40,7 @@ export function TextImageReveal({
   delayMs = 0,
   children,
 }: TextImageRevealProps) {
-  const rootRef = React.useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = React.useState(false);
-
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) {
-      setVisible(true);
-      return;
-    }
-
-    const node = rootRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry?.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      {
-        threshold: 0.22,
-        rootMargin: "0px 0px -10% 0px",
-      }
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  const { ref: rootRef, visible } = useReveal<HTMLElement>();
 
   return (
     <section
