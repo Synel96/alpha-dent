@@ -38,9 +38,14 @@ const navLinks = [
   { labelKey: "nav.contact", href: "/kapcsolat" },
 ];
 
+// Only show the loading screen once a page transition has actually taken
+// this long - most navigations resolve well under this, and flashing the
+// spinner for a single frame on every click is worse than no indicator.
+const LOADING_SCREEN_DELAY_MS = 250;
+
 export function Layout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = React.useState(false);
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
   // 1 = fully opaque navbar (the default for pages without a hero). Pages
   // rendering <Hero> drive this down to 0 while its media fills the
   // viewport, then back up to 1 by the time the hero's bottom is reached.
@@ -112,17 +117,30 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }, []);
 
   React.useEffect(() => {
-    // Hide initial loader after first render
-    setLoading(false);
+    let showTimer: number | undefined;
 
-    // Show/hide loader during page transitions
-    const show = () => setLoading(true);
-    const hide = () => setLoading(false);
+    const show = () => {
+      if (showTimer) return;
+      showTimer = window.setTimeout(() => {
+        showTimer = undefined;
+        setLoading(true);
+      }, LOADING_SCREEN_DELAY_MS);
+    };
+
+    const hide = () => {
+      if (showTimer) {
+        window.clearTimeout(showTimer);
+        showTimer = undefined;
+      }
+      setLoading(false);
+    };
+
     window.addEventListener("alphadent:loading:start", show);
     window.addEventListener("alphadent:loading:end", hide);
     return () => {
       window.removeEventListener("alphadent:loading:start", show);
       window.removeEventListener("alphadent:loading:end", hide);
+      if (showTimer) window.clearTimeout(showTimer);
     };
   }, []);
 
