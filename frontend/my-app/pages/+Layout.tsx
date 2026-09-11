@@ -8,6 +8,7 @@ import { localizeHref } from "../lib/locale";
 import { Footer } from "../components/ui/footer";
 import { LoadingScreen } from "../components/ui/loading-screen";
 import { AlphaGlyph } from "../components/ui/alpha-glyph";
+import { HERO_SCROLL_EVENT, type HeroScrollEventDetail } from "../components/ui/hero";
 import {
   LanguageSwitcher,
   LanguageSwitcherCompact,
@@ -37,6 +38,10 @@ const navLinks = [
 export function Layout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
+  // 1 = fully opaque navbar (the default for pages without a hero). Pages
+  // rendering <Hero> drive this down to 0 while its media fills the
+  // viewport, then back up to 1 by the time the hero's bottom is reached.
+  const [heroProgress, setHeroProgress] = React.useState(1);
   const { locale } = usePageContext();
   const { t, i18n } = useTranslation();
 
@@ -89,10 +94,27 @@ export function Layout({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
+  React.useEffect(() => {
+    const handleHeroScroll = (event: Event) => {
+      const { progress } = (event as CustomEvent<HeroScrollEventDetail>).detail;
+      setHeroProgress(progress);
+    };
+    window.addEventListener(HERO_SCROLL_EVENT, handleHeroScroll);
+    return () => window.removeEventListener(HERO_SCROLL_EVENT, handleHeroScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-brand-black font-sans antialiased text-brand-gold flex flex-col">
       <LoadingScreen visible={loading} />
-      <header className="border-b border-brand-border bg-brand-black/90 backdrop-blur sticky top-0 z-50">
+      <header
+        className="sticky top-0 z-50 border-b transition-[background-color,border-color] duration-200"
+        style={{
+          backgroundColor: `rgba(8, 8, 10, ${0.9 * heroProgress})`,
+          borderColor: `rgba(28, 28, 32, ${heroProgress})`,
+          backdropFilter: heroProgress > 0 ? `blur(${8 * heroProgress}px)` : undefined,
+          WebkitBackdropFilter: heroProgress > 0 ? `blur(${8 * heroProgress}px)` : undefined,
+        }}
+      >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <a
             href={homeHref}
