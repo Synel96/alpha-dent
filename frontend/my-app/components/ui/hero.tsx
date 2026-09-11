@@ -79,7 +79,8 @@ export function Hero({
     <section
       ref={sectionRef}
       className={cn(
-        "relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-brand-black",
+        "relative flex min-h-screen w-full items-center overflow-hidden bg-brand-black",
+        hasCopy ? "justify-start" : "justify-center",
         className
       )}
     >
@@ -106,15 +107,15 @@ export function Hero({
           />
         )}
         {hasCopy ? (
-          // Soft, localized darkening behind the copy only - the rest of
-          // the media stays untouched.
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_50%_50%,rgba(0,0,0,0.55),transparent_70%)]" />
+          // Darken in from the left, where the copy sits - the right side
+          // of the media stays untouched.
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
         ) : null}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/10 to-transparent" />
       </div>
 
       {hasCopy ? (
-        <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-4 px-6 text-center">
+        <div className="relative z-10 flex max-w-xl flex-col items-start gap-4 px-6 text-left sm:px-10 lg:px-16">
           {eyebrow ? (
             <p className="text-xs uppercase tracking-[0.32em] text-brand-gold-light/90">
               {eyebrow}
