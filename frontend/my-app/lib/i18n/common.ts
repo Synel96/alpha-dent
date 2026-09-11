@@ -18,6 +18,11 @@ export const commonResources = {
           "Ezen az oldalon dolgozunk, tartalma hamarosan elérhető lesz. Addig is keresse fel Kapcsolat oldalunkat, ha kérdése van.",
       },
     },
+    home: {
+      hero: {
+        motto: "A szép mosoly nem csak esztétikai igény, hanem az egészség záloga is.",
+      },
+    },
     footer: {
       allRightsReserved: "Minden jog fenntartva.",
     },
@@ -39,6 +44,11 @@ export const commonResources = {
         eyebrow: "Coming soon",
         description:
           "We're working on this page and it will be available soon. In the meantime, feel free to reach out on our Contact page with any questions.",
+      },
+    },
+    home: {
+      hero: {
+        motto: "A beautiful smile isn't just an aesthetic wish - it's also the key to good health.",
       },
     },
     footer: {
@@ -64,6 +74,11 @@ export const commonResources = {
           "Wir arbeiten an dieser Seite, der Inhalt ist bald verfügbar. Bei Fragen erreichst du uns in der Zwischenzeit über unsere Kontaktseite.",
       },
     },
+    home: {
+      hero: {
+        motto: "Ein schönes Lächeln ist nicht nur ein ästhetischer Wunsch, sondern auch die Grundlage für Gesundheit.",
+      },
+    },
     footer: {
       allRightsReserved: "Alle Rechte vorbehalten.",
     },
@@ -85,6 +100,11 @@ export const commonResources = {
         eyebrow: "Prossimamente",
         description:
           "Stiamo lavorando a questa pagina, il contenuto sarà presto disponibile. Nel frattempo, contattaci pure tramite la pagina Contatti.",
+      },
+    },
+    home: {
+      hero: {
+        motto: "Un bel sorriso non è solo un desiderio estetico, ma anche la chiave della salute.",
       },
     },
     footer: {
