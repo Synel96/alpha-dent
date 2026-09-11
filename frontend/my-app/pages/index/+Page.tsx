@@ -32,6 +32,8 @@ function Page() {
         imageAlt="Alphadent"
         quote={t("home.hero.motto")}
         brandMark="Alphadent"
+        ctaHref={localizeHref(locale, "/kapcsolat")}
+        ctaLabel={t("home.intro.ctaButton")}
       />
 
       <section className="relative overflow-hidden border-b border-brand-border bg-[radial-gradient(circle_at_50%_0%,rgba(228,196,106,0.08),transparent_55%)]">

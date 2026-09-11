@@ -1,6 +1,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { cloudinaryUrl, cloudinarySrcSet } from "@/lib/cloudinary";
+import { CtaButton } from "@/components/ui/cta-button";
 
 // Layout's navbar reads this to fade from transparent (over the hero media)
 // to fully opaque by the time the hero's bottom edge reaches the top of the
@@ -40,6 +41,8 @@ type HeroProps = {
   quote?: React.ReactNode;
   brandMark?: React.ReactNode;
   subtitle?: React.ReactNode;
+  ctaHref?: string;
+  ctaLabel?: string;
   children?: React.ReactNode;
   className?: string;
 };
@@ -52,6 +55,8 @@ export function Hero({
   quote,
   brandMark,
   subtitle,
+  ctaHref,
+  ctaLabel,
   children,
   className,
 }: HeroProps) {
@@ -90,7 +95,7 @@ export function Hero({
     };
   }, []);
 
-  const hasCopy = Boolean(quote || subtitle || eyebrow || children);
+  const hasCopy = Boolean(quote || subtitle || eyebrow || (ctaHref && ctaLabel) || children);
 
   return (
     <section
@@ -158,6 +163,9 @@ export function Hero({
           ) : null}
           {subtitle ? (
             <p className="max-w-2xl text-sm text-brand-gold-muted md:text-base">{subtitle}</p>
+          ) : null}
+          {ctaHref && ctaLabel ? (
+            <CtaButton href={ctaHref} title={ctaLabel} variant="ghost" className="mt-1" />
           ) : null}
           {children}
         </div>

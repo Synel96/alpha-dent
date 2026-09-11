@@ -6,6 +6,11 @@ type CtaButtonProps = {
   title: string;
   subtitle?: string;
   badge?: string;
+  // "solid" (default): the full card - badge, title, subtitle, arrow.
+  // "ghost": a compact outlined pill (title only), for contexts - like
+  // over hero media - where the solid card would be too heavy or would
+  // compete with another CTA nearby.
+  variant?: "solid" | "ghost";
   className?: string;
 } & Omit<React.ComponentProps<"a">, "href" | "children" | "className">;
 
@@ -14,9 +19,33 @@ export function CtaButton({
   title,
   subtitle,
   badge = "Kiemelt",
+  variant = "solid",
   className,
   ...props
 }: CtaButtonProps) {
+  if (variant === "ghost") {
+    return (
+      <a
+        href={href}
+        className={cn(
+          "group inline-flex items-center gap-2 rounded-full border border-brand-gold-light/60 bg-black/20 px-5 py-2.5 text-sm font-medium text-brand-gold-light backdrop-blur-sm",
+          "transition-colors duration-300 hover:border-brand-gold-light hover:bg-black/35",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black",
+          className
+        )}
+        {...props}
+      >
+        {title}
+        <span
+          aria-hidden
+          className="transition-transform duration-300 group-hover:translate-x-0.5"
+        >
+          »
+        </span>
+      </a>
+    );
+  }
+
   return (
     <a
       href={href}
