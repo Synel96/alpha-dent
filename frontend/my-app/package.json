@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "vike dev",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
-    "build": "npm run generate:sitemap && vike build",
+    "inline:critical-css": "node scripts/inline-critical-css.mjs",
+    "build": "npm run generate:sitemap && vike build && npm run inline:critical-css",
     "preview": "npm run build && vike preview",
     "test": "vitest",
     "test:coverage": "vitest --coverage"
@@ -37,6 +38,7 @@
     "@vitejs/plugin-react": "^6.0.2",
     "@vitest/coverage-v8": "^4.1.9",
     "autoprefixer": "^10.5.0",
+    "beasties": "^0.5.4",
     "jsdom": "^29.1.1",
     "postcss": "^8.5.15",
     "tailwindcss": "^3.4.19",
