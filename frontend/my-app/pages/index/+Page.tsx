@@ -43,7 +43,7 @@ function Page() {
               style={{ transitionDelay: "0ms" }}
               className={cn(
                 REVEAL_CLASS,
-                introVisible ? "translate-y-0" : "translate-y-3",
+                introVisible ? "translate-y-0" : "translate-y-8",
                 "text-2xl font-semibold leading-tight text-brand-gold-light md:text-4xl"
               )}
             >
@@ -53,7 +53,7 @@ function Page() {
               style={{ transitionDelay: "90ms" }}
               className={cn(
                 REVEAL_CLASS,
-                introVisible ? "translate-y-0" : "translate-y-3",
+                introVisible ? "translate-y-0" : "translate-y-8",
                 "max-w-2xl text-sm leading-relaxed text-white md:text-base"
               )}
             >
@@ -61,7 +61,7 @@ function Page() {
             </p>
             <div
               style={{ transitionDelay: "180ms" }}
-              className={cn(REVEAL_CLASS, introVisible ? "translate-y-0" : "translate-y-3", "mt-2")}
+              className={cn(REVEAL_CLASS, introVisible ? "translate-y-0" : "translate-y-8", "mt-2")}
             >
               <CtaButton
                 href={localizeHref(locale, "/kapcsolat")}
