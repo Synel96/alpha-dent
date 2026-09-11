@@ -19,24 +19,29 @@
   }
 }
 
-/* Loading screen – glowing alpha animation */
+/* Loading screen - glowing alpha animation. The glow is a blurred ::before
+   copy of the glyph (static filter) whose opacity pulses - only animating
+   opacity keeps this on the compositor thread, unlike animating
+   text-shadow directly (non-composited, repaints every frame). */
+.loading-alpha-glow {
+  position: relative;
+}
+
+.loading-alpha-glow::before {
+  content: "\03b1";
+  position: absolute;
+  inset: 0;
+  color: #c9a84c;
+  filter: blur(10px);
+  animation: loading-glow 1.6s ease-in-out infinite;
+}
+
 @keyframes loading-glow {
   0%,
   100% {
-    text-shadow:
-      0 0 8px #c9a84c,
-      0 0 20px rgba(201, 168, 76, 0.5);
-    opacity: 0.75;
+    opacity: 0.35;
   }
   50% {
-    text-shadow:
-      0 0 16px #c9a84c,
-      0 0 40px #c9a84c,
-      0 0 70px rgba(201, 168, 76, 0.4);
-    opacity: 1;
+    opacity: 0.9;
   }
-}
-
-.loading-alpha-glow {
-  animation: loading-glow 1.6s ease-in-out infinite;
 }

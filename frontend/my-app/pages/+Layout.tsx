@@ -147,17 +147,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-brand-black font-sans antialiased text-brand-gold flex flex-col">
       <LoadingScreen visible={loading} />
-      <header
-        ref={headerRef}
-        className="fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color] duration-200"
-        style={{
-          backgroundColor: `rgba(8, 8, 10, ${0.9 * heroProgress})`,
-          borderColor: `rgba(28, 28, 32, ${heroProgress})`,
-          backdropFilter: heroProgress > 0 ? `blur(${8 * heroProgress}px)` : undefined,
-          WebkitBackdropFilter: heroProgress > 0 ? `blur(${8 * heroProgress}px)` : undefined,
-        }}
-      >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <header ref={headerRef} className="fixed inset-x-0 top-0 z-50">
+        {/* Solid backdrop, faded in via opacity as the hero scrolls by.
+            Opacity is a compositor-friendly property; animating
+            background-color/backdrop-filter directly (the old approach)
+            forces the browser off the compositor thread every frame. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 border-b border-brand-border bg-brand-black/90 backdrop-blur transition-opacity duration-200"
+          style={{ opacity: heroProgress }}
+        />
+        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <a
             href={homeHref}
             onClick={(event) => handleInternalLink(event, homeHref)}
