@@ -22,6 +22,12 @@ export const commonResources = {
       hero: {
         motto: "„A szép mosoly nem csak esztétikai igény, hanem az egészség záloga is.”",
       },
+      intro: {
+        title: "Modern fogászat, szájsebészet és fogtechnikai labor Sopronban",
+        description:
+          "Legyen szó egyetlen hiányzó fogról, teljes fogpótlásról, szájsebészeti beavatkozásról vagy esztétikai kezelésről, nálunk a cél ugyanaz: egészséges, természetes és hosszú távon is működő mosoly. Az Alphadentnél a több évtizedes szakmai tapasztalatot a legmodernebb technológiával és saját fogtechnikai háttérrel ötvözzük a 15 fős szakmai csapattal.",
+        ctaButton: "Időpontot kérek",
+      },
     },
     footer: {
       allRightsReserved: "Minden jog fenntartva.",
@@ -49,6 +55,12 @@ export const commonResources = {
     home: {
       hero: {
         motto: "“A beautiful smile isn't just an aesthetic wish - it's also the key to good health.”",
+      },
+      intro: {
+        title: "Modern dentistry, oral surgery and in-house dental lab in Sopron",
+        description:
+          "Whether it's a single missing tooth, a full denture, oral surgery or a cosmetic treatment, our goal is always the same: a healthy, natural smile that lasts. At Alphadent, decades of professional experience meet the latest technology and our own dental lab, backed by a 15-strong team of specialists.",
+        ctaButton: "Book an appointment",
       },
     },
     footer: {
@@ -78,6 +90,12 @@ export const commonResources = {
       hero: {
         motto: "„Ein schönes Lächeln ist nicht nur ein ästhetischer Wunsch, sondern auch die Grundlage für Gesundheit.“",
       },
+      intro: {
+        title: "Moderne Zahnmedizin, Mund-Kiefer-Chirurgie und eigenes Dentallabor in Sopron",
+        description:
+          "Ob ein einzelner fehlender Zahn, vollständiger Zahnersatz, ein kieferchirurgischer Eingriff oder eine ästhetische Behandlung - unser Ziel ist immer dasselbe: ein gesundes, natürliches und dauerhaft funktionierendes Lächeln. Bei Alphadent verbinden wir jahrzehntelange Fachkompetenz mit modernster Technologie und einem eigenen Dentallabor, getragen von einem 15-köpfigen Fachteam.",
+        ctaButton: "Termin anfragen",
+      },
     },
     footer: {
       allRightsReserved: "Alle Rechte vorbehalten.",
@@ -105,6 +123,12 @@ export const commonResources = {
     home: {
       hero: {
         motto: "«Un bel sorriso non è solo un desiderio estetico, ma anche la chiave della salute.»",
+      },
+      intro: {
+        title: "Odontoiatria moderna, chirurgia orale e laboratorio odontotecnico a Sopron",
+        description:
+          "Che si tratti di un singolo dente mancante, di una protesi completa, di un intervento di chirurgia orale o di un trattamento estetico, il nostro obiettivo è sempre lo stesso: un sorriso sano, naturale e duraturo. In Alphadent uniamo decenni di esperienza professionale alla tecnologia più moderna e a un laboratorio odontotecnico interno, sostenuti da un team di 15 specialisti.",
+        ctaButton: "Richiedi un appuntamento",
       },
     },
     footer: {
