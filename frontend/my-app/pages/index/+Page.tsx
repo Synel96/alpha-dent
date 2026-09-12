@@ -46,6 +46,8 @@ const SERVICE_IMAGES: Partial<Record<(typeof SERVICE_SLUGS)[number], string>> = 
   szajsebeszet: "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789215806/IMG_3398_dmrstv.webp",
   esztetikaiFogaszat:
     "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0053_gz8nis.webp",
+  fogmegtartoKezelesek:
+    "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0047_nsmuvv.webp",
 };
 
 // Fade + float up, staggered across the heading/paragraph of the intro
