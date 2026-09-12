@@ -1,4 +1,15 @@
-import { Award, HelpCircle, Phone, Smile, Sparkles, Stethoscope } from "lucide-react";
+import {
+  Award,
+  Building2,
+  Cpu,
+  GraduationCap,
+  Handshake,
+  HelpCircle,
+  Phone,
+  Smile,
+  Sparkles,
+  Stethoscope,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { Hero } from "../../components/ui/hero";
@@ -49,6 +60,11 @@ const SERVICE_IMAGES: Partial<Record<(typeof SERVICE_SLUGS)[number], string>> = 
   fogmegtartoKezelesek:
     "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0047_nsmuvv.webp",
 };
+
+// One icon per "Miért Alphadent?" paragraph, in the same order as
+// home.whyUs.paragraphs: since-1996 lab+clinic, experienced technicians /
+// CAD-CAM, ongoing training, CAMLOG partnership.
+const WHY_US_ICONS = [Building2, Cpu, GraduationCap, Handshake] as const;
 
 // Fade + float up, staggered across the heading/paragraph of the intro
 // section below, triggered once that section scrolls into view. Deliberately
@@ -167,11 +183,17 @@ function Page() {
             <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
               {t("home.whyUs.title")}
             </h2>
-            {whyUsParagraphs.map((paragraph) => (
-              <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
-                {paragraph}
-              </p>
-            ))}
+            {whyUsParagraphs.map((paragraph, index) => {
+              const Icon = WHY_US_ICONS[index] ?? Award;
+              return (
+                <div key={paragraph} className="flex items-start gap-3">
+                  <span className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/30 text-brand-gold-light">
+                    <Icon className="size-4" />
+                  </span>
+                  <p className="text-sm leading-relaxed text-white md:text-base">{paragraph}</p>
+                </div>
+              );
+            })}
             <p className="text-sm italic leading-relaxed text-brand-gold-muted">
               {t("home.whyUs.closing")}
             </p>
