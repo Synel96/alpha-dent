@@ -7,7 +7,7 @@ import { errorResources } from "./i18n/error";
 import { faqResources } from "./i18n/faq";
 import { metaResources } from "./i18n/meta";
 import { servicesResources } from "./i18n/services";
-import { DEFAULT_LOCALE, LOCALES } from "./locale";
+import { DEFAULT_LOCALE, LOCALES, type Locale } from "./locale";
 
 const resources = {
   hu: {
@@ -79,6 +79,18 @@ if (!i18n.isInitialized) {
 } else {
   // Keep server/client resources in sync across HMR and route-level module loads.
   syncResourceBundles();
+}
+
+// Vike's prerender step can render many pages concurrently in the same
+// Node process. The default export above is a single shared, mutable
+// i18next instance - if every page's render mutated its `language` via
+// i18n.changeLanguage() (as pages/+Layout.tsx does), concurrent renders
+// could stomp on each other's locale mid-render, baking page A's content
+// into page B's HTML. pages/+Wrapper.tsx uses this to give every *server*
+// render its own isolated instance; the client keeps using the shared
+// singleton above, which is safe since only one page is ever active there.
+export function createRequestI18n(locale: Locale) {
+  return i18n.cloneInstance({ lng: locale });
 }
 
 export default i18n;
