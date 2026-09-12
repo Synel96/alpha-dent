@@ -41,6 +41,10 @@ const SERVICE_PATHS: Record<(typeof SERVICE_SLUGS)[number], string> = {
   fogmegtartoKezelesek: "/szolgaltatasaink/fogmegtarto-kezelesek",
 };
 
+const SERVICE_IMAGES: Partial<Record<(typeof SERVICE_SLUGS)[number], string>> = {
+  implantologia: "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789208024/IMG_3400_dsepbw.webp",
+};
+
 // Fade + float up, staggered across the heading/paragraph of the intro
 // section below, triggered once that section scrolls into view. Deliberately
 // not used in <Hero>: that's above the fold and already visible on first
@@ -121,6 +125,7 @@ function Page() {
                   key={key}
                   title={t(`services.${key}.nav`)}
                   href={localizeHref(locale, SERVICE_PATHS[key])}
+                  imageUrl={SERVICE_IMAGES[key]}
                   delayMs={index * 60}
                   className="w-[80%] shrink-0 snap-start sm:w-[48%] lg:w-[34%] xl:w-[27%]"
                 />

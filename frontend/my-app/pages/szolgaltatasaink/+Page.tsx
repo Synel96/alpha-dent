@@ -20,6 +20,10 @@ const SERVICE_PATHS: Record<(typeof SERVICE_SLUGS)[number], string> = {
   fogmegtartoKezelesek: "/szolgaltatasaink/fogmegtarto-kezelesek",
 };
 
+const SERVICE_IMAGES: Partial<Record<(typeof SERVICE_SLUGS)[number], string>> = {
+  implantologia: "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789208024/IMG_3400_dsepbw.webp",
+};
+
 type ToolkitItem = { title: string; text: string };
 
 function Page() {
@@ -48,6 +52,7 @@ function Page() {
             key={key}
             title={t(`services.${key}.nav`)}
             href={localizeHref(locale, SERVICE_PATHS[key])}
+            imageUrl={SERVICE_IMAGES[key]}
             delayMs={index * 60}
           />
         ))}
