@@ -57,39 +57,6 @@ export const commonResources = {
         title: "Amiben számíthat ránk",
         moreLink: "Összes szolgáltatás",
       },
-      faq: {
-        title: "Gyakran feltett kérdések",
-        items: [
-          {
-            question: "Milyen nyelven tudok kommunikálni a rendelőben?",
-            answer: "Munkatársainkkal magyarul, angolul és németül is kommunikálhat.",
-          },
-          {
-            question: "Hogyan tudom meg, mennyibe kerül a kezelésem?",
-            answer:
-              "A pontos ár mindig az egyéni kezelési tervtől és a választott megoldástól függ. A vizsgálatot követően részletes kezelési tervet és árajánlatot készítünk.",
-          },
-          {
-            question: "Mennyi idő alatt készül el a fogpótlás?",
-            answer:
-              "Ez a választott kezeléstől függ. Egyes koronák és hidak néhány alkalom alatt elkészülhetnek, míg egy implantáció teljes folyamata több hónapot is igénybe vehet.",
-          },
-          {
-            question: "Hogyan zajlik egy implantáció?",
-            answer:
-              "A folyamat állapotfelméréssel és tervezéssel kezdődik, ezt követi az implantátum beültetése, a gyógyulási időszak, majd a végleges fogpótlás elkészítése.",
-          },
-          {
-            question: "Segítenek a kezelés megszervezésében, ha külföldről érkezem?",
-            answer:
-              "Igen. Külföldi pácienseink számára a kezelés megszervezésében és az utazással kapcsolatos információkban is segítséget nyújtunk.",
-          },
-        ],
-        closing:
-          "Nem tudja, melyik kezelésre van szüksége? Nem kell előre tudnia. Mondja el, mi zavarja, mi pedig segítünk megtalálni a megfelelő megoldást.",
-        ctaTitle: "Kérjen időpontot állapotfelmérésre!",
-        moreLink: "Összes kérdés",
-      },
       contact: {
         title: "Tegye meg az első lépést a mosolya felé.",
         intro:
@@ -159,39 +126,6 @@ export const commonResources = {
         eyebrow: "Our Services",
         title: "What you can count on us for",
         moreLink: "All services",
-      },
-      faq: {
-        title: "Frequently Asked Questions",
-        items: [
-          {
-            question: "What languages can I use at the clinic?",
-            answer: "You can communicate with our staff in Hungarian, English, and German.",
-          },
-          {
-            question: "How do I find out how much my treatment will cost?",
-            answer:
-              "The exact price always depends on your individual treatment plan and the chosen solution. After the examination, we prepare a detailed treatment plan and quote.",
-          },
-          {
-            question: "How long does it take to make a dental restoration?",
-            answer:
-              "This depends on the treatment chosen. Some crowns and bridges can be finished in just a few visits, while a full implant process can take several months.",
-          },
-          {
-            question: "How does an implant procedure work?",
-            answer:
-              "The process starts with assessment and planning, followed by implant placement, the healing period, and finally making the permanent restoration.",
-          },
-          {
-            question: "Do you help organize the treatment if I'm coming from abroad?",
-            answer:
-              "Yes. We help our international patients organize their treatment as well as with travel-related information.",
-          },
-        ],
-        closing:
-          "Not sure which treatment you need? You don't have to know in advance. Tell us what's bothering you, and we'll help you find the right solution.",
-        ctaTitle: "Book a check-up appointment!",
-        moreLink: "All questions",
       },
       contact: {
         title: "Take the first step toward your smile.",
@@ -263,39 +197,6 @@ export const commonResources = {
         title: "Worauf du bei uns zählen kannst",
         moreLink: "Alle Leistungen",
       },
-      faq: {
-        title: "Häufig gestellte Fragen",
-        items: [
-          {
-            question: "In welcher Sprache kann ich in der Praxis kommunizieren?",
-            answer: "Mit unserem Team können Sie auf Ungarisch, Englisch und Deutsch kommunizieren.",
-          },
-          {
-            question: "Wie erfahre ich, wie viel meine Behandlung kostet?",
-            answer:
-              "Der genaue Preis hängt immer vom individuellen Behandlungsplan und der gewählten Lösung ab. Nach der Untersuchung erstellen wir einen detaillierten Behandlungsplan mit Kostenvoranschlag.",
-          },
-          {
-            question: "Wie lange dauert die Anfertigung des Zahnersatzes?",
-            answer:
-              "Das hängt von der gewählten Behandlung ab. Manche Kronen und Brücken können in wenigen Terminen fertiggestellt werden, während ein vollständiger Implantationsprozess mehrere Monate dauern kann.",
-          },
-          {
-            question: "Wie läuft eine Implantation ab?",
-            answer:
-              "Der Prozess beginnt mit Befundaufnahme und Planung, gefolgt von der Implantatsetzung, der Einheilphase und schließlich der Anfertigung des endgültigen Zahnersatzes.",
-          },
-          {
-            question: "Helfen Sie bei der Organisation der Behandlung, wenn ich aus dem Ausland komme?",
-            answer:
-              "Ja. Für unsere internationalen Patienten helfen wir sowohl bei der Organisation der Behandlung als auch mit reisebezogenen Informationen.",
-          },
-        ],
-        closing:
-          "Sie wissen nicht, welche Behandlung Sie benötigen? Das müssen Sie auch nicht im Voraus wissen. Erzählen Sie uns, was Sie stört - wir helfen Ihnen, die richtige Lösung zu finden.",
-        ctaTitle: "Vereinbaren Sie einen Termin zur Untersuchung!",
-        moreLink: "Alle Fragen",
-      },
       contact: {
         title: "Machen Sie den ersten Schritt zu Ihrem Lächeln.",
         intro:
@@ -365,39 +266,6 @@ export const commonResources = {
         eyebrow: "I nostri servizi",
         title: "Su cosa puoi contare da noi",
         moreLink: "Tutti i servizi",
-      },
-      faq: {
-        title: "Domande frequenti",
-        items: [
-          {
-            question: "In quale lingua posso comunicare nello studio?",
-            answer: "Puoi comunicare con il nostro personale in ungherese, inglese e tedesco.",
-          },
-          {
-            question: "Come faccio a sapere quanto costerà il mio trattamento?",
-            answer:
-              "Il prezzo esatto dipende sempre dal piano di trattamento individuale e dalla soluzione scelta. Dopo la visita, prepariamo un piano di trattamento dettagliato con preventivo.",
-          },
-          {
-            question: "Quanto tempo richiede la realizzazione della protesi?",
-            answer:
-              "Dipende dal trattamento scelto. Alcune corone e ponti possono essere completati in poche sedute, mentre l'intero processo di implantologia può richiedere diversi mesi.",
-          },
-          {
-            question: "Come si svolge un'implantazione?",
-            answer:
-              "Il processo inizia con la valutazione e la pianificazione, seguita dall'inserimento dell'impianto, dal periodo di guarigione e infine dalla realizzazione della protesi definitiva.",
-          },
-          {
-            question: "Aiutate a organizzare il trattamento se arrivo dall'estero?",
-            answer:
-              "Sì. Ai nostri pazienti internazionali offriamo supporto sia nell'organizzazione del trattamento sia con informazioni relative al viaggio.",
-          },
-        ],
-        closing:
-          "Non sai di quale trattamento hai bisogno? Non devi saperlo in anticipo. Raccontaci cosa ti disturba: ti aiuteremo a trovare la soluzione giusta.",
-        ctaTitle: "Richiedi un appuntamento per una visita di controllo!",
-        moreLink: "Tutte le domande",
       },
       contact: {
         title: "Fai il primo passo verso il tuo sorriso.",

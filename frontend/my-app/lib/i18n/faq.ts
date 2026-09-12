@@ -60,6 +60,30 @@ export const faqResources = {
           answer:
             "Magyarországon ugyanazokat az anyagokat használják, mint Nyugat-Európában, az Egyesült Királyságban, Németországban, Ausztriában, Svájcban és más országokban.",
         },
+        q11: {
+          question: "Milyen nyelven tudok kommunikálni a rendelőben?",
+          answer: "Munkatársainkkal magyarul, angolul és németül is kommunikálhat.",
+        },
+        q12: {
+          question: "Hogyan tudom meg, mennyibe kerül a kezelésem?",
+          answer:
+            "A pontos ár mindig az egyéni kezelési tervtől és a választott megoldástól függ. A vizsgálatot követően részletes kezelési tervet és árajánlatot készítünk.",
+        },
+        q13: {
+          question: "Mennyi idő alatt készül el a fogpótlás?",
+          answer:
+            "Ez a választott kezeléstől függ. Egyes koronák és hidak néhány alkalom alatt elkészülhetnek, míg egy implantáció teljes folyamata több hónapot is igénybe vehet.",
+        },
+        q14: {
+          question: "Hogyan zajlik egy implantáció?",
+          answer:
+            "A folyamat állapotfelméréssel és tervezéssel kezdődik, ezt követi az implantátum beültetése, a gyógyulási időszak, majd a végleges fogpótlás elkészítése.",
+        },
+        q15: {
+          question: "Segítenek a kezelés megszervezésében, ha külföldről érkezem?",
+          answer:
+            "Igen. Külföldi pácienseink számára a kezelés megszervezésében és az utazással kapcsolatos információkban is segítséget nyújtunk.",
+        },
       },
     },
   },
@@ -123,6 +147,30 @@ export const faqResources = {
           question: "What materials are used in Hungary?",
           answer:
             "The same materials are used in Hungary as in Western Europe, the UK, Germany, Austria, Switzerland and similar countries.",
+        },
+        q11: {
+          question: "What languages can I use at the clinic?",
+          answer: "You can communicate with our staff in Hungarian, English, and German.",
+        },
+        q12: {
+          question: "How do I find out how much my treatment will cost?",
+          answer:
+            "The exact price always depends on your individual treatment plan and the chosen solution. After the examination, we prepare a detailed treatment plan and quote.",
+        },
+        q13: {
+          question: "How long does it take to make a dental restoration?",
+          answer:
+            "This depends on the treatment chosen. Some crowns and bridges can be finished in just a few visits, while a full implant process can take several months.",
+        },
+        q14: {
+          question: "How does an implant procedure work?",
+          answer:
+            "The process starts with assessment and planning, followed by implant placement, the healing period, and finally making the permanent restoration.",
+        },
+        q15: {
+          question: "Do you help organize the treatment if I'm coming from abroad?",
+          answer:
+            "Yes. We help our international patients organize their treatment as well as with travel-related information.",
         },
       },
     },
@@ -188,6 +236,30 @@ export const faqResources = {
           answer:
             "In Ungarn werden dieselben Materialien verwendet wie in Westeuropa, im Vereinigten Konigreich, in Deutschland, Osterreich, der Schweiz und anderen Landern.",
         },
+        q11: {
+          question: "In welcher Sprache kann ich in der Praxis kommunizieren?",
+          answer: "Mit unserem Team können Sie auf Ungarisch, Englisch und Deutsch kommunizieren.",
+        },
+        q12: {
+          question: "Wie erfahre ich, wie viel meine Behandlung kostet?",
+          answer:
+            "Der genaue Preis hängt immer vom individuellen Behandlungsplan und der gewählten Lösung ab. Nach der Untersuchung erstellen wir einen detaillierten Behandlungsplan mit Kostenvoranschlag.",
+        },
+        q13: {
+          question: "Wie lange dauert die Anfertigung des Zahnersatzes?",
+          answer:
+            "Das hängt von der gewählten Behandlung ab. Manche Kronen und Brücken können in wenigen Terminen fertiggestellt werden, während ein vollständiger Implantationsprozess mehrere Monate dauern kann.",
+        },
+        q14: {
+          question: "Wie läuft eine Implantation ab?",
+          answer:
+            "Der Prozess beginnt mit Befundaufnahme und Planung, gefolgt von der Implantatsetzung, der Einheilphase und schließlich der Anfertigung des endgültigen Zahnersatzes.",
+        },
+        q15: {
+          question: "Helfen Sie bei der Organisation der Behandlung, wenn ich aus dem Ausland komme?",
+          answer:
+            "Ja. Für unsere internationalen Patienten helfen wir sowohl bei der Organisation der Behandlung als auch mit reisebezogenen Informationen.",
+        },
       },
     },
   },
@@ -251,6 +323,30 @@ export const faqResources = {
           question: "Quali materiali vengono usati in Ungheria?",
           answer:
             "In Ungheria vengono utilizzati gli stessi materiali dell'Europa occidentale, del Regno Unito, della Germania, dell'Austria, della Svizzera e di altri paesi.",
+        },
+        q11: {
+          question: "In quale lingua posso comunicare nello studio?",
+          answer: "Puoi comunicare con il nostro personale in ungherese, inglese e tedesco.",
+        },
+        q12: {
+          question: "Come faccio a sapere quanto costerà il mio trattamento?",
+          answer:
+            "Il prezzo esatto dipende sempre dal piano di trattamento individuale e dalla soluzione scelta. Dopo la visita, prepariamo un piano di trattamento dettagliato con preventivo.",
+        },
+        q13: {
+          question: "Quanto tempo richiede la realizzazione della protesi?",
+          answer:
+            "Dipende dal trattamento scelto. Alcune corone e ponti possono essere completati in poche sedute, mentre l'intero processo di implantologia può richiedere diversi mesi.",
+        },
+        q14: {
+          question: "Come si svolge un'implantazione?",
+          answer:
+            "Il processo inizia con la valutazione e la pianificazione, seguita dall'inserimento dell'impianto, dal periodo di guarigione e infine dalla realizzazione della protesi definitiva.",
+        },
+        q15: {
+          question: "Aiutate a organizzare il trattamento se arrivo dall'estero?",
+          answer:
+            "Sì. Ai nostri pazienti internazionali offriamo supporto sia nell'organizzazione del trattamento sia con informazioni relative al viaggio.",
         },
       },
     },

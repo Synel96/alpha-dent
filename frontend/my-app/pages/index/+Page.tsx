@@ -5,7 +5,6 @@ import {
   Gem,
   GraduationCap,
   Handshake,
-  HelpCircle,
   Layers,
   Phone,
   Puzzle,
@@ -82,14 +81,11 @@ const INTRO_ICONS = [Puzzle, Layers, Syringe, Gem] as const;
 const REVEAL_CLASS =
   "transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none";
 
-type FaqItem = { question: string; answer: string };
-
 function Page() {
   const { t } = useTranslation();
   const { locale } = usePageContext();
   const { ref: introRef, visible: introVisible } = useReveal<HTMLDivElement>();
 
-  const faqItems = t("home.faq.items", { returnObjects: true }) as FaqItem[];
   const whyUsParagraphs = t("home.whyUs.paragraphs", { returnObjects: true }) as string[];
   const missionParagraphs = t("home.mission.paragraphs", { returnObjects: true }) as string[];
 
@@ -239,51 +235,6 @@ function Page() {
                 {paragraph}
               </p>
             ))}
-          </RevealSection>
-        </PageContainer>
-      </section>
-
-      {/* FAQ teaser */}
-      <section className="border-b border-brand-border bg-brand-surface/40">
-        <PageContainer className="py-14 md:py-20">
-          <RevealSection className="mx-auto max-w-3xl space-y-6">
-            <PillBadge icon={HelpCircle}>{t("nav.faq")}</PillBadge>
-            <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
-              {t("home.faq.title")}
-            </h2>
-
-            <div className="space-y-3">
-              {faqItems.map((item) => (
-                <div
-                  key={item.question}
-                  className="rounded-xl border border-brand-border bg-brand-black/40 p-5"
-                >
-                  <h3 className="mb-2 text-sm font-semibold text-brand-gold-light">
-                    {item.question}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-brand-gold-muted">{item.answer}</p>
-                </div>
-              ))}
-            </div>
-
-            <p className="text-sm italic leading-relaxed text-brand-gold-muted">
-              {t("home.faq.closing")}
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4">
-              <CtaButton
-                href={kapcsolatHref}
-                badge={t("nav.contact")}
-                title={t("home.faq.ctaTitle")}
-                subtitle={t("home.intro.ctaButton")}
-              />
-              <a
-                href={localizeHref(locale, "/kerdesek")}
-                className="text-sm text-brand-gold-muted underline underline-offset-4 hover:text-brand-gold"
-              >
-                {t("home.faq.moreLink")} →
-              </a>
-            </div>
           </RevealSection>
         </PageContainer>
       </section>

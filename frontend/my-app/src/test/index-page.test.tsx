@@ -8,12 +8,6 @@ vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string, options?: ReturnObjectsOptions) => {
       if (!options?.returnObjects) return key;
-      if (key === "home.faq.items") {
-        return [
-          { question: "faq-question-1", answer: "faq-answer-1" },
-          { question: "faq-question-2", answer: "faq-answer-2" },
-        ];
-      }
       return [`${key}-0`, `${key}-1`];
     },
   }),
@@ -60,10 +54,9 @@ describe("Főoldal", () => {
     expect(screen.getByRole("button", { name: "common.carousel.next" })).toBeInTheDocument();
   });
 
-  it("megjeleníti a GYIK kérdéseket", () => {
+  it("nem jeleníti meg a GYIK szekciót - az a GYIK menüpontban él", () => {
     render(<Page />);
-    expect(screen.getByText("faq-question-1")).toBeInTheDocument();
-    expect(screen.getByText("faq-answer-1")).toBeInTheDocument();
+    expect(screen.queryByText("home.faq.title")).not.toBeInTheDocument();
   });
 
   it("megjeleníti az elérhetőségeket a kapcsolat szekcióban", () => {

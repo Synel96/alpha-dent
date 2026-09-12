@@ -23,6 +23,11 @@ const FAQ_KEYS = [
   "q8",
   "q9",
   "q10",
+  "q11",
+  "q12",
+  "q13",
+  "q14",
+  "q15",
 ] as const;
 
 export { Page };

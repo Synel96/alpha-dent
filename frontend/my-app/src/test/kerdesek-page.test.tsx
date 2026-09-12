@@ -16,13 +16,13 @@ import { Page } from "../../pages/kerdesek/+Page";
 const mockPageContext = usePageContext as ReturnType<typeof vi.fn>;
 
 describe("Kerdesek (FAQ) oldal", () => {
-  it("mind a 10 kérdést megjeleníti, összecsukható panelként", () => {
+  it("mind a 15 kérdést megjeleníti, összecsukható panelként", () => {
     mockPageContext.mockReturnValue({ locale: "hu" });
     render(<Page />);
     expect(screen.getByText("faqPage.items.q1.question")).toBeInTheDocument();
-    expect(screen.getByText("faqPage.items.q10.question")).toBeInTheDocument();
+    expect(screen.getByText("faqPage.items.q15.question")).toBeInTheDocument();
     expect(screen.getAllByRole("button", { name: /faqPage\.items\.q\d+\.question/ })).toHaveLength(
-      10
+      15
     );
   });
 
