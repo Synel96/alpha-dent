@@ -104,26 +104,6 @@ function Page() {
         </PageContainer>
       </section>
 
-      {/* Miert Alphadent? */}
-      <section className="border-b border-brand-border">
-        <PageContainer className="py-14 md:py-20">
-          <RevealSection className="mx-auto max-w-3xl space-y-4">
-            <PillBadge icon={Award}>{t("home.whyUs.eyebrow")}</PillBadge>
-            <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
-              {t("home.whyUs.title")}
-            </h2>
-            {whyUsParagraphs.map((paragraph) => (
-              <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
-                {paragraph}
-              </p>
-            ))}
-            <p className="text-sm italic leading-relaxed text-brand-gold-muted">
-              {t("home.whyUs.closing")}
-            </p>
-          </RevealSection>
-        </PageContainer>
-      </section>
-
       {/* Services teaser */}
       <section className="border-b border-brand-border">
         <PageContainer className="py-14 md:py-20">
@@ -155,6 +135,26 @@ function Page() {
                 {t("home.servicesTeaser.moreLink")} →
               </a>
             </div>
+          </RevealSection>
+        </PageContainer>
+      </section>
+
+      {/* Miert Alphadent? */}
+      <section className="border-b border-brand-border">
+        <PageContainer className="py-14 md:py-20">
+          <RevealSection className="mx-auto max-w-3xl space-y-4">
+            <PillBadge icon={Award}>{t("home.whyUs.eyebrow")}</PillBadge>
+            <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
+              {t("home.whyUs.title")}
+            </h2>
+            {whyUsParagraphs.map((paragraph) => (
+              <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
+                {paragraph}
+              </p>
+            ))}
+            <p className="text-sm italic leading-relaxed text-brand-gold-muted">
+              {t("home.whyUs.closing")}
+            </p>
           </RevealSection>
         </PageContainer>
       </section>
