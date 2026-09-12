@@ -1,4 +1,4 @@
-import { Award, HelpCircle, Phone, Smile, Stethoscope } from "lucide-react";
+import { Award, HelpCircle, Phone, Smile, Sparkles, Stethoscope } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { Hero } from "../../components/ui/hero";
@@ -89,8 +89,18 @@ function Page() {
             ref={introRef}
             className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center"
           >
-            <h2
+            <PillBadge
+              icon={Sparkles}
               style={{ transitionDelay: "0ms" }}
+              className={cn(
+                REVEAL_CLASS,
+                introVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              )}
+            >
+              {t("home.intro.eyebrow")}
+            </PillBadge>
+            <h2
+              style={{ transitionDelay: "140ms" }}
               className={cn(
                 REVEAL_CLASS,
                 introVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
@@ -100,7 +110,7 @@ function Page() {
               {t("home.intro.title")}
             </h2>
             <p
-              style={{ transitionDelay: "140ms" }}
+              style={{ transitionDelay: "280ms" }}
               className={cn(
                 REVEAL_CLASS,
                 introVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
