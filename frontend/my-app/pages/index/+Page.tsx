@@ -44,6 +44,8 @@ const SERVICE_PATHS: Record<(typeof SERVICE_SLUGS)[number], string> = {
 const SERVICE_IMAGES: Partial<Record<(typeof SERVICE_SLUGS)[number], string>> = {
   implantologia: "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789208024/IMG_3400_dsepbw.webp",
   szajsebeszet: "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789215806/IMG_3398_dmrstv.webp",
+  esztetikaiFogaszat:
+    "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0053_gz8nis.webp",
 };
 
 // Fade + float up, staggered across the heading/paragraph of the intro
