@@ -4,15 +4,21 @@ import { ServiceTile } from "../../components/ui/service-tile";
 
 describe("ServiceTile", () => {
   it("kép nélkül a Cloudinary placeholder jelzést mutatja", () => {
-    render(<ServiceTile title="Tanácsadás" />);
+    render(<ServiceTile title="Tanácsadás" href="/szolgaltatasaink/implantologia" />);
     expect(screen.getByText("Cloudinary placeholder")).toBeInTheDocument();
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
+  });
+
+  it("a megadott href-re mutató linket ad", () => {
+    render(<ServiceTile title="Implantológia" href="/szolgaltatasaink/implantologia" />);
+    expect(screen.getByRole("link")).toHaveAttribute("href", "/szolgaltatasaink/implantologia");
   });
 
   it("Cloudinary URL esetén reszponzív srcSet-et generál, és eltünteti a placeholdert", () => {
     render(
       <ServiceTile
         title="Tanácsadás"
+        href="/szolgaltatasaink/implantologia"
         imageUrl="https://res.cloudinary.com/demo/image/upload/v1/consult.jpg"
       />
     );
@@ -27,7 +33,13 @@ describe("ServiceTile", () => {
   });
 
   it("nem Cloudinary URL esetén nem ad srcSet-et, de a src-t megtartja", () => {
-    render(<ServiceTile title="Tanácsadás" imageUrl="https://example.com/consult.jpg" />);
+    render(
+      <ServiceTile
+        title="Tanácsadás"
+        href="/szolgaltatasaink/implantologia"
+        imageUrl="https://example.com/consult.jpg"
+      />
+    );
     const img = screen.getByRole("img", { name: "Tanácsadás" });
     expect(img).toHaveAttribute("src", "https://example.com/consult.jpg");
     expect(img).not.toHaveAttribute("srcset");

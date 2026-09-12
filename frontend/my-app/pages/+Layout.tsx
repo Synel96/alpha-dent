@@ -18,9 +18,11 @@ import {
 } from "../components/ui/language-switcher";
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuTrigger,
 } from "../components/ui/navigation-menu";
 import {
   Sheet,
@@ -32,11 +34,25 @@ import {
 const navLinks = [
   { labelKey: "nav.home", href: "/" },
   { labelKey: "nav.clinic", href: "/klinikank" },
-  { labelKey: "nav.services", href: "/szolgaltatasaink" },
+  { labelKey: "nav.services", href: "/szolgaltatasaink", isServices: true },
   { labelKey: "nav.story", href: "/tortenetunk" },
   { labelKey: "nav.faq", href: "/kerdesek" },
   { labelKey: "nav.contact", href: "/kapcsolat" },
 ];
+
+const SERVICE_SUBLINKS = [
+  "implantologia",
+  "szajsebeszet",
+  "esztetikaiFogaszat",
+  "fogmegtartoKezelesek",
+] as const;
+
+const SERVICE_SUBLINK_PATHS: Record<(typeof SERVICE_SUBLINKS)[number], string> = {
+  implantologia: "/szolgaltatasaink/implantologia",
+  szajsebeszet: "/szolgaltatasaink/szajsebeszet",
+  esztetikaiFogaszat: "/szolgaltatasaink/esztetikai-fogaszat",
+  fogmegtartoKezelesek: "/szolgaltatasaink/fogmegtarto-kezelesek",
+};
 
 // Only show the loading screen once a page transition has actually taken
 // this long - most navigations resolve well under this, and flashing the
@@ -181,17 +197,48 @@ export function Layout({ children }: { children: React.ReactNode }) {
               />
               <NavigationMenu viewport={false}>
                 <NavigationMenuList className="gap-1">
-                  {localizedNavLinks.map((link) => (
-                    <NavigationMenuItem key={link.href}>
-                      <NavigationMenuLink
-                        href={link.href}
-                        onClick={(event) => handleInternalLink(event, link.href)}
-                        className="px-3 py-2 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold rounded-md transition-colors"
-                      >
-                        {t(link.labelKey)}
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                  ))}
+                  {localizedNavLinks.map((link) =>
+                    link.isServices ? (
+                      <NavigationMenuItem key={link.href}>
+                        <NavigationMenuTrigger className="rounded-md bg-transparent px-3 py-2 text-sm font-normal tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold data-popup-open:bg-brand-surface data-popup-open:text-brand-gold">
+                          {t(link.labelKey)}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent className="min-w-[240px] rounded-lg border border-brand-border bg-brand-black p-1.5 shadow-lg">
+                          <a
+                            href={link.href}
+                            onClick={(event) => handleInternalLink(event, link.href)}
+                            className="block rounded-md px-3 py-2 text-sm font-medium text-brand-gold hover:bg-brand-surface transition-colors"
+                          >
+                            {t("servicesHub.title")}
+                          </a>
+                          <div className="my-1 border-t border-brand-border" />
+                          {SERVICE_SUBLINKS.map((key) => {
+                            const subHref = localizeHref(locale, SERVICE_SUBLINK_PATHS[key]);
+                            return (
+                              <a
+                                key={key}
+                                href={subHref}
+                                onClick={(event) => handleInternalLink(event, subHref)}
+                                className="block rounded-md px-3 py-2 text-sm text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold transition-colors"
+                              >
+                                {t(`services.${key}.nav`)}
+                              </a>
+                            );
+                          })}
+                        </NavigationMenuContent>
+                      </NavigationMenuItem>
+                    ) : (
+                      <NavigationMenuItem key={link.href}>
+                        <NavigationMenuLink
+                          href={link.href}
+                          onClick={(event) => handleInternalLink(event, link.href)}
+                          className="px-3 py-2 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold rounded-md transition-colors"
+                        >
+                          {t(link.labelKey)}
+                        </NavigationMenuLink>
+                      </NavigationMenuItem>
+                    )
+                  )}
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
@@ -239,14 +286,32 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <SheetTitle className="sr-only">{t("common.navigation")}</SheetTitle>
                   <nav className="flex flex-col gap-1 px-4 pt-4">
                     {localizedNavLinks.map((link) => (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        onClick={(event) => handleInternalLink(event, link.href, true)}
-                        className="rounded-md px-3 py-2.5 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 transition-colors"
-                      >
-                        {t(link.labelKey)}
-                      </a>
+                      <React.Fragment key={link.href}>
+                        <a
+                          href={link.href}
+                          onClick={(event) => handleInternalLink(event, link.href, true)}
+                          className="rounded-md px-3 py-2.5 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 transition-colors"
+                        >
+                          {t(link.labelKey)}
+                        </a>
+                        {link.isServices ? (
+                          <div className="ml-3 flex flex-col gap-1 border-l border-brand-border pl-3">
+                            {SERVICE_SUBLINKS.map((key) => {
+                              const subHref = localizeHref(locale, SERVICE_SUBLINK_PATHS[key]);
+                              return (
+                                <a
+                                  key={key}
+                                  href={subHref}
+                                  onClick={(event) => handleInternalLink(event, subHref, true)}
+                                  className="rounded-md px-3 py-2 text-sm text-brand-gold-muted/80 hover:bg-brand-surface hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 transition-colors"
+                                >
+                                  {t(`services.${key}.nav`)}
+                                </a>
+                              );
+                            })}
+                          </div>
+                        ) : null}
+                      </React.Fragment>
                     ))}
                     <div className="mt-4 border-t border-brand-border pt-4">
                       <p className="mb-2 text-xs uppercase tracking-wide text-brand-gold-muted">

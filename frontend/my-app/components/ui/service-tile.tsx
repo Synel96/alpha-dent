@@ -6,18 +6,18 @@ const TILE_SIZES = "(min-width: 1280px) 22vw, (min-width: 1024px) 30vw, (min-wid
 
 type ServiceTileProps = {
   title: string;
+  href: string;
   imageUrl?: string;
   className?: string;
   delayMs?: number;
-  onClick?: () => void;
 };
 
 export function ServiceTile({
   title,
+  href,
   imageUrl,
   className,
   delayMs = 0,
-  onClick,
 }: ServiceTileProps) {
   const rootRef = React.useRef<HTMLElement | null>(null);
   const [visible, setVisible] = React.useState(false);
@@ -64,9 +64,8 @@ export function ServiceTile({
         className
       )}
     >
-      <button
-        type="button"
-        onClick={onClick}
+      <a
+        href={href}
         className="relative block w-full aspect-[4/3] overflow-hidden rounded-xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/80 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black"
       >
         {imageUrl ? (
@@ -96,7 +95,7 @@ export function ServiceTile({
             {title}
           </h3>
         </div>
-      </button>
+      </a>
     </article>
   );
 }
