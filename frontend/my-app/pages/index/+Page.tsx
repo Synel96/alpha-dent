@@ -2,13 +2,17 @@ import {
   Award,
   Building2,
   Cpu,
+  Gem,
   GraduationCap,
   Handshake,
   HelpCircle,
+  Layers,
   Phone,
+  Puzzle,
   Smile,
   Sparkles,
   Stethoscope,
+  Syringe,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
@@ -65,6 +69,10 @@ const SERVICE_IMAGES: Partial<Record<(typeof SERVICE_SLUGS)[number], string>> = 
 // home.whyUs.paragraphs: since-1996 lab+clinic, experienced technicians /
 // CAD-CAM, ongoing training, CAMLOG partnership.
 const WHY_US_ICONS = [Building2, Cpu, GraduationCap, Handshake] as const;
+
+// The 4 treatment types named in home.intro.description's first sentence:
+// a single missing tooth, full dentures, oral surgery, aesthetic treatment.
+const INTRO_ICONS = [Puzzle, Layers, Syringe, Gem] as const;
 
 // Fade + float up, staggered across the heading/paragraph of the intro
 // section below, triggered once that section scrolls into view. Deliberately
@@ -135,6 +143,23 @@ function Page() {
             >
               {t("home.intro.description")}
             </p>
+            <div
+              style={{ transitionDelay: "420ms" }}
+              className={cn(
+                REVEAL_CLASS,
+                introVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
+                "flex items-center gap-3"
+              )}
+            >
+              {INTRO_ICONS.map((Icon, index) => (
+                <span
+                  key={index}
+                  className="inline-flex size-9 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/30 text-brand-gold-light"
+                >
+                  <Icon className="size-4" />
+                </span>
+              ))}
+            </div>
           </div>
         </PageContainer>
       </section>
