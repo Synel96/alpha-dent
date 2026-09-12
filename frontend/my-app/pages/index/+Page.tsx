@@ -1,3 +1,4 @@
+import { Award, HelpCircle, Phone, Smile, Stethoscope } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { Hero } from "../../components/ui/hero";
@@ -106,7 +107,7 @@ function Page() {
       <section className="border-b border-brand-border">
         <PageContainer className="py-14 md:py-20">
           <RevealSection className="mx-auto max-w-3xl space-y-4">
-            <PillBadge>{t("home.whyUs.eyebrow")}</PillBadge>
+            <PillBadge icon={Award}>{t("home.whyUs.eyebrow")}</PillBadge>
             <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
               {t("home.whyUs.title")}
             </h2>
@@ -126,7 +127,7 @@ function Page() {
       <section className="border-b border-brand-border bg-brand-surface/40">
         <PageContainer className="py-14 md:py-20">
           <RevealSection className="mx-auto max-w-3xl space-y-4 text-center">
-            <PillBadge>{t("home.mission.eyebrow")}</PillBadge>
+            <PillBadge icon={Smile}>{t("home.mission.eyebrow")}</PillBadge>
             <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
               {t("home.mission.title")}
             </h2>
@@ -144,7 +145,7 @@ function Page() {
         <PageContainer className="py-14 md:py-20">
           <RevealSection className="space-y-8">
             <div className="mx-auto max-w-2xl space-y-3 text-center">
-              <PillBadge>{t("home.servicesTeaser.eyebrow")}</PillBadge>
+              <PillBadge icon={Stethoscope}>{t("home.servicesTeaser.eyebrow")}</PillBadge>
               <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
                 {t("home.servicesTeaser.title")}
               </h2>
@@ -177,7 +178,7 @@ function Page() {
       <section className="border-b border-brand-border bg-brand-surface/40">
         <PageContainer className="py-14 md:py-20">
           <RevealSection className="mx-auto max-w-3xl space-y-6">
-            <PillBadge>{t("nav.faq")}</PillBadge>
+            <PillBadge icon={HelpCircle}>{t("nav.faq")}</PillBadge>
             <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
               {t("home.faq.title")}
             </h2>
@@ -223,7 +224,7 @@ function Page() {
         <PageContainer className="py-14 md:py-20">
           <RevealSection className="mx-auto max-w-3xl space-y-6">
             <div className="space-y-3">
-              <PillBadge>{t("nav.contact")}</PillBadge>
+              <PillBadge icon={Phone}>{t("nav.contact")}</PillBadge>
               <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
                 {t("home.contact.title")}
               </h2>
