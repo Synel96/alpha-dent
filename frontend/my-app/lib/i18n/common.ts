@@ -29,6 +29,7 @@ export const commonResources = {
         ctaButton: "Időpontot kérek",
       },
       whyUs: {
+        eyebrow: "Rólunk",
         title: "Miért Alphadent?",
         paragraphs: [
           "Rendelőnk egyik legnagyobb előnye, hogy a fogászati kezelés és a fogtechnikai háttér szorosan együttműködik, egy helyen már 1996 óta.",
@@ -39,6 +40,7 @@ export const commonResources = {
         closing: "Mert számunkra a szakmai fejlődés nem egy elvárás, hanem a minőségi ellátás alapja.",
       },
       mission: {
+        eyebrow: "Szemléletünk",
         title: "Nem csak a fogait kezeljük. A teljes mosolyát látjuk.",
         paragraphs: [
           "Egy fogászati probléma ritkán csak egy fogról szól. Hatással lehet a rágásra, a beszédre, az önbizalomra és arra is, ahogyan mosolyogni szeretne.",
@@ -125,6 +127,7 @@ export const commonResources = {
         ctaButton: "Book an appointment",
       },
       whyUs: {
+        eyebrow: "About Us",
         title: "Why Alphadent?",
         paragraphs: [
           "One of our clinic's biggest strengths is that dental treatment and our dental lab have worked closely together, under one roof, since 1996.",
@@ -135,6 +138,7 @@ export const commonResources = {
         closing: "Because for us, professional development isn't an expectation - it's the foundation of quality care.",
       },
       mission: {
+        eyebrow: "Our Approach",
         title: "We don't just treat your teeth. We see your whole smile.",
         paragraphs: [
           "A dental problem is rarely just about one tooth. It can affect chewing, speech, confidence, and the way you want to smile.",
@@ -221,6 +225,7 @@ export const commonResources = {
         ctaButton: "Termin anfragen",
       },
       whyUs: {
+        eyebrow: "Über uns",
         title: "Warum Alphadent?",
         paragraphs: [
           "Einer der größten Vorteile unserer Praxis ist, dass zahnärztliche Behandlung und Dentallabor bereits seit 1996 eng zusammenarbeiten - alles an einem Ort.",
@@ -231,6 +236,7 @@ export const commonResources = {
         closing: "Denn für uns ist fachliche Weiterentwicklung keine Erwartung, sondern die Grundlage hochwertiger Versorgung.",
       },
       mission: {
+        eyebrow: "Unser Ansatz",
         title: "Wir behandeln nicht nur Ihre Zähne. Wir sehen Ihr ganzes Lächeln.",
         paragraphs: [
           "Ein zahnmedizinisches Problem betrifft selten nur einen Zahn. Es kann sich auf das Kauen, das Sprechen, das Selbstvertrauen und darauf auswirken, wie Sie lächeln möchten.",
@@ -317,6 +323,7 @@ export const commonResources = {
         ctaButton: "Richiedi un appuntamento",
       },
       whyUs: {
+        eyebrow: "Chi siamo",
         title: "Perché Alphadent?",
         paragraphs: [
           "Uno dei maggiori punti di forza del nostro studio è che il trattamento odontoiatrico e il laboratorio odontotecnico collaborano strettamente, in un unico luogo, già dal 1996.",
@@ -327,6 +334,7 @@ export const commonResources = {
         closing: "Perché per noi lo sviluppo professionale non è un'aspettativa, ma il fondamento di un'assistenza di qualità.",
       },
       mission: {
+        eyebrow: "Il nostro approccio",
         title: "Non curiamo solo i tuoi denti. Vediamo il tuo sorriso nel suo insieme.",
         paragraphs: [
           "Un problema odontoiatrico raramente riguarda un solo dente. Può influire sulla masticazione, sulla fonazione, sulla fiducia in sé stessi e sul modo in cui si desidera sorridere.",

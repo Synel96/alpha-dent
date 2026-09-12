@@ -3,6 +3,7 @@ import { usePageContext } from "vike-react/usePageContext";
 import { Hero } from "../../components/ui/hero";
 import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
+import { PillBadge } from "../../components/ui/pill-badge";
 import { RevealSection } from "../../components/ui/reveal-section";
 import { ServiceTile } from "../../components/ui/service-tile";
 import { localizeHref } from "../../lib/locale";
@@ -105,6 +106,7 @@ function Page() {
       <section className="border-b border-brand-border">
         <PageContainer className="py-14 md:py-20">
           <RevealSection className="mx-auto max-w-3xl space-y-4">
+            <PillBadge>{t("home.whyUs.eyebrow")}</PillBadge>
             <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
               {t("home.whyUs.title")}
             </h2>
@@ -124,6 +126,7 @@ function Page() {
       <section className="border-b border-brand-border bg-brand-surface/40">
         <PageContainer className="py-14 md:py-20">
           <RevealSection className="mx-auto max-w-3xl space-y-4 text-center">
+            <PillBadge>{t("home.mission.eyebrow")}</PillBadge>
             <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
               {t("home.mission.title")}
             </h2>
@@ -140,10 +143,8 @@ function Page() {
       <section className="border-b border-brand-border">
         <PageContainer className="py-14 md:py-20">
           <RevealSection className="space-y-8">
-            <div className="mx-auto max-w-2xl space-y-2 text-center">
-              <p className="text-xs uppercase tracking-[0.22em] text-brand-gold-muted">
-                {t("home.servicesTeaser.eyebrow")}
-              </p>
+            <div className="mx-auto max-w-2xl space-y-3 text-center">
+              <PillBadge>{t("home.servicesTeaser.eyebrow")}</PillBadge>
               <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
                 {t("home.servicesTeaser.title")}
               </h2>
@@ -176,6 +177,7 @@ function Page() {
       <section className="border-b border-brand-border bg-brand-surface/40">
         <PageContainer className="py-14 md:py-20">
           <RevealSection className="mx-auto max-w-3xl space-y-6">
+            <PillBadge>{t("nav.faq")}</PillBadge>
             <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
               {t("home.faq.title")}
             </h2>
@@ -221,9 +223,7 @@ function Page() {
         <PageContainer className="py-14 md:py-20">
           <RevealSection className="mx-auto max-w-3xl space-y-6">
             <div className="space-y-3">
-              <p className="text-xs uppercase tracking-[0.22em] text-brand-gold-muted">
-                {t("nav.contact")}
-              </p>
+              <PillBadge>{t("nav.contact")}</PillBadge>
               <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
                 {t("home.contact.title")}
               </h2>
