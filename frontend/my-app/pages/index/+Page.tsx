@@ -124,23 +124,6 @@ function Page() {
         </PageContainer>
       </section>
 
-      {/* Mission */}
-      <section className="border-b border-brand-border bg-brand-surface/40">
-        <PageContainer className="py-14 md:py-20">
-          <RevealSection className="mx-auto max-w-3xl space-y-4 text-center">
-            <PillBadge icon={Smile}>{t("home.mission.eyebrow")}</PillBadge>
-            <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
-              {t("home.mission.title")}
-            </h2>
-            {missionParagraphs.map((paragraph) => (
-              <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
-                {paragraph}
-              </p>
-            ))}
-          </RevealSection>
-        </PageContainer>
-      </section>
-
       {/* Services teaser */}
       <section className="border-b border-brand-border">
         <PageContainer className="py-14 md:py-20">
@@ -172,6 +155,23 @@ function Page() {
                 {t("home.servicesTeaser.moreLink")} →
               </a>
             </div>
+          </RevealSection>
+        </PageContainer>
+      </section>
+
+      {/* Mission */}
+      <section className="border-b border-brand-border bg-brand-surface/40">
+        <PageContainer className="py-14 md:py-20">
+          <RevealSection className="mx-auto max-w-3xl space-y-4 text-center">
+            <PillBadge icon={Smile}>{t("home.mission.eyebrow")}</PillBadge>
+            <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
+              {t("home.mission.title")}
+            </h2>
+            {missionParagraphs.map((paragraph) => (
+              <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
+                {paragraph}
+              </p>
+            ))}
           </RevealSection>
         </PageContainer>
       </section>
