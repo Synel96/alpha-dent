@@ -12,6 +12,10 @@ export const commonResources = {
       menuOpen: "Menü megnyitása",
       navigation: "Navigáció",
       language: "Nyelv",
+      carousel: {
+        prev: "Előző",
+        next: "Következő",
+      },
       comingSoon: {
         eyebrow: "Hamarosan",
         description:
@@ -110,6 +114,10 @@ export const commonResources = {
       menuOpen: "Open menu",
       navigation: "Navigation",
       language: "Language",
+      carousel: {
+        prev: "Previous",
+        next: "Next",
+      },
       comingSoon: {
         eyebrow: "Coming soon",
         description:
@@ -208,6 +216,10 @@ export const commonResources = {
       menuOpen: "Menü öffnen",
       navigation: "Navigation",
       language: "Sprache",
+      carousel: {
+        prev: "Zurück",
+        next: "Weiter",
+      },
       comingSoon: {
         eyebrow: "In Kürze",
         description:
@@ -306,6 +318,10 @@ export const commonResources = {
       menuOpen: "Apri il menu",
       navigation: "Navigazione",
       language: "Lingua",
+      carousel: {
+        prev: "Precedente",
+        next: "Successivo",
+      },
       comingSoon: {
         eyebrow: "Prossimamente",
         description:

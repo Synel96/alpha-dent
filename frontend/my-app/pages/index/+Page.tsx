@@ -6,6 +6,7 @@ import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
 import { PillBadge } from "../../components/ui/pill-badge";
 import { RevealSection } from "../../components/ui/reveal-section";
+import { ServiceCarousel } from "../../components/ui/service-carousel";
 import { ServiceTile } from "../../components/ui/service-tile";
 import { localizeHref } from "../../lib/locale";
 import { useReveal } from "../../lib/use-reveal";
@@ -151,16 +152,17 @@ function Page() {
               </h2>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <ServiceCarousel>
               {SERVICE_SLUGS.map((key, index) => (
                 <ServiceTile
                   key={key}
                   title={t(`services.${key}.nav`)}
                   href={localizeHref(locale, SERVICE_PATHS[key])}
                   delayMs={index * 60}
+                  className="w-[80%] shrink-0 snap-start sm:w-[48%] lg:w-[34%] xl:w-[27%]"
                 />
               ))}
-            </div>
+            </ServiceCarousel>
 
             <div className="text-center">
               <a
