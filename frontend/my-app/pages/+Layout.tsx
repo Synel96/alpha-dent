@@ -25,11 +25,12 @@ import {
   NavigationMenuTrigger,
 } from "../components/ui/navigation-menu";
 import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetTitle,
-} from "../components/ui/sheet";
+  PushDrawer,
+  PushDrawerBody,
+  PushDrawerContent,
+  PushDrawerTitle,
+  PushDrawerTrigger,
+} from "../components/ui/push-drawer";
 
 const navLinks = [
   { labelKey: "nav.home", href: "/" },
@@ -161,97 +162,100 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-brand-black font-sans antialiased text-brand-gold flex flex-col">
-      <LoadingScreen visible={loading} />
-      <header ref={headerRef} className="fixed inset-x-0 top-0 z-50">
-        {/* Solid backdrop, faded in via opacity as the hero scrolls by.
-            Opacity is a compositor-friendly property; animating
-            background-color/backdrop-filter directly (the old approach)
-            forces the browser off the compositor thread every frame. */}
-        <div
-          aria-hidden
-          className="absolute inset-0 border-b border-brand-border bg-brand-black/90 backdrop-blur transition-opacity duration-200"
-          style={{ opacity: heroProgress }}
-        />
-        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <a
-            href={homeHref}
-            onClick={(event) => handleInternalLink(event, homeHref)}
-            className="flex items-center rounded-md text-lg font-semibold text-brand-gold transition-colors hover:text-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
-          >
-            <span className="uppercase tracking-[0.32em]">Alphadent</span>
-          </a>
+    <PushDrawer open={open} onOpenChange={setOpen}>
+      <PushDrawerBody
+        open={open}
+        className="bg-brand-black font-sans antialiased text-brand-gold flex flex-col"
+      >
+        <LoadingScreen visible={loading} />
+        <header ref={headerRef} className="fixed inset-x-0 top-0 z-50">
+          {/* Solid backdrop, faded in via opacity as the hero scrolls by.
+              Opacity is a compositor-friendly property; animating
+              background-color/backdrop-filter directly (the old approach)
+              forces the browser off the compositor thread every frame. */}
+          <div
+            aria-hidden
+            className="absolute inset-0 border-b border-brand-border bg-brand-black/90 backdrop-blur transition-opacity duration-200"
+            style={{ opacity: heroProgress }}
+          />
+          <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+            <a
+              href={homeHref}
+              onClick={(event) => handleInternalLink(event, homeHref)}
+              className="flex items-center rounded-md text-lg font-semibold text-brand-gold transition-colors hover:text-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
+            >
+              <span className="uppercase tracking-[0.32em]">Alphadent</span>
+            </a>
 
-          <div className="hidden md:flex flex-1 justify-center">
-            <div className="relative">
-              {/* Faint backdrop so the gold nav text stays legible over a
-                  bright hero photo before the header itself goes solid -
-                  fades out as heroProgress rises, since the header's own
-                  background already gives enough contrast by then.
-                  Desktop only: on mobile these links are hidden behind the
-                  sheet trigger, so there's nothing here to lose in a photo. */}
-              <div
-                aria-hidden
-                className="absolute -inset-x-4 -inset-y-2 rounded-full bg-black/35 backdrop-blur-sm transition-opacity duration-200"
-                style={{ opacity: 1 - heroProgress }}
-              />
-              <NavigationMenu viewport={false}>
-                <NavigationMenuList className="gap-1">
-                  {localizedNavLinks.map((link) =>
-                    link.isServices ? (
-                      <NavigationMenuItem key={link.href}>
-                        <NavigationMenuTrigger className="rounded-md bg-transparent px-3 py-2 text-sm font-normal tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold data-popup-open:bg-brand-surface data-popup-open:text-brand-gold">
-                          {t(link.labelKey)}
-                        </NavigationMenuTrigger>
-                        <NavigationMenuContent className="min-w-[240px] rounded-lg border border-brand-border bg-brand-black p-1.5 shadow-lg">
-                          <a
+            <div className="hidden md:flex flex-1 justify-center">
+              <div className="relative">
+                {/* Faint backdrop so the gold nav text stays legible over a
+                    bright hero photo before the header itself goes solid -
+                    fades out as heroProgress rises, since the header's own
+                    background already gives enough contrast by then.
+                    Desktop only: on mobile these links are hidden behind the
+                    sheet trigger, so there's nothing here to lose in a photo. */}
+                <div
+                  aria-hidden
+                  className="absolute -inset-x-4 -inset-y-2 rounded-full bg-black/35 backdrop-blur-sm transition-opacity duration-200"
+                  style={{ opacity: 1 - heroProgress }}
+                />
+                <NavigationMenu viewport={false}>
+                  <NavigationMenuList className="gap-1">
+                    {localizedNavLinks.map((link) =>
+                      link.isServices ? (
+                        <NavigationMenuItem key={link.href}>
+                          <NavigationMenuTrigger className="rounded-md bg-transparent px-3 py-2 text-sm font-normal tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold data-popup-open:bg-brand-surface data-popup-open:text-brand-gold">
+                            {t(link.labelKey)}
+                          </NavigationMenuTrigger>
+                          <NavigationMenuContent className="min-w-[240px] rounded-lg border border-brand-border bg-brand-black p-1.5 shadow-lg">
+                            <a
+                              href={link.href}
+                              onClick={(event) => handleInternalLink(event, link.href)}
+                              className="block rounded-md px-3 py-2 text-sm font-medium text-brand-gold hover:bg-brand-surface transition-colors"
+                            >
+                              {t("servicesHub.title")}
+                            </a>
+                            <div className="my-1 border-t border-brand-border" />
+                            {SERVICE_SUBLINKS.map((key) => {
+                              const subHref = localizeHref(locale, SERVICE_SUBLINK_PATHS[key]);
+                              return (
+                                <a
+                                  key={key}
+                                  href={subHref}
+                                  onClick={(event) => handleInternalLink(event, subHref)}
+                                  className="block rounded-md px-3 py-2 text-sm text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold transition-colors"
+                                >
+                                  {t(`services.${key}.nav`)}
+                                </a>
+                              );
+                            })}
+                          </NavigationMenuContent>
+                        </NavigationMenuItem>
+                      ) : (
+                        <NavigationMenuItem key={link.href}>
+                          <NavigationMenuLink
                             href={link.href}
                             onClick={(event) => handleInternalLink(event, link.href)}
-                            className="block rounded-md px-3 py-2 text-sm font-medium text-brand-gold hover:bg-brand-surface transition-colors"
+                            className="px-3 py-2 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold rounded-md transition-colors"
                           >
-                            {t("servicesHub.title")}
-                          </a>
-                          <div className="my-1 border-t border-brand-border" />
-                          {SERVICE_SUBLINKS.map((key) => {
-                            const subHref = localizeHref(locale, SERVICE_SUBLINK_PATHS[key]);
-                            return (
-                              <a
-                                key={key}
-                                href={subHref}
-                                onClick={(event) => handleInternalLink(event, subHref)}
-                                className="block rounded-md px-3 py-2 text-sm text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold transition-colors"
-                              >
-                                {t(`services.${key}.nav`)}
-                              </a>
-                            );
-                          })}
-                        </NavigationMenuContent>
-                      </NavigationMenuItem>
-                    ) : (
-                      <NavigationMenuItem key={link.href}>
-                        <NavigationMenuLink
-                          href={link.href}
-                          onClick={(event) => handleInternalLink(event, link.href)}
-                          className="px-3 py-2 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold rounded-md transition-colors"
-                        >
-                          {t(link.labelKey)}
-                        </NavigationMenuLink>
-                      </NavigationMenuItem>
-                    )
-                  )}
-                </NavigationMenuList>
-              </NavigationMenu>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="hidden md:block">
-              <LanguageSwitcherCompact />
+                            {t(link.labelKey)}
+                          </NavigationMenuLink>
+                        </NavigationMenuItem>
+                      )
+                    )}
+                  </NavigationMenuList>
+                </NavigationMenu>
+              </div>
             </div>
 
-            <div className="flex md:hidden">
-              <Sheet open={open} onOpenChange={setOpen}>
-                <SheetTrigger asChild>
+            <div className="flex items-center gap-4">
+              <div className="hidden md:block">
+                <LanguageSwitcherCompact />
+              </div>
+
+              <div className="flex md:hidden">
+                <PushDrawerTrigger asChild>
                   <button
                     aria-label={t("common.menuOpen")}
                     className="flex h-8 w-8 flex-col items-center justify-center gap-[5px] rounded-md hover:bg-brand-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black"
@@ -276,62 +280,58 @@ export function Layout({ children }: { children: React.ReactNode }) {
                       }`}
                     />
                   </button>
-                </SheetTrigger>
-
-                <SheetContent
-                  side="right"
-                  className="w-3/4"
-                  aria-describedby={undefined}
-                >
-                  <SheetTitle className="sr-only">{t("common.navigation")}</SheetTitle>
-                  <nav className="flex flex-col gap-1 px-4 pt-4">
-                    {localizedNavLinks.map((link) => (
-                      <React.Fragment key={link.href}>
-                        <a
-                          href={link.href}
-                          onClick={(event) => handleInternalLink(event, link.href, true)}
-                          className="rounded-md px-3 py-2.5 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 transition-colors"
-                        >
-                          {t(link.labelKey)}
-                        </a>
-                        {link.isServices ? (
-                          <div className="ml-3 flex flex-col gap-1 border-l border-brand-border pl-3">
-                            {SERVICE_SUBLINKS.map((key) => {
-                              const subHref = localizeHref(locale, SERVICE_SUBLINK_PATHS[key]);
-                              return (
-                                <a
-                                  key={key}
-                                  href={subHref}
-                                  onClick={(event) => handleInternalLink(event, subHref, true)}
-                                  className="rounded-md px-3 py-2 text-sm text-brand-gold-muted/80 hover:bg-brand-surface hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 transition-colors"
-                                >
-                                  {t(`services.${key}.nav`)}
-                                </a>
-                              );
-                            })}
-                          </div>
-                        ) : null}
-                      </React.Fragment>
-                    ))}
-                    <div className="mt-4 border-t border-brand-border pt-4">
-                      <p className="mb-2 text-xs uppercase tracking-wide text-brand-gold-muted">
-                        {t("common.language")}
-                      </p>
-                      <LanguageSwitcher />
-                    </div>
-                  </nav>
-                </SheetContent>
-              </Sheet>
+                </PushDrawerTrigger>
+              </div>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <main className="flex-1" style={{ paddingTop: "var(--nav-height, 72px)" }}>
-        {children}
-      </main>
+        <main className="flex-1" style={{ paddingTop: "var(--nav-height, 72px)" }}>
+          {children}
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </PushDrawerBody>
+
+      <PushDrawerContent open={open} aria-describedby={undefined}>
+        <PushDrawerTitle className="sr-only">{t("common.navigation")}</PushDrawerTitle>
+        <nav className="flex flex-col gap-1 px-4 pt-4">
+          {localizedNavLinks.map((link) => (
+            <React.Fragment key={link.href}>
+              <a
+                href={link.href}
+                onClick={(event) => handleInternalLink(event, link.href, true)}
+                className="rounded-md px-3 py-2.5 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 transition-colors"
+              >
+                {t(link.labelKey)}
+              </a>
+              {link.isServices ? (
+                <div className="ml-3 flex flex-col gap-1 border-l border-brand-border pl-3">
+                  {SERVICE_SUBLINKS.map((key) => {
+                    const subHref = localizeHref(locale, SERVICE_SUBLINK_PATHS[key]);
+                    return (
+                      <a
+                        key={key}
+                        href={subHref}
+                        onClick={(event) => handleInternalLink(event, subHref, true)}
+                        className="rounded-md px-3 py-2 text-sm text-brand-gold-muted/80 hover:bg-brand-surface hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 transition-colors"
+                      >
+                        {t(`services.${key}.nav`)}
+                      </a>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </React.Fragment>
+          ))}
+          <div className="mt-4 border-t border-brand-border pt-4">
+            <p className="mb-2 text-xs uppercase tracking-wide text-brand-gold-muted">
+              {t("common.language")}
+            </p>
+            <LanguageSwitcher />
+          </div>
+        </nav>
+      </PushDrawerContent>
+    </PushDrawer>
   );
 }
