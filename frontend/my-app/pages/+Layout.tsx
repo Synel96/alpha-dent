@@ -163,11 +163,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <PushDrawer open={open} onOpenChange={setOpen}>
-      <PushDrawerBody
-        open={open}
-        className="bg-brand-black font-sans antialiased text-brand-gold flex flex-col"
-      >
+      <div className="bg-brand-black font-sans antialiased text-brand-gold">
         <LoadingScreen visible={loading} />
+
+        {/* Kept outside <PushDrawerBody> - unlike the rest of the page, the
+            navbar should stay put (truly fixed to the viewport) rather than
+            sliding aside with the push animation when the drawer opens. */}
         <header ref={headerRef} className="fixed inset-x-0 top-0 z-50">
           {/* Solid backdrop, faded in via opacity as the hero scrolls by.
               Opacity is a compositor-friendly property; animating
@@ -286,12 +287,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </header>
 
-        <main className="flex-1" style={{ paddingTop: "var(--nav-height, 72px)" }}>
-          {children}
-        </main>
+        <PushDrawerBody open={open} className="flex flex-col">
+          <main className="flex-1" style={{ paddingTop: "var(--nav-height, 72px)" }}>
+            {children}
+          </main>
 
-        <Footer />
-      </PushDrawerBody>
+          <Footer />
+        </PushDrawerBody>
+      </div>
 
       <PushDrawerContent open={open} aria-describedby={undefined}>
         <PushDrawerTitle className="sr-only">{t("common.navigation")}</PushDrawerTitle>
