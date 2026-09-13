@@ -296,9 +296,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </PushDrawerBody>
       </div>
 
-      <PushDrawerContent open={open} aria-describedby={undefined}>
+      <PushDrawerContent
+        open={open}
+        closeLabel={t("common.menuClose")}
+        aria-describedby={undefined}
+      >
         <PushDrawerTitle className="sr-only">{t("common.navigation")}</PushDrawerTitle>
-        <nav className="flex flex-col gap-1 px-4 pt-4">
+        <nav className="flex flex-col gap-1 px-4 pt-14">
           {localizedNavLinks.map((link) => (
             <React.Fragment key={link.href}>
               <a

@@ -10,6 +10,7 @@ export const commonResources = {
     },
     common: {
       menuOpen: "Menü megnyitása",
+      menuClose: "Menü bezárása",
       navigation: "Navigáció",
       language: "Nyelv",
       carousel: {
@@ -80,6 +81,7 @@ export const commonResources = {
     },
     common: {
       menuOpen: "Open menu",
+      menuClose: "Close menu",
       navigation: "Navigation",
       language: "Language",
       carousel: {
@@ -150,6 +152,7 @@ export const commonResources = {
     },
     common: {
       menuOpen: "Menü öffnen",
+      menuClose: "Menü schließen",
       navigation: "Navigation",
       language: "Sprache",
       carousel: {
@@ -220,6 +223,7 @@ export const commonResources = {
     },
     common: {
       menuOpen: "Apri il menu",
+      menuClose: "Chiudi il menu",
       navigation: "Navigazione",
       language: "Lingua",
       carousel: {

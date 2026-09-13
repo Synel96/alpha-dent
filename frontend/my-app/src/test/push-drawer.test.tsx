@@ -17,7 +17,7 @@ function Harness() {
         <PushDrawerTrigger>Menü megnyitása</PushDrawerTrigger>
         <p>Oldal tartalma</p>
       </PushDrawerBody>
-      <PushDrawerContent open={open} aria-describedby={undefined}>
+      <PushDrawerContent open={open} closeLabel="Menü bezárása" aria-describedby={undefined}>
         <PushDrawerTitle>Navigáció</PushDrawerTitle>
         <a href="/kapcsolat">Kapcsolat</a>
       </PushDrawerContent>
@@ -62,6 +62,16 @@ describe("PushDrawer", () => {
 
     const body = container.querySelector(".page-body") as HTMLElement;
     expect(body.style.transform).toBe("translateX(0) scale(1)");
+  });
+
+  it("a panelen belüli X gombra kattintva is bezáródik", () => {
+    const { getByText, getByLabelText } = render(<Harness />);
+
+    fireEvent.click(getByText("Menü megnyitása"));
+    fireEvent.click(getByLabelText("Menü bezárása"));
+
+    const panel = document.body.querySelector('[role="dialog"]') as HTMLElement;
+    expect(panel.style.transform).toContain("translateX(100%)");
   });
 
   it("zárva a panel inert és nem fogadja a kattintást, a scrim pointer-events-none", () => {

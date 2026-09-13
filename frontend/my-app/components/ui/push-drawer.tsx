@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // A mobile nav drawer that pushes the whole page aside instead of just
@@ -34,10 +35,12 @@ export const PushDrawerTitle = DialogPrimitive.Title;
 
 type PushDrawerContentProps = React.ComponentProps<typeof DialogPrimitive.Content> & {
   open: boolean;
+  closeLabel: string;
 };
 
 export function PushDrawerContent({
   open,
+  closeLabel,
   className,
   style,
   children,
@@ -87,6 +90,15 @@ export function PushDrawerContent({
           aria-hidden
           className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-black/45 to-transparent"
         />
+        <DialogPrimitive.Close asChild>
+          <button
+            type="button"
+            aria-label={closeLabel}
+            className="absolute right-3 top-3 z-20 inline-flex size-8 items-center justify-center rounded-full border border-brand-gold/30 text-brand-gold-muted transition-colors hover:border-brand-gold/60 hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
+          >
+            <X className="size-4" />
+          </button>
+        </DialogPrimitive.Close>
         {children}
       </DialogPrimitive.Content>
     </DialogPrimitive.Portal>
