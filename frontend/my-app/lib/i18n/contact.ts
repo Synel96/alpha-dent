@@ -2,16 +2,18 @@ export const contactResources = {
   hu: {
     contactPage: {
       eyebrow: "Kapcsolat",
-      title: "Lépj velünk kapcsolatba",
+      title: "Tegye meg az első lépést a mosolya felé.",
       intro:
-        "Időpontfoglalás, kérdések vagy további információ esetén elérsz minket telefonon, emailben és térképes útvonalon is.",
+        "Az első konzultáció során felmérjük a helyzetet, válaszolunk a kérdéseire, és megmutatjuk a lehetséges kezelési irányokat.",
       imageAlt: "Alphadent logó",
+      languages: "Magyar • Deutsch • English",
       cards: {
         address: "Címünk",
         mobile: "Mobil",
         phone: "Telefon",
         email: "Email",
         gps: "GPS koordináták",
+        languages: "Nyelvek",
       },
       actions: {
         openMap: "Megnyitás térképen",
@@ -25,16 +27,18 @@ export const contactResources = {
   en: {
     contactPage: {
       eyebrow: "Contact",
-      title: "Get in touch with us",
+      title: "Take the first step toward your smile.",
       intro:
-        "For appointments, questions, or further details, you can reach us by phone, email, or map navigation.",
+        "During the first consultation, we assess your situation, answer your questions, and show you the possible treatment directions.",
       imageAlt: "Alphadent logo",
+      languages: "Hungarian • German • English",
       cards: {
         address: "Address",
         mobile: "Mobile",
         phone: "Phone",
         email: "Email",
         gps: "GPS coordinates",
+        languages: "Languages",
       },
       actions: {
         openMap: "Open in maps",
@@ -48,16 +52,18 @@ export const contactResources = {
   de: {
     contactPage: {
       eyebrow: "Kontakt",
-      title: "Nimm Kontakt mit uns auf",
+      title: "Machen Sie den ersten Schritt zu Ihrem Lächeln.",
       intro:
-        "Für Termine, Fragen oder weitere Informationen erreichst du uns per Telefon, Email oder Karten-Navigation.",
+        "Beim ersten Beratungsgespräch erfassen wir die Situation, beantworten Ihre Fragen und zeigen Ihnen die möglichen Behandlungsrichtungen.",
       imageAlt: "Alphadent Logo",
+      languages: "Ungarisch • Deutsch • Englisch",
       cards: {
         address: "Unsere Adresse",
         mobile: "Mobil",
         phone: "Telefon",
         email: "Email",
         gps: "GPS-Koordinaten",
+        languages: "Sprachen",
       },
       actions: {
         openMap: "In Karten öffnen",
@@ -71,16 +77,18 @@ export const contactResources = {
   it: {
     contactPage: {
       eyebrow: "Contatti",
-      title: "Mettiti in contatto con noi",
+      title: "Fai il primo passo verso il tuo sorriso.",
       intro:
-        "Per appuntamenti, domande o maggiori informazioni, puoi contattarci via telefono, email o navigazione su mappa.",
+        "Durante la prima consulenza valutiamo la situazione, rispondiamo alle tue domande e ti mostriamo le possibili direzioni di trattamento.",
       imageAlt: "Logo Alphadent",
+      languages: "Ungherese • Tedesco • Inglese",
       cards: {
         address: "Il nostro indirizzo",
         mobile: "Cellulare",
         phone: "Telefono",
         email: "Email",
         gps: "Coordinate GPS",
+        languages: "Lingue",
       },
       actions: {
         openMap: "Apri in mappa",

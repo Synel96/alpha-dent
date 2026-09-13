@@ -16,9 +16,9 @@ describe("Per-oldal title/description függvények", () => {
   });
 
   it("a kapcsolat oldal saját, lefordított title/description-t ad", () => {
-    expect(contactTitle({ locale: "hu" })).toBe("Lépj velünk kapcsolatba | Alpha Dent");
-    expect(contactTitle({ locale: "en" })).toBe("Get in touch with us | Alpha Dent");
-    expect(contactDescription({ locale: "it" })).toContain("telefono");
+    expect(contactTitle({ locale: "hu" })).toBe("Kapcsolat | Alpha Dent");
+    expect(contactTitle({ locale: "en" })).toBe("Contact | Alpha Dent");
+    expect(contactDescription({ locale: "it" })).toContain("consulenza");
   });
 
   it("a GYIK és szolgáltatások oldal címe a saját tartalmát tükrözi", () => {

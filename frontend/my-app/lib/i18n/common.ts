@@ -62,8 +62,6 @@ export const commonResources = {
         title: "Tegye meg az első lépést a mosolya felé.",
         intro:
           "Az első konzultáció során felmérjük a helyzetet, válaszolunk a kérdéseire, és megmutatjuk a lehetséges kezelési irányokat.",
-        languagesLabel: "Nyelvek",
-        languages: "Magyar • Deutsch • English",
       },
     },
     footer: {
@@ -133,8 +131,6 @@ export const commonResources = {
         title: "Take the first step toward your smile.",
         intro:
           "During the first consultation, we assess your situation, answer your questions, and show you the possible treatment directions.",
-        languagesLabel: "Languages",
-        languages: "Hungarian • German • English",
       },
     },
     footer: {
@@ -204,8 +200,6 @@ export const commonResources = {
         title: "Machen Sie den ersten Schritt zu Ihrem Lächeln.",
         intro:
           "Beim ersten Beratungsgespräch erfassen wir die Situation, beantworten Ihre Fragen und zeigen Ihnen die möglichen Behandlungsrichtungen.",
-        languagesLabel: "Sprachen",
-        languages: "Ungarisch • Deutsch • Englisch",
       },
     },
     footer: {
@@ -275,8 +269,6 @@ export const commonResources = {
         title: "Fai il primo passo verso il tuo sorriso.",
         intro:
           "Durante la prima consulenza valutiamo la situazione, rispondiamo alle tue domande e ti mostriamo le possibili direzioni di trattamento.",
-        languagesLabel: "Lingue",
-        languages: "Ungherese • Tedesco • Inglese",
       },
     },
     footer: {

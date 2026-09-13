@@ -31,16 +31,6 @@ export { Page };
 const HERO_IMAGE =
   "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789138056/IMG_3392_faedmf.webp";
 
-const CONTACT_INFO = {
-  address: "9400 Sopron, Arany Janos u. 13.",
-  mobileDisplay: "+36 20 80 80 600",
-  mobileHref: "tel:+36208080600",
-  phoneMainDisplay: "+36 99 788 888",
-  phoneMainHref: "tel:+3699788888",
-  email: "info@alpha-dent.eu",
-  emailHref: "mailto:info@alpha-dent.eu",
-} as const;
-
 const SERVICE_SLUGS = [
   "implantologia",
   "szajsebeszet",
@@ -242,66 +232,23 @@ function Page() {
       {/* Contact teaser */}
       <section>
         <PageContainer className="py-14 md:py-20">
-          <RevealSection className="mx-auto max-w-3xl space-y-6">
-            <div className="space-y-3">
-              <PillBadge icon={Phone}>{t("nav.contact")}</PillBadge>
-              <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
-                {t("home.contact.title")}
-              </h2>
-              <p className="text-sm leading-relaxed text-white md:text-base">
-                {t("home.contact.intro")}
-              </p>
+          <RevealSection className="mx-auto max-w-2xl space-y-4 text-center">
+            <PillBadge icon={Phone} className="mx-auto">
+              {t("nav.contact")}
+            </PillBadge>
+            <h2 className="text-2xl font-semibold text-brand-gold-light md:text-3xl">
+              {t("home.contact.title")}
+            </h2>
+            <p className="text-sm leading-relaxed text-white md:text-base">
+              {t("home.contact.intro")}
+            </p>
+            <div className="pt-2">
+              <CtaButton
+                href={kapcsolatHref}
+                badge={t("nav.contact")}
+                title={t("home.intro.ctaButton")}
+              />
             </div>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-                <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-                  Alphadent
-                </h3>
-                <p className="text-sm text-brand-gold-muted">{CONTACT_INFO.address}</p>
-              </div>
-
-              <div className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-                <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-                  {t("home.contact.languagesLabel")}
-                </h3>
-                <p className="text-sm text-brand-gold-muted">{t("home.contact.languages")}</p>
-              </div>
-
-              <div className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-                <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-                  Telefon
-                </h3>
-                <div className="space-y-1">
-                  <a
-                    href={CONTACT_INFO.mobileHref}
-                    className="block text-sm text-brand-gold hover:text-brand-gold-light"
-                  >
-                    {CONTACT_INFO.mobileDisplay}
-                  </a>
-                  <a
-                    href={CONTACT_INFO.phoneMainHref}
-                    className="block text-sm text-brand-gold hover:text-brand-gold-light"
-                  >
-                    {CONTACT_INFO.phoneMainDisplay}
-                  </a>
-                </div>
-              </div>
-
-              <div className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-                <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-                  Email
-                </h3>
-                <a
-                  href={CONTACT_INFO.emailHref}
-                  className="text-sm text-brand-gold hover:text-brand-gold-light"
-                >
-                  {CONTACT_INFO.email}
-                </a>
-              </div>
-            </div>
-
-            <CtaButton href={kapcsolatHref} badge={t("nav.contact")} title={t("home.intro.ctaButton")} />
           </RevealSection>
         </PageContainer>
       </section>

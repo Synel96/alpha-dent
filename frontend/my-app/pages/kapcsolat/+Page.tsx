@@ -111,7 +111,14 @@ function Page() {
           </a>
         </article>
 
-        <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5 sm:col-span-2 lg:col-span-2">
+        <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
+          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+            {t("contactPage.cards.languages")}
+          </h3>
+          <p className="text-sm text-brand-gold-muted">{t("contactPage.languages")}</p>
+        </article>
+
+        <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
           <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
             {t("contactPage.cards.gps")}
           </h3>
