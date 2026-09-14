@@ -29,7 +29,7 @@ export function getHeroProgressServerSnapshot() {
   return 1;
 }
 
-const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1920, 2560] as const;
+const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1920] as const;
 
 type HeroProps = {
   imageSrc: string;

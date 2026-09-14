@@ -21,7 +21,7 @@ function isCloudinaryUrl(url: string): boolean {
 export function cloudinaryUrl(url: string, options: CloudinaryTransformOptions = {}): string {
   if (!isCloudinaryUrl(url)) return url;
 
-  const { width, crop = "fill", gravity = "auto", quality = "auto", format = "auto" } = options;
+  const { width, crop = "fill", gravity = "auto", quality = 78, format = "auto" } = options;
   const transform = [
     width ? `w_${width}` : null,
     width ? `c_${crop}` : null,
@@ -47,5 +47,5 @@ export function cloudinarySrcSet(
 
 // Roughly matched to the grids these widths are used in (see
 // ServiceTile/szolgaltatasaink and TextImageReveal usages).
-export const TILE_IMAGE_WIDTHS = [400, 600, 800, 1200] as const;
-export const REVEAL_IMAGE_WIDTHS = [480, 768, 960, 1440] as const;
+export const TILE_IMAGE_WIDTHS = [400, 600, 800] as const;
+export const REVEAL_IMAGE_WIDTHS = [480, 768, 960] as const;

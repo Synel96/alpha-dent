@@ -2,7 +2,7 @@ import React from "react";
 import { cloudinarySrcSet, cloudinaryUrl } from "@/lib/cloudinary";
 import { cn } from "@/lib/utils";
 
-const GALLERY_IMAGE_WIDTHS = [480, 640, 960] as const;
+const GALLERY_IMAGE_WIDTHS = [400, 640, 960] as const;
 
 type GalleryImage = {
   src: string;
