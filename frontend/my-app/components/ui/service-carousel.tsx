@@ -15,6 +15,11 @@ type ServiceCarouselProps = {
 export function ServiceCarousel({ children, className }: ServiceCarouselProps) {
   const { t } = useTranslation();
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
+  const dragRef = React.useRef<{ pointerId: number; startX: number; startScrollLeft: number } | null>(
+    null
+  );
+  const draggedRef = React.useRef(false);
+  const [dragging, setDragging] = React.useState(false);
 
   const scrollByCard = (direction: 1 | -1) => {
     const node = scrollRef.current;
@@ -25,16 +30,71 @@ export function ServiceCarousel({ children, className }: ServiceCarouselProps) {
     node.scrollBy({ left: direction * amount, behavior: "smooth" });
   };
 
+  // Click-and-drag scrolling for mouse users: the scrollbar is hidden for a
+  // cleaner look, and a plain overflow-x-auto div doesn't respond to a
+  // mouse drag on its own, so without this a mouse user has no way to pan
+  // the strip except the arrow buttons.
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse") return;
+    const node = scrollRef.current;
+    if (!node) return;
+    dragRef.current = { pointerId: event.pointerId, startX: event.clientX, startScrollLeft: node.scrollLeft };
+    draggedRef.current = false;
+    node.setPointerCapture(event.pointerId);
+    setDragging(true);
+  };
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    const node = scrollRef.current;
+    if (!drag || !node || drag.pointerId !== event.pointerId) return;
+    const delta = event.clientX - drag.startX;
+    if (Math.abs(delta) > 5) draggedRef.current = true;
+    node.scrollLeft = drag.startScrollLeft - delta;
+  };
+
+  const endDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    const node = scrollRef.current;
+    if (!drag || !node || drag.pointerId !== event.pointerId) return;
+    node.releasePointerCapture(event.pointerId);
+    dragRef.current = null;
+    setDragging(false);
+  };
+
+  // A card is a link; suppress the click that would otherwise fire (and
+  // navigate) right after a drag release.
+  const handleClickCapture = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (draggedRef.current) {
+      event.preventDefault();
+      event.stopPropagation();
+      draggedRef.current = false;
+    }
+  };
+
   return (
     <div className={cn("relative", className)}>
       <div
         ref={scrollRef}
-        // snap-proximity rather than snap-mandatory: a near-vertical swipe
-        // that happens to start on a card should still pass through to the
-        // page scroll instead of the browser aggressively locking it into
-        // horizontal snapping - mandatory made that lock too eager, which
-        // could make the page feel "stuck" mid-scroll on mobile.
-        className="flex touch-pan-x snap-x snap-proximity gap-4 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        onClickCapture={handleClickCapture}
+        // Deliberately touch-action: auto (the default) rather than
+        // touch-pan-x: pan-x forces the browser to commit this touch
+        // gesture to horizontal panning on THIS element up front, which
+        // also blocks handing a mostly-vertical gesture that starts on a
+        // card off to the page scroll - exactly the "feels stuck, looks
+        // like the end of the page" complaint. The native ambiguity
+        // resolution (auto) picks the right axis per-gesture instead, and
+        // horizontal swipe still works fine now that scroll-behavior:
+        // smooth (the thing that originally broke it) is gone.
+        className={cn(
+          "flex snap-x snap-proximity gap-4 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden",
+          "cursor-grab active:cursor-grabbing",
+          dragging && "select-none"
+        )}
         style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
       >
         {children}
