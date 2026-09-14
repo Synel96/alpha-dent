@@ -29,7 +29,12 @@ export function ServiceCarousel({ children, className }: ServiceCarouselProps) {
     <div className={cn("relative", className)}>
       <div
         ref={scrollRef}
-        className="flex touch-pan-x snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden"
+        // snap-proximity rather than snap-mandatory: a near-vertical swipe
+        // that happens to start on a card should still pass through to the
+        // page scroll instead of the browser aggressively locking it into
+        // horizontal snapping - mandatory made that lock too eager, which
+        // could make the page feel "stuck" mid-scroll on mobile.
+        className="flex touch-pan-x snap-x snap-proximity gap-4 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden"
         style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
       >
         {children}
