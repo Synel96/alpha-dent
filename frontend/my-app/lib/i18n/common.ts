@@ -45,6 +45,10 @@ export const commonResources = {
         ],
         closing: "Mert számunkra a szakmai fejlődés nem egy elvárás, hanem a minőségi ellátás alapja.",
       },
+      gallery: {
+        eyebrow: "Bepillantás",
+        imageAlt: "Részlet az Alphadent rendelőből",
+      },
       mission: {
         eyebrow: "Szemléletünk",
         title: "Nem csak a fogait kezeljük. A teljes mosolyát látjuk.",
@@ -113,6 +117,10 @@ export const commonResources = {
           "In implantology, we work in close professional partnership with the CAMLOG Group, thanks to which our clinic also operates as a CAMLOG Gold-level reference practice.",
         ],
         closing: "Because for us, professional development isn't an expectation - it's the foundation of quality care.",
+      },
+      gallery: {
+        eyebrow: "A Look Inside",
+        imageAlt: "A glimpse of the Alphadent clinic",
       },
       mission: {
         eyebrow: "Our Approach",
@@ -183,6 +191,10 @@ export const commonResources = {
         ],
         closing: "Denn für uns ist fachliche Weiterentwicklung keine Erwartung, sondern die Grundlage hochwertiger Versorgung.",
       },
+      gallery: {
+        eyebrow: "Einblick",
+        imageAlt: "Einblick in die Alphadent Praxis",
+      },
       mission: {
         eyebrow: "Unser Ansatz",
         title: "Wir behandeln nicht nur Ihre Zähne. Wir sehen Ihr ganzes Lächeln.",
@@ -251,6 +263,10 @@ export const commonResources = {
           "Nel campo dell'implantologia collaboriamo strettamente con il gruppo CAMLOG, grazie al quale il nostro studio opera anche come studio di riferimento CAMLOG di livello Gold.",
         ],
         closing: "Perché per noi lo sviluppo professionale non è un'aspettativa, ma il fondamento di un'assistenza di qualità.",
+      },
+      gallery: {
+        eyebrow: "Uno sguardo dentro",
+        imageAlt: "Uno scorcio dello studio Alphadent",
       },
       mission: {
         eyebrow: "Il nostro approccio",

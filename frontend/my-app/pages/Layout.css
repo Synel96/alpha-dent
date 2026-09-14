@@ -45,3 +45,16 @@
     opacity: 0.9;
   }
 }
+
+/* Auto-scrolling clinic gallery (components/ui/auto-gallery.tsx). The track
+   renders the image list twice back to back and scrolls exactly one copy's
+   width, so it loops seamlessly; animating only transform keeps this on the
+   compositor thread. */
+@keyframes gallery-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

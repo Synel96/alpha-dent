@@ -2,6 +2,7 @@ import {
   Award,
   Building2,
   Cpu,
+  GalleryHorizontal,
   Gem,
   GraduationCap,
   Handshake,
@@ -15,6 +16,7 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
+import { AutoGallery } from "../../components/ui/auto-gallery";
 import { Hero } from "../../components/ui/hero";
 import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
@@ -53,6 +55,14 @@ const SERVICE_IMAGES: Partial<Record<(typeof SERVICE_SLUGS)[number], string>> = 
   fogmegtartoKezelesek:
     "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0047_nsmuvv.webp",
 };
+
+const GALLERY_IMAGES = [
+  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3397_gii27w.webp",
+  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3396_vw5kcw.webp",
+  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3395_ba4hbc.webp",
+  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3399_xpizts.webp",
+  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381100/IMG_3398_1_xfmfz8.webp",
+] as const;
 
 // One icon per "Miért Alphadent?" paragraph, in the same order as
 // home.whyUs.paragraphs: since-1996 lab+clinic, experienced technicians /
@@ -210,6 +220,21 @@ function Page() {
             </p>
           </RevealSection>
         </PageContainer>
+      </section>
+
+      {/* Gallery */}
+      <section className="border-b border-brand-border bg-brand-surface/30 py-14 md:py-20">
+        <PageContainer>
+          <div className="mx-auto mb-8 max-w-2xl text-center">
+            <PillBadge icon={GalleryHorizontal} className="mx-auto">
+              {t("home.gallery.eyebrow")}
+            </PillBadge>
+          </div>
+        </PageContainer>
+        <AutoGallery
+          images={GALLERY_IMAGES.map((src) => ({ src, alt: t("home.gallery.imageAlt") }))}
+          className="px-6"
+        />
       </section>
 
       {/* Mission */}
