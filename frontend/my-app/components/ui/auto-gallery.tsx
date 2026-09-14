@@ -73,6 +73,7 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
               alt={index >= images.length ? "" : image.alt}
               loading="lazy"
               decoding="async"
+              crossOrigin="anonymous"
               className="h-full w-full object-cover"
             />
           </div>

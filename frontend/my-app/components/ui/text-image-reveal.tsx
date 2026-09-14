@@ -95,6 +95,7 @@ export function TextImageReveal({
             loading={imageLoading}
             decoding={imageDecoding}
             sizes={imageSizes}
+            crossOrigin="anonymous"
             className="h-full w-full object-cover"
           />
         ) : (

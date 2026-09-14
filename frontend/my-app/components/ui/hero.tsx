@@ -131,6 +131,7 @@ export function Hero({
             loading="eager"
             decoding="async"
             fetchPriority="high"
+            crossOrigin="anonymous"
           />
         )}
         {hasCopy ? (
