@@ -48,6 +48,13 @@ function Page() {
             subtitle={CONTACT_INFO.mobileDisplay}
             className="min-w-[260px]"
           />
+          <CtaButton
+            href={CONTACT_INFO.emailHref}
+            badge={t("contactPage.cards.email")}
+            title={t("contactPage.actions.sendEmail")}
+            subtitle={CONTACT_INFO.email}
+            className="min-w-[260px]"
+          />
         </div>
       </TextImageReveal>
 
@@ -56,7 +63,7 @@ function Page() {
           <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
             {t("contactPage.cards.address")}
           </h3>
-          <p className="mb-3 text-sm text-brand-gold-muted">{CONTACT_INFO.address}</p>
+          <p className="mb-3 text-sm text-white">{CONTACT_INFO.address}</p>
           <a
             href={CONTACT_INFO.mapUrl}
             target="_blank"
@@ -115,14 +122,14 @@ function Page() {
           <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
             {t("contactPage.cards.languages")}
           </h3>
-          <p className="text-sm text-brand-gold-muted">{t("contactPage.languages")}</p>
+          <p className="text-sm text-white">{t("contactPage.languages")}</p>
         </article>
 
         <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
           <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
             {t("contactPage.cards.gps")}
           </h3>
-          <p className="mb-3 text-sm text-brand-gold-muted">{CONTACT_INFO.gps}</p>
+          <p className="mb-3 text-sm text-white">{CONTACT_INFO.gps}</p>
           <div className="flex flex-wrap gap-4">
             <a
               href={CONTACT_INFO.gpsMapUrl}
