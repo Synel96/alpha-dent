@@ -30,6 +30,8 @@ function Page() {
         eyebrow={t("contactPage.eyebrow")}
         title={t("contactPage.title")}
         description={t("contactPage.intro")}
+        imageSrc="https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3395_ba4hbc.webp"
+        imageAlt={t("contactPage.imageAlt")}
       >
         <div className="flex flex-wrap gap-3">
           <CtaButton
