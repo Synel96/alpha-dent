@@ -72,7 +72,7 @@ export function CtaButton({
           {title}
         </span>
         {subtitle ? (
-          <span className="mt-1 text-xs leading-relaxed text-brand-gold-muted">
+          <span className="mt-1 text-xs leading-relaxed text-white">
             {subtitle}
           </span>
         ) : null}
