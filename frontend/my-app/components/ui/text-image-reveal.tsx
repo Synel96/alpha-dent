@@ -69,7 +69,7 @@ export function TextImageReveal({
           {title}
         </h2>
 
-        <p className="max-w-prose text-sm leading-relaxed text-brand-gold-muted md:text-base">
+        <p className="max-w-prose text-sm leading-relaxed text-white md:text-base">
           {description}
         </p>
 
