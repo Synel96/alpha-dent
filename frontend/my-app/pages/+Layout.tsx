@@ -337,6 +337,32 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </p>
             <LanguageSwitcher />
           </div>
+
+          <div className="mt-6 border-t border-brand-border pt-4">
+            <p className="mb-3 text-xs uppercase tracking-wide text-brand-gold-muted">
+              {t("contactPage.eyebrow")}
+            </p>
+            <div className="space-y-2 text-xs">
+              <div>
+                <p className="text-brand-gold-muted mb-1">{t("contactPage.cards.mobile")}</p>
+                <a href="tel:+36208080600" className="text-white hover:text-brand-gold-light transition-colors">
+                  +36 20 80 80 600
+                </a>
+              </div>
+              <div>
+                <p className="text-brand-gold-muted mb-1">{t("contactPage.cards.email")}</p>
+                <a href="mailto:info@alpha-dent.eu" className="text-white hover:text-brand-gold-light transition-colors break-all">
+                  info@alpha-dent.eu
+                </a>
+              </div>
+              <div>
+                <p className="text-brand-gold-muted mb-1">{t("contactPage.cards.address")}</p>
+                <a href="https://goo.gl/maps/tBZd2pfrPTJkpJVb6" target="_blank" rel="noreferrer" className="text-white hover:text-brand-gold-light transition-colors">
+                  9400 Sopron<br />Arany Janos u. 13.
+                </a>
+              </div>
+            </div>
+          </div>
         </nav>
       </PushDrawerContent>
     </PushDrawer>
