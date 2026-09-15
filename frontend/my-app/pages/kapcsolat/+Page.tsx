@@ -68,7 +68,7 @@ function Page() {
             href={CONTACT_INFO.mapUrl}
             target="_blank"
             rel="noreferrer"
-            className="text-sm text-brand-gold hover:text-brand-gold-light"
+            className="text-sm text-white hover:text-brand-gold-light"
           >
             {t("contactPage.actions.openMap")}
           </a>
@@ -80,7 +80,7 @@ function Page() {
           </h3>
           <a
             href={CONTACT_INFO.mobileHref}
-            className="text-sm text-brand-gold hover:text-brand-gold-light"
+            className="text-sm text-white hover:text-brand-gold-light"
           >
             {CONTACT_INFO.mobileDisplay}
           </a>
@@ -93,13 +93,13 @@ function Page() {
           <div className="space-y-2">
             <a
               href={CONTACT_INFO.phoneMainHref}
-              className="block text-sm text-brand-gold hover:text-brand-gold-light"
+              className="block text-sm text-white hover:text-brand-gold-light"
             >
               {CONTACT_INFO.phoneMainDisplay}
             </a>
             <a
               href={CONTACT_INFO.phoneAltHref}
-              className="block text-sm text-brand-gold hover:text-brand-gold-light"
+              className="block text-sm text-white hover:text-brand-gold-light"
             >
               {CONTACT_INFO.phoneAltDisplay}
             </a>
@@ -112,7 +112,7 @@ function Page() {
           </h3>
           <a
             href={CONTACT_INFO.emailHref}
-            className="text-sm text-brand-gold hover:text-brand-gold-light"
+            className="text-sm text-white hover:text-brand-gold-light"
           >
             {CONTACT_INFO.email}
           </a>
@@ -135,7 +135,7 @@ function Page() {
               href={CONTACT_INFO.gpsMapUrl}
               target="_blank"
               rel="noreferrer"
-              className="text-sm text-brand-gold hover:text-brand-gold-light"
+              className="text-sm text-white hover:text-brand-gold-light"
             >
               {t("contactPage.actions.openByGps")}
             </a>
@@ -143,7 +143,7 @@ function Page() {
               href={CONTACT_INFO.websiteUrl}
               target="_blank"
               rel="noreferrer"
-              className="text-sm text-brand-gold hover:text-brand-gold-light"
+              className="text-sm text-white hover:text-brand-gold-light"
             >
               {t("contactPage.actions.openWebsite")}
             </a>
