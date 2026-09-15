@@ -53,7 +53,7 @@ function Page() {
 
       <section className="rounded-2xl border border-brand-gold/25 bg-[radial-gradient(circle_at_10%_0%,rgba(228,196,106,0.16),transparent_45%),linear-gradient(140deg,rgba(17,17,20,0.96),rgba(8,8,10,0.96))] p-6 md:p-8">
         <h2 className="text-xl font-semibold text-brand-gold-light">{t("faqPage.ctaTitle")}</h2>
-        <p className="mt-2 max-w-2xl text-sm text-brand-gold-muted md:text-base">
+        <p className="mt-2 max-w-2xl text-sm text-white md:text-base">
           {t("faqPage.ctaDescription")}
         </p>
         <div className="mt-5">
