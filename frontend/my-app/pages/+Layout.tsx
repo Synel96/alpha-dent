@@ -63,6 +63,7 @@ const LOADING_SCREEN_DELAY_MS = 250;
 export function Layout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [servicesOpen, setServicesOpen] = React.useState(false);
   // 1 = fully opaque navbar (the default for pages without a hero). Pages
   // rendering <Hero> drive this down to 0 while its media fills the
   // viewport, then back up to 1 by the time the hero's bottom is reached.
@@ -305,14 +306,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <nav className="flex flex-col gap-1 px-4 pt-14">
           {localizedNavLinks.map((link) => (
             <React.Fragment key={link.href}>
-              <a
-                href={link.href}
-                onClick={(event) => handleInternalLink(event, link.href, true)}
-                className="rounded-md px-3 py-2.5 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 transition-colors"
-              >
-                {t(link.labelKey)}
-              </a>
               {link.isServices ? (
+                <button
+                  onClick={() => setServicesOpen(!servicesOpen)}
+                  className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 transition-colors text-left"
+                >
+                  <span>{t(link.labelKey)}</span>
+                  <span className={`transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}>
+                    ▼
+                  </span>
+                </button>
+              ) : (
+                <a
+                  href={link.href}
+                  onClick={(event) => handleInternalLink(event, link.href, true)}
+                  className="rounded-md px-3 py-2.5 text-sm tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 transition-colors"
+                >
+                  {t(link.labelKey)}
+                </a>
+              )}
+              {link.isServices && servicesOpen ? (
                 <div className="ml-3 flex flex-col gap-1 border-l border-brand-border pl-3">
                   {SERVICE_SUBLINKS.map((key) => {
                     const subHref = localizeHref(locale, SERVICE_SUBLINK_PATHS[key]);
