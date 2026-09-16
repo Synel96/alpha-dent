@@ -189,13 +189,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <span className="uppercase tracking-[0.32em]">Alphadent</span>
             </a>
 
-            <div className="hidden md:flex flex-1 justify-center">
+            <div className="hidden lg:flex flex-1 justify-center">
               <div className="relative">
                 {/* Faint backdrop so the gold nav text stays legible over a
                     bright hero photo before the header itself goes solid -
                     fades out as heroProgress rises, since the header's own
                     background already gives enough contrast by then.
-                    Desktop only: on mobile these links are hidden behind the
+                    Desktop only: on mobile/tablet these links are hidden behind the
                     sheet trigger, so there's nothing here to lose in a photo. */}
                 <div
                   aria-hidden
@@ -252,11 +252,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
 
             <div className="flex items-center gap-4">
-              <div className="hidden md:block">
+              <div className="hidden lg:block">
                 <LanguageSwitcherCompact />
               </div>
 
-              <div className="flex md:hidden">
+              <div className="flex lg:hidden">
                 <PushDrawerTrigger asChild>
                   <button
                     aria-label={t("common.menuOpen")}
