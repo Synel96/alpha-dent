@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Facebook, Instagram } from "lucide-react";
 import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
 import { TextImageReveal } from "../../components/ui/text-image-reveal";
@@ -18,6 +19,19 @@ const CONTACT_INFO = {
   gpsMapUrl: "https://www.google.com/maps?q=47.6777786,16.5896789",
   websiteUrl: "https://alpha-dent.eu/hu/",
 } as const;
+
+const SOCIAL_LINKS = [
+  {
+    icon: Instagram,
+    label: "Instagram",
+    href: "https://www.instagram.com/alphadent_eu?stkn=M3doOGZmZXU2dWox",
+  },
+  {
+    icon: Facebook,
+    label: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61589184814755",
+  },
+];
 
 export { Page };
 
@@ -149,6 +163,26 @@ function Page() {
             >
               {t("contactPage.actions.openWebsite")}
             </a>
+          </div>
+        </article>
+
+        <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
+          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+            Közösségi média
+          </h3>
+          <div className="flex gap-4">
+            {SOCIAL_LINKS.map(({ icon: Icon, label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="inline-flex items-center justify-center text-brand-gold-muted hover:text-brand-gold-light transition-colors"
+              >
+                <Icon className="size-6" />
+              </a>
+            ))}
           </div>
         </article>
       </section>

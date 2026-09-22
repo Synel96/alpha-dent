@@ -2,6 +2,7 @@ import React from "react";
 import { navigate } from "vike/client/router";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
+import { Facebook, Instagram } from "lucide-react";
 import "./Layout.css";
 import "../lib/i18n";
 import { localizeHref } from "../lib/locale";
@@ -54,6 +55,19 @@ const SERVICE_SUBLINK_PATHS: Record<(typeof SERVICE_SUBLINKS)[number], string> =
   esztetikaiFogaszat: "/szolgaltatasaink/esztetikai-fogaszat",
   fogmegtartoKezelesek: "/szolgaltatasaink/fogmegtarto-kezelesek",
 };
+
+const SOCIAL_LINKS = [
+  {
+    icon: Instagram,
+    label: "Instagram",
+    href: "https://www.instagram.com/alphadent_eu?stkn=M3doOGZmZXU2dWox",
+  },
+  {
+    icon: Facebook,
+    label: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61589184814755",
+  },
+];
 
 // Only show the loading screen once a page transition has actually taken
 // this long - most navigations resolve well under this, and flashing the
@@ -252,6 +266,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
 
             <div className="flex items-center gap-4">
+              <div className="hidden lg:flex items-center gap-3">
+                {SOCIAL_LINKS.map(({ icon: Icon, label, href }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={label}
+                    className="inline-flex items-center justify-center text-brand-gold-muted hover:text-brand-gold-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
+                  >
+                    <Icon className="size-5" />
+                  </a>
+                ))}
+              </div>
+
               <div className="hidden lg:block">
                 <LanguageSwitcherCompact />
               </div>
@@ -374,6 +403,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   9400 Sopron<br />Arany Janos u. 13.
                 </a>
               </div>
+            </div>
+          </div>
+
+          <div className="mt-6 border-t border-brand-border pt-4">
+            <p className="mb-3 text-xs uppercase tracking-wide text-brand-gold-muted">
+              Közösségi média
+            </p>
+            <div className="flex gap-4">
+              {SOCIAL_LINKS.map(({ icon: Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  className="inline-flex items-center justify-center text-brand-gold-muted hover:text-brand-gold-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
+                >
+                  <Icon className="size-6" />
+                </a>
+              ))}
             </div>
           </div>
         </nav>
