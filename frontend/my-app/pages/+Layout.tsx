@@ -2,7 +2,6 @@ import React from "react";
 import { navigate } from "vike/client/router";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
-import { Facebook, Instagram } from "lucide-react";
 import "./Layout.css";
 import "../lib/i18n";
 import { localizeHref } from "../lib/locale";
@@ -58,14 +57,14 @@ const SERVICE_SUBLINK_PATHS: Record<(typeof SERVICE_SUBLINKS)[number], string> =
 
 const SOCIAL_LINKS = [
   {
-    icon: Instagram,
     label: "Instagram",
     href: "https://www.instagram.com/alphadent_eu?stkn=M3doOGZmZXU2dWox",
+    icon: "📷",
   },
   {
-    icon: Facebook,
     label: "Facebook",
     href: "https://www.facebook.com/profile.php?id=61589184814755",
+    icon: "f",
   },
 ];
 
@@ -267,7 +266,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
             <div className="flex items-center gap-4">
               <div className="hidden lg:flex items-center gap-3">
-                {SOCIAL_LINKS.map(({ icon: Icon, label, href }) => (
+                {SOCIAL_LINKS.map(({ icon, label, href }) => (
                   <a
                     key={label}
                     href={href}
@@ -275,8 +274,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     rel="noreferrer"
                     aria-label={label}
                     className="inline-flex items-center justify-center text-brand-gold-muted hover:text-brand-gold-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
+                    title={label}
                   >
-                    <Icon className="size-5" />
+                    <span className="text-base">{icon}</span>
                   </a>
                 ))}
               </div>
@@ -411,7 +411,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               Közösségi média
             </p>
             <div className="flex gap-4">
-              {SOCIAL_LINKS.map(({ icon: Icon, label, href }) => (
+              {SOCIAL_LINKS.map(({ icon, label, href }) => (
                 <a
                   key={label}
                   href={href}
@@ -419,8 +419,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   rel="noreferrer"
                   aria-label={label}
                   className="inline-flex items-center justify-center text-brand-gold-muted hover:text-brand-gold-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
+                  title={label}
                 >
-                  <Icon className="size-6" />
+                  <span className="text-xl">{icon}</span>
                 </a>
               ))}
             </div>

@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { Facebook, Instagram } from "lucide-react";
 import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
 import { TextImageReveal } from "../../components/ui/text-image-reveal";
@@ -22,14 +21,14 @@ const CONTACT_INFO = {
 
 const SOCIAL_LINKS = [
   {
-    icon: Instagram,
     label: "Instagram",
     href: "https://www.instagram.com/alphadent_eu?stkn=M3doOGZmZXU2dWox",
+    icon: "📷",
   },
   {
-    icon: Facebook,
     label: "Facebook",
     href: "https://www.facebook.com/profile.php?id=61589184814755",
+    icon: "f",
   },
 ];
 
@@ -171,7 +170,7 @@ function Page() {
             Közösségi média
           </h3>
           <div className="flex gap-4">
-            {SOCIAL_LINKS.map(({ icon: Icon, label, href }) => (
+            {SOCIAL_LINKS.map(({ icon, label, href }) => (
               <a
                 key={label}
                 href={href}
@@ -179,8 +178,9 @@ function Page() {
                 rel="noreferrer"
                 aria-label={label}
                 className="inline-flex items-center justify-center text-brand-gold-muted hover:text-brand-gold-light transition-colors"
+                title={label}
               >
-                <Icon className="size-6" />
+                <span className="text-2xl">{icon}</span>
               </a>
             ))}
           </div>
