@@ -96,7 +96,7 @@ export function FaqAccordion({
               }`}
             >
               <div className="overflow-hidden">
-                <p className="pl-16 pr-5 pb-5 text-sm leading-relaxed text-brand-gold-muted">
+                <p className="pl-16 pr-5 pb-5 text-sm leading-relaxed text-white">
                   {item.answer}
                 </p>
               </div>
