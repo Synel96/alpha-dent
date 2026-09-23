@@ -35,21 +35,21 @@ function Page() {
           {t("services.esztetikaiFogaszat.tagline")}
         </p>
         {paragraphs.map((paragraph) => (
-          <p key={paragraph} className="text-sm leading-relaxed text-brand-gold-muted md:text-base">
+          <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
             {paragraph}
           </p>
         ))}
       </div>
 
       <section className="max-w-3xl space-y-3">
-        <p className="text-sm text-brand-gold-muted">
+        <p className="text-sm text-white">
           {t("services.esztetikaiFogaszat.listIntro")}
         </p>
         <ul className="grid gap-2 sm:grid-cols-2">
           {items.map((item) => (
             <li
               key={item}
-              className="rounded-md border border-brand-border bg-brand-surface/55 px-3 py-2 text-sm leading-relaxed text-brand-gold-muted"
+              className="rounded-md border border-brand-border bg-brand-surface/55 px-3 py-2 text-sm leading-relaxed text-white"
             >
               {item}
             </li>
@@ -57,7 +57,7 @@ function Page() {
         </ul>
       </section>
 
-      <p className="max-w-3xl text-sm italic leading-relaxed text-brand-gold-muted">
+      <p className="max-w-3xl text-sm italic leading-relaxed text-white">
         {t("services.esztetikaiFogaszat.closing")}
       </p>
 

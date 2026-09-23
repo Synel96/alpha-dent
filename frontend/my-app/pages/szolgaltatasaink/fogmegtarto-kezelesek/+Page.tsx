@@ -34,7 +34,7 @@ function Page() {
           {t("services.fogmegtartoKezelesek.tagline")}
         </p>
         {paragraphs.map((paragraph) => (
-          <p key={paragraph} className="text-sm leading-relaxed text-brand-gold-muted md:text-base">
+          <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
             {paragraph}
           </p>
         ))}
