@@ -61,7 +61,7 @@ export function FaqAccordion({
             key={item.question}
             style={{ transitionDelay: `${index * 55}ms` }}
             className={cn(
-              "overflow-hidden rounded-2xl border border-brand-border bg-[linear-gradient(120deg,rgba(17,17,20,0.96),rgba(17,17,20,0.72))]",
+              "overflow-hidden rounded-2xl border border-brand-gold/25 bg-[linear-gradient(120deg,rgba(17,17,20,0.96),rgba(17,17,20,0.72))]",
               "transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none",
               visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             )}
