@@ -7,6 +7,7 @@ import "../lib/i18n";
 import { localizeHref } from "../lib/locale";
 import { Footer } from "../components/ui/footer";
 import { LoadingScreen } from "../components/ui/loading-screen";
+import { PageBackground } from "../components/ui/page-background";
 import {
   subscribeHeroProgress,
   getHeroProgress,
@@ -188,6 +189,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <PushDrawer open={open} onOpenChange={setOpen}>
       <div className="bg-brand-black font-sans antialiased text-brand-gold">
         <LoadingScreen visible={loading} />
+        <PageBackground />
 
         {/* Kept outside <PushDrawerBody> - unlike the rest of the page, the
             navbar should stay put (truly fixed to the viewport) rather than

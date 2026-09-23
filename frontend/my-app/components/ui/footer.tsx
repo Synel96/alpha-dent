@@ -27,7 +27,7 @@ export function Footer() {
   const { t } = useTranslation();
 
   return (
-    <footer className="border-t border-brand-border bg-brand-black py-8 text-center text-sm text-brand-gold">
+    <footer className="border-t border-brand-border bg-brand-black/80 backdrop-blur-sm py-8 text-center text-sm text-brand-gold">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-6 flex items-center justify-center gap-4">
           {SOCIAL_LINKS.map(({ icon, label, href }) => (

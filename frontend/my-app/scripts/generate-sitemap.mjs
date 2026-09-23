@@ -16,7 +16,6 @@ const PAGE_PATHNAMES = [
   "/szolgaltatasaink/szajsebeszet",
   "/szolgaltatasaink/esztetikai-fogaszat",
   "/szolgaltatasaink/fogmegtarto-kezelesek",
-  "/tortenetunk",
   "/kerdesek",
   "/kapcsolat",
 ];

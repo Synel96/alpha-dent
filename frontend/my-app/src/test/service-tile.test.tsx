@@ -25,10 +25,10 @@ describe("ServiceTile", () => {
     const img = screen.getByRole("img", { name: "Tanácsadás" });
     expect(img).toHaveAttribute(
       "src",
-      "https://res.cloudinary.com/demo/image/upload/w_1200,c_fill,g_auto,q_auto,f_auto/v1/consult.jpg"
+      "https://res.cloudinary.com/demo/image/upload/w_800,c_fill,g_auto,q_78,f_auto/v1/consult.jpg"
     );
     expect(img.getAttribute("srcset")).toContain("400w");
-    expect(img.getAttribute("srcset")).toContain("1200w");
+    expect(img.getAttribute("srcset")).toContain("800w");
     expect(screen.queryByText("Cloudinary placeholder")).not.toBeInTheDocument();
   });
 

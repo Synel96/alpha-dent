@@ -6,13 +6,13 @@ const BASE = "https://res.cloudinary.com/demo/image/upload/v1/sample.jpg";
 describe("cloudinaryUrl", () => {
   it("szélesség nélkül csak minőség/formátum transzformációt told be", () => {
     expect(cloudinaryUrl(BASE)).toBe(
-      "https://res.cloudinary.com/demo/image/upload/q_auto,f_auto/v1/sample.jpg"
+      "https://res.cloudinary.com/demo/image/upload/q_78,f_auto/v1/sample.jpg"
     );
   });
 
   it("szélességgel méretezési transzformációkat is told be", () => {
     expect(cloudinaryUrl(BASE, { width: 400 })).toBe(
-      "https://res.cloudinary.com/demo/image/upload/w_400,c_fill,g_auto,q_auto,f_auto/v1/sample.jpg"
+      "https://res.cloudinary.com/demo/image/upload/w_400,c_fill,g_auto,q_78,f_auto/v1/sample.jpg"
     );
   });
 
@@ -32,8 +32,8 @@ describe("cloudinarySrcSet", () => {
   it("minden szélességhez egy bejegyzést generál 'url Nw' formátumban", () => {
     const srcSet = cloudinarySrcSet(BASE, [400, 800]);
     expect(srcSet).toBe(
-      "https://res.cloudinary.com/demo/image/upload/w_400,c_fill,g_auto,q_auto,f_auto/v1/sample.jpg 400w, " +
-        "https://res.cloudinary.com/demo/image/upload/w_800,c_fill,g_auto,q_auto,f_auto/v1/sample.jpg 800w"
+      "https://res.cloudinary.com/demo/image/upload/w_400,c_fill,g_auto,q_78,f_auto/v1/sample.jpg 400w, " +
+        "https://res.cloudinary.com/demo/image/upload/w_800,c_fill,g_auto,q_78,f_auto/v1/sample.jpg 800w"
     );
   });
 
