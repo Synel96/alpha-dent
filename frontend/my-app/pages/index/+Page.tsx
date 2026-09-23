@@ -31,7 +31,7 @@ import { cn } from "../../lib/utils";
 export { Page };
 
 const HERO_IMAGE =
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0053_gz8nis.webp";
+  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789138056/IMG_3392_faedmf.webp";
 
 const SERVICE_SLUGS = [
   "implantologia",
