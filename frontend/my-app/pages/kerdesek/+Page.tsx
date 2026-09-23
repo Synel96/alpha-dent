@@ -47,6 +47,8 @@ function Page() {
         eyebrow={t("faqPage.eyebrow")}
         title={t("faqPage.title")}
         description={t("faqPage.intro")}
+        imageSrc="https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3397_gii27w.webp"
+        imageAlt={t("faqPage.imageAlt")}
       />
 
       <FaqAccordion items={items} />

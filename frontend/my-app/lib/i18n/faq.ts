@@ -5,7 +5,7 @@ export const faqResources = {
       title: "Gyakran Ismételt Kérdések",
       intro:
         "Itt találja betegeink által leggyakrabban feltett kérdéseket a magyarországi fogászati kezelésekkel kapcsolatban. További kérdéseivel forduljon hozzánk bizalommal!",
-      imageAlt: "GYIK kép",
+      imageAlt: "Az Alphadent világos váróterme bőr kanapéval",
       ctaTitle: "Nem találtad meg a választ?",
       ctaDescription: "Vedd fel velünk a kapcsolatot, és segítünk eligazodni.",
       ctaButton: "Kapcsolatfelvétel",
@@ -93,7 +93,7 @@ export const faqResources = {
       title: "Frequently Asked Questions",
       intro:
         "Here you can find the questions most frequently asked by our patients about dental treatments in Hungary. If you have further questions, feel free to contact us.",
-      imageAlt: "FAQ image",
+      imageAlt: "The bright Alphadent waiting room with a leather sofa",
       ctaTitle: "Didn\'t find your answer?",
       ctaDescription: "Reach out to us and we will help you right away.",
       ctaButton: "Contact us",
@@ -181,7 +181,7 @@ export const faqResources = {
       title: "Haufig gestellte Fragen",
       intro:
         "Hier findest du die haufigsten Fragen unserer Patienten zu zahnarztlichen Behandlungen in Ungarn. Bei weiteren Fragen kannst du uns jederzeit kontaktieren.",
-      imageAlt: "FAQ Bild",
+      imageAlt: "Das helle Wartezimmer von Alphadent mit Ledersofa",
       ctaTitle: "Keine passende Antwort gefunden?",
       ctaDescription: "Kontaktiere uns direkt und wir helfen dir gerne weiter.",
       ctaButton: "Kontakt aufnehmen",
@@ -269,7 +269,7 @@ export const faqResources = {
       title: "Domande Frequenti",
       intro:
         "Qui trovi le domande piu frequenti dei nostri pazienti sui trattamenti dentistici in Ungheria. Per ulteriori domande, contattaci con fiducia.",
-      imageAlt: "Immagine FAQ",
+      imageAlt: "La luminosa sala d'attesa di Alphadent con divano in pelle",
       ctaTitle: "Non hai trovato la risposta?",
       ctaDescription: "Contattaci e ti aiuteremo subito.",
       ctaButton: "Contattaci",
