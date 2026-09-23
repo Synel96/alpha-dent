@@ -36,7 +36,6 @@ const navLinks = [
   { labelKey: "nav.home", href: "/" },
   { labelKey: "nav.clinic", href: "/klinikank" },
   { labelKey: "nav.services", href: "/szolgaltatasaink", isServices: true },
-  { labelKey: "nav.story", href: "/tortenetunk" },
   { labelKey: "nav.faq", href: "/kerdesek" },
   { labelKey: "nav.contact", href: "/kapcsolat" },
 ];
