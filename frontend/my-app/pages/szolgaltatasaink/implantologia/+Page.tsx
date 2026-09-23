@@ -46,7 +46,7 @@ function Page() {
         {cases.map((item) => (
           <article
             key={item.title}
-            className="rounded-xl border border-brand-border bg-brand-surface/60 p-5"
+            className="rounded-xl border border-brand-gold/25 bg-brand-surface/60 p-5"
           >
             <h3 className="mb-2 text-sm uppercase tracking-[0.15em] text-brand-gold-light">
               {item.title}
@@ -68,7 +68,7 @@ function Page() {
           {steps.map((step) => (
             <li
               key={step.title}
-              className="rounded-xl border border-brand-border bg-brand-surface/40 p-4"
+              className="rounded-xl border border-brand-gold/25 bg-brand-surface/40 p-4"
             >
               <h3 className="text-sm font-semibold text-brand-gold-light">{step.title}</h3>
               <p className="mt-1 text-sm leading-relaxed text-white">{step.text}</p>
