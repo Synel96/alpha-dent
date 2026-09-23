@@ -36,7 +36,7 @@ function Page() {
           {t("services.implantologia.tagline")}
         </p>
         {paragraphs.map((paragraph) => (
-          <p key={paragraph} className="text-sm leading-relaxed text-brand-gold-muted md:text-base">
+          <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
             {paragraph}
           </p>
         ))}
@@ -51,12 +51,12 @@ function Page() {
             <h3 className="mb-2 text-sm uppercase tracking-[0.15em] text-brand-gold-light">
               {item.title}
             </h3>
-            <p className="text-sm leading-relaxed text-brand-gold-muted">{item.text}</p>
+            <p className="text-sm leading-relaxed text-white">{item.text}</p>
           </article>
         ))}
       </section>
 
-      <p className="max-w-3xl text-sm italic leading-relaxed text-brand-gold-muted">
+      <p className="max-w-3xl text-sm italic leading-relaxed text-white">
         {t("services.implantologia.closing")}
       </p>
 
@@ -71,7 +71,7 @@ function Page() {
               className="rounded-xl border border-brand-border bg-brand-surface/40 p-4"
             >
               <h3 className="text-sm font-semibold text-brand-gold-light">{step.title}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-brand-gold-muted">{step.text}</p>
+              <p className="mt-1 text-sm leading-relaxed text-white">{step.text}</p>
             </li>
           ))}
         </ol>
