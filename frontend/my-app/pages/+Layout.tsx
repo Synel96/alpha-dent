@@ -419,7 +419,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
           <div className="mt-6 border-t border-brand-border pt-4">
             <p className="mb-3 text-xs uppercase tracking-wide text-brand-gold-muted">
-              Közösségi média
+              {t("contactPage.cards.social")}
             </p>
             <div className="flex gap-4">
               {SOCIAL_LINKS.map(({ icon, label, href }) => (

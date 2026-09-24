@@ -177,7 +177,7 @@ function Page() {
 
         <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
           <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-            Közösségi média
+            {t("contactPage.cards.social")}
           </h3>
           <div className="flex gap-4">
             {SOCIAL_LINKS.map(({ icon, label, href }) => (

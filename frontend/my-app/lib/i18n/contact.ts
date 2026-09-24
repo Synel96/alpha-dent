@@ -14,6 +14,7 @@ export const contactResources = {
         email: "Email",
         gps: "GPS koordináták",
         languages: "Nyelvek",
+        social: "Közösségi média",
       },
       actions: {
         openMap: "Megnyitás térképen",
@@ -39,6 +40,7 @@ export const contactResources = {
         email: "Email",
         gps: "GPS coordinates",
         languages: "Languages",
+        social: "Social media",
       },
       actions: {
         openMap: "Open in maps",
@@ -64,6 +66,7 @@ export const contactResources = {
         email: "Email",
         gps: "GPS-Koordinaten",
         languages: "Sprachen",
+        social: "Soziale Medien",
       },
       actions: {
         openMap: "In Karten öffnen",
@@ -89,6 +92,7 @@ export const contactResources = {
         email: "Email",
         gps: "Coordinate GPS",
         languages: "Lingue",
+        social: "Social media",
       },
       actions: {
         openMap: "Apri in mappa",
