@@ -62,7 +62,7 @@ describe("Főoldal", () => {
   it("a kapcsolat szekció csak egy rövid CTA-t mutat a kapcsolat oldalra, nem az elérhetőségeket", () => {
     render(<Page />);
     expect(screen.getByText("home.contact.title")).toBeInTheDocument();
-    expect(screen.queryByText("9400 Sopron, Arany Janos u. 13.")).not.toBeInTheDocument();
+    expect(screen.queryByText("9400 Sopron, Arany János u. 13.")).not.toBeInTheDocument();
 
     const ctaLinks = screen.getAllByRole("link", { name: "home.intro.ctaButton" });
     expect(ctaLinks.length).toBeGreaterThan(0);

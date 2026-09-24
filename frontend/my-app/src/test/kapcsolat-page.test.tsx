@@ -11,7 +11,7 @@ import { Page } from "../../pages/kapcsolat/+Page";
 describe("Kapcsolat oldal", () => {
   it("megjeleníti a cím szöveges tartalmát és a térkép linket", () => {
     render(<Page />);
-    expect(screen.getAllByText("9400 Sopron, Arany Janos u. 13.")[0]).toBeInTheDocument();
+    expect(screen.getAllByText("9400 Sopron, Arany János u. 13.")[0]).toBeInTheDocument();
     const mapLinks = screen.getAllByRole("link", { name: "contactPage.actions.openMap" });
     expect(mapLinks.length).toBeGreaterThan(0);
     for (const link of mapLinks) {

@@ -4,7 +4,7 @@ import { PageContainer } from "../../components/ui/page-container";
 import { TextImageReveal } from "../../components/ui/text-image-reveal";
 
 const CONTACT_INFO = {
-  address: "9400 Sopron, Arany Janos u. 13.",
+  address: "9400 Sopron, Arany János u. 13.",
   mapUrl: "https://goo.gl/maps/tBZd2pfrPTJkpJVb6",
   mobileDisplay: "+36 20 80 80 600",
   mobileHref: "tel:+36208080600",

@@ -411,7 +411,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <div>
                 <p className="text-brand-gold-muted mb-1">{t("contactPage.cards.address")}</p>
                 <a href="https://goo.gl/maps/tBZd2pfrPTJkpJVb6" target="_blank" rel="noreferrer" className="text-white hover:text-brand-gold-light transition-colors">
-                  9400 Sopron<br />Arany Janos u. 13.
+                  9400 Sopron<br />Arany János u. 13.
                 </a>
               </div>
             </div>
