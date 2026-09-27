@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { CtaButton } from "../../../components/ui/cta-button";
-import { cloudinarySrcSet, cloudinaryUrl, REVEAL_IMAGE_WIDTHS } from "../../../lib/cloudinary";
 import { PageContainer } from "../../../components/ui/page-container";
+import { ServiceImage } from "../../../components/ui/service-image";
 import { localizeHref } from "../../../lib/locale";
 
 export { Page };
@@ -47,22 +47,11 @@ function Page() {
           ))}
         </div>
 
-        <figure>
-          <img
-            src={cloudinaryUrl(IMPLANT_IMAGE, { width: 960 })}
-            srcSet={cloudinarySrcSet(IMPLANT_IMAGE, REVEAL_IMAGE_WIDTHS)}
-            sizes="(min-width: 768px) 50vw, 100vw"
-            alt={t("services.implantologia.imageAlt")}
-            width={960}
-            height={640}
-            decoding="async"
-            crossOrigin="anonymous"
-            className="aspect-[3/2] w-full rounded-2xl border border-brand-gold/25 object-cover shadow-[0_18px_36px_-24px_rgba(201,168,76,0.45)]"
-          />
-          <figcaption className="mt-3 text-xs uppercase tracking-[0.18em] text-brand-gold-muted">
-            {t("services.implantologia.imageCaption")}
-          </figcaption>
-        </figure>
+        <ServiceImage
+          src={IMPLANT_IMAGE}
+          alt={t("services.implantologia.imageAlt")}
+          caption={t("services.implantologia.imageCaption")}
+        />
       </div>
 
       <section className="grid gap-4 sm:grid-cols-3">

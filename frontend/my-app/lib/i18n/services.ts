@@ -150,6 +150,7 @@ export const servicesResources = {
       fogmegtartoKezelesek: {
         nav: "Fogmegtartó kezelések",
         title: "Fogmegtartó kezelések",
+        imageAlt: "Fogkefe, fogselyem és fogköztisztító kefék egy sötét kőpulton",
         tagline: "Amit lehet, megpróbálunk megmenteni.",
         paragraphs: [
           "Egy saját fog általában érték. Ezért ha a fog állapota lehetővé teszi, elsődleges célunk annak megtartása.",
@@ -305,6 +306,7 @@ export const servicesResources = {
       fogmegtartoKezelesek: {
         nav: "Tooth-Preserving Treatments",
         title: "Tooth-Preserving Treatments",
+        imageAlt: "Toothbrush, dental floss and interdental brushes on a dark stone countertop",
         tagline: "Whatever can be saved, we try to save.",
         paragraphs: [
           "Your own natural tooth is generally worth preserving. That's why, whenever the tooth's condition allows it, our primary goal is to keep it.",
@@ -460,6 +462,7 @@ export const servicesResources = {
       fogmegtartoKezelesek: {
         nav: "Zahnerhaltende Behandlungen",
         title: "Zahnerhaltende Behandlungen",
+        imageAlt: "Zahnbürste, Zahnseide und Interdentalbürsten auf einer dunklen Steinplatte",
         tagline: "Was sich retten lässt, versuchen wir zu retten.",
         paragraphs: [
           "Ein eigener Zahn ist in der Regel wertvoll. Erlaubt es der Zustand des Zahns, ist unser vorrangiges Ziel deshalb, ihn zu erhalten.",
@@ -615,6 +618,7 @@ export const servicesResources = {
       fogmegtartoKezelesek: {
         nav: "Trattamenti Conservativi",
         title: "Trattamenti Conservativi",
+        imageAlt: "Spazzolino, filo interdentale e scovolini su un piano in pietra scura",
         tagline: "Ciò che si può salvare, cerchiamo di salvarlo.",
         paragraphs: [
           "Un dente naturale ha generalmente un valore. Per questo, se le condizioni del dente lo consentono, il nostro obiettivo primario è preservarlo.",
