@@ -1,3 +1,4 @@
+import { Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { CtaButton } from "../../../components/ui/cta-button";
@@ -63,9 +64,10 @@ function Page() {
           {items.map((item) => (
             <li
               key={item}
-              className="rounded-md border border-brand-gold/25 bg-brand-surface/55 px-3 py-2 text-sm leading-relaxed text-white"
+              className="flex items-start gap-2.5 rounded-md border border-brand-gold/25 bg-brand-surface/55 px-3 py-2 text-sm leading-relaxed text-white"
             >
-              {item}
+              <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-brand-gold-light" strokeWidth={2.5} />
+              <span>{item}</span>
             </li>
           ))}
         </ul>
