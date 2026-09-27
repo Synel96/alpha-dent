@@ -31,6 +31,8 @@ export const servicesResources = {
       implantologia: {
         nav: "Implantológia",
         title: "Implantológia",
+        imageAlt: "CAMLOG implantátum a rá rögzített fogkoronával, bemutató modellen",
+        imageCaption: "CAMLOG arany fokozatú referenciarendelőként dolgozunk.",
         tagline:
           "Akár egy vagy több foga hiányzik, nem kell együtt élnie a hiánnyal.",
         paragraphs: [
@@ -187,6 +189,8 @@ export const servicesResources = {
       implantologia: {
         nav: "Implantology",
         title: "Implantology",
+        imageAlt: "CAMLOG implant with a crown attached, on a demonstration model",
+        imageCaption: "We are a CAMLOG Gold-level reference practice.",
         tagline: "Whether you're missing one tooth or several, you don't have to live with the gap.",
         paragraphs: [
           "In fact, a missing tooth isn't only a cosmetic issue. It can change the way you chew and speak, put extra load on your remaining teeth, and affect your oral health in the long run.",
@@ -340,6 +344,8 @@ export const servicesResources = {
       implantologia: {
         nav: "Implantologie",
         title: "Implantologie",
+        imageAlt: "CAMLOG-Implantat mit aufgesetzter Zahnkrone auf einem Demonstrationsmodell",
+        imageCaption: "Wir sind eine CAMLOG-Referenzpraxis in Gold.",
         tagline: "Ob ein oder mehrere Zähne fehlen - mit der Lücke müssen Sie nicht leben.",
         paragraphs: [
           "Ein fehlender Zahn ist nämlich nicht nur eine ästhetische Frage. Er kann das Kauen und Sprechen verändern, die verbliebenen Zähne stärker belasten und sich langfristig auf die Mundgesundheit auswirken.",
@@ -493,6 +499,8 @@ export const servicesResources = {
       implantologia: {
         nav: "Implantologia",
         title: "Implantologia",
+        imageAlt: "Impianto CAMLOG con corona applicata, su un modello dimostrativo",
+        imageCaption: "Siamo uno studio di riferimento CAMLOG di livello Gold.",
         tagline: "Che manchi uno o più denti, non devi conviverci.",
         paragraphs: [
           "Un dente mancante, infatti, non è solo una questione estetica. Può modificare la masticazione, la fonazione, il carico sui denti rimanenti e, a lungo termine, incidere sulla salute del cavo orale.",

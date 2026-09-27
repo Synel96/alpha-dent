@@ -1,10 +1,14 @@
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { CtaButton } from "../../../components/ui/cta-button";
+import { cloudinarySrcSet, cloudinaryUrl, REVEAL_IMAGE_WIDTHS } from "../../../lib/cloudinary";
 import { PageContainer } from "../../../components/ui/page-container";
 import { localizeHref } from "../../../lib/locale";
 
 export { Page };
+
+const IMPLANT_IMAGE =
+  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0053_gz8nis.webp";
 
 type Item = { title: string; text: string };
 
@@ -25,21 +29,40 @@ function Page() {
         ← {t("servicesHub.title")}
       </a>
 
-      <div className="max-w-3xl space-y-4">
-        <p className="text-xs uppercase tracking-[0.22em] text-brand-gold-muted">
-          {t("nav.services")}
-        </p>
-        <h1 className="text-2xl font-semibold text-brand-gold-light md:text-4xl">
-          {t("services.implantologia.title")}
-        </h1>
-        <p className="text-lg italic leading-snug text-brand-gold-light/90">
-          {t("services.implantologia.tagline")}
-        </p>
-        {paragraphs.map((paragraph) => (
-          <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
-            {paragraph}
+      <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+        <div className="space-y-4">
+          <p className="text-xs uppercase tracking-[0.22em] text-brand-gold-muted">
+            {t("nav.services")}
           </p>
-        ))}
+          <h1 className="text-2xl font-semibold text-brand-gold-light md:text-4xl">
+            {t("services.implantologia.title")}
+          </h1>
+          <p className="text-lg italic leading-snug text-brand-gold-light/90">
+            {t("services.implantologia.tagline")}
+          </p>
+          {paragraphs.map((paragraph) => (
+            <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        <figure>
+          <img
+            src={cloudinaryUrl(IMPLANT_IMAGE, { width: 960 })}
+            srcSet={cloudinarySrcSet(IMPLANT_IMAGE, REVEAL_IMAGE_WIDTHS)}
+            sizes="(min-width: 768px) 50vw, 100vw"
+            alt={t("services.implantologia.imageAlt")}
+            width={960}
+            height={640}
+            decoding="async"
+            crossOrigin="anonymous"
+            className="aspect-[3/2] w-full rounded-2xl border border-brand-gold/25 object-cover shadow-[0_18px_36px_-24px_rgba(201,168,76,0.45)]"
+          />
+          <figcaption className="mt-3 text-xs uppercase tracking-[0.18em] text-brand-gold-muted">
+            {t("services.implantologia.imageCaption")}
+          </figcaption>
+        </figure>
       </div>
 
       <section className="grid gap-4 sm:grid-cols-3">
