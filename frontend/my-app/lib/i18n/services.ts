@@ -88,6 +88,7 @@ export const servicesResources = {
         intro:
           "A szájsebészeti beavatkozásoknál különösen fontos a pontos diagnózis, a megfelelő tervezés és a tapasztalat.",
         listIntro: "Rendelőnkben többek között az alábbi beavatkozásokat végezzük:",
+        imageAlt: "Szájsebészet az Alphadent rendelőben",
         items: [
           "Fogeltávolítás",
           "Bölcsességfog eltávolítása",
@@ -218,6 +219,7 @@ export const servicesResources = {
         tagline: "Safe solutions, even for complicated cases.",
         intro: "In oral surgery, an accurate diagnosis, proper planning, and experience matter more than anywhere else.",
         listIntro: "Among others, we perform the following procedures:",
+        imageAlt: "Oral surgery at the Alphadent clinic",
         items: [
           "Tooth extraction",
           "Wisdom tooth removal",
@@ -348,6 +350,7 @@ export const servicesResources = {
         tagline: "Sichere Lösungen auch für komplizierte Fälle.",
         intro: "Bei oralchirurgischen Eingriffen sind eine genaue Diagnose, sorgfältige Planung und Erfahrung besonders wichtig.",
         listIntro: "In unserer Praxis führen wir unter anderem folgende Eingriffe durch:",
+        imageAlt: "Oralchirurgie in der Alphadent Praxis",
         items: [
           "Zahnextraktion",
           "Entfernung von Weisheitszähnen",
@@ -478,6 +481,7 @@ export const servicesResources = {
         tagline: "Soluzioni sicure anche per i casi complicati.",
         intro: "Negli interventi di chirurgia orale sono particolarmente importanti una diagnosi precisa, una pianificazione adeguata e l'esperienza.",
         listIntro: "Nel nostro studio eseguiamo, tra gli altri, i seguenti interventi:",
+        imageAlt: "Chirurgia orale nello studio Alphadent",
         items: [
           "Estrazione dentale",
           "Rimozione dei denti del giudizio",

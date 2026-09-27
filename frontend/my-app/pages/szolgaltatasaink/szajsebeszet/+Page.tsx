@@ -1,10 +1,16 @@
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { CtaButton } from "../../../components/ui/cta-button";
+import { cloudinarySrcSet, cloudinaryUrl } from "../../../lib/cloudinary";
 import { PageContainer } from "../../../components/ui/page-container";
 import { localizeHref } from "../../../lib/locale";
 
 export { Page };
+
+const PANORAMA_IMAGE =
+  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1790500751/pano_crop_tlmpc3.webp";
+
+const PANORAMA_IMAGE_WIDTHS = [640, 960, 1280, 1920] as const;
 
 function Page() {
   const { t } = useTranslation();
@@ -35,6 +41,21 @@ function Page() {
           {t("services.szajsebeszet.intro")}
         </p>
       </div>
+
+      {/* Fixed aspect per breakpoint (not the image's own) so there's no layout
+          shift; on phones a full panorama would be only ~120px tall. */}
+      <figure className="overflow-hidden rounded-2xl border border-brand-gold/25 shadow-[0_18px_36px_-24px_rgba(201,168,76,0.45)]">
+        <img
+          src={cloudinaryUrl(PANORAMA_IMAGE, { width: 1280 })}
+          srcSet={cloudinarySrcSet(PANORAMA_IMAGE, PANORAMA_IMAGE_WIDTHS)}
+          sizes="(min-width: 1280px) 1216px, 100vw"
+          alt={t("services.szajsebeszet.imageAlt")}
+          loading="lazy"
+          decoding="async"
+          crossOrigin="anonymous"
+          className="aspect-[16/9] w-full object-cover sm:aspect-[21/9] lg:aspect-[3/1]"
+        />
+      </figure>
 
       <section className="max-w-3xl space-y-3">
         <p className="text-sm text-white">{t("services.szajsebeszet.listIntro")}</p>
