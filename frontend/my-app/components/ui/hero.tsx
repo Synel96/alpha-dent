@@ -135,9 +135,9 @@ export function Hero({
           />
         )}
         {hasCopy ? (
-          // Darken in from the left, where the copy sits - the right side
-          // of the media stays untouched.
-          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
+          // Darken in from the left, where the copy sits. Below md the quote spans
+          // nearly the full width, so the right side needs darkening there too.
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30 md:from-black/80 md:via-black/45 md:to-transparent" />
         ) : null}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/10 to-transparent" />
       </div>
@@ -152,13 +152,13 @@ export function Hero({
           {quote ? (
             <h1
               style={{ fontFamily: '"Geist Variable", Georgia, "Times New Roman", serif' }}
-              className="text-2xl italic font-light leading-snug text-brand-gold-light md:text-4xl"
+              className="text-2xl italic font-light leading-snug text-brand-gold-light [text-shadow:0_2px_16px_rgba(0,0,0,0.65)] md:text-4xl"
             >
               {quote}
             </h1>
           ) : null}
           {brandMark ? (
-            <p className="text-sm font-semibold uppercase tracking-[0.32em] text-brand-gold">
+            <p className="text-sm font-semibold uppercase tracking-[0.32em] text-brand-gold [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
               {brandMark}
             </p>
           ) : null}
