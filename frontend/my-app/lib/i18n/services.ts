@@ -88,7 +88,29 @@ export const servicesResources = {
         intro:
           "A szájsebészeti beavatkozásoknál különösen fontos a pontos diagnózis, a megfelelő tervezés és a tapasztalat.",
         listIntro: "Rendelőnkben többek között az alábbi beavatkozásokat végezzük:",
-        imageAlt: "Szájsebészet az Alphadent rendelőben",
+        imageAlt:
+          "Az Alphadent világos, modern kezelőszobája fogorvosi székkel, panorámafelvételen",
+        comfortTitle: "Biztonságban, kíméletesen",
+        comfortIntro:
+          "Tudjuk, hogy a szájsebészeti beavatkozás sokakban szorongást kelt. Ezért mindent megteszünk, hogy a kezelés alatt és után is biztonságban érezze magát.",
+        comfort: [
+          {
+            title: "Alapos érzéstelenítés",
+            text: "Minden szájsebészeti beavatkozás helyi érzéstelenítésben történik. Csak akkor kezdünk, amikor a terület már teljesen érzéketlen.",
+          },
+          {
+            title: "Előre tudja, mi fog történni",
+            text: "A beavatkozás előtt lépésről lépésre elmondjuk, mi történik és mennyi ideig tart, és minden kérdésére válaszolunk.",
+          },
+          {
+            title: "Ön bármikor jelezhet",
+            text: "A kezelés előtt megbeszélünk egy kézjelet. Ha szünetre van szüksége, csak jeleznie kell, és azonnal megállunk.",
+          },
+          {
+            title: "Utána sem marad egyedül",
+            text: "Részletes tanácsokat adunk az otthoni teendőkhöz és a fájdalomcsillapításhoz, kérdés esetén pedig telefonon is elér minket.",
+          },
+        ],
         items: [
           "Fogeltávolítás",
           "Bölcsességfog eltávolítása",
@@ -219,7 +241,29 @@ export const servicesResources = {
         tagline: "Safe solutions, even for complicated cases.",
         intro: "In oral surgery, an accurate diagnosis, proper planning, and experience matter more than anywhere else.",
         listIntro: "Among others, we perform the following procedures:",
-        imageAlt: "Oral surgery at the Alphadent clinic",
+        imageAlt:
+          "Panoramic view of Alphadent's bright, modern treatment room with the dental chair",
+        comfortTitle: "Safe and gentle care",
+        comfortIntro:
+          "We know that oral surgery makes many people anxious. That's why we do everything we can to make you feel safe during and after your treatment.",
+        comfort: [
+          {
+            title: "Thorough anaesthesia",
+            text: "Every oral surgery procedure is performed under local anaesthesia. We only begin once the area is completely numb.",
+          },
+          {
+            title: "You know what to expect",
+            text: "Before the procedure, we explain step by step what will happen and how long it will take, and answer all of your questions.",
+          },
+          {
+            title: "You can signal at any time",
+            text: "Before we start, we agree on a hand signal. If you need a break, just raise it and we stop immediately.",
+          },
+          {
+            title: "You're not on your own afterwards",
+            text: "We give you detailed advice on aftercare and pain relief at home, and you can reach us by phone if you have any questions.",
+          },
+        ],
         items: [
           "Tooth extraction",
           "Wisdom tooth removal",
@@ -350,7 +394,29 @@ export const servicesResources = {
         tagline: "Sichere Lösungen auch für komplizierte Fälle.",
         intro: "Bei oralchirurgischen Eingriffen sind eine genaue Diagnose, sorgfältige Planung und Erfahrung besonders wichtig.",
         listIntro: "In unserer Praxis führen wir unter anderem folgende Eingriffe durch:",
-        imageAlt: "Oralchirurgie in der Alphadent Praxis",
+        imageAlt:
+          "Panoramaansicht des hellen, modernen Behandlungsraums von Alphadent mit Behandlungsstuhl",
+        comfortTitle: "Sicher und schonend",
+        comfortIntro:
+          "Wir wissen, dass ein oralchirurgischer Eingriff bei vielen Menschen Ängste auslöst. Deshalb tun wir alles dafür, dass Sie sich während und nach der Behandlung sicher fühlen.",
+        comfort: [
+          {
+            title: "Gründliche Betäubung",
+            text: "Jeder oralchirurgische Eingriff erfolgt unter örtlicher Betäubung. Wir beginnen erst, wenn der Bereich vollständig betäubt ist.",
+          },
+          {
+            title: "Sie wissen, was auf Sie zukommt",
+            text: "Vor dem Eingriff erklären wir Ihnen Schritt für Schritt, was passiert und wie lange es dauert, und beantworten alle Ihre Fragen.",
+          },
+          {
+            title: "Sie können jederzeit ein Zeichen geben",
+            text: "Vor der Behandlung vereinbaren wir ein Handzeichen. Wenn Sie eine Pause brauchen, genügt ein Zeichen und wir unterbrechen sofort.",
+          },
+          {
+            title: "Auch danach sind Sie nicht allein",
+            text: "Wir geben Ihnen ausführliche Hinweise zur Nachsorge und Schmerzlinderung zu Hause, und bei Fragen erreichen Sie uns telefonisch.",
+          },
+        ],
         items: [
           "Zahnextraktion",
           "Entfernung von Weisheitszähnen",
@@ -481,7 +547,29 @@ export const servicesResources = {
         tagline: "Soluzioni sicure anche per i casi complicati.",
         intro: "Negli interventi di chirurgia orale sono particolarmente importanti una diagnosi precisa, una pianificazione adeguata e l'esperienza.",
         listIntro: "Nel nostro studio eseguiamo, tra gli altri, i seguenti interventi:",
-        imageAlt: "Chirurgia orale nello studio Alphadent",
+        imageAlt:
+          "Vista panoramica della luminosa e moderna sala di trattamento Alphadent con la poltrona odontoiatrica",
+        comfortTitle: "In sicurezza, con delicatezza",
+        comfortIntro:
+          "Sappiamo che un intervento di chirurgia orale genera ansia in molte persone. Per questo facciamo tutto il possibile perché si senta al sicuro durante e dopo il trattamento.",
+        comfort: [
+          {
+            title: "Anestesia accurata",
+            text: "Ogni intervento di chirurgia orale viene eseguito in anestesia locale. Iniziamo solo quando la zona è completamente insensibile.",
+          },
+          {
+            title: "Sa sempre cosa succederà",
+            text: "Prima dell'intervento le spieghiamo passo dopo passo cosa accadrà e quanto durerà, e rispondiamo a tutte le sue domande.",
+          },
+          {
+            title: "Può fermarci in qualsiasi momento",
+            text: "Prima del trattamento concordiamo un segnale con la mano. Se ha bisogno di una pausa, basta farlo e ci fermiamo subito.",
+          },
+          {
+            title: "Siamo al suo fianco anche dopo",
+            text: "Le diamo consigli dettagliati per la cura a casa e per alleviare il dolore, e per qualsiasi domanda può contattarci per telefono.",
+          },
+        ],
         items: [
           "Estrazione dentale",
           "Rimozione dei denti del giudizio",

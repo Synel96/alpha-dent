@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Check, Hand, HeartHandshake, MessageCircle, ShieldCheck } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { CtaButton } from "../../../components/ui/cta-button";
@@ -13,11 +13,17 @@ const PANORAMA_IMAGE =
 
 const PANORAMA_IMAGE_WIDTHS = [640, 960, 1280, 1920] as const;
 
+// Same order as services.szajsebeszet.comfort: anaesthesia, explanation, hand signal, aftercare.
+const COMFORT_ICONS = [ShieldCheck, MessageCircle, Hand, HeartHandshake] as const;
+
+type ComfortItem = { title: string; text: string };
+
 function Page() {
   const { t } = useTranslation();
   const { locale } = usePageContext();
 
   const items = t("services.szajsebeszet.items", { returnObjects: true }) as string[];
+  const comfort = t("services.szajsebeszet.comfort", { returnObjects: true }) as ComfortItem[];
 
   return (
     <PageContainer className="py-10 md:py-14 space-y-10 md:space-y-12">
@@ -71,6 +77,33 @@ function Page() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="rounded-2xl border border-brand-gold/25 bg-[radial-gradient(circle_at_10%_0%,rgba(228,196,106,0.16),transparent_45%),linear-gradient(140deg,rgba(17,17,20,0.96),rgba(8,8,10,0.96))] p-6 md:p-8">
+        <h2 className="text-xl font-semibold text-brand-gold-light md:text-2xl">
+          {t("services.szajsebeszet.comfortTitle")}
+        </h2>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white md:text-base">
+          {t("services.szajsebeszet.comfortIntro")}
+        </p>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2">
+          {comfort.map((item, index) => {
+            const Icon = COMFORT_ICONS[index];
+            return (
+              <div key={item.title} className="flex items-start gap-3">
+                <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/30 text-brand-gold-light">
+                  {Icon ? <Icon aria-hidden className="size-4" /> : null}
+                </span>
+                <div>
+                  <h3 className="text-sm font-semibold text-brand-gold-light md:text-base">
+                    {item.title}
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed text-white">{item.text}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </section>
 
       <CtaButton
