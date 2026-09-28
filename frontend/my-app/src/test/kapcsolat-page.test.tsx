@@ -6,6 +6,10 @@ vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
 
+vi.mock("vike-react/usePageContext", () => ({
+  usePageContext: () => ({ locale: "hu" }),
+}));
+
 import { Page } from "../../pages/kapcsolat/+Page";
 
 describe("Kapcsolat oldal", () => {
@@ -37,6 +41,14 @@ describe("Kapcsolat oldal", () => {
       "href",
       "mailto:info@alpha-dent.eu"
     );
+  });
+
+  it("megjeleníti a heti nyitvatartást, hétvégén zárva", () => {
+    render(<Page />);
+    expect(screen.getByText("openingHours.title")).toBeInTheDocument();
+    expect(screen.getByText("Hétfő")).toBeInTheDocument();
+    expect(screen.getAllByText("9:00–17:00")).toHaveLength(5);
+    expect(screen.getAllByText("openingHours.closed")).toHaveLength(2);
   });
 
   it("a GPS koordinátákat és a hozzá tartozó navigációs linket megjeleníti", () => {

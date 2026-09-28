@@ -18,6 +18,7 @@ import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { AutoGallery } from "../../components/ui/auto-gallery";
 import { Hero } from "../../components/ui/hero";
+import { OpenStatusCard } from "../../components/ui/open-status";
 import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
 import { PillBadge } from "../../components/ui/pill-badge";
@@ -100,7 +101,9 @@ function Page() {
         brandMark="Alphadent"
         ctaHref={kapcsolatHref}
         ctaLabel={t("home.intro.ctaButton")}
-      />
+      >
+        <OpenStatusCard />
+      </Hero>
 
       {/* Intro */}
       <section className="relative overflow-hidden border-b border-brand-border bg-[radial-gradient(circle_at_50%_0%,rgba(228,196,106,0.08),transparent_55%)]">

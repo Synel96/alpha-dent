@@ -1,7 +1,11 @@
 import { useTranslation } from "react-i18next";
+import { usePageContext } from "vike-react/usePageContext";
 import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
 import { TextImageReveal } from "../../components/ui/text-image-reveal";
+import { formatClockTime, weekdayName, WEEKLY_HOURS } from "../../lib/opening-hours";
+import { useOpenStatus } from "../../lib/use-open-status";
+import { cn } from "../../lib/utils";
 
 const CONTACT_INFO = {
   address: "9400 Sopron, Arany János u. 13.",
@@ -46,6 +50,8 @@ export { Page };
 
 function Page() {
   const { t } = useTranslation();
+  const { locale } = usePageContext();
+  const { todayWeekday } = useOpenStatus();
 
   return (
     <PageContainer className="py-10 md:py-14 space-y-10 md:space-y-12">
@@ -97,6 +103,33 @@ function Page() {
           >
             {t("contactPage.actions.openMap")}
           </a>
+        </article>
+
+        <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
+          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+            {t("openingHours.title")}
+          </h3>
+          <dl className="space-y-1 text-sm">
+            {WEEKLY_HOURS.map((hours, weekday) => {
+              const name = weekdayName(weekday, locale);
+              return (
+                <div
+                  key={weekday}
+                  className={cn(
+                    "flex justify-between gap-4",
+                    weekday === todayWeekday ? "font-semibold text-brand-gold-light" : "text-white"
+                  )}
+                >
+                  <dt>{name.charAt(0).toLocaleUpperCase(locale) + name.slice(1)}</dt>
+                  <dd>
+                    {hours
+                      ? `${formatClockTime(hours[0])}–${formatClockTime(hours[1])}`
+                      : t("openingHours.closed")}
+                  </dd>
+                </div>
+              );
+            })}
+          </dl>
         </article>
 
         <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
