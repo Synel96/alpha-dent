@@ -1,0 +1,189 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/hu",
+      "permanent": true
+    },
+    {
+      "source": "/klinikank",
+      "destination": "/hu/klinikank",
+      "permanent": true
+    },
+    {
+      "source": "/szolgaltatasaink",
+      "destination": "/hu/szolgaltatasaink",
+      "permanent": true
+    },
+    {
+      "source": "/szolgaltatasaink/implantologia",
+      "destination": "/hu/szolgaltatasaink/implantologia",
+      "permanent": true
+    },
+    {
+      "source": "/szolgaltatasaink/szajsebeszet",
+      "destination": "/hu/szolgaltatasaink/szajsebeszet",
+      "permanent": true
+    },
+    {
+      "source": "/szolgaltatasaink/esztetikai-fogaszat",
+      "destination": "/hu/szolgaltatasaink/esztetikai-fogaszat",
+      "permanent": true
+    },
+    {
+      "source": "/szolgaltatasaink/fogmegtarto-kezelesek",
+      "destination": "/hu/szolgaltatasaink/fogmegtarto-kezelesek",
+      "permanent": true
+    },
+    {
+      "source": "/kerdesek",
+      "destination": "/hu/kerdesek",
+      "permanent": true
+    },
+    {
+      "source": "/kapcsolat",
+      "destination": "/hu/kapcsolat",
+      "permanent": true
+    },
+    {
+      "source": "/en/klinikank",
+      "destination": "/en/our-clinic",
+      "permanent": true
+    },
+    {
+      "source": "/en/szolgaltatasaink",
+      "destination": "/en/services",
+      "permanent": true
+    },
+    {
+      "source": "/en/szolgaltatasaink/implantologia",
+      "destination": "/en/services/implantology",
+      "permanent": true
+    },
+    {
+      "source": "/en/szolgaltatasaink/szajsebeszet",
+      "destination": "/en/services/oral-surgery",
+      "permanent": true
+    },
+    {
+      "source": "/en/szolgaltatasaink/esztetikai-fogaszat",
+      "destination": "/en/services/cosmetic-dentistry",
+      "permanent": true
+    },
+    {
+      "source": "/en/szolgaltatasaink/fogmegtarto-kezelesek",
+      "destination": "/en/services/tooth-preserving-treatments",
+      "permanent": true
+    },
+    {
+      "source": "/en/kerdesek",
+      "destination": "/en/faq",
+      "permanent": true
+    },
+    {
+      "source": "/en/kapcsolat",
+      "destination": "/en/contact",
+      "permanent": true
+    },
+    {
+      "source": "/de/klinikank",
+      "destination": "/de/unsere-praxis",
+      "permanent": true
+    },
+    {
+      "source": "/de/szolgaltatasaink",
+      "destination": "/de/leistungen",
+      "permanent": true
+    },
+    {
+      "source": "/de/szolgaltatasaink/implantologia",
+      "destination": "/de/leistungen/implantologie",
+      "permanent": true
+    },
+    {
+      "source": "/de/szolgaltatasaink/szajsebeszet",
+      "destination": "/de/leistungen/oralchirurgie",
+      "permanent": true
+    },
+    {
+      "source": "/de/szolgaltatasaink/esztetikai-fogaszat",
+      "destination": "/de/leistungen/aesthetische-zahnheilkunde",
+      "permanent": true
+    },
+    {
+      "source": "/de/szolgaltatasaink/fogmegtarto-kezelesek",
+      "destination": "/de/leistungen/zahnerhaltung",
+      "permanent": true
+    },
+    {
+      "source": "/de/kerdesek",
+      "destination": "/de/faq",
+      "permanent": true
+    },
+    {
+      "source": "/de/kapcsolat",
+      "destination": "/de/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/it/klinikank",
+      "destination": "/it/la-nostra-clinica",
+      "permanent": true
+    },
+    {
+      "source": "/it/szolgaltatasaink",
+      "destination": "/it/servizi",
+      "permanent": true
+    },
+    {
+      "source": "/it/szolgaltatasaink/implantologia",
+      "destination": "/it/servizi/implantologia",
+      "permanent": true
+    },
+    {
+      "source": "/it/szolgaltatasaink/szajsebeszet",
+      "destination": "/it/servizi/chirurgia-orale",
+      "permanent": true
+    },
+    {
+      "source": "/it/szolgaltatasaink/esztetikai-fogaszat",
+      "destination": "/it/servizi/odontoiatria-estetica",
+      "permanent": true
+    },
+    {
+      "source": "/it/szolgaltatasaink/fogmegtarto-kezelesek",
+      "destination": "/it/servizi/trattamenti-conservativi",
+      "permanent": true
+    },
+    {
+      "source": "/it/kerdesek",
+      "destination": "/it/faq",
+      "permanent": true
+    },
+    {
+      "source": "/it/kapcsolat",
+      "destination": "/it/contatti",
+      "permanent": true
+    },
+    {
+      "source": "/tortenetunk",
+      "destination": "/hu",
+      "permanent": true
+    },
+    {
+      "source": "/en/tortenetunk",
+      "destination": "/en",
+      "permanent": true
+    },
+    {
+      "source": "/de/tortenetunk",
+      "destination": "/de",
+      "permanent": true
+    },
+    {
+      "source": "/it/tortenetunk",
+      "destination": "/it",
+      "permanent": true
+    }
+  ]
+}

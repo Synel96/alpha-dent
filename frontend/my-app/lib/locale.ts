@@ -1,3 +1,5 @@
+import ROUTE_SLUGS from "./route-slugs.json";
+
 export const LOCALES = ["hu", "en", "de", "it"] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = "hu";
@@ -10,13 +12,27 @@ declare global {
   }
 }
 
+type RouteSlugs = Record<string, Record<Locale, string>>;
+const SLUGS: RouteSlugs = ROUTE_SLUGS;
+
+// Logical pathname of every real page: the Hungarian filesystem route under
+// pages/ (e.g. "/kapcsolat"). Public URLs are always locale-prefixed and use
+// each language's own slug (e.g. "/de/kontakt"), see lib/route-slugs.json.
+export const PAGE_PATHNAMES = Object.keys(SLUGS);
+
+function isLocale(value: string): value is Locale {
+  return (LOCALES as readonly string[]).includes(value);
+}
+
+function stripTrailingSlash(pathname: string): string {
+  return pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+}
+
 /**
- * The default locale has no URL prefix (e.g. `/kapcsolat`); every other
- * locale is prefixed (e.g. `/en/kapcsolat`). This mirrors Vike's official
- * i18n pattern, which keeps prerendering/routing well-defined: unprefixed
- * URLs must always resolve to a real page, since Vike's filesystem-based
- * page discovery (and the prerender crawl) probes pages at their bare path
- * before any prefix is known.
+ * Maps a public URL pathname to its locale and logical (filesystem) pathname.
+ * Unprefixed paths still resolve as Hungarian: Vike's page discovery probes
+ * pages at their bare filesystem path, so those must keep routing, even
+ * though they're never linked and only reachable via a redirect in production.
  */
 export function extractLocale(pathname: string): {
   locale: Locale;
@@ -25,31 +41,16 @@ export function extractLocale(pathname: string): {
   const segments = pathname.split("/");
   const first = segments[1];
 
-  if ((LOCALES as readonly string[]).includes(first) && first !== DEFAULT_LOCALE) {
-    return {
-      locale: first as Locale,
-      pathnameWithoutLocale: "/" + segments.slice(2).join("/"),
-    };
+  if (!isLocale(first)) {
+    return { locale: DEFAULT_LOCALE, pathnameWithoutLocale: pathname };
   }
 
-  return { locale: DEFAULT_LOCALE, pathnameWithoutLocale: pathname };
+  const slug = stripTrailingSlash("/" + segments.slice(2).join("/"));
+  const logical = Object.keys(SLUGS).find((page) => SLUGS[page][first] === slug);
+  return { locale: first, pathnameWithoutLocale: logical ?? slug };
 }
 
 export function localizeHref(locale: Locale, pathname: string): string {
-  if (locale === DEFAULT_LOCALE) return pathname;
-  return `/${locale}${pathname === "/" ? "" : pathname}`;
+  const slug = SLUGS[pathname]?.[locale] ?? pathname;
+  return `/${locale}${slug === "/" ? "" : slug}`;
 }
-
-// Logical (locale-less) pathname of every real page, kept in sync by hand
-// with pages/*/+Page.tsx. Used by the sitemap generator.
-export const PAGE_PATHNAMES = [
-  "/",
-  "/klinikank",
-  "/szolgaltatasaink",
-  "/szolgaltatasaink/implantologia",
-  "/szolgaltatasaink/szajsebeszet",
-  "/szolgaltatasaink/esztetikai-fogaszat",
-  "/szolgaltatasaink/fogmegtarto-kezelesek",
-  "/kerdesek",
-  "/kapcsolat",
-] as const;

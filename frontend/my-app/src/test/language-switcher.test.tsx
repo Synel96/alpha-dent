@@ -31,17 +31,17 @@ describe("LanguageSwitcher", () => {
     expect(screen.getByText("EN")).toHaveAttribute("aria-current", "false");
   });
 
-  it("nem alapértelmezett nyelvre váltva a prefixelt útvonalra navigál", () => {
+  it("más nyelvre váltva a lefordított, prefixelt útvonalra navigál", () => {
     render(<LanguageSwitcher />);
     fireEvent.click(screen.getByText("EN"));
-    expect(mockNavigate).toHaveBeenCalledWith("/en/kapcsolat");
+    expect(mockNavigate).toHaveBeenCalledWith("/en/contact");
   });
 
-  it("alapértelmezett (hu) nyelvre váltva prefix nélküli útvonalra navigál", () => {
+  it("magyarra váltva a /hu prefixelt útvonalra navigál", () => {
     mockPageContext.mockReturnValue({ locale: "en", urlPathname: "/kapcsolat" });
     render(<LanguageSwitcher />);
     fireEvent.click(screen.getByText("HU"));
-    expect(mockNavigate).toHaveBeenCalledWith("/kapcsolat");
+    expect(mockNavigate).toHaveBeenCalledWith("/hu/kapcsolat");
   });
 
   it("az aktuális nyelvre kattintva nem navigál újra", () => {
@@ -66,7 +66,7 @@ describe("LanguageSwitcherCompact", () => {
     render(<LanguageSwitcherCompact />);
     fireEvent.click(screen.getByLabelText("Switch language"));
     fireEvent.click(screen.getByText("IT"));
-    expect(mockNavigate).toHaveBeenCalledWith("/it/kerdesek");
+    expect(mockNavigate).toHaveBeenCalledWith("/it/faq");
   });
 
   it("aria-expanded és aria-haspopup jelzi a menü állapotát", () => {

@@ -31,16 +31,16 @@ describe("Kerdesek (FAQ) oldal", () => {
     render(<Page />);
     expect(screen.getByRole("link", { name: "faqPage.ctaButton" })).toHaveAttribute(
       "href",
-      "/en/kapcsolat"
+      "/en/contact"
     );
   });
 
-  it("a kapcsolatfelvétel CTA gomb alapértelmezett (hu) nyelven prefix nélküli útvonalra mutat", () => {
+  it("a kapcsolatfelvétel CTA gomb alapértelmezett (hu) nyelven is a /hu prefixelt útvonalra mutat", () => {
     mockPageContext.mockReturnValue({ locale: "hu" });
     render(<Page />);
     expect(screen.getByRole("link", { name: "faqPage.ctaButton" })).toHaveAttribute(
       "href",
-      "/kapcsolat"
+      "/hu/kapcsolat"
     );
   });
 });

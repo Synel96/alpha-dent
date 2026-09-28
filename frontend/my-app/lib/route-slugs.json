@@ -1,0 +1,56 @@
+{
+  "/": {
+    "hu": "/",
+    "en": "/",
+    "de": "/",
+    "it": "/"
+  },
+  "/klinikank": {
+    "hu": "/klinikank",
+    "en": "/our-clinic",
+    "de": "/unsere-praxis",
+    "it": "/la-nostra-clinica"
+  },
+  "/szolgaltatasaink": {
+    "hu": "/szolgaltatasaink",
+    "en": "/services",
+    "de": "/leistungen",
+    "it": "/servizi"
+  },
+  "/szolgaltatasaink/implantologia": {
+    "hu": "/szolgaltatasaink/implantologia",
+    "en": "/services/implantology",
+    "de": "/leistungen/implantologie",
+    "it": "/servizi/implantologia"
+  },
+  "/szolgaltatasaink/szajsebeszet": {
+    "hu": "/szolgaltatasaink/szajsebeszet",
+    "en": "/services/oral-surgery",
+    "de": "/leistungen/oralchirurgie",
+    "it": "/servizi/chirurgia-orale"
+  },
+  "/szolgaltatasaink/esztetikai-fogaszat": {
+    "hu": "/szolgaltatasaink/esztetikai-fogaszat",
+    "en": "/services/cosmetic-dentistry",
+    "de": "/leistungen/aesthetische-zahnheilkunde",
+    "it": "/servizi/odontoiatria-estetica"
+  },
+  "/szolgaltatasaink/fogmegtarto-kezelesek": {
+    "hu": "/szolgaltatasaink/fogmegtarto-kezelesek",
+    "en": "/services/tooth-preserving-treatments",
+    "de": "/leistungen/zahnerhaltung",
+    "it": "/servizi/trattamenti-conservativi"
+  },
+  "/kerdesek": {
+    "hu": "/kerdesek",
+    "en": "/faq",
+    "de": "/faq",
+    "it": "/faq"
+  },
+  "/kapcsolat": {
+    "hu": "/kapcsolat",
+    "en": "/contact",
+    "de": "/kontakt",
+    "it": "/contatti"
+  }
+}

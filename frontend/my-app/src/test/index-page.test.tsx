@@ -37,14 +37,14 @@ describe("Főoldal", () => {
     render(<Page />);
     const serviceLinks = screen
       .getAllByRole("link")
-      .filter((link) => (link.getAttribute("href") ?? "").startsWith("/szolgaltatasaink/"));
+      .filter((link) => (link.getAttribute("href") ?? "").startsWith("/hu/szolgaltatasaink/"));
 
     expect(serviceLinks).toHaveLength(4);
     expect(serviceLinks.map((link) => link.getAttribute("href"))).toEqual([
-      "/szolgaltatasaink/implantologia",
-      "/szolgaltatasaink/szajsebeszet",
-      "/szolgaltatasaink/esztetikai-fogaszat",
-      "/szolgaltatasaink/fogmegtarto-kezelesek",
+      "/hu/szolgaltatasaink/implantologia",
+      "/hu/szolgaltatasaink/szajsebeszet",
+      "/hu/szolgaltatasaink/esztetikai-fogaszat",
+      "/hu/szolgaltatasaink/fogmegtarto-kezelesek",
     ]);
   });
 
@@ -67,7 +67,7 @@ describe("Főoldal", () => {
     const ctaLinks = screen.getAllByRole("link", { name: "home.intro.ctaButton" });
     expect(ctaLinks.length).toBeGreaterThan(0);
     for (const link of ctaLinks) {
-      expect(link).toHaveAttribute("href", "/kapcsolat");
+      expect(link).toHaveAttribute("href", "/hu/kapcsolat");
     }
   });
 });

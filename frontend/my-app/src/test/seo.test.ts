@@ -2,34 +2,31 @@ import { describe, it, expect } from "vitest";
 import { absoluteLocalizedUrl, hreflangAlternates, SITE_URL } from "../../lib/seo";
 
 describe("absoluteLocalizedUrl", () => {
-  it("az alapértelmezett nyelvhez prefix nélküli, teljes URL-t ad", () => {
-    expect(absoluteLocalizedUrl("hu", "/kapcsolat")).toBe(`${SITE_URL}/kapcsolat`);
+  it("a magyar oldalhoz /hu prefixelt, teljes URL-t ad", () => {
+    expect(absoluteLocalizedUrl("hu", "/kapcsolat")).toBe(`${SITE_URL}/hu/kapcsolat`);
   });
 
-  it("nem alapértelmezett nyelvhez prefixelt, teljes URL-t ad", () => {
-    expect(absoluteLocalizedUrl("en", "/kapcsolat")).toBe(`${SITE_URL}/en/kapcsolat`);
+  it("más nyelvhez a lefordított, prefixelt URL-t adja", () => {
+    expect(absoluteLocalizedUrl("en", "/kapcsolat")).toBe(`${SITE_URL}/en/contact`);
   });
 });
 
 describe("hreflangAlternates", () => {
   it("mind a 4 nyelvhez, plusz x-default-hoz ad egy-egy bejegyzést", () => {
-    const alternates = hreflangAlternates("/kapcsolat");
-    const hreflangs = alternates.map((a) => a.hreflang).sort();
+    const hreflangs = hreflangAlternates("/kapcsolat").map((a) => a.hreflang).sort();
     expect(hreflangs).toEqual(["de", "en", "hu", "it", "x-default"].sort());
   });
 
-  it("a hu bejegyzés prefix nélküli URL-re mutat", () => {
-    const hu = hreflangAlternates("/kapcsolat").find((a) => a.hreflang === "hu");
-    expect(hu?.href).toBe(`${SITE_URL}/kapcsolat`);
+  it("minden nyelv a saját lefordított URL-jére mutat", () => {
+    const byLang = Object.fromEntries(hreflangAlternates("/kapcsolat").map((a) => [a.hreflang, a.href]));
+    expect(byLang.hu).toBe(`${SITE_URL}/hu/kapcsolat`);
+    expect(byLang.en).toBe(`${SITE_URL}/en/contact`);
+    expect(byLang.de).toBe(`${SITE_URL}/de/kontakt`);
+    expect(byLang.it).toBe(`${SITE_URL}/it/contatti`);
   });
 
-  it("az en bejegyzés /en prefixelt URL-re mutat", () => {
-    const en = hreflangAlternates("/kapcsolat").find((a) => a.hreflang === "en");
-    expect(en?.href).toBe(`${SITE_URL}/en/kapcsolat`);
-  });
-
-  it("az x-default a nyelv-semleges (prefix nélküli) URL-re mutat", () => {
+  it("az x-default a magyar változatra mutat, mert a gyökér oda irányít", () => {
     const xDefault = hreflangAlternates("/kapcsolat").find((a) => a.hreflang === "x-default");
-    expect(xDefault?.href).toBe(`${SITE_URL}/kapcsolat`);
+    expect(xDefault?.href).toBe(`${SITE_URL}/hu/kapcsolat`);
   });
 });

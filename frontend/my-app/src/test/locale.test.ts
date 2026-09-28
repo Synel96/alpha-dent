@@ -1,71 +1,66 @@
 import { describe, it, expect } from "vitest";
-import { DEFAULT_LOCALE, LOCALES, extractLocale, localizeHref } from "../../lib/locale";
+import { LOCALES, PAGE_PATHNAMES, extractLocale, localizeHref } from "../../lib/locale";
 
-describe("extractLocale", () => {
-  it("alapértelmezett nyelvre (hu) áll, ha nincs prefix a gyökér útvonalon", () => {
-    expect(extractLocale("/")).toEqual({ locale: "hu", pathnameWithoutLocale: "/" });
+describe("localizeHref", () => {
+  it("minden nyelvet prefixel, a magyart is", () => {
+    expect(localizeHref("hu", "/kapcsolat")).toBe("/hu/kapcsolat");
+    expect(localizeHref("en", "/kapcsolat")).toBe("/en/contact");
+    expect(localizeHref("de", "/kapcsolat")).toBe("/de/kontakt");
+    expect(localizeHref("it", "/kapcsolat")).toBe("/it/contatti");
   });
 
-  it("alapértelmezett nyelvre áll, ha nincs prefix egy aloldalon", () => {
-    expect(extractLocale("/kapcsolat")).toEqual({
-      locale: "hu",
-      pathnameWithoutLocale: "/kapcsolat",
-    });
+  it("a beágyazott szolgáltatás oldalakat is lefordítja", () => {
+    expect(localizeHref("en", "/szolgaltatasaink/szajsebeszet")).toBe("/en/services/oral-surgery");
+    expect(localizeHref("de", "/szolgaltatasaink/esztetikai-fogaszat")).toBe(
+      "/de/leistungen/aesthetische-zahnheilkunde"
+    );
   });
 
-  it("felismeri az /en prefixet a gyökér útvonalon", () => {
-    expect(extractLocale("/en")).toEqual({ locale: "en", pathnameWithoutLocale: "/" });
-  });
-
-  it("felismeri az /en prefixet és levágja egy aloldalnál", () => {
-    expect(extractLocale("/en/kapcsolat")).toEqual({
-      locale: "en",
-      pathnameWithoutLocale: "/kapcsolat",
-    });
-  });
-
-  it("felismeri a /de és /it prefixeket is", () => {
-    expect(extractLocale("/de/kerdesek").locale).toBe("de");
-    expect(extractLocale("/it/szolgaltatasaink").locale).toBe("it");
-  });
-
-  it("a /hu prefixet NEM kezeli külön prefixként (az alapértelmezett nyelv prefix nélküli)", () => {
-    // A hivatalos Vike i18n minta szerint az alapértelmezett nyelvnek nincs
-    // prefixe, így a "/hu/..." útvonal nem egyezik egyetlen oldallal sem.
-    expect(extractLocale("/hu/kapcsolat")).toEqual({
-      locale: "hu",
-      pathnameWithoutLocale: "/hu/kapcsolat",
-    });
-  });
-
-  it("ismeretlen prefix esetén alapértelmezett nyelvre áll, és nem vágja le az útvonalat", () => {
-    expect(extractLocale("/fr/kapcsolat")).toEqual({
-      locale: "hu",
-      pathnameWithoutLocale: "/fr/kapcsolat",
-    });
+  it("a főoldalhoz nem told perjelet a prefix után", () => {
+    expect(localizeHref("hu", "/")).toBe("/hu");
+    expect(localizeHref("en", "/")).toBe("/en");
   });
 });
 
-describe("localizeHref", () => {
-  it("az alapértelmezett nyelvhez (hu) nem tesz prefixet", () => {
-    expect(localizeHref(DEFAULT_LOCALE, "/kapcsolat")).toBe("/kapcsolat");
-    expect(localizeHref(DEFAULT_LOCALE, "/")).toBe("/");
+describe("extractLocale", () => {
+  it("a lefordított URL-t visszafordítja a magyar logikai útvonalra", () => {
+    expect(extractLocale("/de/kontakt")).toEqual({ locale: "de", pathnameWithoutLocale: "/kapcsolat" });
+    expect(extractLocale("/en/services/implantology")).toEqual({
+      locale: "en",
+      pathnameWithoutLocale: "/szolgaltatasaink/implantologia",
+    });
   });
 
-  it("nem alapértelmezett nyelvekhez prefixet tesz", () => {
-    expect(localizeHref("en", "/kapcsolat")).toBe("/en/kapcsolat");
-    expect(localizeHref("de", "/kerdesek")).toBe("/de/kerdesek");
-    expect(localizeHref("it", "/szolgaltatasaink")).toBe("/it/szolgaltatasaink");
+  it("a /hu prefixet is felismeri", () => {
+    expect(extractLocale("/hu/kapcsolat")).toEqual({ locale: "hu", pathnameWithoutLocale: "/kapcsolat" });
+    expect(extractLocale("/hu")).toEqual({ locale: "hu", pathnameWithoutLocale: "/" });
   });
 
-  it("a gyökér útvonalhoz nem told dupla perjelet", () => {
-    expect(localizeHref("en", "/")).toBe("/en");
+  it("a záró perjelet figyelmen kívül hagyja", () => {
+    expect(extractLocale("/en/contact/")).toEqual({ locale: "en", pathnameWithoutLocale: "/kapcsolat" });
   });
 
-  it("extractLocale-lel körbeérve visszaadja az eredeti (nem-alapértelmezett) útvonalat", () => {
-    for (const locale of LOCALES.filter((l) => l !== DEFAULT_LOCALE)) {
-      const href = localizeHref(locale, "/kapcsolat");
-      expect(extractLocale(href)).toEqual({ locale, pathnameWithoutLocale: "/kapcsolat" });
+  it("prefix nélküli útvonalat magyarként kezel, változatlan útvonallal", () => {
+    expect(extractLocale("/kapcsolat")).toEqual({ locale: "hu", pathnameWithoutLocale: "/kapcsolat" });
+    expect(extractLocale("/")).toEqual({ locale: "hu", pathnameWithoutLocale: "/" });
+  });
+
+  it("ismeretlen prefix esetén nem vág le semmit", () => {
+    expect(extractLocale("/fr/kapcsolat")).toEqual({ locale: "hu", pathnameWithoutLocale: "/fr/kapcsolat" });
+  });
+
+  it("minden oldal minden nyelven oda-vissza fordítható", () => {
+    for (const page of PAGE_PATHNAMES) {
+      for (const locale of LOCALES) {
+        expect(extractLocale(localizeHref(locale, page))).toEqual({ locale, pathnameWithoutLocale: page });
+      }
+    }
+  });
+
+  it("egy nyelven belül nincs két oldalnak azonos URL-je", () => {
+    for (const locale of LOCALES) {
+      const urls = PAGE_PATHNAMES.map((page) => localizeHref(locale, page));
+      expect(new Set(urls).size).toBe(urls.length);
     }
   });
 });

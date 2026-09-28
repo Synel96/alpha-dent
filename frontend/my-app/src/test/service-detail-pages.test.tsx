@@ -38,11 +38,11 @@ describe("Szolgáltatás aloldalak", () => {
     expect(screen.getByText("services.implantologia.steps-1-text")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "← servicesHub.title" })).toHaveAttribute(
       "href",
-      "/szolgaltatasaink"
+      "/hu/szolgaltatasaink"
     );
     expect(screen.getByRole("link", { name: "home.intro.ctaButton" })).toHaveAttribute(
       "href",
-      "/kapcsolat"
+      "/hu/kapcsolat"
     );
   });
 
@@ -54,7 +54,7 @@ describe("Szolgáltatás aloldalak", () => {
     expect(screen.getByText("services.szajsebeszet.items-0")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "home.intro.ctaButton" })).toHaveAttribute(
       "href",
-      "/kapcsolat"
+      "/hu/kapcsolat"
     );
   });
 
@@ -75,7 +75,7 @@ describe("Szolgáltatás aloldalak", () => {
     expect(screen.getByText("services.fogmegtartoKezelesek.paragraphs-0")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "home.intro.ctaButton" })).toHaveAttribute(
       "href",
-      "/kapcsolat"
+      "/hu/kapcsolat"
     );
   });
 });

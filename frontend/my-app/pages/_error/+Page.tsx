@@ -2,12 +2,14 @@ import React from "react";
 import { usePageContext } from "vike-react/usePageContext";
 import { useTranslation } from "react-i18next";
 import "../../lib/i18n";
+import { DEFAULT_LOCALE, localizeHref, type Locale } from "../../lib/locale";
 import { AlphaGlyph } from "../../components/ui/alpha-glyph";
 
 export default function Page() {
-  const { is404, abortStatusCode } = usePageContext() as {
+  const { is404, abortStatusCode, locale } = usePageContext() as {
     is404?: boolean;
     abortStatusCode?: number;
+    locale?: Locale;
   };
   const { t } = useTranslation();
 
@@ -47,7 +49,7 @@ export default function Page() {
       </p>
 
       <a
-        href="/"
+        href={localizeHref(locale ?? DEFAULT_LOCALE, "/")}
         className="inline-flex items-center gap-2 rounded-md border border-brand-gold/40 px-5 py-2.5 text-sm tracking-wide text-brand-gold transition-colors hover:bg-brand-surface hover:border-brand-gold"
       >
         {t("error.backHome")}

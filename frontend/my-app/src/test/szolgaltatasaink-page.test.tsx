@@ -21,10 +21,10 @@ describe("Szolgaltatasaink oldal", () => {
     const links = screen.getAllByRole("link");
     expect(links).toHaveLength(4);
     expect(links.map((link) => link.getAttribute("href"))).toEqual([
-      "/szolgaltatasaink/implantologia",
-      "/szolgaltatasaink/szajsebeszet",
-      "/szolgaltatasaink/esztetikai-fogaszat",
-      "/szolgaltatasaink/fogmegtarto-kezelesek",
+      "/hu/szolgaltatasaink/implantologia",
+      "/hu/szolgaltatasaink/szajsebeszet",
+      "/hu/szolgaltatasaink/esztetikai-fogaszat",
+      "/hu/szolgaltatasaink/fogmegtarto-kezelesek",
     ]);
   });
 

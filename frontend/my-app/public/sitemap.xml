@@ -1,291 +1,291 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://alpha-dent.eu/</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/" />
+    <loc>https://alpha-dent.eu/hu</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de" />
     <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu" />
   </url>
   <url>
     <loc>https://alpha-dent.eu/en</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de" />
     <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu" />
   </url>
   <url>
     <loc>https://alpha-dent.eu/de</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de" />
     <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu" />
   </url>
   <url>
     <loc>https://alpha-dent.eu/it</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de" />
     <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/klinikank</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/klinikank" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/klinikank" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/klinikank" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/klinikank" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/klinikank" />
+    <loc>https://alpha-dent.eu/hu/klinikank</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/klinikank" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/our-clinic" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/unsere-praxis" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/la-nostra-clinica" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/klinikank" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/en/klinikank</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/klinikank" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/klinikank" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/klinikank" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/klinikank" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/klinikank" />
+    <loc>https://alpha-dent.eu/en/our-clinic</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/klinikank" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/our-clinic" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/unsere-praxis" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/la-nostra-clinica" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/klinikank" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/de/klinikank</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/klinikank" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/klinikank" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/klinikank" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/klinikank" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/klinikank" />
+    <loc>https://alpha-dent.eu/de/unsere-praxis</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/klinikank" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/our-clinic" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/unsere-praxis" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/la-nostra-clinica" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/klinikank" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/it/klinikank</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/klinikank" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/klinikank" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/klinikank" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/klinikank" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/klinikank" />
+    <loc>https://alpha-dent.eu/it/la-nostra-clinica</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/klinikank" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/our-clinic" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/unsere-praxis" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/la-nostra-clinica" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/klinikank" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/szolgaltatasaink</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink" />
+    <loc>https://alpha-dent.eu/hu/szolgaltatasaink</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/en/szolgaltatasaink</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink" />
+    <loc>https://alpha-dent.eu/en/services</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/de/szolgaltatasaink</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink" />
+    <loc>https://alpha-dent.eu/de/leistungen</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/it/szolgaltatasaink</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink" />
+    <loc>https://alpha-dent.eu/it/servizi</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/szolgaltatasaink/implantologia</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/implantologia" />
+    <loc>https://alpha-dent.eu/hu/szolgaltatasaink/implantologia</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/implantologia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/implantology" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/implantologie" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/implantologia" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/implantologia" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/en/szolgaltatasaink/implantologia</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/implantologia" />
+    <loc>https://alpha-dent.eu/en/services/implantology</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/implantologia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/implantology" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/implantologie" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/implantologia" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/implantologia" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/de/szolgaltatasaink/implantologia</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/implantologia" />
+    <loc>https://alpha-dent.eu/de/leistungen/implantologie</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/implantologia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/implantology" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/implantologie" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/implantologia" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/implantologia" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/it/szolgaltatasaink/implantologia</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/implantologia" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/implantologia" />
+    <loc>https://alpha-dent.eu/it/servizi/implantologia</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/implantologia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/implantology" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/implantologie" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/implantologia" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/implantologia" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/szolgaltatasaink/szajsebeszet</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/szajsebeszet" />
+    <loc>https://alpha-dent.eu/hu/szolgaltatasaink/szajsebeszet</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/szajsebeszet" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/oral-surgery" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/oralchirurgie" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/chirurgia-orale" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/szajsebeszet" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/en/szolgaltatasaink/szajsebeszet</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/szajsebeszet" />
+    <loc>https://alpha-dent.eu/en/services/oral-surgery</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/szajsebeszet" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/oral-surgery" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/oralchirurgie" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/chirurgia-orale" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/szajsebeszet" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/de/szolgaltatasaink/szajsebeszet</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/szajsebeszet" />
+    <loc>https://alpha-dent.eu/de/leistungen/oralchirurgie</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/szajsebeszet" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/oral-surgery" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/oralchirurgie" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/chirurgia-orale" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/szajsebeszet" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/it/szolgaltatasaink/szajsebeszet</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/szajsebeszet" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/szajsebeszet" />
+    <loc>https://alpha-dent.eu/it/servizi/chirurgia-orale</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/szajsebeszet" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/oral-surgery" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/oralchirurgie" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/chirurgia-orale" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/szajsebeszet" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/szolgaltatasaink/esztetikai-fogaszat</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/esztetikai-fogaszat" />
+    <loc>https://alpha-dent.eu/hu/szolgaltatasaink/esztetikai-fogaszat</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/esztetikai-fogaszat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/cosmetic-dentistry" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/aesthetische-zahnheilkunde" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/odontoiatria-estetica" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/esztetikai-fogaszat" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/en/szolgaltatasaink/esztetikai-fogaszat</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/esztetikai-fogaszat" />
+    <loc>https://alpha-dent.eu/en/services/cosmetic-dentistry</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/esztetikai-fogaszat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/cosmetic-dentistry" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/aesthetische-zahnheilkunde" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/odontoiatria-estetica" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/esztetikai-fogaszat" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/de/szolgaltatasaink/esztetikai-fogaszat</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/esztetikai-fogaszat" />
+    <loc>https://alpha-dent.eu/de/leistungen/aesthetische-zahnheilkunde</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/esztetikai-fogaszat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/cosmetic-dentistry" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/aesthetische-zahnheilkunde" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/odontoiatria-estetica" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/esztetikai-fogaszat" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/it/szolgaltatasaink/esztetikai-fogaszat</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/esztetikai-fogaszat" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/esztetikai-fogaszat" />
+    <loc>https://alpha-dent.eu/it/servizi/odontoiatria-estetica</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/esztetikai-fogaszat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/cosmetic-dentistry" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/aesthetische-zahnheilkunde" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/odontoiatria-estetica" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/esztetikai-fogaszat" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/szolgaltatasaink/fogmegtarto-kezelesek</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/fogmegtarto-kezelesek" />
+    <loc>https://alpha-dent.eu/hu/szolgaltatasaink/fogmegtarto-kezelesek</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/fogmegtarto-kezelesek" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/tooth-preserving-treatments" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/zahnerhaltung" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/trattamenti-conservativi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/fogmegtarto-kezelesek" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/en/szolgaltatasaink/fogmegtarto-kezelesek</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/fogmegtarto-kezelesek" />
+    <loc>https://alpha-dent.eu/en/services/tooth-preserving-treatments</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/fogmegtarto-kezelesek" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/tooth-preserving-treatments" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/zahnerhaltung" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/trattamenti-conservativi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/fogmegtarto-kezelesek" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/de/szolgaltatasaink/fogmegtarto-kezelesek</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/fogmegtarto-kezelesek" />
+    <loc>https://alpha-dent.eu/de/leistungen/zahnerhaltung</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/fogmegtarto-kezelesek" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/tooth-preserving-treatments" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/zahnerhaltung" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/trattamenti-conservativi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/fogmegtarto-kezelesek" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/it/szolgaltatasaink/fogmegtarto-kezelesek</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/szolgaltatasaink/fogmegtarto-kezelesek" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/szolgaltatasaink/fogmegtarto-kezelesek" />
+    <loc>https://alpha-dent.eu/it/servizi/trattamenti-conservativi</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/fogmegtarto-kezelesek" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/tooth-preserving-treatments" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/zahnerhaltung" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/servizi/trattamenti-conservativi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/szolgaltatasaink/fogmegtarto-kezelesek" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/kerdesek</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/kerdesek" />
+    <loc>https://alpha-dent.eu/hu/kerdesek</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kerdesek" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/kerdesek" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/en/kerdesek</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/kerdesek" />
+    <loc>https://alpha-dent.eu/en/faq</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kerdesek" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/kerdesek" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/de/kerdesek</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/kerdesek" />
+    <loc>https://alpha-dent.eu/de/faq</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kerdesek" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/kerdesek" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/it/kerdesek</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/kerdesek" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/kerdesek" />
+    <loc>https://alpha-dent.eu/it/faq</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kerdesek" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/kerdesek" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/kapcsolat</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/kapcsolat" />
+    <loc>https://alpha-dent.eu/hu/kapcsolat</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kapcsolat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/contact" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kontakt" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/contatti" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/kapcsolat" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/en/kapcsolat</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/kapcsolat" />
+    <loc>https://alpha-dent.eu/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kapcsolat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/contact" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kontakt" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/contatti" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/kapcsolat" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/de/kapcsolat</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/kapcsolat" />
+    <loc>https://alpha-dent.eu/de/kontakt</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kapcsolat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/contact" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kontakt" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/contatti" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/kapcsolat" />
   </url>
   <url>
-    <loc>https://alpha-dent.eu/it/kapcsolat</loc>
-    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/kapcsolat" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/kapcsolat" />
+    <loc>https://alpha-dent.eu/it/contatti</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kapcsolat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/contact" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kontakt" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://alpha-dent.eu/it/contatti" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpha-dent.eu/hu/kapcsolat" />
   </url>
 </urlset>

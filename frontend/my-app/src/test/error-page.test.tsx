@@ -48,7 +48,7 @@ describe("ErrorPage", () => {
     it("tartalmaz 'vissza a főoldalra' linket", () => {
       render(<ErrorPage />);
       const link = screen.getByRole("link");
-      expect(link).toHaveAttribute("href", "/");
+      expect(link).toHaveAttribute("href", "/hu");
       expect(link).toHaveTextContent("error.backHome");
     });
   });
@@ -108,7 +108,7 @@ describe("ErrorPage", () => {
     it("minden esetben tartalmaz főoldalra mutató linket", () => {
       mockPageContext.mockReturnValue({ is404: false });
       render(<ErrorPage />);
-      expect(screen.getByRole("link")).toHaveAttribute("href", "/");
+      expect(screen.getByRole("link")).toHaveAttribute("href", "/hu");
     });
   });
 });

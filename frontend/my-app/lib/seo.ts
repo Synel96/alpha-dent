@@ -1,4 +1,4 @@
-import { LOCALES, localizeHref, type Locale } from "./locale";
+import { DEFAULT_LOCALE, LOCALES, localizeHref, type Locale } from "./locale";
 
 // The production domain, taken from the CONTACT_INFO.websiteUrl already
 // referenced in pages/kapcsolat/+Page.tsx. Update this if the final domain
@@ -22,7 +22,8 @@ export function hreflangAlternates(pathnameWithoutLocale: string): Array<{
       hreflang: locale,
       href: absoluteLocalizedUrl(locale, pathnameWithoutLocale),
     })),
-    // x-default: the language-neutral entry point, per Google's hreflang guidance.
-    { hreflang: "x-default", href: absoluteUrl(pathnameWithoutLocale) },
+    // x-default: the fallback for unlisted languages. There's no unprefixed
+    // page to point at (the root redirects to /hu), so it's the Hungarian URL.
+    { hreflang: "x-default", href: absoluteLocalizedUrl(DEFAULT_LOCALE, pathnameWithoutLocale) },
   ];
 }
