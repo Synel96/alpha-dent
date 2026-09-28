@@ -65,16 +65,6 @@ function Page() {
       >
         <div className="flex flex-wrap gap-3">
           <CtaButton
-            href={CONTACT_INFO.mapUrl}
-            target="_blank"
-            rel="noreferrer"
-            badge={t("contactPage.cards.address")}
-            title={t("contactPage.actions.openMap")}
-            subtitle={CONTACT_INFO.address}
-            icon={MapPin}
-            className="min-w-[280px]"
-          />
-          <CtaButton
             href={CONTACT_INFO.mobileHref}
             badge={t("contactPage.cards.mobile")}
             title={t("contactPage.actions.callNow")}
@@ -89,6 +79,16 @@ function Page() {
             subtitle={CONTACT_INFO.email}
             icon={Mail}
             className="min-w-[260px]"
+          />
+          <CtaButton
+            href={CONTACT_INFO.mapUrl}
+            target="_blank"
+            rel="noreferrer"
+            badge={t("contactPage.cards.address")}
+            title={t("contactPage.actions.openMap")}
+            subtitle={CONTACT_INFO.address}
+            icon={MapPin}
+            className="min-w-[280px]"
           />
         </div>
       </TextImageReveal>
