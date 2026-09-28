@@ -128,6 +128,7 @@ export const servicesResources = {
       esztetikaiFogaszat: {
         nav: "Esztétikai fogászat",
         title: "Esztétikai fogászat",
+        imageAlt: "Természetes mosoly közelről",
         tagline: "A természetes mosoly nem tökéletes. Hanem harmonikus.",
         paragraphs: [
           "Az esztétikai fogászat célja nem az, hogy mindenki ugyanolyan fehér, szabályos fogakat kapjon. A jó esztétikai eredmény illeszkedik az arc karakteréhez, a mosolyvonalhoz és a természetes fogazathoz.",
@@ -284,6 +285,7 @@ export const servicesResources = {
       esztetikaiFogaszat: {
         nav: "Cosmetic Dentistry",
         title: "Cosmetic Dentistry",
+        imageAlt: "Close-up of a natural smile",
         tagline: "A natural smile isn't perfect. It's harmonious.",
         paragraphs: [
           "The goal of cosmetic dentistry isn't to give everyone the same uniformly white, perfectly even teeth. A good aesthetic result fits your facial character, your smile line, and your natural teeth.",
@@ -440,6 +442,7 @@ export const servicesResources = {
       esztetikaiFogaszat: {
         nav: "Ästhetische Zahnheilkunde",
         title: "Ästhetische Zahnheilkunde",
+        imageAlt: "Natürliches Lächeln in Nahaufnahme",
         tagline: "Ein natürliches Lächeln ist nicht perfekt. Sondern harmonisch.",
         paragraphs: [
           "Ziel der ästhetischen Zahnheilkunde ist nicht, dass alle die gleichen, gleichmäßig weißen Zähne bekommen. Ein gutes ästhetisches Ergebnis passt zum Charakter des Gesichts, zur Lachlinie und zu den natürlichen Zähnen.",
@@ -596,6 +599,7 @@ export const servicesResources = {
       esztetikaiFogaszat: {
         nav: "Odontoiatria Estetica",
         title: "Odontoiatria Estetica",
+        imageAlt: "Primo piano di un sorriso naturale",
         tagline: "Il sorriso naturale non è perfetto. È armonioso.",
         paragraphs: [
           "L'obiettivo dell'odontoiatria estetica non è dare a tutti gli stessi denti, bianchi e uniformi. Un buon risultato estetico si adatta al carattere del viso, alla linea del sorriso e ai denti naturali.",

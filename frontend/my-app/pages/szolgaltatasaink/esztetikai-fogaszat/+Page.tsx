@@ -3,9 +3,13 @@ import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { CtaButton } from "../../../components/ui/cta-button";
 import { PageContainer } from "../../../components/ui/page-container";
+import { ServiceImage } from "../../../components/ui/service-image";
 import { localizeHref } from "../../../lib/locale";
 
 export { Page };
+
+const SMILE_IMAGE =
+  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1790610784/file_00000000ea2481f4b11af39991847f2f_esa65q.png";
 
 function Page() {
   const { t } = useTranslation();
@@ -25,21 +29,28 @@ function Page() {
         ← {t("servicesHub.title")}
       </a>
 
-      <div className="max-w-3xl space-y-4">
-        <p className="text-xs uppercase tracking-[0.22em] text-brand-gold-muted">
-          {t("nav.services")}
-        </p>
-        <h1 className="text-2xl font-semibold text-brand-gold-light md:text-4xl">
-          {t("services.esztetikaiFogaszat.title")}
-        </h1>
-        <p className="text-lg italic leading-snug text-brand-gold-light/90">
-          {t("services.esztetikaiFogaszat.tagline")}
-        </p>
-        {paragraphs.map((paragraph) => (
-          <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
-            {paragraph}
+      <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+        <div className="space-y-4">
+          <p className="text-xs uppercase tracking-[0.22em] text-brand-gold-muted">
+            {t("nav.services")}
           </p>
-        ))}
+          <h1 className="text-2xl font-semibold text-brand-gold-light md:text-4xl">
+            {t("services.esztetikaiFogaszat.title")}
+          </h1>
+          <p className="text-lg italic leading-snug text-brand-gold-light/90">
+            {t("services.esztetikaiFogaszat.tagline")}
+          </p>
+          {paragraphs.map((paragraph) => (
+            <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        <ServiceImage
+          src={SMILE_IMAGE}
+          alt={t("services.esztetikaiFogaszat.imageAlt")}
+        />
       </div>
 
       <section className="max-w-3xl space-y-3">
