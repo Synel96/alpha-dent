@@ -1,3 +1,4 @@
+import { Mail, MapPin, Phone } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { CtaButton } from "../../components/ui/cta-button";
@@ -70,6 +71,7 @@ function Page() {
             badge={t("contactPage.cards.address")}
             title={t("contactPage.actions.openMap")}
             subtitle={CONTACT_INFO.address}
+            icon={MapPin}
             className="min-w-[280px]"
           />
           <CtaButton
@@ -77,6 +79,7 @@ function Page() {
             badge={t("contactPage.cards.mobile")}
             title={t("contactPage.actions.callNow")}
             subtitle={CONTACT_INFO.mobileDisplay}
+            icon={Phone}
             className="min-w-[260px]"
           />
           <CtaButton
@@ -84,6 +87,7 @@ function Page() {
             badge={t("contactPage.cards.email")}
             title={t("contactPage.actions.sendEmail")}
             subtitle={CONTACT_INFO.email}
+            icon={Mail}
             className="min-w-[260px]"
           />
         </div>

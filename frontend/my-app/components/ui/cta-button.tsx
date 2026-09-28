@@ -11,6 +11,8 @@ type CtaButtonProps = {
   // over hero media - where the solid card would be too heavy or would
   // compete with another CTA nearby.
   variant?: "solid" | "ghost";
+  // Solid variant only: shown in a gold ring before the text.
+  icon?: React.ComponentType<{ className?: string }>;
   className?: string;
 } & Omit<React.ComponentProps<"a">, "href" | "children" | "className">;
 
@@ -20,6 +22,7 @@ export function CtaButton({
   subtitle,
   badge = "Kiemelt",
   variant = "solid",
+  icon: Icon,
   className,
   ...props
 }: CtaButtonProps) {
@@ -63,6 +66,15 @@ export function CtaButton({
       <span className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
         <span className="absolute -left-10 top-0 h-full w-10 -skew-x-12 bg-gradient-to-r from-transparent via-brand-gold-light/55 to-transparent transition-transform duration-700 group-hover:translate-x-[320px]" />
       </span>
+
+      {Icon ? (
+        <span
+          aria-hidden
+          className="relative z-10 inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-brand-gold/45 bg-brand-black/50 text-brand-gold-light"
+        >
+          <Icon className="size-5" />
+        </span>
+      ) : null}
 
       <span className="relative z-10 flex min-w-0 flex-col">
         <span className="mb-1 inline-flex w-fit items-center rounded-full border border-brand-gold/40 bg-brand-black/45 px-2 py-0.5 text-[11px] uppercase tracking-[0.18em] text-brand-gold-light">
