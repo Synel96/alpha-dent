@@ -52,5 +52,11 @@
     "en": "/contact",
     "de": "/kontakt",
     "it": "/contatti"
+  },
+  "/adatkezelesi-tajekoztato": {
+    "hu": "/adatkezelesi-tajekoztato",
+    "en": "/privacy-policy",
+    "de": "/datenschutz",
+    "it": "/privacy"
   }
 }

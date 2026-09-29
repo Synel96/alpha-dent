@@ -46,6 +46,11 @@
       "permanent": true
     },
     {
+      "source": "/adatkezelesi-tajekoztato",
+      "destination": "/hu/adatkezelesi-tajekoztato",
+      "permanent": true
+    },
+    {
       "source": "/en/klinikank",
       "destination": "/en/our-clinic",
       "permanent": true

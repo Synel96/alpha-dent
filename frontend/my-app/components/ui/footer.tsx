@@ -131,8 +131,16 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-brand-border px-6 py-5 text-center text-xs tracking-wide text-brand-gold-muted">
-        &copy; {new Date().getFullYear()} Alphadent Kft. - {t("footer.allRightsReserved")}
+      <div className="flex flex-col items-center gap-2 border-t border-brand-border px-6 py-5 text-center text-xs tracking-wide text-brand-gold-muted sm:flex-row sm:justify-center sm:gap-4">
+        <span>
+          &copy; {new Date().getFullYear()} Alphadent Kft. - {t("footer.allRightsReserved")}
+        </span>
+        <a
+          href={localizeHref(locale, "/adatkezelesi-tajekoztato")}
+          className="transition-colors hover:text-brand-gold-light"
+        >
+          {t("privacyPage.title")}
+        </a>
       </div>
     </footer>
   );

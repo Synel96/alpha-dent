@@ -6,6 +6,7 @@ import contactDescription from "../../pages/kapcsolat/+description";
 import faqTitle from "../../pages/kerdesek/+title";
 import servicesTitle from "../../pages/szolgaltatasaink/+title";
 import clinicTitle from "../../pages/klinikank/+title";
+import privacyTitle from "../../pages/adatkezelesi-tajekoztato/+title";
 
 describe("Per-oldal title/description függvények", () => {
   it("a gyökér title/description nyelvfüggő", () => {
@@ -27,5 +28,10 @@ describe("Per-oldal title/description függvények", () => {
 
   it("a hamarosan-oldal (klinikank) a nav címkét használja", () => {
     expect(clinicTitle({ locale: "hu" })).toBe("Klinikánk | Alphadent");
+  });
+
+  it("az adatkezelési tájékoztató címe minden nyelven lefordított", () => {
+    expect(privacyTitle({ locale: "hu" })).toBe("Adatkezelési tájékoztató | Alphadent");
+    expect(privacyTitle({ locale: "de" })).toBe("Datenschutzerklärung | Alphadent");
   });
 });
