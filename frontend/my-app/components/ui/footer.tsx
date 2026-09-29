@@ -1,4 +1,7 @@
+import { Mail, MapPin, Phone } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { usePageContext } from "vike-react/usePageContext";
+import { localizeHref } from "@/lib/locale";
 
 const SOCIAL_LINKS = [
   {
@@ -23,31 +26,113 @@ const SOCIAL_LINKS = [
   },
 ];
 
+const PAGE_LINKS = [
+  { labelKey: "nav.home", path: "/" },
+  { labelKey: "nav.clinic", path: "/klinikank" },
+  { labelKey: "nav.services", path: "/szolgaltatasaink" },
+  { labelKey: "nav.faq", path: "/kerdesek" },
+  { labelKey: "nav.contact", path: "/kapcsolat" },
+];
+
+const SERVICE_LINKS = [
+  { labelKey: "services.implantologia.nav", path: "/szolgaltatasaink/implantologia" },
+  { labelKey: "services.szajsebeszet.nav", path: "/szolgaltatasaink/szajsebeszet" },
+  { labelKey: "services.esztetikaiFogaszat.nav", path: "/szolgaltatasaink/esztetikai-fogaszat" },
+  { labelKey: "services.fogmegtartoKezelesek.nav", path: "/szolgaltatasaink/fogmegtarto-kezelesek" },
+];
+
+const HEADING = "mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold-light";
+const LINK = "text-sm text-white/80 transition-colors hover:text-brand-gold-light";
+
 export function Footer() {
   const { t } = useTranslation();
+  const { locale } = usePageContext();
 
   return (
-    <footer className="border-t border-brand-border bg-brand-black/80 backdrop-blur-sm py-8 text-center text-sm text-brand-gold">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-6 flex items-center justify-center gap-4">
-          {SOCIAL_LINKS.map(({ icon, label, href }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={label}
-              className="inline-flex items-center justify-center text-brand-gold-muted hover:text-brand-gold-light transition-colors"
-              title={label}
-            >
-              {icon}
-            </a>
-          ))}
+    <footer className="border-t border-brand-border bg-brand-black/80 backdrop-blur-sm text-brand-gold">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
+        <div>
+          <a
+            href={localizeHref(locale, "/")}
+            className="text-lg font-semibold uppercase tracking-[0.32em] text-brand-gold transition-colors hover:text-brand-gold-light"
+          >
+            Alphadent
+          </a>
+          <div className="mt-5 flex items-center gap-4">
+            {SOCIAL_LINKS.map(({ icon, label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                title={label}
+                className="inline-flex items-center justify-center text-brand-gold-muted transition-colors hover:text-brand-gold-light"
+              >
+                {icon}
+              </a>
+            ))}
+          </div>
         </div>
-        <div className="tracking-wide">
-          &copy; {new Date().getFullYear()} Alphadent Kft. -{" "}
-          {t("footer.allRightsReserved")}
+
+        <nav aria-label={t("footer.pages")}>
+          <h2 className={HEADING}>{t("footer.pages")}</h2>
+          <ul className="space-y-2.5">
+            {PAGE_LINKS.map(({ labelKey, path }) => (
+              <li key={path}>
+                <a href={localizeHref(locale, path)} className={LINK}>
+                  {t(labelKey)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <nav aria-label={t("nav.services")}>
+          <h2 className={HEADING}>{t("nav.services")}</h2>
+          <ul className="space-y-2.5">
+            {SERVICE_LINKS.map(({ labelKey, path }) => (
+              <li key={path}>
+                <a href={localizeHref(locale, path)} className={LINK}>
+                  {t(labelKey)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div>
+          <h2 className={HEADING}>{t("contactPage.eyebrow")}</h2>
+          <ul className="space-y-3">
+            <li className="flex items-center gap-2.5">
+              <Phone aria-hidden className="size-4 shrink-0 text-brand-gold-muted" />
+              <a href="tel:+36208080600" className={LINK}>
+                +36 20 80 80 600
+              </a>
+            </li>
+            <li className="flex items-center gap-2.5">
+              <Mail aria-hidden className="size-4 shrink-0 text-brand-gold-muted" />
+              <a href="mailto:info@alpha-dent.eu" className={LINK}>
+                info@alpha-dent.eu
+              </a>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-brand-gold-muted" />
+              <a
+                href="https://goo.gl/maps/tBZd2pfrPTJkpJVb6"
+                target="_blank"
+                rel="noreferrer"
+                className={LINK}
+              >
+                9400 Sopron, Arany János u. 13.
+              </a>
+            </li>
+          </ul>
         </div>
+      </div>
+
+      <div className="border-t border-brand-border px-6 py-5 text-center text-xs tracking-wide text-brand-gold-muted">
+        &copy; {new Date().getFullYear()} Alphadent Kft. - {t("footer.allRightsReserved")}
       </div>
     </footer>
   );

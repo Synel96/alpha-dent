@@ -70,6 +70,7 @@ export const commonResources = {
     },
     footer: {
       allRightsReserved: "Minden jog fenntartva.",
+      pages: "Oldalak",
     },
   },
   en: {
@@ -143,6 +144,7 @@ export const commonResources = {
     },
     footer: {
       allRightsReserved: "All rights reserved.",
+      pages: "Pages",
     },
   },
   de: {
@@ -216,6 +218,7 @@ export const commonResources = {
     },
     footer: {
       allRightsReserved: "Alle Rechte vorbehalten.",
+      pages: "Seiten",
     },
   },
   it: {
@@ -289,6 +292,7 @@ export const commonResources = {
     },
     footer: {
       allRightsReserved: "Tutti i diritti riservati.",
+      pages: "Pagine",
     },
   },
 } as const;
