@@ -1,6 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
+import { clinicResources } from "./i18n/clinic";
 import { commonResources } from "./i18n/common";
 import { contactResources } from "./i18n/contact";
 import { errorResources } from "./i18n/error";
@@ -15,6 +16,7 @@ const resources = {
       ...commonResources.hu,
       ...errorResources.hu,
       ...contactResources.hu,
+      ...clinicResources.hu,
       ...faqResources.hu,
       ...servicesResources.hu,
       ...metaResources.hu,
@@ -25,6 +27,7 @@ const resources = {
       ...commonResources.en,
       ...errorResources.en,
       ...contactResources.en,
+      ...clinicResources.en,
       ...faqResources.en,
       ...servicesResources.en,
       ...metaResources.en,
@@ -35,6 +38,7 @@ const resources = {
       ...commonResources.de,
       ...errorResources.de,
       ...contactResources.de,
+      ...clinicResources.de,
       ...faqResources.de,
       ...servicesResources.de,
       ...metaResources.de,
@@ -45,6 +49,7 @@ const resources = {
       ...commonResources.it,
       ...errorResources.it,
       ...contactResources.it,
+      ...clinicResources.it,
       ...faqResources.it,
       ...servicesResources.it,
       ...metaResources.it,
