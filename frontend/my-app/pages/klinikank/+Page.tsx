@@ -1,4 +1,5 @@
 import React from "react";
+import { Award, Building2, Gem, Users } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { CtaButton } from "../../components/ui/cta-button";
@@ -26,6 +27,9 @@ const MACHINE_PHOTOS: GridPhoto[] = [];
 const LAB_WORK_PHOTOS: GridPhoto[] = [];
 
 type Highlight = { value: string; label: string };
+
+// Same order as clinicPage.highlights: since 1996, team, zirconia pioneers, CAMLOG Gold.
+const HIGHLIGHT_ICONS = [Building2, Users, Gem, Award] as const;
 
 function Section({
   eyebrow,
@@ -79,15 +83,26 @@ function Page() {
         </div>
 
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {highlights.map((item) => (
-            <li
-              key={item.value}
-              className="rounded-2xl border border-brand-gold/25 bg-[radial-gradient(circle_at_10%_0%,rgba(228,196,106,0.14),transparent_55%),linear-gradient(140deg,rgba(17,17,20,0.96),rgba(8,8,10,0.96))] p-5"
-            >
-              <p className="text-2xl font-semibold text-brand-gold-light md:text-3xl">{item.value}</p>
-              <p className="mt-2 text-sm leading-relaxed text-white/85">{item.label}</p>
-            </li>
-          ))}
+          {highlights.map((item, index) => {
+            const Icon = HIGHLIGHT_ICONS[index];
+            return (
+              <li
+                key={item.value}
+                className="rounded-2xl border border-brand-gold/25 bg-[radial-gradient(circle_at_10%_0%,rgba(228,196,106,0.14),transparent_55%),linear-gradient(140deg,rgba(17,17,20,0.96),rgba(8,8,10,0.96))] p-5"
+              >
+                {Icon ? (
+                  <span
+                    aria-hidden
+                    className="mb-4 inline-flex size-10 items-center justify-center rounded-full border border-brand-gold/45 bg-brand-black/40 text-brand-gold-light"
+                  >
+                    <Icon className="size-5" />
+                  </span>
+                ) : null}
+                <p className="text-2xl font-semibold text-brand-gold-light md:text-3xl">{item.value}</p>
+                <p className="mt-2 text-sm leading-relaxed text-white/85">{item.label}</p>
+              </li>
+            );
+          })}
         </ul>
       </header>
 
