@@ -88,23 +88,6 @@ function Page() {
         {t("services.implantologia.closing")}
       </p>
 
-      <section>
-        <h2 className="mb-5 text-xl font-semibold text-brand-gold-light md:text-2xl">
-          {t("services.implantologia.processTitle")}
-        </h2>
-        <ol className="space-y-4">
-          {steps.map((step) => (
-            <li
-              key={step.title}
-              className="rounded-xl border border-brand-gold/25 bg-brand-surface/40 p-4"
-            >
-              <h3 className="text-sm font-semibold text-brand-gold-light">{step.title}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-white">{step.text}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
       {CRAFT_IMAGES.length > 0 ? (
         <section>
           <h2 className="mb-5 flex items-center gap-3 text-xl font-semibold text-brand-gold-light md:text-2xl">
@@ -121,6 +104,23 @@ function Page() {
           />
         </section>
       ) : null}
+
+      <section>
+        <h2 className="mb-5 text-xl font-semibold text-brand-gold-light md:text-2xl">
+          {t("services.implantologia.processTitle")}
+        </h2>
+        <ol className="space-y-4">
+          {steps.map((step) => (
+            <li
+              key={step.title}
+              className="rounded-xl border border-brand-gold/25 bg-brand-surface/40 p-4"
+            >
+              <h3 className="text-sm font-semibold text-brand-gold-light">{step.title}</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white">{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
 
       <CtaButton
         href={localizeHref(locale, "/kapcsolat")}
