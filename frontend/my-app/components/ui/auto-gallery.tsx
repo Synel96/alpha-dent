@@ -3,6 +3,8 @@ import { cloudinarySrcSet, cloudinaryUrl } from "@/lib/cloudinary";
 import { cn } from "@/lib/utils";
 
 const GALLERY_IMAGE_WIDTHS = [400, 640, 960] as const;
+// Per image, so the strip moves at the same speed whatever the image count.
+const SECONDS_PER_IMAGE = 8;
 
 type GalleryImage = {
   src: string;
@@ -57,8 +59,9 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
       <div
         className={cn(
           "flex w-max gap-4",
-          active && "[animation:gallery-scroll_40s_linear_infinite] hover:[animation-play-state:paused]"
+          active && "[animation:gallery-scroll_linear_infinite] hover:[animation-play-state:paused]"
         )}
+        style={active ? { animationDuration: `${images.length * SECONDS_PER_IMAGE}s` } : undefined}
       >
         {track.map((image, index) => (
           <div
