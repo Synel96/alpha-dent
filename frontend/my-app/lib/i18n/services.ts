@@ -31,6 +31,8 @@ export const servicesResources = {
       implantologia: {
         nav: "Implantológia",
         title: "Implantológia",
+        galleryTitle: "Betekintés az implantátumkészítés művészetébe",
+        galleryImageAlt: "Fogtechnikus munka közben az Alphadent laborjában",
         imageAlt: "CAMLOG implantátum a rá rögzített fogkoronával, bemutató modellen",
         imageCaption: "CAMLOG arany fokozatú referenciarendelőként dolgozunk.",
         tagline:
@@ -191,6 +193,8 @@ export const servicesResources = {
       implantologia: {
         nav: "Implantology",
         title: "Implantology",
+        galleryTitle: "A look into the art of crafting implant restorations",
+        galleryImageAlt: "A dental technician at work in the Alphadent laboratory",
         imageAlt: "CAMLOG implant with a crown attached, on a demonstration model",
         imageCaption: "We are a CAMLOG Gold-level reference practice.",
         tagline: "Whether you're missing one tooth or several, you don't have to live with the gap.",
@@ -348,6 +352,8 @@ export const servicesResources = {
       implantologia: {
         nav: "Implantologie",
         title: "Implantologie",
+        galleryTitle: "Einblick in die Kunst der Implantatanfertigung",
+        galleryImageAlt: "Zahntechniker bei der Arbeit im Alphadent Labor",
         imageAlt: "CAMLOG-Implantat mit aufgesetzter Zahnkrone auf einem Demonstrationsmodell",
         imageCaption: "Wir sind eine CAMLOG-Referenzpraxis in Gold.",
         tagline: "Ob ein oder mehrere Zähne fehlen - mit der Lücke müssen Sie nicht leben.",
@@ -505,6 +511,8 @@ export const servicesResources = {
       implantologia: {
         nav: "Implantologia",
         title: "Implantologia",
+        galleryTitle: "Uno sguardo all'arte della realizzazione implantare",
+        galleryImageAlt: "Un odontotecnico al lavoro nel laboratorio Alphadent",
         imageAlt: "Impianto CAMLOG con corona applicata, su un modello dimostrativo",
         imageCaption: "Siamo uno studio di riferimento CAMLOG di livello Gold.",
         tagline: "Che manchi uno o più denti, non devi conviverci.",

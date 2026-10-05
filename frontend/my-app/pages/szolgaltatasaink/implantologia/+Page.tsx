@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
+import { AutoGallery } from "../../../components/ui/auto-gallery";
 import { CtaButton } from "../../../components/ui/cta-button";
 import { PageContainer } from "../../../components/ui/page-container";
 import { ServiceImage } from "../../../components/ui/service-image";
@@ -9,6 +10,8 @@ export { Page };
 
 const IMPLANT_IMAGE =
   "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0053_gz8nis.webp";
+
+const CRAFT_IMAGES: string[] = [];
 
 type Item = { title: string; text: string };
 
@@ -88,6 +91,17 @@ function Page() {
           ))}
         </ol>
       </section>
+
+      {CRAFT_IMAGES.length > 0 ? (
+        <section>
+          <h2 className="mb-5 text-xl font-semibold text-brand-gold-light md:text-2xl">
+            {t("services.implantologia.galleryTitle")}
+          </h2>
+          <AutoGallery
+            images={CRAFT_IMAGES.map((src) => ({ src, alt: t("services.implantologia.galleryImageAlt") }))}
+          />
+        </section>
+      ) : null}
 
       <CtaButton
         href={localizeHref(locale, "/kapcsolat")}
