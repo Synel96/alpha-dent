@@ -1,3 +1,4 @@
+import { Palette } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { AutoGallery } from "../../../components/ui/auto-gallery";
@@ -106,7 +107,13 @@ function Page() {
 
       {CRAFT_IMAGES.length > 0 ? (
         <section>
-          <h2 className="mb-5 text-xl font-semibold text-brand-gold-light md:text-2xl">
+          <h2 className="mb-5 flex items-center gap-3 text-xl font-semibold text-brand-gold-light md:text-2xl">
+            <span
+              aria-hidden
+              className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-brand-gold/45 bg-brand-black/40 text-brand-gold-light"
+            >
+              <Palette className="size-5" />
+            </span>
             {t("services.implantologia.galleryTitle")}
           </h2>
           <AutoGallery
