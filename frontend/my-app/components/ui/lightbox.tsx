@@ -30,16 +30,20 @@ export function Lightbox({ images, index, onIndexChange, onClose }: LightboxProp
   const { t } = useTranslation();
   const open = index !== null && images.length > 0;
   const current = open ? images[index] : undefined;
-  const [loaded, setLoaded] = React.useState(false);
+  // Keyed by image (not reset in an effect), so a cached image whose load
+  // event fires right away can never be flagged "loading" again afterwards.
+  const [loadedKey, setLoadedKey] = React.useState<string | null>(null);
+  // If the resized Cloudinary variant fails, retry once with the original
+  // upload before giving up (the caption is shown either way).
+  const [failedSrc, setFailedSrc] = React.useState<string | null>(null);
+  const useOriginal = current !== undefined && failedSrc === current.src;
+  const imageKey = current ? `${current.src}${useOriginal ? "#original" : ""}` : "";
+  const loaded = loadedKey === imageKey;
   const swipeRef = React.useRef<{ pointerId: number; startX: number; startY: number } | null>(null);
   const swipedRef = React.useRef(false);
   // There is no Radix <Trigger> (galleries open it from many thumbnails),
   // so remember what had focus and hand it back on close ourselves.
   const returnFocusRef = React.useRef<HTMLElement | null>(null);
-
-  React.useEffect(() => {
-    setLoaded(false);
-  }, [current?.src]);
 
   const step = (direction: 1 | -1) => {
     if (index === null || images.length < 2) return;
@@ -126,28 +130,32 @@ export function Lightbox({ images, index, onIndexChange, onClose }: LightboxProp
             </button>
           </DialogPrimitive.Close>
 
+          {current && !loaded ? (
+            <span aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <span className="size-10 animate-spin rounded-full border-2 border-brand-gold/25 border-t-brand-gold-light" />
+            </span>
+          ) : null}
+
           {current ? (
-            <figure className="relative flex max-h-full min-h-0 flex-col items-center gap-3">
-              {!loaded ? (
-                <span
-                  aria-hidden
-                  className="absolute left-1/2 top-1/2 size-10 -translate-x-1/2 -translate-y-1/2 animate-spin rounded-full border-2 border-brand-gold/25 border-t-brand-gold-light"
-                />
-              ) : null}
+            <figure className="flex max-h-full min-h-0 flex-col items-center gap-3">
               <img
-                key={current.src}
-                src={cloudinaryUrl(current.src, { width: 1600, crop: "limit" })}
-                srcSet={cloudinarySrcSet(current.src, LIGHTBOX_IMAGE_WIDTHS, { crop: "limit" })}
+                key={imageKey}
+                src={useOriginal ? current.src : cloudinaryUrl(current.src, { width: 1600, crop: "limit" })}
+                srcSet={useOriginal ? undefined : cloudinarySrcSet(current.src, LIGHTBOX_IMAGE_WIDTHS, { crop: "limit" })}
                 sizes="100vw"
                 alt={current.alt}
-                loading="lazy"
+                // Eager on purpose: this <img> only exists once the visitor
+                // opens the photo, so it is already loaded on demand - and a
+                // still-invisible, zero-size lazy image may never start.
+                loading="eager"
                 decoding="async"
                 crossOrigin="anonymous"
                 draggable={false}
-                onLoad={() => setLoaded(true)}
+                onLoad={() => setLoadedKey(imageKey)}
+                onError={() => (useOriginal ? setLoadedKey(imageKey) : setFailedSrc(current.src))}
                 className={cn(
-                  "lightbox-animate max-h-[calc(100dvh-10rem)] min-h-0 w-auto max-w-full select-none rounded-2xl border border-brand-gold/30 object-contain shadow-[0_24px_64px_-24px_rgba(201,168,76,0.45)] transition-opacity duration-300 [animation:lightbox-zoom_260ms_ease-out]",
-                  loaded ? "opacity-100" : "opacity-0"
+                  "lightbox-animate max-h-[calc(100dvh-10rem)] min-h-0 w-auto max-w-full select-none rounded-2xl border border-brand-gold/30 object-contain shadow-[0_24px_64px_-24px_rgba(201,168,76,0.45)]",
+                  loaded ? "[animation:lightbox-zoom_260ms_ease-out]" : "opacity-0"
                 )}
               />
               <figcaption className="max-w-2xl text-center text-sm leading-relaxed text-white/85">

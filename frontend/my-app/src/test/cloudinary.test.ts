@@ -16,6 +16,12 @@ describe("cloudinaryUrl", () => {
     );
   });
 
+  it("nem vágó módoknál (c_limit) nem küld gravity-t, amit a Cloudinary elutasítana", () => {
+    expect(cloudinaryUrl(BASE, { width: 1600, crop: "limit" })).toBe(
+      "https://res.cloudinary.com/demo/image/upload/w_1600,c_limit,q_78,f_auto/v1/sample.jpg"
+    );
+  });
+
   it("egyéni crop/gravity/quality/format értékeket alkalmaz", () => {
     expect(
       cloudinaryUrl(BASE, { width: 200, crop: "thumb", gravity: "face", quality: 80, format: "webp" })

@@ -22,10 +22,14 @@ export function cloudinaryUrl(url: string, options: CloudinaryTransformOptions =
   if (!isCloudinaryUrl(url)) return url;
 
   const { width, crop = "fill", gravity = "auto", quality = 78, format = "auto" } = options;
+  // Gravity only means something (and Cloudinary only accepts it) for the
+  // modes that actually crop; with c_limit/c_fit/c_scale it makes the
+  // request fail instead of being ignored.
+  const crops = crop === "fill" || crop === "thumb";
   const transform = [
     width ? `w_${width}` : null,
     width ? `c_${crop}` : null,
-    width ? `g_${gravity}` : null,
+    width && crops ? `g_${gravity}` : null,
     `q_${quality}`,
     `f_${format}`,
   ]
