@@ -33,7 +33,7 @@ export function OpenStatusCard() {
     <div
       aria-hidden={status ? undefined : true}
       className={cn(
-        "w-full max-w-sm rounded-2xl border border-brand-gold/30 bg-black/40 p-4 backdrop-blur-sm",
+        "w-full max-w-sm rounded-2xl border border-brand-gold/30 bg-black/40 p-4 backdrop-blur-sm lg:bg-black/60 lg:backdrop-blur-md",
         !status && "invisible"
       )}
     >

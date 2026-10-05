@@ -44,6 +44,8 @@ type HeroProps = {
   ctaHref?: string;
   ctaLabel?: string;
   children?: React.ReactNode;
+  // Shown beside the copy on desktop (lg+), below it on smaller screens.
+  aside?: React.ReactNode;
   className?: string;
 };
 
@@ -58,6 +60,7 @@ export function Hero({
   ctaHref,
   ctaLabel,
   children,
+  aside,
   className,
 }: HeroProps) {
   const sectionRef = React.useRef<HTMLElement | null>(null);
@@ -95,7 +98,7 @@ export function Hero({
     };
   }, []);
 
-  const hasCopy = Boolean(quote || subtitle || eyebrow || (ctaHref && ctaLabel) || children);
+  const hasCopy = Boolean(quote || subtitle || eyebrow || (ctaHref && ctaLabel) || children || aside);
 
   return (
     <section
@@ -143,32 +146,35 @@ export function Hero({
       </div>
 
       {hasCopy ? (
-        <div className="relative z-10 flex max-w-xl flex-col items-start gap-5 px-6 text-left sm:px-10 lg:px-16">
-          {eyebrow ? (
-            <p className="text-xs uppercase tracking-[0.32em] text-brand-gold-light/90">
-              {eyebrow}
-            </p>
-          ) : null}
-          {quote ? (
-            <h1
-              style={{ fontFamily: '"Geist Variable", Georgia, "Times New Roman", serif' }}
-              className="text-2xl italic font-light leading-snug text-brand-gold-light [text-shadow:0_2px_16px_rgba(0,0,0,0.65)] md:text-4xl"
-            >
-              {quote}
-            </h1>
-          ) : null}
-          {brandMark ? (
-            <p className="text-sm font-semibold uppercase tracking-[0.32em] text-brand-gold [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
-              {brandMark}
-            </p>
-          ) : null}
-          {subtitle ? (
-            <p className="max-w-2xl text-sm text-brand-gold-muted md:text-base">{subtitle}</p>
-          ) : null}
-          {ctaHref && ctaLabel ? (
-            <CtaButton href={ctaHref} title={ctaLabel} variant="ghost" className="mt-1" />
-          ) : null}
-          {children}
+        <div className="relative z-10 flex w-full flex-col gap-5 px-6 sm:px-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-16">
+          <div className="flex max-w-xl flex-col items-start gap-5 text-left">
+            {eyebrow ? (
+              <p className="text-xs uppercase tracking-[0.32em] text-brand-gold-light/90">
+                {eyebrow}
+              </p>
+            ) : null}
+            {quote ? (
+              <h1
+                style={{ fontFamily: '"Geist Variable", Georgia, "Times New Roman", serif' }}
+                className="text-2xl italic font-light leading-snug text-brand-gold-light [text-shadow:0_2px_16px_rgba(0,0,0,0.65)] md:text-4xl"
+              >
+                {quote}
+              </h1>
+            ) : null}
+            {brandMark ? (
+              <p className="text-sm font-semibold uppercase tracking-[0.32em] text-brand-gold [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
+                {brandMark}
+              </p>
+            ) : null}
+            {subtitle ? (
+              <p className="max-w-2xl text-sm text-brand-gold-muted md:text-base">{subtitle}</p>
+            ) : null}
+            {ctaHref && ctaLabel ? (
+              <CtaButton href={ctaHref} title={ctaLabel} variant="ghost" className="mt-1" />
+            ) : null}
+            {children}
+          </div>
+          {aside ? <div className="w-full max-w-sm lg:shrink-0">{aside}</div> : null}
         </div>
       ) : null}
     </section>

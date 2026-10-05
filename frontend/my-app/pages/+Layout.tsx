@@ -277,7 +277,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
 
             <div className="flex items-center gap-4">
-              <div className="hidden lg:flex items-center gap-3">
+              <div className="hidden lg:flex items-center gap-2">
                 {SOCIAL_LINKS.map(({ icon, label, href }) => (
                   <a
                     key={label}
@@ -285,7 +285,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={label}
-                    className="inline-flex items-center justify-center text-brand-gold-muted hover:text-brand-gold-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
+                    // A dark gold-ringed bubble keeps the icons readable while
+                    // the navbar is still transparent over the hero photo.
+                    className="inline-flex size-9 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/60 text-brand-gold-light backdrop-blur-sm transition-colors hover:border-brand-gold hover:bg-brand-gold/15 hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 [&>svg]:size-[18px]"
                     title={label}
                   >
                     {icon}

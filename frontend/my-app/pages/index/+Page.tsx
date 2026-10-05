@@ -101,9 +101,8 @@ function Page() {
         brandMark="Alphadent"
         ctaHref={kapcsolatHref}
         ctaLabel={t("home.intro.ctaButton")}
-      >
-        <OpenStatusCard />
-      </Hero>
+        aside={<OpenStatusCard />}
+      />
 
       {/* Intro */}
       <section className="relative overflow-hidden border-b border-brand-border bg-[radial-gradient(circle_at_50%_0%,rgba(228,196,106,0.08),transparent_55%)]">
