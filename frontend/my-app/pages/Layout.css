@@ -46,15 +46,30 @@
   }
 }
 
-/* Auto-scrolling clinic gallery (components/ui/auto-gallery.tsx). The track
-   renders the image list twice back to back and scrolls exactly one copy's
-   width, so it loops seamlessly; animating only transform keeps this on the
-   compositor thread. */
-@keyframes gallery-scroll {
+/* Image lightbox (components/ui/lightbox.tsx): backdrop fade and a gentle
+   scale-in for the photo, keyed per image so paging replays it. */
+@keyframes lightbox-fade {
   from {
-    transform: translateX(0);
+    opacity: 0;
   }
   to {
-    transform: translateX(-50%);
+    opacity: 1;
+  }
+}
+
+@keyframes lightbox-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-animate {
+    animation: none !important;
   }
 }

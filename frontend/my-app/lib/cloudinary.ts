@@ -8,7 +8,7 @@ const UPLOAD_MARKER = "/upload/";
 
 export type CloudinaryTransformOptions = {
   width?: number;
-  crop?: "fill" | "fit" | "scale" | "thumb";
+  crop?: "fill" | "fit" | "limit" | "scale" | "thumb";
   gravity?: string;
   quality?: "auto" | number;
   format?: "auto" | string;

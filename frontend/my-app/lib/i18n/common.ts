@@ -17,6 +17,16 @@ export const commonResources = {
         prev: "Előző",
         next: "Következő",
       },
+      gallery: {
+        prev: "Előző képek",
+        next: "Következő képek",
+      },
+      lightbox: {
+        open: "Kép megnagyítása: {{alt}}",
+        close: "Bezárás",
+        prev: "Előző kép",
+        next: "Következő kép",
+      },
       comingSoon: {
         eyebrow: "Hamarosan",
         description:
@@ -96,6 +106,16 @@ export const commonResources = {
       carousel: {
         prev: "Previous",
         next: "Next",
+      },
+      gallery: {
+        prev: "Previous photos",
+        next: "Next photos",
+      },
+      lightbox: {
+        open: "Enlarge photo: {{alt}}",
+        close: "Close",
+        prev: "Previous photo",
+        next: "Next photo",
       },
       comingSoon: {
         eyebrow: "Coming soon",
@@ -177,6 +197,16 @@ export const commonResources = {
         prev: "Zurück",
         next: "Weiter",
       },
+      gallery: {
+        prev: "Vorherige Bilder",
+        next: "Nächste Bilder",
+      },
+      lightbox: {
+        open: "Bild vergrößern: {{alt}}",
+        close: "Schließen",
+        prev: "Vorheriges Bild",
+        next: "Nächstes Bild",
+      },
       comingSoon: {
         eyebrow: "In Kürze",
         description:
@@ -256,6 +286,16 @@ export const commonResources = {
       carousel: {
         prev: "Precedente",
         next: "Successivo",
+      },
+      gallery: {
+        prev: "Foto precedenti",
+        next: "Foto successive",
+      },
+      lightbox: {
+        open: "Ingrandisci foto: {{alt}}",
+        close: "Chiudi",
+        prev: "Foto precedente",
+        next: "Foto successiva",
       },
       comingSoon: {
         eyebrow: "Prossimamente",

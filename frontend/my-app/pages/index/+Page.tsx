@@ -236,7 +236,6 @@ function Page() {
         </PageContainer>
         <AutoGallery
           images={GALLERY_IMAGES.map((src) => ({ src, alt: t("home.gallery.imageAlt") }))}
-          className="px-6"
         />
       </section>
 

@@ -1,10 +1,17 @@
 import React from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { cloudinarySrcSet, cloudinaryUrl } from "@/lib/cloudinary";
 import { cn } from "@/lib/utils";
+import { Lightbox, ZoomBadge } from "./lightbox";
 
 const GALLERY_IMAGE_WIDTHS = [400, 640, 960] as const;
 // Per image, so the strip moves at the same speed whatever the image count.
 const SECONDS_PER_IMAGE = 8;
+// How long the auto-scroll waits after the last swipe, drag, wheel or arrow
+// click before it picks up again from wherever the user left the strip.
+const RESUME_DELAY_MS = 2500;
+const GAP_PX = 16;
 
 type GalleryImage = {
   src: string;
@@ -16,14 +23,51 @@ type AutoGalleryProps = {
   className?: string;
 };
 
-// Horizontal, auto-scrolling strip of clinic photos. The scroll animation
-// only starts once the strip is actually on screen (IntersectionObserver),
-// so it costs nothing on first paint, and never starts at all under
-// prefers-reduced-motion - the images themselves (native loading="lazy")
-// still show up, just as a static row.
+const ARROW_CLASS =
+  "absolute top-1/2 z-10 inline-flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/85 text-brand-gold-light shadow-lg transition hover:border-brand-gold hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70";
+
+// Horizontal, auto-scrolling strip of photos that the visitor can also move
+// by hand: native swipe on touch, click-and-drag with a mouse, the wheel /
+// trackpad, or the prev/next arrows. Any of those pauses the auto-scroll,
+// which resumes a moment later from the new position. Clicking a photo opens
+// it in the Lightbox.
+//
+// The auto-scroll drives the container's real scrollLeft (not a CSS
+// transform), so manual scrolling and the animation share one position. It
+// only starts once the strip is on screen (IntersectionObserver) and never
+// under prefers-reduced-motion - the strip then simply stays manual.
 export function AutoGallery({ images, className }: AutoGalleryProps) {
-  const rootRef = React.useRef<HTMLDivElement | null>(null);
+  const { t } = useTranslation();
+  const scrollRef = React.useRef<HTMLDivElement | null>(null);
+  const trackRef = React.useRef<HTMLDivElement | null>(null);
   const [active, setActive] = React.useState(false);
+  const [lightboxIndex, setLightboxIndex] = React.useState<number | null>(null);
+  const [dragging, setDragging] = React.useState(false);
+
+  const hoverRef = React.useRef(false);
+  const touchRef = React.useRef(false);
+  const idleUntilRef = React.useRef(0);
+  const dragRef = React.useRef<{ pointerId: number; startX: number; startScrollLeft: number } | null>(
+    null
+  );
+  const draggedRef = React.useRef(false);
+  const lightboxOpenRef = React.useRef(false);
+  lightboxOpenRef.current = lightboxIndex !== null;
+
+  const pauseForAWhile = () => {
+    idleUntilRef.current = performance.now() + RESUME_DELAY_MS;
+  };
+
+  // Width of one copy of the image list (the track holds two back to back):
+  // scrolling by exactly this much lands on an identical frame, which is
+  // what makes the loop seamless in both directions.
+  const loopWidth = React.useCallback(() => {
+    const track = trackRef.current;
+    const firstCopy = track?.children[0] as HTMLElement | undefined;
+    const secondCopy = track?.children[images.length] as HTMLElement | undefined;
+    if (!firstCopy || !secondCopy) return 0;
+    return secondCopy.offsetLeft - firstCopy.offsetLeft;
+  }, [images.length]);
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
@@ -31,7 +75,7 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reducedMotion) return;
 
-    const node = rootRef.current;
+    const node = scrollRef.current;
     if (!node) return;
 
     const observer = new IntersectionObserver(
@@ -49,39 +93,224 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
     return () => observer.disconnect();
   }, []);
 
-  // Duplicated so the strip can loop by scrolling exactly one copy's width
-  // (see the gallery-scroll keyframes in pages/Layout.css) instead of
-  // snapping back to the start.
+  React.useEffect(() => {
+    if (!active) return;
+    const node = scrollRef.current;
+    if (!node) return;
+
+    // Fractional position kept here, since browsers may round scrollLeft.
+    let position = node.scrollLeft;
+    let last = performance.now();
+    let frame = 0;
+
+    const tick = (now: number) => {
+      const elapsed = Math.min(now - last, 100);
+      last = now;
+      const width = loopWidth();
+      const paused =
+        hoverRef.current ||
+        touchRef.current ||
+        dragRef.current !== null ||
+        lightboxOpenRef.current ||
+        now < idleUntilRef.current ||
+        document.hidden;
+
+      if (paused || width <= 0) {
+        position = node.scrollLeft;
+      } else {
+        const speed = width / (images.length * SECONDS_PER_IMAGE * 1000);
+        position += speed * elapsed;
+        if (position >= width) position -= width;
+        node.scrollLeft = position;
+      }
+      frame = requestAnimationFrame(tick);
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [active, images.length, loopWidth]);
+
+  // Manual scrolling past either end jumps by one copy's width, so swiping
+  // or dragging never hits a wall either way.
+  const handleScroll = () => {
+    const node = scrollRef.current;
+    const width = loopWidth();
+    if (!node || width <= 0) return;
+    if (node.scrollLeft >= width) {
+      node.scrollLeft -= width;
+      if (dragRef.current) dragRef.current.startScrollLeft -= width;
+    } else if (node.scrollLeft <= 0 && (touchRef.current || dragRef.current || performance.now() < idleUntilRef.current)) {
+      node.scrollLeft += width;
+      if (dragRef.current) dragRef.current.startScrollLeft += width;
+    }
+  };
+
+  const scrollByCard = (direction: 1 | -1) => {
+    const node = scrollRef.current;
+    if (!node) return;
+    pauseForAWhile();
+    const card = trackRef.current?.firstElementChild as HTMLElement | null;
+    const amount = (card?.offsetWidth ?? node.clientWidth * 0.8) + GAP_PX;
+    const width = loopWidth();
+    // Wrap first, instantly, so the smooth scroll below never has to cross
+    // a loop boundary (adjusting scrollLeft mid-animation would cancel it).
+    if (width > 0) {
+      if (direction === -1 && node.scrollLeft - amount < 0) node.scrollLeft += width;
+      if (direction === 1 && node.scrollLeft + amount >= width) node.scrollLeft -= width;
+    }
+    node.scrollBy({ left: direction * amount, behavior: "smooth" });
+  };
+
+  // Click-and-drag for mouse users: a plain overflow-x-auto strip with a
+  // hidden scrollbar doesn't otherwise respond to a mouse drag. Touch keeps
+  // the browser's native swipe (and momentum).
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    draggedRef.current = false;
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    const node = scrollRef.current;
+    if (!node) return;
+    dragRef.current = { pointerId: event.pointerId, startX: event.clientX, startScrollLeft: node.scrollLeft };
+    setDragging(true);
+  };
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    const node = scrollRef.current;
+    if (!drag || !node || drag.pointerId !== event.pointerId) return;
+    const delta = event.clientX - drag.startX;
+    if (!draggedRef.current && Math.abs(delta) > 5) {
+      draggedRef.current = true;
+      // Captured only once it is really a drag, so a plain click still
+      // lands on the photo button underneath.
+      node.setPointerCapture(event.pointerId);
+    }
+    if (draggedRef.current) node.scrollLeft = drag.startScrollLeft - delta;
+  };
+
+  const endDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    const node = scrollRef.current;
+    if (!drag || !node || drag.pointerId !== event.pointerId) return;
+    if (node.hasPointerCapture(event.pointerId)) node.releasePointerCapture(event.pointerId);
+    dragRef.current = null;
+    setDragging(false);
+    pauseForAWhile();
+  };
+
+  // Swallow the click that a drag release would otherwise turn into
+  // "open this photo".
+  const handleClickCapture = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (draggedRef.current) {
+      event.preventDefault();
+      event.stopPropagation();
+      draggedRef.current = false;
+    }
+  };
+
+  // Duplicated so the strip can loop by jumping exactly one copy's width.
   const track = [...images, ...images];
 
   return (
-    <div ref={rootRef} className={cn("overflow-hidden", className)}>
+    <div
+      className={cn("relative", className)}
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") hoverRef.current = true;
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType === "mouse") hoverRef.current = false;
+      }}
+    >
       <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        onClickCapture={handleClickCapture}
+        onTouchStart={() => {
+          touchRef.current = true;
+        }}
+        onTouchEnd={() => {
+          touchRef.current = false;
+          pauseForAWhile();
+        }}
+        onTouchCancel={() => {
+          touchRef.current = false;
+          pauseForAWhile();
+        }}
+        onWheel={pauseForAWhile}
+        onFocus={pauseForAWhile}
+        // touch-action stays auto (see ServiceCarousel): the browser picks
+        // horizontal swipe vs. vertical page scroll per gesture.
         className={cn(
-          "flex w-max gap-4",
-          active && "[animation:gallery-scroll_linear_infinite] hover:[animation-play-state:paused]"
+          "overflow-x-auto [&::-webkit-scrollbar]:hidden",
+          "cursor-grab active:cursor-grabbing",
+          dragging && "select-none"
         )}
-        style={active ? { animationDuration: `${images.length * SECONDS_PER_IMAGE}s` } : undefined}
+        style={{ scrollbarWidth: "none" }}
       >
-        {track.map((image, index) => (
-          <div
-            key={index}
-            aria-hidden={index >= images.length}
-            className="h-56 w-72 shrink-0 overflow-hidden rounded-2xl border border-brand-border bg-brand-surface/60 shadow-[0_18px_36px_-24px_rgba(201,168,76,0.4)] sm:h-64 sm:w-96"
-          >
-            <img
-              src={cloudinaryUrl(image.src, { width: 640 })}
-              srcSet={cloudinarySrcSet(image.src, GALLERY_IMAGE_WIDTHS)}
-              sizes="(min-width: 640px) 384px, 288px"
-              alt={index >= images.length ? "" : image.alt}
-              loading="lazy"
-              decoding="async"
-              crossOrigin="anonymous"
-              className="h-full w-full object-cover"
-            />
-          </div>
-        ))}
+        <div ref={trackRef} className="flex w-max gap-4">
+          {track.map((image, index) => {
+            const isCopy = index >= images.length;
+            return (
+              <button
+                key={index}
+                type="button"
+                aria-hidden={isCopy || undefined}
+                tabIndex={isCopy ? -1 : undefined}
+                aria-label={isCopy ? undefined : t("common.lightbox.open", { alt: image.alt })}
+                onClick={() => setLightboxIndex(index % images.length)}
+                className="group relative h-56 w-72 shrink-0 cursor-zoom-in overflow-hidden rounded-2xl border border-brand-border bg-brand-surface/60 shadow-[0_18px_36px_-24px_rgba(201,168,76,0.4)] transition-colors hover:border-brand-gold/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 sm:h-64 sm:w-96"
+              >
+                <img
+                  src={cloudinaryUrl(image.src, { width: 640 })}
+                  srcSet={cloudinarySrcSet(image.src, GALLERY_IMAGE_WIDTHS)}
+                  sizes="(min-width: 640px) 384px, 288px"
+                  alt={isCopy ? "" : image.alt}
+                  loading="lazy"
+                  decoding="async"
+                  crossOrigin="anonymous"
+                  draggable={false}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+                <ZoomBadge />
+              </button>
+            );
+          })}
+        </div>
       </div>
+
+      {images.length > 1 ? (
+        <>
+          <button
+            type="button"
+            aria-label={t("common.gallery.prev")}
+            onClick={() => scrollByCard(-1)}
+            className={cn(ARROW_CLASS, "left-2 sm:left-4")}
+          >
+            <ChevronLeft className="size-5" />
+          </button>
+          <button
+            type="button"
+            aria-label={t("common.gallery.next")}
+            onClick={() => scrollByCard(1)}
+            className={cn(ARROW_CLASS, "right-2 sm:right-4")}
+          >
+            <ChevronRight className="size-5" />
+          </button>
+        </>
+      ) : null}
+
+      <Lightbox
+        images={images}
+        index={lightboxIndex}
+        onIndexChange={setLightboxIndex}
+        onClose={() => {
+          setLightboxIndex(null);
+          pauseForAWhile();
+        }}
+      />
     </div>
   );
 }

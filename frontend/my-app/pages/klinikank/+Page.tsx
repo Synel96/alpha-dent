@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
+import { ZoomableImage } from "../../components/ui/lightbox";
 import { PhotoGrid, type GridPhoto } from "../../components/ui/photo-grid";
 import { ServiceImage } from "../../components/ui/service-image";
 import { cloudinarySrcSet, cloudinaryUrl } from "../../lib/cloudinary";
@@ -111,16 +112,18 @@ function Page() {
         title={t("clinicPage.rooms.title")}
         paragraphs={list("clinicPage.rooms.paragraphs")}
       >
-        <img
-          src={cloudinaryUrl(PANORAMA_IMAGE, { width: 1280 })}
-          srcSet={cloudinarySrcSet(PANORAMA_IMAGE, PANORAMA_IMAGE_WIDTHS)}
-          sizes="(min-width: 1280px) 1216px, 100vw"
-          alt={t("clinicPage.rooms.panoramaAlt")}
-          loading="lazy"
-          decoding="async"
-          crossOrigin="anonymous"
-          className="aspect-[16/9] w-full rounded-2xl border border-brand-gold/25 object-cover shadow-[0_18px_36px_-24px_rgba(201,168,76,0.45)] sm:aspect-[21/9] lg:aspect-[3/1]"
-        />
+        <ZoomableImage image={{ src: PANORAMA_IMAGE, alt: t("clinicPage.rooms.panoramaAlt") }}>
+          <img
+            src={cloudinaryUrl(PANORAMA_IMAGE, { width: 1280 })}
+            srcSet={cloudinarySrcSet(PANORAMA_IMAGE, PANORAMA_IMAGE_WIDTHS)}
+            sizes="(min-width: 1280px) 1216px, 100vw"
+            alt={t("clinicPage.rooms.panoramaAlt")}
+            loading="lazy"
+            decoding="async"
+            crossOrigin="anonymous"
+            className="aspect-[16/9] w-full rounded-2xl border border-brand-gold/25 object-cover shadow-[0_18px_36px_-24px_rgba(201,168,76,0.45)] sm:aspect-[21/9] lg:aspect-[3/1]"
+          />
+        </ZoomableImage>
         <PhotoGrid photos={clinicPhotos} />
       </Section>
 

@@ -2,6 +2,7 @@ import { Check, Hand, HeartHandshake, MessageCircle, ShieldCheck } from "lucide-
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { CtaButton } from "../../../components/ui/cta-button";
+import { ZoomableImage } from "../../../components/ui/lightbox";
 import { cloudinarySrcSet, cloudinaryUrl } from "../../../lib/cloudinary";
 import { PageContainer } from "../../../components/ui/page-container";
 import { localizeHref } from "../../../lib/locale";
@@ -51,7 +52,7 @@ function Page() {
 
       {/* Fixed aspect per breakpoint (not the image's own) so there's no layout
           shift; on phones a full panorama would be only ~120px tall. */}
-      <figure className="overflow-hidden rounded-2xl border border-brand-gold/25 shadow-[0_18px_36px_-24px_rgba(201,168,76,0.45)]">
+      <ZoomableImage image={{ src: PANORAMA_IMAGE, alt: t("services.szajsebeszet.imageAlt") }}>
         <img
           src={cloudinaryUrl(PANORAMA_IMAGE, { width: 1280 })}
           srcSet={cloudinarySrcSet(PANORAMA_IMAGE, PANORAMA_IMAGE_WIDTHS)}
@@ -60,9 +61,9 @@ function Page() {
           loading="lazy"
           decoding="async"
           crossOrigin="anonymous"
-          className="aspect-[16/9] w-full object-cover sm:aspect-[21/9] lg:aspect-[3/1]"
+          className="aspect-[16/9] w-full rounded-2xl border border-brand-gold/25 object-cover shadow-[0_18px_36px_-24px_rgba(201,168,76,0.45)] sm:aspect-[21/9] lg:aspect-[3/1]"
         />
-      </figure>
+      </ZoomableImage>
 
       <section className="max-w-3xl space-y-3">
         <p className="text-sm text-white">{t("services.szajsebeszet.listIntro")}</p>
