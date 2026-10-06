@@ -42,6 +42,9 @@ describe("Adatkezelési tájékoztató", () => {
       expect(text).toContain("info@alpha-dent.eu");
       expect(text).toContain("08-09-017400");
       expect(text).toContain("14027493-2-08");
+      expect(text).toContain("Guzsván Csaba");
+      // Only the director's name: no birth date or private address on a public page.
+      expect(text).not.toContain("Zerge");
       expect(text).not.toMatch(/\bnull\b|\bundefined\b/);
     }
   });

@@ -38,8 +38,9 @@ export const COMPANY = {
   companyRegistrationNumber: "08-09-017400" as string | null,
   // Adószám.
   taxNumber: "14027493-2-08" as string | null,
-  // Name of the managing director (ügyvezető).
-  representative: null as string | null,
+  // Name of the managing director (ügyvezető). Name only: the register's
+  // other personal details of the director don't belong on a public page.
+  representative: "Guzsván Csaba" as string | null,
   // Data protection officer's contact, only if one has been appointed.
   dataProtectionOfficer: null as string | null,
   // Healthcare operating licence: number and issuing authority.
