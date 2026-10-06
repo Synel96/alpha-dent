@@ -25,7 +25,7 @@ const CONTENT_SOURCES = {
   "/szolgaltatasaink/fogmegtarto-kezelesek": ["lib/i18n/services.ts"],
   "/kerdesek": ["lib/i18n/faq.ts"],
   "/kapcsolat": ["lib/i18n/contact.ts", "lib/clinic-info.ts", "lib/opening-hours.ts"],
-  "/adatkezelesi-tajekoztato": ["lib/i18n/common.ts"],
+  "/adatkezelesi-tajekoztato": ["lib/privacy-policy.ts", "lib/clinic-info.ts"],
 };
 
 const projectRoot = fileURLToPath(new URL("..", import.meta.url));

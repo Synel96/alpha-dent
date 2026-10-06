@@ -25,3 +25,26 @@ export const CLINIC = {
 } as const;
 
 export const CLINIC_ADDRESS_LINE = `${CLINIC.postalCode} ${CLINIC.city}, ${CLINIC.streetAddress}`;
+
+// The operating company, for the privacy notice (and its "service provider"
+// block, which doubles as the site's legal imprint). Fields left null are
+// simply not shown on the page - fill them in from the company register
+// (e-cegjegyzek.hu) when available.
+export const COMPANY = {
+  legalName: "Alphadent Kft.",
+  // Registered seat, if it differs from the clinic address above.
+  registeredSeat: null as string | null,
+  // Cégjegyzékszám, e.g. "08-09-000000".
+  companyRegistrationNumber: null as string | null,
+  // Adószám, e.g. "12345678-1-08".
+  taxNumber: null as string | null,
+  // Name of the managing director (ügyvezető).
+  representative: null as string | null,
+  // Data protection officer's contact, only if one has been appointed.
+  dataProtectionOfficer: null as string | null,
+  // Healthcare operating licence: number and issuing authority.
+  operatingLicence: null as string | null,
+};
+
+// Date the current privacy notice takes effect (YYYY-MM-DD).
+export const PRIVACY_POLICY_EFFECTIVE_DATE = "2026-10-06";

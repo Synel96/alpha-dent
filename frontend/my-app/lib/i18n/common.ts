@@ -85,8 +85,6 @@ export const commonResources = {
     },
     privacyPage: {
       title: "Adatkezelési tájékoztató",
-      placeholder:
-        "A tájékoztató szövege hamarosan elérhető lesz. Ha addig is kérdése van személyes adatai kezelésével kapcsolatban, írjon nekünk:",
     },
   },
   en: {
@@ -175,8 +173,6 @@ export const commonResources = {
     },
     privacyPage: {
       title: "Privacy Policy",
-      placeholder:
-        "The full text of this policy will be available soon. If you have any questions about how we handle your personal data in the meantime, please write to us:",
     },
   },
   de: {
@@ -265,8 +261,6 @@ export const commonResources = {
     },
     privacyPage: {
       title: "Datenschutzerklärung",
-      placeholder:
-        "Der vollständige Text dieser Erklärung ist in Kürze verfügbar. Wenn Sie bis dahin Fragen zur Verarbeitung Ihrer personenbezogenen Daten haben, schreiben Sie uns:",
     },
   },
   it: {
@@ -355,8 +349,6 @@ export const commonResources = {
     },
     privacyPage: {
       title: "Informativa sulla privacy",
-      placeholder:
-        "Il testo completo dell'informativa sarà disponibile a breve. Se nel frattempo ha domande sul trattamento dei suoi dati personali, ci scriva:",
     },
   },
 } as const;
