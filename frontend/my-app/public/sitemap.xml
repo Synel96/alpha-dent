@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://alpha-dent.eu/hu</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de" />
@@ -10,6 +11,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/en</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de" />
@@ -18,6 +20,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/de</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de" />
@@ -26,6 +29,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/it</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de" />
@@ -34,6 +38,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/hu/klinikank</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/klinikank" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/our-clinic" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/unsere-praxis" />
@@ -42,6 +47,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/en/our-clinic</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/klinikank" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/our-clinic" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/unsere-praxis" />
@@ -50,6 +56,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/de/unsere-praxis</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/klinikank" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/our-clinic" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/unsere-praxis" />
@@ -58,6 +65,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/it/la-nostra-clinica</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/klinikank" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/our-clinic" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/unsere-praxis" />
@@ -66,6 +74,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/hu/szolgaltatasaink</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen" />
@@ -74,6 +83,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/en/services</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen" />
@@ -82,6 +92,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/de/leistungen</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen" />
@@ -90,6 +101,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/it/servizi</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen" />
@@ -98,6 +110,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/hu/szolgaltatasaink/implantologia</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/implantologia" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/implantology" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/implantologie" />
@@ -106,6 +119,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/en/services/implantology</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/implantologia" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/implantology" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/implantologie" />
@@ -114,6 +128,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/de/leistungen/implantologie</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/implantologia" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/implantology" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/implantologie" />
@@ -122,6 +137,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/it/servizi/implantologia</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/implantologia" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/implantology" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/implantologie" />
@@ -130,6 +146,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/hu/szolgaltatasaink/szajsebeszet</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/szajsebeszet" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/oral-surgery" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/oralchirurgie" />
@@ -138,6 +155,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/en/services/oral-surgery</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/szajsebeszet" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/oral-surgery" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/oralchirurgie" />
@@ -146,6 +164,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/de/leistungen/oralchirurgie</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/szajsebeszet" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/oral-surgery" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/oralchirurgie" />
@@ -154,6 +173,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/it/servizi/chirurgia-orale</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/szajsebeszet" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/oral-surgery" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/oralchirurgie" />
@@ -162,6 +182,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/hu/szolgaltatasaink/esztetikai-fogaszat</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/esztetikai-fogaszat" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/cosmetic-dentistry" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/aesthetische-zahnheilkunde" />
@@ -170,6 +191,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/en/services/cosmetic-dentistry</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/esztetikai-fogaszat" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/cosmetic-dentistry" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/aesthetische-zahnheilkunde" />
@@ -178,6 +200,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/de/leistungen/aesthetische-zahnheilkunde</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/esztetikai-fogaszat" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/cosmetic-dentistry" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/aesthetische-zahnheilkunde" />
@@ -186,6 +209,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/it/servizi/odontoiatria-estetica</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/esztetikai-fogaszat" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/cosmetic-dentistry" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/aesthetische-zahnheilkunde" />
@@ -194,6 +218,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/hu/szolgaltatasaink/fogmegtarto-kezelesek</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/fogmegtarto-kezelesek" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/tooth-preserving-treatments" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/zahnerhaltung" />
@@ -202,6 +227,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/en/services/tooth-preserving-treatments</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/fogmegtarto-kezelesek" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/tooth-preserving-treatments" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/zahnerhaltung" />
@@ -210,6 +236,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/de/leistungen/zahnerhaltung</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/fogmegtarto-kezelesek" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/tooth-preserving-treatments" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/zahnerhaltung" />
@@ -218,6 +245,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/it/servizi/trattamenti-conservativi</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink/fogmegtarto-kezelesek" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services/tooth-preserving-treatments" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen/zahnerhaltung" />
@@ -226,6 +254,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/hu/kerdesek</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kerdesek" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/faq" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/faq" />
@@ -234,6 +263,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/en/faq</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kerdesek" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/faq" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/faq" />
@@ -242,6 +272,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/de/faq</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kerdesek" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/faq" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/faq" />
@@ -250,6 +281,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/it/faq</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kerdesek" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/faq" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/faq" />
@@ -258,6 +290,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/hu/kapcsolat</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kapcsolat" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/contact" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kontakt" />
@@ -266,6 +299,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/en/contact</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kapcsolat" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/contact" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kontakt" />
@@ -274,6 +308,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/de/kontakt</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kapcsolat" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/contact" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kontakt" />
@@ -282,6 +317,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/it/contatti</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/kapcsolat" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/contact" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/kontakt" />
@@ -290,6 +326,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/hu/adatkezelesi-tajekoztato</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/adatkezelesi-tajekoztato" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/privacy-policy" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/datenschutz" />
@@ -298,6 +335,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/en/privacy-policy</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/adatkezelesi-tajekoztato" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/privacy-policy" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/datenschutz" />
@@ -306,6 +344,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/de/datenschutz</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/adatkezelesi-tajekoztato" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/privacy-policy" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/datenschutz" />
@@ -314,6 +353,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/it/privacy</loc>
+    <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/adatkezelesi-tajekoztato" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/privacy-policy" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/datenschutz" />
