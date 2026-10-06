@@ -64,7 +64,7 @@ export const metaResources = {
         contact: {
           title: "Kapcsolat – fogászat Sopron, Arany János u. 13. | Alphadent",
           description:
-            "Alphadent fogászat: 9400 Sopron, Arany János u. 13. Telefon: +36 20 80 80 600, e-mail: info@alpha-dent.eu. Nyitva hétfőtől péntekig 9–17 óráig.",
+            "Alphadent fogászat: 9400 Sopron, Arany János u. 13. Telefon: +36 20 80 80 600, e-mail: info@alpha-dent.eu. Nyitva hétfőtől péntekig 8–17 óráig.",
         },
         privacy: {
           title: "Adatkezelési tájékoztató | Alphadent",
@@ -120,7 +120,7 @@ export const metaResources = {
         contact: {
           title: "Contact – Dentist in Sopron, Arany János u. 13. | Alphadent",
           description:
-            "Alphadent dental clinic: 9400 Sopron, Arany János u. 13., Hungary. Phone: +36 20 80 80 600, e-mail: info@alpha-dent.eu. Open Monday–Friday, 9am–5pm.",
+            "Alphadent dental clinic: 9400 Sopron, Arany János u. 13., Hungary. Phone: +36 20 80 80 600, e-mail: info@alpha-dent.eu. Open Monday–Friday, 8am–5pm.",
         },
         privacy: {
           title: "Privacy Policy | Alphadent",
@@ -176,7 +176,7 @@ export const metaResources = {
         contact: {
           title: "Kontakt – Zahnarzt in Sopron, Arany János u. 13. | Alphadent",
           description:
-            "Alphadent Zahnklinik: 9400 Sopron, Arany János u. 13., Ungarn. Telefon: +36 20 80 80 600, E-Mail: info@alpha-dent.eu. Geöffnet Mo–Fr 9–17 Uhr.",
+            "Alphadent Zahnklinik: 9400 Sopron, Arany János u. 13., Ungarn. Telefon: +36 20 80 80 600, E-Mail: info@alpha-dent.eu. Geöffnet Mo–Fr 8–17 Uhr.",
         },
         privacy: {
           title: "Datenschutzerklärung | Alphadent",
@@ -232,7 +232,7 @@ export const metaResources = {
         contact: {
           title: "Contatti – dentista a Sopron, Arany János u. 13. | Alphadent",
           description:
-            "Clinica dentale Alphadent: 9400 Sopron, Arany János u. 13., Ungheria. Telefono: +36 20 80 80 600, e-mail: info@alpha-dent.eu. Aperti lun–ven 9–17.",
+            "Clinica dentale Alphadent: 9400 Sopron, Arany János u. 13., Ungheria. Telefono: +36 20 80 80 600, e-mail: info@alpha-dent.eu. Aperti lun–ven 8–17.",
         },
         privacy: {
           title: "Informativa sulla privacy | Alphadent",

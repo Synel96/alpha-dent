@@ -26,7 +26,7 @@ describe("schema.org strukturált adat", () => {
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "09:00",
+        opens: "08:00",
         closes: "17:00",
       },
     ]);

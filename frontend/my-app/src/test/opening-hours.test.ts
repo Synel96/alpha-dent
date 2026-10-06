@@ -7,10 +7,11 @@ describe("getOpenStatus (budapesti idő szerint)", () => {
     expect(getOpenStatus(new Date("2026-09-28T08:00:00Z"))).toEqual({ open: true, closesAt: 17 * 60 });
   });
 
-  it("nyitás előtt zárva, és ma 9:00-kor nyit", () => {
-    expect(getOpenStatus(new Date("2026-09-28T06:59:00Z"))).toEqual({
+  it("nyitás előtt zárva, és ma 8:00-kor nyit", () => {
+    // 05:59 UTC = 07:59 CEST
+    expect(getOpenStatus(new Date("2026-09-28T05:59:00Z"))).toEqual({
       open: false,
-      opensAt: 9 * 60,
+      opensAt: 8 * 60,
       weekday: 0,
       daysUntil: 0,
     });
@@ -40,11 +41,16 @@ describe("getOpenStatus (budapesti idő szerint)", () => {
     });
   });
 
+  it("pontban 8:00-kor már nyitva", () => {
+    // 06:00 UTC = 08:00 CEST
+    expect(getOpenStatus(new Date("2026-09-28T06:00:00Z")).open).toBe(true);
+  });
+
   it("téli időszámításban is a budapesti órát nézi", () => {
-    // 08:30 UTC = 09:30 CET on a Monday
-    expect(getOpenStatus(new Date("2026-12-07T08:30:00Z")).open).toBe(true);
-    // 07:30 UTC = 08:30 CET, before opening
-    expect(getOpenStatus(new Date("2026-12-07T07:30:00Z")).open).toBe(false);
+    // 07:30 UTC = 08:30 CET on a Monday
+    expect(getOpenStatus(new Date("2026-12-07T07:30:00Z")).open).toBe(true);
+    // 06:30 UTC = 07:30 CET, before opening
+    expect(getOpenStatus(new Date("2026-12-07T06:30:00Z")).open).toBe(false);
   });
 });
 

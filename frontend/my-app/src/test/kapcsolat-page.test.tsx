@@ -52,7 +52,7 @@ describe("Kapcsolat oldal", () => {
     render(<Page />);
     expect(screen.getByText("openingHours.title")).toBeInTheDocument();
     expect(screen.getByText("Hétfő")).toBeInTheDocument();
-    expect(screen.getAllByText("9:00–17:00")).toHaveLength(5);
+    expect(screen.getAllByText("8:00–17:00")).toHaveLength(5);
     expect(screen.getAllByText("openingHours.closed")).toHaveLength(2);
   });
 
