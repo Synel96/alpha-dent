@@ -13,6 +13,12 @@ vi.mock("vike-react/usePageContext", () => ({
 import { Page } from "../../pages/kapcsolat/+Page";
 
 describe("Kapcsolat oldal", () => {
+  it("megjeleníti a parkolási információt", () => {
+    render(<Page />);
+    expect(screen.getByRole("heading", { name: "contactPage.cards.parking" })).toBeInTheDocument();
+    expect(screen.getByText("contactPage.parking")).toBeInTheDocument();
+  });
+
   it("pontosan egy H1 címsora van (SEO, akadálymentesség)", () => {
     render(<Page />);
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);

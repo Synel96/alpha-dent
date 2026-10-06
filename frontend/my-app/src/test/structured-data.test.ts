@@ -32,6 +32,11 @@ describe("schema.org strukturált adat", () => {
     ]);
   });
 
+  it("jelzi a Google-nek az ingyenes parkolást, a nyelvnek megfelelő szöveggel", () => {
+    expect(dentist.amenityFeature).toMatchObject({ "@type": "LocationFeatureSpecification", value: true });
+    expect(String((dentist.amenityFeature as { name: string }).name)).toContain("parkolás");
+  });
+
   it("a leírás és az URL nyelvfüggő", () => {
     const german = clinicStructuredData("de")["@graph"].find((node) => node["@type"] === "Dentist") as Record<
       string,

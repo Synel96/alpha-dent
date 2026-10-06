@@ -7,6 +7,7 @@ export const contactResources = {
         "Az első konzultáció során felmérjük a helyzetet, válaszolunk a kérdéseire, és megmutatjuk a lehetséges kezelési irányokat.",
       imageAlt: "Alphadent logó",
       languages: "Magyar • Deutsch • English",
+      parking: "Pácienseink számára ingyenes parkolás a rendelő zárt udvarában.",
       cards: {
         address: "Címünk",
         mobile: "Mobil",
@@ -14,6 +15,7 @@ export const contactResources = {
         email: "Email",
         gps: "GPS koordináták",
         languages: "Nyelvek",
+        parking: "Parkolás",
         social: "Közösségi média",
       },
       actions: {
@@ -45,6 +47,7 @@ export const contactResources = {
         "During the first consultation, we assess your situation, answer your questions, and show you the possible treatment directions.",
       imageAlt: "Alphadent logo",
       languages: "Hungarian • German • English",
+      parking: "Free parking for our patients in the clinic's enclosed courtyard.",
       cards: {
         address: "Address",
         mobile: "Mobile",
@@ -52,6 +55,7 @@ export const contactResources = {
         email: "Email",
         gps: "GPS coordinates",
         languages: "Languages",
+        parking: "Parking",
         social: "Social media",
       },
       actions: {
@@ -83,6 +87,7 @@ export const contactResources = {
         "Beim ersten Beratungsgespräch erfassen wir die Situation, beantworten Ihre Fragen und zeigen Ihnen die möglichen Behandlungsrichtungen.",
       imageAlt: "Alphadent Logo",
       languages: "Ungarisch • Deutsch • Englisch",
+      parking: "Kostenlose Parkplätze für unsere Patienten im geschlossenen Innenhof der Praxis.",
       cards: {
         address: "Unsere Adresse",
         mobile: "Mobil",
@@ -90,6 +95,7 @@ export const contactResources = {
         email: "Email",
         gps: "GPS-Koordinaten",
         languages: "Sprachen",
+        parking: "Parken",
         social: "Soziale Medien",
       },
       actions: {
@@ -121,6 +127,7 @@ export const contactResources = {
         "Durante la prima consulenza valutiamo la situazione, rispondiamo alle tue domande e ti mostriamo le possibili direzioni di trattamento.",
       imageAlt: "Logo Alphadent",
       languages: "Ungherese • Tedesco • Inglese",
+      parking: "Parcheggio gratuito per i nostri pazienti nel cortile chiuso dello studio.",
       cards: {
         address: "Il nostro indirizzo",
         mobile: "Cellulare",
@@ -128,6 +135,7 @@ export const contactResources = {
         email: "Email",
         gps: "Coordinate GPS",
         languages: "Lingue",
+        parking: "Parcheggio",
         social: "Social media",
       },
       actions: {

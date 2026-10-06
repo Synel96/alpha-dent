@@ -112,6 +112,22 @@ function Page() {
             </a>
           </article>
 
+          {/* Right after the address: the first thing someone arriving by car asks. */}
+          <article className="flex gap-4 rounded-xl border border-brand-gold/40 bg-brand-surface/60 p-5">
+            <span
+              aria-hidden
+              className="flex size-11 shrink-0 items-center justify-center rounded-lg border-2 border-brand-gold-light bg-brand-black/40 text-xl font-bold leading-none text-brand-gold-light"
+            >
+              P
+            </span>
+            <div>
+              <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+                {t("contactPage.cards.parking")}
+              </h3>
+              <p className="text-sm leading-relaxed text-white">{t("contactPage.parking")}</p>
+            </div>
+          </article>
+
           <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
             <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
               {t("openingHours.title")}

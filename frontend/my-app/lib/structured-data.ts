@@ -1,4 +1,5 @@
 import { CLINIC } from "./clinic-info";
+import { contactResources } from "./i18n/contact";
 import { pageMeta } from "./i18n/meta";
 import { DEFAULT_LOCALE, type Locale } from "./locale";
 import { WEEKLY_HOURS } from "./opening-hours";
@@ -64,6 +65,11 @@ export function clinicStructuredData(locale: Locale) {
         hasMap: CLINIC.mapUrl,
         areaServed: { "@type": "City", name: CLINIC.city },
         openingHoursSpecification: openingHoursSpecification(),
+        amenityFeature: {
+          "@type": "LocationFeatureSpecification",
+          name: contactResources[locale].contactPage.parking,
+          value: true,
+        },
         sameAs: CLINIC.socialProfiles,
       },
       {
