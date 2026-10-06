@@ -1,5 +1,5 @@
 import React from "react";
-import { Award, Building2, Gem, Users } from "lucide-react";
+import { Award, Building2, Users } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { AutoGallery } from "../../components/ui/auto-gallery";
@@ -28,8 +28,8 @@ const MACHINE_PHOTOS: GridPhoto[] = [];
 
 type Highlight = { value: string; label: string };
 
-// Same order as clinicPage.highlights: since 1996, team, zirconia pioneers, CAMLOG Gold.
-const HIGHLIGHT_ICONS = [Building2, Users, Gem, Award] as const;
+// Same order as clinicPage.highlights: since 1996, team, CAMLOG Gold.
+const HIGHLIGHT_ICONS = [Building2, Users, Award] as const;
 
 function Section({
   eyebrow,
@@ -84,7 +84,7 @@ function Page() {
             <p className="text-sm leading-relaxed text-white md:text-base">{t("clinicPage.intro")}</p>
           </div>
 
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid gap-4 sm:grid-cols-3">
             {highlights.map((item, index) => {
               const Icon = HIGHLIGHT_ICONS[index];
               return (

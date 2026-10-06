@@ -29,7 +29,7 @@ export const metaResources = {
         clinic: {
           title: "Fogászati klinikánk Sopronban – rendelő és labor | Alphadent",
           description:
-            "Ismerje meg soproni fogászati klinikánkat: modern rendelő, saját CAD/CAM fogtechnikai labor, és az elsők között az országban cirkónia implantátumokkal.",
+            "Ismerje meg soproni fogászati klinikánkat: modern rendelő és saját CAD/CAM fogtechnikai labor 1996 óta, CAMLOG arany referenciarendelő az implantológiában.",
         },
         services: {
           title: "Fogászati szolgáltatások Sopronban | Alphadent",
@@ -85,7 +85,7 @@ export const metaResources = {
         clinic: {
           title: "Our Dental Clinic in Sopron, Hungary – Practice & Lab | Alphadent",
           description:
-            "Get to know our dental clinic in Sopron: a modern practice, our own CAD/CAM dental lab, and one of the first in Hungary to work with zirconia implants.",
+            "Get to know our dental clinic in Sopron: a modern practice and our own CAD/CAM dental lab since 1996, and a CAMLOG Gold reference clinic for implants.",
         },
         services: {
           title: "Dental Treatments in Sopron, Hungary | Alphadent",
@@ -141,7 +141,7 @@ export const metaResources = {
         clinic: {
           title: "Unsere Zahnklinik in Sopron, Ungarn – Praxis & Labor | Alphadent",
           description:
-            "Lernen Sie unsere Zahnklinik in Sopron kennen: moderne Praxis, eigenes CAD/CAM-Dentallabor und einer der ersten in Ungarn mit Zirkonimplantaten.",
+            "Lernen Sie unsere Zahnklinik in Sopron kennen: moderne Praxis und eigenes CAD/CAM-Dentallabor seit 1996, CAMLOG Gold-Referenzpraxis für Implantologie.",
         },
         services: {
           title: "Zahnbehandlungen in Sopron, Ungarn | Alphadent",
@@ -197,7 +197,7 @@ export const metaResources = {
         clinic: {
           title: "La nostra clinica dentale a Sopron – studio e laboratorio | Alphadent",
           description:
-            "Scopri la nostra clinica dentale a Sopron: studio moderno, laboratorio odontotecnico CAD/CAM interno e tra i primi in Ungheria con impianti in zirconia.",
+            "Scopri la nostra clinica dentale a Sopron: studio moderno e laboratorio odontotecnico CAD/CAM interno dal 1996, centro di riferimento CAMLOG Gold.",
         },
         services: {
           title: "Trattamenti dentali a Sopron, Ungheria | Alphadent",

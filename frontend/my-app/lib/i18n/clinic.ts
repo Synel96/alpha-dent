@@ -8,7 +8,6 @@ export const clinicResources = {
       highlights: [
         { value: "1996", label: "óta működik együtt rendelőnk és saját fogtechnikai laborunk" },
         { value: "15 fő", label: "tapasztalt szakmai csapat" },
-        { value: "Az elsők között", label: "kezdtünk cirkónia implantátumokkal foglalkozni Magyarországon" },
         { value: "CAMLOG Gold", label: "arany fokozatú referenciarendelő az implantológiában" },
       ],
       rooms: {
@@ -39,9 +38,9 @@ export const clinicResources = {
       },
       implants: {
         eyebrow: "Implantológia",
-        title: "Úttörők a cirkónia implantátumok terén",
+        title: "Esztétikus, tartós implantátumok",
         paragraphs: [
-          "Magyarországon az elsők között kezdtünk el cirkónia implantátumokkal foglalkozni. A fémmentes, fogszínű cirkónia különösen esztétikus megoldás, és ma is kiemelt szakterületünk része.",
+          "A fémmentes, fogszínű cirkónia implantátum különösen esztétikus megoldás, és rendelőnkben is kiemelt szakterület.",
           "Az implantológia területén szoros szakmai együttműködésben dolgozunk a CAMLOG csoporttal, amelynek köszönhetően rendelőnk CAMLOG arany fokozatú referenciarendelőként is működik.",
         ],
       },
@@ -60,7 +59,6 @@ export const clinicResources = {
       highlights: [
         { value: "1996", label: "our clinic and in-house dental laboratory have worked together since" },
         { value: "15", label: "experienced professionals on our team" },
-        { value: "Among the first", label: "in Hungary to work with zirconia implants" },
         { value: "CAMLOG Gold", label: "Gold-level reference practice in implantology" },
       ],
       rooms: {
@@ -91,9 +89,9 @@ export const clinicResources = {
       },
       implants: {
         eyebrow: "Implantology",
-        title: "Pioneers in zirconia implants",
+        title: "Aesthetic, long-lasting implants",
         paragraphs: [
-          "We were among the first in Hungary to start working with zirconia implants. Metal-free, tooth-coloured zirconia is a particularly aesthetic solution, and it remains one of our key areas of expertise.",
+          "Metal-free, tooth-coloured zirconia implants are a particularly aesthetic solution, and one of our key areas of expertise.",
           "In implantology, we work in close professional partnership with the CAMLOG Group, thanks to which our clinic also operates as a CAMLOG Gold-level reference practice.",
         ],
       },
@@ -112,7 +110,6 @@ export const clinicResources = {
       highlights: [
         { value: "1996", label: "seit diesem Jahr arbeiten Praxis und eigenes Dentallabor zusammen" },
         { value: "15", label: "erfahrene Fachkräfte in unserem Team" },
-        { value: "Unter den Ersten", label: "in Ungarn, die mit Zirkonimplantaten arbeiteten" },
         { value: "CAMLOG Gold", label: "Referenzpraxis in Gold für Implantologie" },
       ],
       rooms: {
@@ -143,9 +140,9 @@ export const clinicResources = {
       },
       implants: {
         eyebrow: "Implantologie",
-        title: "Pioniere bei Zirkonimplantaten",
+        title: "Ästhetische, langlebige Implantate",
         paragraphs: [
-          "Wir gehörten zu den Ersten in Ungarn, die mit Zirkonimplantaten gearbeitet haben. Metallfreies, zahnfarbenes Zirkon ist eine besonders ästhetische Lösung und bis heute einer unserer Schwerpunkte.",
+          "Metallfreie, zahnfarbene Zirkonimplantate sind eine besonders ästhetische Lösung und einer unserer Schwerpunkte.",
           "Im Bereich der Implantologie arbeiten wir in enger fachlicher Partnerschaft mit der CAMLOG Group, wodurch unsere Praxis auch als CAMLOG-Referenzpraxis in Gold zertifiziert ist.",
         ],
       },
@@ -164,7 +161,6 @@ export const clinicResources = {
       highlights: [
         { value: "1996", label: "l'anno da cui studio e laboratorio interno lavorano insieme" },
         { value: "15", label: "professionisti esperti nel nostro team" },
-        { value: "Tra i primi", label: "in Ungheria a lavorare con impianti in zirconia" },
         { value: "CAMLOG Gold", label: "studio di riferimento di livello Gold in implantologia" },
       ],
       rooms: {
@@ -195,9 +191,9 @@ export const clinicResources = {
       },
       implants: {
         eyebrow: "Implantologia",
-        title: "Pionieri negli impianti in zirconia",
+        title: "Impianti estetici e duraturi",
         paragraphs: [
-          "Siamo stati tra i primi in Ungheria a lavorare con gli impianti in zirconia. La zirconia, priva di metallo e del colore del dente, è una soluzione particolarmente estetica e rimane uno dei nostri ambiti di specializzazione.",
+          "Gli impianti in zirconia, privi di metallo e del colore del dente, sono una soluzione particolarmente estetica e uno dei nostri ambiti di specializzazione.",
           "Nel campo dell'implantologia collaboriamo strettamente con il gruppo CAMLOG, grazie al quale il nostro studio opera anche come studio di riferimento CAMLOG di livello Gold.",
         ],
       },
