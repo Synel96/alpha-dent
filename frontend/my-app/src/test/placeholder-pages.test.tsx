@@ -42,10 +42,11 @@ describe("Klinikánk oldal", () => {
     }
   });
 
-  it("a rendelő képeit és az időpontkérő gombot a magyar kapcsolat oldalra mutatva jeleníti meg", () => {
+  it("a rendelő képeit (panorámával együtt) körhintában és az időpontkérő gombot a kapcsolat oldalra mutatva jeleníti meg", () => {
     render(<KlinikankPage />);
-    expect(screen.getByRole("img", { name: "clinicPage.rooms.panoramaAlt" })).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: "clinicPage.rooms.waitingRoomAlt" })).toBeInTheDocument();
+    // Each photo is exposed once, even though the carousel repeats short lists.
+    expect(screen.getAllByRole("img", { name: "clinicPage.rooms.panoramaAlt" })).toHaveLength(1);
+    expect(screen.getAllByRole("img", { name: "clinicPage.rooms.waitingRoomAlt" })).toHaveLength(1);
     expect(screen.getByRole("link", { name: "home.intro.ctaButton" })).toHaveAttribute("href", "/hu/kapcsolat");
   });
 

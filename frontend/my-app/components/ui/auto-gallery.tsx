@@ -13,6 +13,11 @@ const SECONDS_PER_IMAGE = 8;
 // click before it picks up again from wherever the user left the strip.
 const RESUME_DELAY_MS = 2500;
 const GAP_PX = 16;
+// One loop unit (the stretch the strip scrolls before it repeats) must be
+// wider than the viewport, or the end of the loop shows empty space. A short
+// list is repeated until it has at least this many tiles: 8 x 400px covers
+// a 2560px-wide screen.
+const MIN_LOOP_ITEMS = 8;
 
 type GalleryImage = {
   src: string;
@@ -56,11 +61,14 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
   const lightboxOpenRef = React.useRef(false);
   lightboxOpenRef.current = lightboxIndex !== null;
 
+  // The image list, repeated as often as needed to make one loop unit.
+  const unitLength = images.length * Math.max(1, Math.ceil(MIN_LOOP_ITEMS / Math.max(images.length, 1)));
+
   const pauseForAWhile = () => {
     idleUntilRef.current = performance.now() + RESUME_DELAY_MS;
   };
 
-  // Width of one copy of the image list (the track holds two back to back):
+  // Width of one loop unit (the track holds two back to back):
   // scrolling by exactly this much lands on an identical frame, which is
   // what makes the loop seamless in both directions. Measured only when the
   // track resizes (ResizeObserver), never per frame, so the frame loop and
@@ -73,7 +81,7 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
     if (!track) return;
     const measure = () => {
       const firstCopy = track.children[0] as HTMLElement | undefined;
-      const secondCopy = track.children[images.length] as HTMLElement | undefined;
+      const secondCopy = track.children[unitLength] as HTMLElement | undefined;
       loopWidthRef.current = firstCopy && secondCopy ? secondCopy.offsetLeft - firstCopy.offsetLeft : 0;
     };
     measure();
@@ -81,7 +89,7 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
     const observer = new ResizeObserver(measure);
     observer.observe(track);
     return () => observer.disconnect();
-  }, [images.length]);
+  }, [unitLength]);
 
   // Kept observing (not disconnected after the first hit) so the frame loop
   // can stop again whenever the strip scrolls out of view.
@@ -137,7 +145,7 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
           position = node.scrollLeft;
           wasPaused = false;
         }
-        const speed = width / (images.length * SECONDS_PER_IMAGE * 1000);
+        const speed = width / (unitLength * SECONDS_PER_IMAGE * 1000);
         position += speed * elapsed;
         if (position >= width) position -= width;
         node.scrollLeft = position;
@@ -147,7 +155,7 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
 
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [inView, images.length]);
+  }, [inView, unitLength]);
 
   // Manual scrolling past either end jumps by one copy's width, so swiping
   // or dragging never hits a wall either way.
@@ -226,8 +234,10 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
     }
   };
 
-  // Duplicated so the strip can loop by jumping exactly one copy's width.
-  const track = [...images, ...images];
+  // Two loop units back to back, so the strip can loop by jumping exactly
+  // one unit's width. Only the first occurrence of each photo is exposed to
+  // assistive tech and the tab order; the repeats are decorative.
+  const track = Array.from({ length: unitLength * 2 }, (_, index) => images[index % images.length]);
 
   return (
     <div

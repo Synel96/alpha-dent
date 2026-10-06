@@ -19,15 +19,25 @@ describe("AutoGallery", () => {
     }
   });
 
-  it("a sávot duplázza a zökkenőmentes hurokhoz - a képek száma a duplája az eredetinek", () => {
+  it("a rövid listát legalább 8 képes hurokegységgé ismétli, és ezt duplázza a zökkenőmentes hurokhoz", () => {
+    // 2 kép -> 4x ismételve = 8 képes egység, kétszer = 16 csempe.
     const { container } = render(<AutoGallery images={IMAGES} />);
-    expect(container.querySelectorAll("img")).toHaveLength(IMAGES.length * 2);
+    expect(container.querySelectorAll("img")).toHaveLength(16);
   });
 
-  it("a másolt (ismétlődő) képek aria-hidden-ek és nem fókuszálhatók", () => {
+  it("hosszú listát nem ismétel feleslegesen: csak a hurokhoz szükséges duplázás marad", () => {
+    const many = Array.from({ length: 11 }, (_, index) => ({
+      src: `https://res.cloudinary.com/demo/image/upload/v1/${index}.webp`,
+      alt: `Kép ${index}`,
+    }));
+    const { container } = render(<AutoGallery images={many} />);
+    expect(container.querySelectorAll("img")).toHaveLength(22);
+  });
+
+  it("minden kép csak egyszer érhető el (képernyőolvasó, Tab), az ismétlések aria-hidden-ek", () => {
     const { container } = render(<AutoGallery images={IMAGES} />);
     const hiddenCopies = container.querySelectorAll('button[aria-hidden="true"]');
-    expect(hiddenCopies).toHaveLength(IMAGES.length);
+    expect(hiddenCopies).toHaveLength(16 - IMAGES.length);
     for (const copy of hiddenCopies) {
       expect(copy).toHaveAttribute("tabindex", "-1");
     }

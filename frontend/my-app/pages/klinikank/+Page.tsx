@@ -6,10 +6,8 @@ import { AutoGallery } from "../../components/ui/auto-gallery";
 import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
 import { RevealGroup } from "../../components/ui/reveal-section";
-import { ZoomableImage } from "../../components/ui/lightbox";
 import { PhotoGrid, type GridPhoto } from "../../components/ui/photo-grid";
 import { ServiceImage } from "../../components/ui/service-image";
-import { cloudinarySrcSet, cloudinaryUrl } from "../../lib/cloudinary";
 import { LAB_CRAFT_IMAGES } from "../../lib/lab-gallery";
 import { localizeHref } from "../../lib/locale";
 
@@ -17,7 +15,6 @@ export { Page };
 
 const PANORAMA_IMAGE =
   "https://res.cloudinary.com/dmwulp3dl/image/upload/v1790500751/pano_crop_tlmpc3.webp";
-const PANORAMA_IMAGE_WIDTHS = [640, 960, 1280, 1920] as const;
 const WAITING_ROOM_IMAGE =
   "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3397_gii27w.webp";
 const CLINIC_IMAGES = [
@@ -68,6 +65,7 @@ function Page() {
 
   const highlights = t("clinicPage.highlights", { returnObjects: true }) as Highlight[];
   const clinicPhotos: GridPhoto[] = [
+    { src: PANORAMA_IMAGE, alt: t("clinicPage.rooms.panoramaAlt") },
     { src: WAITING_ROOM_IMAGE, alt: t("clinicPage.rooms.waitingRoomAlt") },
     ...CLINIC_IMAGES.map((src) => ({ src, alt: t("clinicPage.rooms.photoAlt") })),
   ];
@@ -115,19 +113,7 @@ function Page() {
           title={t("clinicPage.rooms.title")}
           paragraphs={list("clinicPage.rooms.paragraphs")}
         >
-          <ZoomableImage image={{ src: PANORAMA_IMAGE, alt: t("clinicPage.rooms.panoramaAlt") }}>
-            <img
-              src={cloudinaryUrl(PANORAMA_IMAGE, { width: 1280 })}
-              srcSet={cloudinarySrcSet(PANORAMA_IMAGE, PANORAMA_IMAGE_WIDTHS)}
-              sizes="(min-width: 1280px) 1216px, 100vw"
-              alt={t("clinicPage.rooms.panoramaAlt")}
-              loading="lazy"
-              decoding="async"
-              crossOrigin="anonymous"
-              className="aspect-[16/9] w-full rounded-2xl border border-brand-gold/25 object-cover shadow-[0_18px_36px_-24px_rgba(201,168,76,0.45)] sm:aspect-[21/9] lg:aspect-[3/1]"
-            />
-          </ZoomableImage>
-          <PhotoGrid photos={clinicPhotos} />
+          <AutoGallery images={clinicPhotos} />
         </Section>
 
         <Section

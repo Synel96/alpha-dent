@@ -12,11 +12,12 @@ const IMAGES = [
 describe("Kép skeleton", () => {
   it("a körhinta minden képe alatt skeleton van, ami a kép betöltése után eltűnik", () => {
     const { container } = render(<AutoGallery images={IMAGES} />);
-    expect(container.querySelectorAll(".image-skeleton")).toHaveLength(IMAGES.length * 2);
+    const tiles = container.querySelectorAll("img").length;
+    expect(container.querySelectorAll(".image-skeleton")).toHaveLength(tiles);
 
     const [first] = container.querySelectorAll("img");
     fireEvent.load(first);
-    expect(container.querySelectorAll(".image-skeleton")).toHaveLength(IMAGES.length * 2 - 1);
+    expect(container.querySelectorAll(".image-skeleton")).toHaveLength(tiles - 1);
   });
 
   it("a skeleton a kép előtt áll a DOM-ban, így a betöltött kép rárajzolódik (JS nélkül is látszik)", () => {
