@@ -39,6 +39,7 @@ type HeroProps = {
   videoSrc?: string;
   eyebrow?: string;
   quote?: React.ReactNode;
+  // Rendered as the page's <h1> - give it the brand plus what/where.
   brandMark?: React.ReactNode;
   subtitle?: React.ReactNode;
   ctaHref?: string;
@@ -153,18 +154,21 @@ export function Hero({
                 {eyebrow}
               </p>
             ) : null}
+            {/* The quote is the big visual line, but the brand line under it is
+                the page's <h1>: that's what tells search engines what the page
+                is ("Alphadent - dental clinic, Sopron"), which a motto can't. */}
             {quote ? (
-              <h1
+              <blockquote
                 style={{ fontFamily: '"Geist Variable", Georgia, "Times New Roman", serif' }}
                 className="text-2xl italic font-light leading-snug text-brand-gold-light [text-shadow:0_2px_16px_rgba(0,0,0,0.65)] md:text-4xl"
               >
-                {quote}
-              </h1>
+                <p>{quote}</p>
+              </blockquote>
             ) : null}
             {brandMark ? (
-              <p className="text-sm font-semibold uppercase tracking-[0.32em] text-brand-gold [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
+              <h1 className="text-sm font-semibold uppercase leading-relaxed tracking-[0.32em] text-brand-gold [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
                 {brandMark}
-              </p>
+              </h1>
             ) : null}
             {subtitle ? (
               <p className="max-w-2xl text-sm text-brand-gold-muted md:text-base">{subtitle}</p>

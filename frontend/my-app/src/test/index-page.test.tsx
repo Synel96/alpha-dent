@@ -22,7 +22,15 @@ import { Page } from "../../pages/index/+Page";
 describe("Főoldal", () => {
   it("megjeleníti a hero mottót", () => {
     render(<Page />);
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("home.hero.motto");
+    expect(screen.getByText("home.hero.motto").closest("blockquote")).not.toBeNull();
+  });
+
+  it("a H1 a márkanév és a helyi kulcsszó (fogászati klinika Sopron), nem az idézet", () => {
+    render(<Page />);
+    const h1 = screen.getByRole("heading", { level: 1 });
+    expect(h1).toHaveTextContent("Alphadent");
+    expect(h1).toHaveTextContent("home.hero.brandLine");
+    expect(h1).not.toHaveTextContent("home.hero.motto");
   });
 
   it("megjeleníti a 'Miért Alphadent?' és a küldetés szekciót a bekezdéseikkel", () => {

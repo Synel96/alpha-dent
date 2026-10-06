@@ -98,7 +98,15 @@ function Page() {
         imageSrc={HERO_IMAGE}
         imageAlt="Alphadent"
         quote={t("home.hero.motto")}
-        brandMark="Alphadent"
+        brandMark={
+          <>
+            Alphadent{" "}
+            <span aria-hidden className="hidden text-brand-gold-muted sm:inline">
+              ·
+            </span>{" "}
+            <span className="block text-brand-gold-light/85 sm:inline">{t("home.hero.brandLine")}</span>
+          </>
+        }
         ctaHref={kapcsolatHref}
         ctaLabel={t("home.intro.ctaButton")}
         aside={<OpenStatusCard />}
