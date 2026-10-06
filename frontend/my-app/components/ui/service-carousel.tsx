@@ -40,8 +40,9 @@ export function ServiceCarousel({ children, className }: ServiceCarouselProps) {
     if (!node) return;
     dragRef.current = { pointerId: event.pointerId, startX: event.clientX, startScrollLeft: node.scrollLeft };
     draggedRef.current = false;
-    node.setPointerCapture(event.pointerId);
-    setDragging(true);
+    // No pointer capture yet: capturing here would retarget the click that
+    // follows a plain press-and-release to this container, so the tile's
+    // link would never receive it and a mouse click wouldn't navigate.
   };
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -49,15 +50,20 @@ export function ServiceCarousel({ children, className }: ServiceCarouselProps) {
     const node = scrollRef.current;
     if (!drag || !node || drag.pointerId !== event.pointerId) return;
     const delta = event.clientX - drag.startX;
-    if (Math.abs(delta) > 5) draggedRef.current = true;
-    node.scrollLeft = drag.startScrollLeft - delta;
+    if (!draggedRef.current && Math.abs(delta) > 5) {
+      // Only now is it a drag: capture so it keeps tracking outside the row.
+      draggedRef.current = true;
+      node.setPointerCapture(event.pointerId);
+      setDragging(true);
+    }
+    if (draggedRef.current) node.scrollLeft = drag.startScrollLeft - delta;
   };
 
   const endDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     const drag = dragRef.current;
     const node = scrollRef.current;
     if (!drag || !node || drag.pointerId !== event.pointerId) return;
-    node.releasePointerCapture(event.pointerId);
+    if (node.hasPointerCapture(event.pointerId)) node.releasePointerCapture(event.pointerId);
     dragRef.current = null;
     setDragging(false);
   };
@@ -81,6 +87,10 @@ export function ServiceCarousel({ children, className }: ServiceCarouselProps) {
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
         onClickCapture={handleClickCapture}
+        // The tiles are links with images, which the browser would otherwise
+        // start dragging natively (HTML drag-and-drop) - that cancels the
+        // pointer stream, so the row wouldn't scroll on a mouse drag.
+        onDragStart={(event) => event.preventDefault()}
         // Deliberately touch-action: auto (the default) rather than
         // touch-pan-x: pan-x forces the browser to commit this touch
         // gesture to horizontal panning on THIS element up front, which

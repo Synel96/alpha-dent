@@ -59,4 +59,51 @@ describe("ServiceCarousel", () => {
     const prevArgs = scrollBySpy.mock.calls.at(-1)?.[0];
     expect(prevArgs.left).toBeLessThan(0);
   });
+
+  describe("egérrel (asztali nézet)", () => {
+    const setPointerCapture = vi.fn();
+    const originalSet = Element.prototype.setPointerCapture;
+    const originalHas = Element.prototype.hasPointerCapture;
+
+    afterEach(() => {
+      Element.prototype.setPointerCapture = originalSet;
+      Element.prototype.hasPointerCapture = originalHas;
+      setPointerCapture.mockReset();
+    });
+
+    const renderWithLink = () => {
+      Element.prototype.setPointerCapture = setPointerCapture;
+      Element.prototype.hasPointerCapture = () => false;
+      render(
+        <ServiceCarousel>
+          <a href="/hu/szolgaltatasaink/implantologia">Implantológia</a>
+        </ServiceCarousel>
+      );
+      const link = screen.getByRole("link", { name: "Implantológia" });
+      return { link, row: link.parentElement! };
+    };
+
+    it("sima kattintásra nem foglalja le az egeret, így a csempe linkje megkapja a kattintást", () => {
+      const { link } = renderWithLink();
+      fireEvent.pointerDown(link, { pointerType: "mouse", pointerId: 1, button: 0, clientX: 100 });
+      fireEvent.pointerUp(link, { pointerType: "mouse", pointerId: 1, clientX: 101 });
+      expect(setPointerCapture).not.toHaveBeenCalled();
+      // fireEvent returns false when the event's default action was prevented.
+      expect(fireEvent.click(link)).toBe(true);
+    });
+
+    it("valódi húzás után lefoglalja az egeret, és a húzást lezáró kattintás nem nyitja meg a csempét", () => {
+      const { link } = renderWithLink();
+      fireEvent.pointerDown(link, { pointerType: "mouse", pointerId: 1, button: 0, clientX: 300 });
+      fireEvent.pointerMove(link, { pointerType: "mouse", pointerId: 1, clientX: 200 });
+      expect(setPointerCapture).toHaveBeenCalledWith(1);
+      fireEvent.pointerUp(link, { pointerType: "mouse", pointerId: 1, clientX: 200 });
+      expect(fireEvent.click(link)).toBe(false);
+    });
+
+    it("letiltja a böngésző saját link/kép húzását, ami megszakítaná a görgetést", () => {
+      const { link } = renderWithLink();
+      expect(fireEvent.dragStart(link)).toBe(false);
+    });
+  });
 });
