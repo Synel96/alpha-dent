@@ -1,6 +1,6 @@
-import { servicesResources } from "../../../lib/i18n/services";
+import { pageMeta } from "../../../lib/i18n/meta";
 import type { Locale } from "../../../lib/locale";
 
 export default function description(pageContext: { locale: Locale }) {
-  return servicesResources[pageContext.locale].services.implantologia.tagline;
+  return pageMeta(pageContext.locale, "implantologia").description;
 }

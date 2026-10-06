@@ -5,23 +5,24 @@ import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
 import { RevealGroup } from "../../components/ui/reveal-section";
 import { TextImageReveal } from "../../components/ui/text-image-reveal";
+import { CLINIC, CLINIC_ADDRESS_LINE } from "../../lib/clinic-info";
 import { formatClockTime, weekdayName, WEEKLY_HOURS } from "../../lib/opening-hours";
 import { useOpenStatus } from "../../lib/use-open-status";
 import { cn } from "../../lib/utils";
 
 const CONTACT_INFO = {
-  address: "9400 Sopron, Arany János u. 13.",
-  mapUrl: "https://goo.gl/maps/tBZd2pfrPTJkpJVb6",
-  mobileDisplay: "+36 20 80 80 600",
-  mobileHref: "tel:+36208080600",
+  address: CLINIC_ADDRESS_LINE,
+  mapUrl: CLINIC.mapUrl,
+  mobileDisplay: CLINIC.phoneDisplay,
+  mobileHref: `tel:${CLINIC.phoneE164}`,
   phoneMainDisplay: "+36 99 788 888",
   phoneMainHref: "tel:+3699788888",
   phoneAltDisplay: "+36 99 340 707",
   phoneAltHref: "tel:+3699340707",
-  email: "info@alpha-dent.eu",
-  emailHref: "mailto:info@alpha-dent.eu",
-  gps: "47.6777786, 16.5896789",
-  gpsMapUrl: "https://www.google.com/maps?q=47.6777786,16.5896789",
+  email: CLINIC.email,
+  emailHref: `mailto:${CLINIC.email}`,
+  gps: `${CLINIC.latitude}, ${CLINIC.longitude}`,
+  gpsMapUrl: `https://www.google.com/maps?q=${CLINIC.latitude},${CLINIC.longitude}`,
   websiteUrl: "https://alpha-dent.eu/hu/",
 } as const;
 

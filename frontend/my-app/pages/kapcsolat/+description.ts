@@ -1,6 +1,6 @@
-import { contactResources } from "../../lib/i18n/contact";
+import { pageMeta } from "../../lib/i18n/meta";
 import type { Locale } from "../../lib/locale";
 
 export default function description(pageContext: { locale: Locale }) {
-  return contactResources[pageContext.locale].contactPage.intro;
+  return pageMeta(pageContext.locale, "contact").description;
 }

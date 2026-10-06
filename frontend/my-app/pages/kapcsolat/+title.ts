@@ -1,6 +1,6 @@
-import { contactResources } from "../../lib/i18n/contact";
+import { pageMeta } from "../../lib/i18n/meta";
 import type { Locale } from "../../lib/locale";
 
 export default function title(pageContext: { locale: Locale }) {
-  return `${contactResources[pageContext.locale].contactPage.eyebrow} | Alphadent`;
+  return pageMeta(pageContext.locale, "contact").title;
 }

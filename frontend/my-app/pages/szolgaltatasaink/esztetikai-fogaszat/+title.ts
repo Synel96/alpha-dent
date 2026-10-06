@@ -1,6 +1,6 @@
-import { servicesResources } from "../../../lib/i18n/services";
+import { pageMeta } from "../../../lib/i18n/meta";
 import type { Locale } from "../../../lib/locale";
 
 export default function title(pageContext: { locale: Locale }) {
-  return `${servicesResources[pageContext.locale].services.esztetikaiFogaszat.title} | Alphadent`;
+  return pageMeta(pageContext.locale, "esztetikaiFogaszat").title;
 }

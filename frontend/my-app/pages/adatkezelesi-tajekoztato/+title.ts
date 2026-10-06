@@ -1,6 +1,6 @@
-import { commonResources } from "../../lib/i18n/common";
+import { pageMeta } from "../../lib/i18n/meta";
 import type { Locale } from "../../lib/locale";
 
 export default function title(pageContext: { locale: Locale }) {
-  return `${commonResources[pageContext.locale].privacyPage.title} | Alphadent`;
+  return pageMeta(pageContext.locale, "privacy").title;
 }

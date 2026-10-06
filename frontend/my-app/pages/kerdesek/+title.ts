@@ -1,6 +1,6 @@
-import { faqResources } from "../../lib/i18n/faq";
+import { pageMeta } from "../../lib/i18n/meta";
 import type { Locale } from "../../lib/locale";
 
 export default function title(pageContext: { locale: Locale }) {
-  return `${faqResources[pageContext.locale].faqPage.title} | Alphadent`;
+  return pageMeta(pageContext.locale, "faq").title;
 }

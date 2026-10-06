@@ -1,7 +1,8 @@
-import { metaResources } from "../lib/i18n/meta";
+import { pageMeta } from "../lib/i18n/meta";
 import type { Locale } from "../lib/locale";
 
-// Default <title>, overridden per-page (see e.g. pages/kapcsolat/+title.ts).
+// Also the fallback for pages without their own +title.ts (the home page
+// and the error page).
 export default function title(pageContext: { locale: Locale }) {
-  return metaResources[pageContext.locale].meta.defaultTitle;
+  return pageMeta(pageContext.locale, "home").title;
 }

@@ -1,3 +1,5 @@
+import { CLINIC } from "./clinic-info";
+import { cloudinaryUrl } from "./cloudinary";
 import { DEFAULT_LOCALE, LOCALES, localizeHref, type Locale } from "./locale";
 
 // The production domain, taken from the CONTACT_INFO.websiteUrl already
@@ -26,4 +28,27 @@ export function hreflangAlternates(pathnameWithoutLocale: string): Array<{
     // page to point at (the root redirects to /hu), so it's the Hungarian URL.
     { hreflang: "x-default", href: absoluteLocalizedUrl(DEFAULT_LOCALE, pathnameWithoutLocale) },
   ];
+}
+
+// 1200x630 is the size Facebook/LinkedIn/Messenger previews are cut to; JPG
+// rather than f_auto, since not every link-preview crawler takes WebP/AVIF.
+export const OG_IMAGE_WIDTH = 1200;
+export const OG_IMAGE_HEIGHT = 630;
+
+export function ogImageUrl(): string {
+  return cloudinaryUrl(CLINIC.image, {
+    width: OG_IMAGE_WIDTH,
+    height: OG_IMAGE_HEIGHT,
+    format: "jpg",
+  });
+}
+
+const OG_LOCALES: Record<Locale, string> = { hu: "hu_HU", en: "en_GB", de: "de_DE", it: "it_IT" };
+
+export function ogLocale(locale: Locale): string {
+  return OG_LOCALES[locale];
+}
+
+export function ogLocaleAlternates(locale: Locale): string[] {
+  return LOCALES.filter((other) => other !== locale).map((other) => OG_LOCALES[other]);
 }

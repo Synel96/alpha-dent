@@ -84,7 +84,6 @@ export const commonResources = {
     },
     privacyPage: {
       title: "Adatkezelési tájékoztató",
-      description: "Az Alphadent Kft. adatkezelési tájékoztatója.",
       placeholder:
         "A tájékoztató szövege hamarosan elérhető lesz. Ha addig is kérdése van személyes adatai kezelésével kapcsolatban, írjon nekünk:",
     },
@@ -174,7 +173,6 @@ export const commonResources = {
     },
     privacyPage: {
       title: "Privacy Policy",
-      description: "The privacy policy of Alphadent Kft.",
       placeholder:
         "The full text of this policy will be available soon. If you have any questions about how we handle your personal data in the meantime, please write to us:",
     },
@@ -264,7 +262,6 @@ export const commonResources = {
     },
     privacyPage: {
       title: "Datenschutzerklärung",
-      description: "Die Datenschutzerklärung der Alphadent Kft.",
       placeholder:
         "Der vollständige Text dieser Erklärung ist in Kürze verfügbar. Wenn Sie bis dahin Fragen zur Verarbeitung Ihrer personenbezogenen Daten haben, schreiben Sie uns:",
     },
@@ -354,7 +351,6 @@ export const commonResources = {
     },
     privacyPage: {
       title: "Informativa sulla privacy",
-      description: "L'informativa sulla privacy di Alphadent Kft.",
       placeholder:
         "Il testo completo dell'informativa sarà disponibile a breve. Se nel frattempo ha domande sul trattamento dei suoi dati personali, ci scriva:",
     },

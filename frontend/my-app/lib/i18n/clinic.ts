@@ -5,8 +5,6 @@ export const clinicResources = {
       title: "Rendelő és saját fogtechnikai labor, egy helyen 1996 óta",
       intro:
         "Sopronban a fogászati kezelést és a fogtechnikai munkát egy fedél alatt végezzük. 15 fős szakmai csapatunk a több évtizedes tapasztalatot a legmodernebb digitális technológiával ötvözi, hogy pácienseink hosszú távon is működő, természetes mosolyt kapjanak.",
-      metaDescription:
-        "Ismerje meg az Alphadent soproni rendelőjét és saját fogtechnikai laborját: modern kezelők, CAD/CAM géppark, 1996 óta egy helyen.",
       highlights: [
         { value: "1996", label: "óta működik együtt rendelőnk és saját fogtechnikai laborunk" },
         { value: "15 fő", label: "tapasztalt szakmai csapat" },
@@ -59,8 +57,6 @@ export const clinicResources = {
       title: "Dental clinic and in-house dental laboratory, under one roof since 1996",
       intro:
         "In Sopron, we provide dental treatment and dental technology under one roof. Our 15-strong professional team combines decades of experience with the latest digital technology, so that our patients get a natural smile that lasts.",
-      metaDescription:
-        "Discover Alphadent's clinic and in-house dental laboratory in Sopron, Hungary: modern treatment rooms and CAD/CAM equipment, under one roof since 1996.",
       highlights: [
         { value: "1996", label: "our clinic and in-house dental laboratory have worked together since" },
         { value: "15", label: "experienced professionals on our team" },
@@ -113,8 +109,6 @@ export const clinicResources = {
       title: "Zahnarztpraxis und eigenes Dentallabor, unter einem Dach seit 1996",
       intro:
         "In Sopron bieten wir zahnärztliche Behandlung und Zahntechnik unter einem Dach. Unser 15-köpfiges Fachteam verbindet jahrzehntelange Erfahrung mit modernster digitaler Technologie, damit unsere Patienten ein natürliches Lächeln bekommen, das lange hält.",
-      metaDescription:
-        "Lernen Sie die Praxis und das eigene Dentallabor von Alphadent in Sopron kennen: moderne Behandlungsräume, CAD/CAM-Technik, seit 1996 unter einem Dach.",
       highlights: [
         { value: "1996", label: "seit diesem Jahr arbeiten Praxis und eigenes Dentallabor zusammen" },
         { value: "15", label: "erfahrene Fachkräfte in unserem Team" },
@@ -167,8 +161,6 @@ export const clinicResources = {
       title: "Studio dentistico e laboratorio odontotecnico interno, sotto lo stesso tetto dal 1996",
       intro:
         "A Sopron offriamo cure odontoiatriche e lavori odontotecnici sotto lo stesso tetto. Il nostro team di 15 professionisti unisce decenni di esperienza alla più moderna tecnologia digitale, perché i nostri pazienti abbiano un sorriso naturale e duraturo.",
-      metaDescription:
-        "Scopra lo studio e il laboratorio odontotecnico interno di Alphadent a Sopron: sale di trattamento moderne e tecnologia CAD/CAM, sotto lo stesso tetto dal 1996.",
       highlights: [
         { value: "1996", label: "l'anno da cui studio e laboratorio interno lavorano insieme" },
         { value: "15", label: "professionisti esperti nel nostro team" },

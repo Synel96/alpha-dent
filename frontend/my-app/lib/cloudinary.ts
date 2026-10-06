@@ -8,6 +8,7 @@ const UPLOAD_MARKER = "/upload/";
 
 export type CloudinaryTransformOptions = {
   width?: number;
+  height?: number;
   crop?: "fill" | "fit" | "limit" | "scale" | "thumb";
   gravity?: string;
   quality?: "auto" | number;
@@ -21,13 +22,14 @@ function isCloudinaryUrl(url: string): boolean {
 export function cloudinaryUrl(url: string, options: CloudinaryTransformOptions = {}): string {
   if (!isCloudinaryUrl(url)) return url;
 
-  const { width, crop = "fill", gravity = "auto", quality = 78, format = "auto" } = options;
+  const { width, height, crop = "fill", gravity = "auto", quality = 78, format = "auto" } = options;
   // Gravity only means something (and Cloudinary only accepts it) for the
   // modes that actually crop; with c_limit/c_fit/c_scale it makes the
   // request fail instead of being ignored.
   const crops = crop === "fill" || crop === "thumb";
   const transform = [
     width ? `w_${width}` : null,
+    width && height ? `h_${height}` : null,
     width ? `c_${crop}` : null,
     width && crops ? `g_${gravity}` : null,
     `q_${quality}`,

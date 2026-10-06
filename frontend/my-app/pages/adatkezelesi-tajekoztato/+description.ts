@@ -1,6 +1,6 @@
-import { commonResources } from "../../lib/i18n/common";
+import { pageMeta } from "../../lib/i18n/meta";
 import type { Locale } from "../../lib/locale";
 
 export default function description(pageContext: { locale: Locale }) {
-  return commonResources[pageContext.locale].privacyPage.description;
+  return pageMeta(pageContext.locale, "privacy").description;
 }
