@@ -232,10 +232,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     {localizedNavLinks.map((link) =>
                       link.isServices ? (
                         <NavigationMenuItem key={link.href}>
-                          <NavigationMenuTrigger className="rounded-md bg-transparent px-3 py-2 text-sm font-normal tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold data-popup-open:bg-brand-surface data-popup-open:text-brand-gold">
+                          <NavigationMenuTrigger
+                            // Hovering already opens the menu, and Radix's click
+                            // toggles it - so the natural "move there, then click"
+                            // would close it again right away. A click on an open
+                            // trigger is therefore ignored; it still closes on
+                            // pointer leave, Esc or a click outside.
+                            onClick={(event) => {
+                              if (event.currentTarget.getAttribute("data-state") === "open") {
+                                event.preventDefault();
+                              }
+                            }}
+                            className="rounded-md bg-transparent px-3 py-2 text-sm font-normal tracking-wide text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold data-[state=open]:bg-brand-surface data-[state=open]:text-brand-gold"
+                          >
                             {t(link.labelKey)}
                           </NavigationMenuTrigger>
-                          <NavigationMenuContent className="min-w-[240px] rounded-lg border border-brand-border bg-brand-black p-1.5 shadow-lg">
+                          <NavigationMenuContent className="min-w-[240px] rounded-lg bg-brand-black p-1.5 shadow-lg ring-brand-gold/30">
                             <a
                               href={link.href}
                               onClick={(event) => handleInternalLink(event, link.href)}
