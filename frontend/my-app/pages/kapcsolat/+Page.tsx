@@ -21,9 +21,6 @@ const CONTACT_INFO = {
   phoneAltHref: "tel:+3699340707",
   email: CLINIC.email,
   emailHref: `mailto:${CLINIC.email}`,
-  gps: `${CLINIC.latitude}, ${CLINIC.longitude}`,
-  gpsMapUrl: `https://www.google.com/maps?q=${CLINIC.latitude},${CLINIC.longitude}`,
-  websiteUrl: "https://alpha-dent.eu/hu/",
 } as const;
 
 const SOCIAL_LINKS = [
@@ -97,22 +94,8 @@ function Page() {
         </TextImageReveal>
 
         <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-              {t("contactPage.cards.address")}
-            </h3>
-            <p className="mb-3 text-sm text-white">{CONTACT_INFO.address}</p>
-            <a
-              href={CONTACT_INFO.mapUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="text-sm text-white hover:text-brand-gold-light"
-            >
-              {t("contactPage.actions.openMap")}
-            </a>
-          </article>
-
-          {/* Right after the address: the first thing someone arriving by car asks. */}
+          {/* First card: the address is in the map button above, and parking is
+              the next thing someone arriving by car wants to know. */}
           <article className="flex gap-4 rounded-xl border border-brand-gold/40 bg-brand-surface/60 p-5">
             <span
               aria-hidden
@@ -128,7 +111,8 @@ function Page() {
             </div>
           </article>
 
-          <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
+          {/* Spans both rows on desktop, so the five cards fill a 3x2 grid. */}
+          <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5 lg:row-span-2">
             <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
               {t("openingHours.title")}
             </h3>
@@ -157,18 +141,6 @@ function Page() {
 
           <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
             <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-              {t("contactPage.cards.mobile")}
-            </h3>
-            <a
-              href={CONTACT_INFO.mobileHref}
-              className="text-sm text-white hover:text-brand-gold-light"
-            >
-              {CONTACT_INFO.mobileDisplay}
-            </a>
-          </article>
-
-          <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
               {t("contactPage.cards.phone")}
             </h3>
             <div className="space-y-2">
@@ -189,46 +161,9 @@ function Page() {
 
           <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
             <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-              {t("contactPage.cards.email")}
-            </h3>
-            <a
-              href={CONTACT_INFO.emailHref}
-              className="text-sm text-white hover:text-brand-gold-light"
-            >
-              {CONTACT_INFO.email}
-            </a>
-          </article>
-
-          <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
               {t("contactPage.cards.languages")}
             </h3>
             <p className="text-sm text-white">{t("contactPage.languages")}</p>
-          </article>
-
-          <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-              {t("contactPage.cards.gps")}
-            </h3>
-            <p className="mb-3 text-sm text-white">{CONTACT_INFO.gps}</p>
-            <div className="flex flex-wrap gap-4">
-              <a
-                href={CONTACT_INFO.gpsMapUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm text-white hover:text-brand-gold-light"
-              >
-                {t("contactPage.actions.openByGps")}
-              </a>
-              <a
-                href={CONTACT_INFO.websiteUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm text-white hover:text-brand-gold-light"
-              >
-                {t("contactPage.actions.openWebsite")}
-              </a>
-            </div>
           </article>
 
           <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
