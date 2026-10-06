@@ -33,7 +33,8 @@ export const contactResources = {
       opensTomorrow: "Nyitás: holnap {{time}}",
       opensOn: "Nyitás: {{day}} {{time}}",
       openMessage: "Keressen minket bátran telefonon!",
-      closedMessage: "Írjon nekünk bátran e-mailt, és nyitáskor válaszolunk!",
+      closedMessage:
+        "Rendelési időn kívül is fogadjuk hívását napközben. Ha telefonon nem sikerül elérnie minket, írjon e-mailt, és hamarosan válaszolunk!",
     },
   },
   en: {
@@ -70,7 +71,8 @@ export const contactResources = {
       opensTomorrow: "Opens tomorrow at {{time}}",
       opensOn: "Opens {{day}} at {{time}}",
       openMessage: "Feel free to give us a call!",
-      closedMessage: "Feel free to email us, and we'll reply as soon as we open.",
+      closedMessage:
+        "We also take calls during the day outside opening hours. If you can't reach us by phone, send us an email and we'll get back to you soon.",
     },
   },
   de: {
@@ -107,7 +109,8 @@ export const contactResources = {
       opensTomorrow: "Öffnet morgen um {{time}} Uhr",
       opensOn: "Öffnet am {{day}} um {{time}} Uhr",
       openMessage: "Rufen Sie uns gerne an!",
-      closedMessage: "Schreiben Sie uns gerne eine E-Mail, wir antworten, sobald wir öffnen.",
+      closedMessage:
+        "Auch außerhalb der Öffnungszeiten nehmen wir tagsüber Anrufe entgegen. Wenn Sie uns telefonisch nicht erreichen, schreiben Sie uns eine E-Mail – wir melden uns bald.",
     },
   },
   it: {
@@ -144,7 +147,8 @@ export const contactResources = {
       opensTomorrow: "Apre domani alle {{time}}",
       opensOn: "Apre {{day}} alle {{time}}",
       openMessage: "Non esiti a chiamarci!",
-      closedMessage: "Ci scriva pure un'e-mail: le risponderemo non appena apriamo.",
+      closedMessage:
+        "Anche fuori orario rispondiamo alle chiamate durante il giorno. Se non riesce a raggiungerci per telefono, ci scriva un'e-mail: le risponderemo presto.",
     },
   },
 } as const;

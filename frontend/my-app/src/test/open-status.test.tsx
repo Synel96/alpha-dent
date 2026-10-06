@@ -29,15 +29,24 @@ describe("OpenStatusCard", () => {
     );
   });
 
-  it("zárva e-mailre buzdít", () => {
+  it("zárva is a hívás az első lehetőség (napközben veszik fel), mellette az e-mail", () => {
     vi.useFakeTimers({ toFake: ["Date"] });
     vi.setSystemTime(new Date("2026-10-03T10:00:00Z"));
     render(<OpenStatusCard />);
 
     expect(screen.getByText("openingHours.closedNow")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "info@alpha-dent.eu" })).toHaveAttribute(
-      "href",
-      "mailto:info@alpha-dent.eu"
-    );
+    expect(screen.getByText("openingHours.closedMessage")).toBeInTheDocument();
+    const links = screen.getAllByRole("link");
+    expect(links.map((link) => link.getAttribute("href"))).toEqual([
+      "tel:+36208080600",
+      "mailto:info@alpha-dent.eu",
+    ]);
+  });
+
+  it("nyitva csak a hívás gomb látszik", () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date("2026-09-28T08:00:00Z"));
+    render(<OpenStatusCard />);
+    expect(screen.getAllByRole("link")).toHaveLength(1);
   });
 });

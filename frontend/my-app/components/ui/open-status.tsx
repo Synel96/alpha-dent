@@ -2,12 +2,15 @@ import { Mail, Phone } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { cn } from "@/lib/utils";
+import { CLINIC } from "@/lib/clinic-info";
 import { formatClockTime, weekdayName, type OpenStatus } from "@/lib/opening-hours";
 import { useOpenStatus } from "@/lib/use-open-status";
 
-const PHONE_DISPLAY = "+36 20 80 80 600";
-const PHONE_HREF = "tel:+36208080600";
-const EMAIL = "info@alpha-dent.eu";
+const PHONE_HREF = `tel:${CLINIC.phoneE164}`;
+const EMAIL_HREF = `mailto:${CLINIC.email}`;
+
+const BUTTON_CLASS =
+  "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70";
 
 // Stand-in used until the real status is known on mount: the card renders
 // invisibly with it so the hero copy doesn't jump when the status appears.
@@ -57,14 +60,29 @@ export function OpenStatusCard() {
       <p className="mt-1.5 text-sm leading-relaxed text-white/85">
         {shown.open ? t("openingHours.openMessage") : t("openingHours.closedMessage")}
       </p>
-      <a
-        href={shown.open ? PHONE_HREF : `mailto:${EMAIL}`}
-        tabIndex={status ? undefined : -1}
-        className="mt-3 inline-flex items-center gap-2 rounded-full border border-brand-gold-light/60 px-4 py-2 text-sm font-medium text-brand-gold-light transition-colors hover:border-brand-gold-light hover:bg-black/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
-      >
-        {shown.open ? <Phone aria-hidden className="size-4" /> : <Mail aria-hidden className="size-4" />}
-        {shown.open ? PHONE_DISPLAY : EMAIL}
-      </a>
+      {/* Calls are taken during the day even outside opening hours, so the
+          phone stays the main action; when closed, e-mail is offered next to
+          it for when nobody picks up. */}
+      <div className="mt-3 flex flex-wrap gap-2">
+        <a
+          href={PHONE_HREF}
+          tabIndex={status ? undefined : -1}
+          className={cn(BUTTON_CLASS, "border-brand-gold-light/60 text-brand-gold-light hover:border-brand-gold-light hover:bg-black/35")}
+        >
+          <Phone aria-hidden className="size-4" />
+          {CLINIC.phoneDisplay}
+        </a>
+        {!shown.open ? (
+          <a
+            href={EMAIL_HREF}
+            tabIndex={status ? undefined : -1}
+            className={cn(BUTTON_CLASS, "border-white/25 text-white/85 hover:border-brand-gold-light/60 hover:text-brand-gold-light")}
+          >
+            <Mail aria-hidden className="size-4" />
+            {CLINIC.email}
+          </a>
+        ) : null}
+      </div>
     </div>
   );
 }
