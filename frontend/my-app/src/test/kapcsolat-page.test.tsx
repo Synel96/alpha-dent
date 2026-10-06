@@ -13,6 +13,11 @@ vi.mock("vike-react/usePageContext", () => ({
 import { Page } from "../../pages/kapcsolat/+Page";
 
 describe("Kapcsolat oldal", () => {
+  it("pontosan egy H1 címsora van (SEO, akadálymentesség)", () => {
+    render(<Page />);
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+  });
+
   it("megjeleníti a cím szöveges tartalmát és a térkép linket", () => {
     render(<Page />);
     expect(screen.getAllByText("9400 Sopron, Arany János u. 13.")[0]).toBeInTheDocument();

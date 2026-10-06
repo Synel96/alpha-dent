@@ -65,9 +65,10 @@ export function TextImageReveal({
           </p>
         ) : null}
 
-        <h2 className="text-2xl font-semibold leading-tight text-brand-gold-light md:text-3xl">
+        {/* The page's <h1>: this block is the title/intro of the pages that use it. */}
+        <h1 className="text-2xl font-semibold leading-tight text-brand-gold-light md:text-3xl">
           {title}
-        </h2>
+        </h1>
 
         <p className="max-w-prose text-sm leading-relaxed text-white md:text-base">
           {description}

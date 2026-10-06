@@ -16,6 +16,12 @@ import { Page } from "../../pages/kerdesek/+Page";
 const mockPageContext = usePageContext as ReturnType<typeof vi.fn>;
 
 describe("Kerdesek (FAQ) oldal", () => {
+  it("pontosan egy H1 címsora van (SEO, akadálymentesség)", () => {
+    mockPageContext.mockReturnValue({ locale: "hu" });
+    render(<Page />);
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+  });
+
   it("mind a 15 kérdést megjeleníti, összecsukható panelként", () => {
     mockPageContext.mockReturnValue({ locale: "hu" });
     render(<Page />);
