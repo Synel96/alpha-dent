@@ -47,7 +47,7 @@ describe("Klinikánk oldal", () => {
     // Each photo is exposed once, even though the carousel repeats short lists.
     expect(screen.getAllByRole("img", { name: "clinicPage.rooms.panoramaAlt" })).toHaveLength(1);
     expect(screen.getAllByRole("img", { name: "clinicPage.rooms.waitingRoomAlt" })).toHaveLength(1);
-    expect(screen.getByRole("link", { name: "home.intro.ctaButton" })).toHaveAttribute("href", "/hu/kapcsolat");
+    expect(screen.getByRole("link", { name: /home\.intro\.ctaButton/ })).toHaveAttribute("href", "/hu/kapcsolat");
   });
 
   it("a labormunkák szekcióban körhintán mutatja a labor képeit", () => {

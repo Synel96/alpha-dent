@@ -40,7 +40,7 @@ describe("Szolgáltatás aloldalak", () => {
       "href",
       "/hu/szolgaltatasaink"
     );
-    expect(screen.getByRole("link", { name: "home.intro.ctaButton" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /home\.intro\.ctaButton/ })).toHaveAttribute(
       "href",
       "/hu/kapcsolat"
     );
@@ -52,7 +52,7 @@ describe("Szolgáltatás aloldalak", () => {
       "services.szajsebeszet.title"
     );
     expect(screen.getByText("services.szajsebeszet.items-0")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "home.intro.ctaButton" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /home\.intro\.ctaButton/ })).toHaveAttribute(
       "href",
       "/hu/kapcsolat"
     );
@@ -73,7 +73,7 @@ describe("Szolgáltatás aloldalak", () => {
       "services.fogmegtartoKezelesek.title"
     );
     expect(screen.getByText("services.fogmegtartoKezelesek.paragraphs-0")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "home.intro.ctaButton" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /home\.intro\.ctaButton/ })).toHaveAttribute(
       "href",
       "/hu/kapcsolat"
     );

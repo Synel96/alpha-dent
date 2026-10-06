@@ -56,6 +56,7 @@ function Page() {
         <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICE_SLUGS.map((key, index) => (
             <ServiceTile
+              headingLevel={2}
               key={key}
               title={t(`services.${key}.nav`)}
               href={localizeHref(locale, SERVICE_PATHS[key])}

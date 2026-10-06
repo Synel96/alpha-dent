@@ -72,7 +72,7 @@ describe("Főoldal", () => {
     expect(screen.getByText("home.contact.title")).toBeInTheDocument();
     expect(screen.queryByText("9400 Sopron, Arany János u. 13.")).not.toBeInTheDocument();
 
-    const ctaLinks = screen.getAllByRole("link", { name: "home.intro.ctaButton" });
+    const ctaLinks = screen.getAllByRole("link", { name: /home\.intro\.ctaButton/ });
     expect(ctaLinks.length).toBeGreaterThan(0);
     for (const link of ctaLinks) {
       expect(link).toHaveAttribute("href", "/hu/kapcsolat");

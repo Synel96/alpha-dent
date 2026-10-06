@@ -24,7 +24,7 @@ function Linkified({ text }: { text: string }) {
             <a
               href={href}
               {...(href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
-              className="break-words text-brand-gold-light underline-offset-4 hover:underline"
+              className="break-words text-brand-gold-light underline decoration-brand-gold-light/50 underline-offset-4 hover:decoration-brand-gold-light"
             >
               {target}
             </a>

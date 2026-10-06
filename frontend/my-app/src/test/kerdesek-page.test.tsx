@@ -35,7 +35,7 @@ describe("Kerdesek (FAQ) oldal", () => {
   it("a kapcsolatfelvétel CTA gomb az aktuális nyelv prefixelt kapcsolat oldalára mutat (en)", () => {
     mockPageContext.mockReturnValue({ locale: "en" });
     render(<Page />);
-    expect(screen.getByRole("link", { name: "faqPage.ctaButton" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /faqPage\.ctaButton/ })).toHaveAttribute(
       "href",
       "/en/contact"
     );
@@ -44,7 +44,7 @@ describe("Kerdesek (FAQ) oldal", () => {
   it("a kapcsolatfelvétel CTA gomb alapértelmezett (hu) nyelven is a /hu prefixelt útvonalra mutat", () => {
     mockPageContext.mockReturnValue({ locale: "hu" });
     render(<Page />);
-    expect(screen.getByRole("link", { name: "faqPage.ctaButton" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /faqPage\.ctaButton/ })).toHaveAttribute(
       "href",
       "/hu/kapcsolat"
     );

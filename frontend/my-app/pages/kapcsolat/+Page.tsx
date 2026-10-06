@@ -104,18 +104,18 @@ function Page() {
               P
             </span>
             <div>
-              <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+              <h2 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
                 {t("contactPage.cards.parking")}
-              </h3>
+              </h2>
               <p className="text-sm leading-relaxed text-white">{t("contactPage.parking")}</p>
             </div>
           </article>
 
           {/* Spans both rows on desktop, so the five cards fill a 3x2 grid. */}
           <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5 lg:row-span-2">
-            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+            <h2 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
               {t("openingHours.title")}
-            </h3>
+            </h2>
             <dl className="space-y-1 text-sm">
               {WEEKLY_HOURS.map((hours, weekday) => {
                 const name = weekdayName(weekday, locale);
@@ -140,9 +140,9 @@ function Page() {
           </article>
 
           <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+            <h2 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
               {t("contactPage.cards.phone")}
-            </h3>
+            </h2>
             <div className="space-y-2">
               <a
                 href={CONTACT_INFO.phoneMainHref}
@@ -160,16 +160,16 @@ function Page() {
           </article>
 
           <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+            <h2 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
               {t("contactPage.cards.languages")}
-            </h3>
+            </h2>
             <p className="text-sm text-white">{t("contactPage.languages")}</p>
           </article>
 
           <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+            <h2 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
               {t("contactPage.cards.social")}
-            </h3>
+            </h2>
             <div className="flex gap-4">
               {SOCIAL_LINKS.map(({ icon, label, href }) => (
                 <a

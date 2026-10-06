@@ -65,9 +65,9 @@ function Page() {
               key={item.title}
               className="rounded-xl border border-brand-gold/25 bg-brand-surface/60 p-5"
             >
-              <h3 className="mb-2 text-sm uppercase tracking-[0.15em] text-brand-gold-light">
+              <h2 className="mb-2 text-sm uppercase tracking-[0.15em] text-brand-gold-light">
                 {item.title}
-              </h3>
+              </h2>
               <p className="text-sm leading-relaxed text-white">{item.text}</p>
             </article>
           ))}

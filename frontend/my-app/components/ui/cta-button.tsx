@@ -60,7 +60,6 @@ export function CtaButton({
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black",
         className
       )}
-      aria-label={title}
       {...props}
     >
       <span className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">

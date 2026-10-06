@@ -27,7 +27,7 @@ describe("Kapcsolat oldal", () => {
   it("megjeleníti a cím szöveges tartalmát és a térkép linket", () => {
     render(<Page />);
     expect(screen.getAllByText("9400 Sopron, Arany János u. 13.")[0]).toBeInTheDocument();
-    const mapLinks = screen.getAllByRole("link", { name: "contactPage.actions.openMap" });
+    const mapLinks = screen.getAllByRole("link", { name: /contactPage\.actions\.openMap/ });
     expect(mapLinks.length).toBeGreaterThan(0);
     for (const link of mapLinks) {
       expect(link).toHaveAttribute("href", "https://goo.gl/maps/tBZd2pfrPTJkpJVb6");
@@ -64,7 +64,7 @@ describe("Kapcsolat oldal", () => {
 
   it("nincs külön mobil, email, cím és GPS kártya (ezek a felső gombokban vannak)", () => {
     render(<Page />);
-    const cardTitles = screen.getAllByRole("heading", { level: 3 }).map((heading) => heading.textContent);
+    const cardTitles = screen.getAllByRole("heading", { level: 2 }).map((heading) => heading.textContent);
     expect(cardTitles).not.toContain("contactPage.cards.mobile");
     expect(cardTitles).not.toContain("contactPage.cards.address");
     expect(cardTitles).not.toContain("contactPage.cards.email");

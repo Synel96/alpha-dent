@@ -11,6 +11,9 @@ type ServiceTileProps = {
   imageUrl?: string;
   className?: string;
   delayMs?: number;
+  // 3 under a section heading (homepage), 2 when the tiles sit straight
+  // under the page's h1 (services hub) - keeps the heading outline gapless.
+  headingLevel?: 2 | 3;
 };
 
 export function ServiceTile({
@@ -19,7 +22,9 @@ export function ServiceTile({
   imageUrl,
   className,
   delayMs = 0,
+  headingLevel = 3,
 }: ServiceTileProps) {
+  const Heading = headingLevel === 2 ? "h2" : "h3";
   const { ref: rootRef, visible } = useReveal<HTMLElement>({ threshold: 0.2 });
   const image = useImageLoaded();
 
@@ -48,7 +53,9 @@ export function ServiceTile({
             src={cloudinaryUrl(imageUrl, { width: TILE_IMAGE_WIDTHS.at(-1) })}
             srcSet={cloudinarySrcSet(imageUrl, TILE_IMAGE_WIDTHS)}
             sizes={TILE_SIZES}
-            alt={title}
+            // Decorative: the tile's heading already names the service, and a
+            // repeated alt would just be read out twice.
+            alt=""
             loading="lazy"
             decoding="async"
             crossOrigin="anonymous"
@@ -67,9 +74,9 @@ export function ServiceTile({
         ) : null}
 
         <div className="absolute inset-x-0 bottom-0 p-4">
-          <h3 className="inline-block rounded-md border border-brand-gold/35 bg-brand-black/70 px-2.5 py-1.5 text-sm font-semibold leading-snug text-brand-gold-light md:text-base">
+          <Heading className="inline-block rounded-md border border-brand-gold/35 bg-brand-black/70 px-2.5 py-1.5 text-sm font-semibold leading-snug text-brand-gold-light md:text-base">
             {title}
-          </h3>
+          </Heading>
         </div>
       </a>
     </article>

@@ -25,6 +25,12 @@ describe("LanguageSwitcher", () => {
     mockPageContext.mockReturnValue({ locale: "hu", urlPathname: "/kapcsolat" });
   });
 
+  it("a gombokat a nyelv saját nevén olvassa fel, a látható kóddal együtt", () => {
+    render(<LanguageSwitcher />);
+    expect(screen.getByRole("button", { name: "Deutsch (DE)" })).toHaveAttribute("lang", "de");
+    expect(screen.getByRole("button", { name: "Magyar (HU)" })).toBeInTheDocument();
+  });
+
   it("az aktuális nyelv gombja van kiemelve (aria-current)", () => {
     render(<LanguageSwitcher />);
     expect(screen.getByText("HU")).toHaveAttribute("aria-current", "true");
@@ -59,19 +65,19 @@ describe("LanguageSwitcherCompact", () => {
 
   it("a jelenlegi nyelvet jeleníti meg a megnyitó gombon", () => {
     render(<LanguageSwitcherCompact />);
-    expect(screen.getByLabelText("Switch language")).toHaveTextContent("DE");
+    expect(screen.getByRole("button", { name: "common.language: DE" })).toHaveTextContent("DE");
   });
 
   it("megnyitás után a kiválasztott nyelv prefixelt útvonalára navigál", () => {
     render(<LanguageSwitcherCompact />);
-    fireEvent.click(screen.getByLabelText("Switch language"));
+    fireEvent.click(screen.getByRole("button", { name: "common.language: DE" }));
     fireEvent.click(screen.getByText("IT"));
     expect(mockNavigate).toHaveBeenCalledWith("/it/faq");
   });
 
   it("aria-expanded és aria-haspopup jelzi a menü állapotát", () => {
     render(<LanguageSwitcherCompact />);
-    const toggle = screen.getByLabelText("Switch language");
+    const toggle = screen.getByRole("button", { name: "common.language: DE" });
     expect(toggle).toHaveAttribute("aria-haspopup", "menu");
     expect(toggle).toHaveAttribute("aria-expanded", "false");
     fireEvent.click(toggle);
@@ -80,7 +86,7 @@ describe("LanguageSwitcherCompact", () => {
 
   it("Escape lenyomására bezáródik a menü", () => {
     render(<LanguageSwitcherCompact />);
-    fireEvent.click(screen.getByLabelText("Switch language"));
+    fireEvent.click(screen.getByRole("button", { name: "common.language: DE" }));
     expect(screen.getByText("IT")).toBeInTheDocument();
     fireEvent.keyDown(document, { key: "Escape" });
     expect(screen.queryByText("IT")).not.toBeInTheDocument();
@@ -93,7 +99,7 @@ describe("LanguageSwitcherCompact", () => {
         <LanguageSwitcherCompact />
       </div>
     );
-    fireEvent.click(screen.getByLabelText("Switch language"));
+    fireEvent.click(screen.getByRole("button", { name: "common.language: DE" }));
     expect(screen.getByText("IT")).toBeInTheDocument();
     fireEvent.pointerDown(screen.getByTestId("outside"));
     expect(screen.queryByText("IT")).not.toBeInTheDocument();

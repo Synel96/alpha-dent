@@ -1,5 +1,6 @@
 import React from "react";
 import { navigate } from "vike/client/router";
+import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { LOCALES, localizeHref, type Locale } from "@/lib/locale";
 
@@ -9,6 +10,17 @@ const LANGUAGE_LABELS: Record<Locale, string> = {
   de: "DE",
   it: "IT",
 };
+
+// Each language named in itself, as is usual in language pickers; the
+// visible code stays part of the accessible name (WCAG 2.5.3).
+const LANGUAGE_NAMES: Record<Locale, string> = {
+  hu: "Magyar",
+  en: "English",
+  de: "Deutsch",
+  it: "Italiano",
+};
+
+const optionLabel = (code: Locale) => `${LANGUAGE_NAMES[code]} (${LANGUAGE_LABELS[code]})`;
 
 const FOCUS_RING =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70";
@@ -38,7 +50,8 @@ export function LanguageSwitcher() {
               ? "bg-brand-gold text-brand-black"
               : "text-brand-gold-muted hover:bg-brand-surface hover:text-brand-gold"
           }`}
-          aria-label={`Switch to ${LANGUAGE_LABELS[code]}`}
+          aria-label={optionLabel(code)}
+          lang={code}
           aria-current={locale === code ? "true" : "false"}
         >
           {LANGUAGE_LABELS[code]}
@@ -49,6 +62,7 @@ export function LanguageSwitcher() {
 }
 
 export function LanguageSwitcherCompact() {
+  const { t } = useTranslation();
   const { locale } = usePageContext();
   const switchLocale = useLocaleSwitch();
   const [isOpen, setIsOpen] = React.useState(false);
@@ -77,7 +91,7 @@ export function LanguageSwitcherCompact() {
       <button
         onClick={() => setIsOpen((value) => !value)}
         className={`px-3 py-2 text-sm font-semibold text-brand-gold hover:bg-brand-surface rounded-md transition-colors ${FOCUS_RING}`}
-        aria-label="Switch language"
+        aria-label={`${t("common.language")}: ${LANGUAGE_LABELS[locale]}`}
         aria-haspopup="menu"
         aria-expanded={isOpen}
       >
@@ -93,6 +107,8 @@ export function LanguageSwitcherCompact() {
             <button
               key={code}
               role="menuitem"
+              aria-label={optionLabel(code)}
+              lang={code}
               onClick={() => {
                 switchLocale(code);
                 setIsOpen(false);
