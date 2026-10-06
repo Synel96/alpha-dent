@@ -83,3 +83,59 @@ describe("PhotoGrid", () => {
     expect(within(dialog).getByRole("img", { name: "Kép B" })).toBeInTheDocument();
   });
 });
+
+describe("Lightbox nagyítás", () => {
+  const openFirst = () => {
+    render(<PhotoGrid photos={IMAGES} />);
+    fireEvent.click(screen.getAllByRole("button", { name: "common.lightbox.open" })[0]);
+    const dialog = screen.getByRole("dialog");
+    return { dialog, image: () => within(dialog).getByRole("img") };
+  };
+
+  it("100%-on indul: a kicsinyítés és a visszaállítás tiltott, a nagyítás elérhető", () => {
+    const { dialog, image } = openFirst();
+    expect(within(dialog).getByRole("button", { name: "common.lightbox.zoomOut" })).toBeDisabled();
+    expect(within(dialog).getByRole("button", { name: "common.lightbox.resetZoom" })).toHaveTextContent("100%");
+    expect(within(dialog).getByRole("button", { name: "common.lightbox.zoomIn" })).toBeEnabled();
+    expect(image().style.transform).toContain("scale(1)");
+  });
+
+  it("a gombokkal nagyít és kicsinyít, legfeljebb 400%-ig", () => {
+    const { dialog, image } = openFirst();
+    const zoomIn = within(dialog).getByRole("button", { name: "common.lightbox.zoomIn" });
+    fireEvent.click(zoomIn);
+    expect(image().style.transform).toContain("scale(1.5)");
+    expect(within(dialog).getByRole("button", { name: "common.lightbox.resetZoom" })).toHaveTextContent("150%");
+    for (let i = 0; i < 5; i++) fireEvent.click(zoomIn);
+    expect(image().style.transform).toContain("scale(4)");
+    expect(zoomIn).toBeDisabled();
+    fireEvent.click(within(dialog).getByRole("button", { name: "common.lightbox.zoomOut" }));
+    expect(within(dialog).getByRole("button", { name: "common.lightbox.resetZoom" })).toHaveTextContent("267%");
+  });
+
+  it("billentyűzettel is működik (+, -, 0), és nagyításkor nagyobb felbontású képet kér", () => {
+    const { dialog, image } = openFirst();
+    fireEvent.keyDown(dialog, { key: "+" });
+    expect(image().style.transform).toContain("scale(1.5)");
+    expect(image()).toHaveAttribute("sizes", "150vw");
+    fireEvent.keyDown(dialog, { key: "0" });
+    expect(image().style.transform).toContain("scale(1)");
+    expect(image()).toHaveAttribute("sizes", "100vw");
+  });
+
+  it("dupla kattintásra nagyít, újabbra visszaáll", () => {
+    const { image } = openFirst();
+    fireEvent.doubleClick(image());
+    expect(image().style.transform).toContain("scale(2.5)");
+    fireEvent.doubleClick(image());
+    expect(image().style.transform).toContain("scale(1)");
+  });
+
+  it("lapozáskor a következő kép újra 100%-on jelenik meg", () => {
+    const { dialog, image } = openFirst();
+    fireEvent.keyDown(dialog, { key: "+" });
+    fireEvent.click(within(dialog).getByRole("button", { name: "common.lightbox.next" }));
+    expect(image().style.transform).toContain("scale(1)");
+  });
+});
+

@@ -24,6 +24,9 @@ export const commonResources = {
       lightbox: {
         open: "Kép megnagyítása: {{alt}}",
         close: "Bezárás",
+        zoomIn: "Nagyítás",
+        zoomOut: "Kicsinyítés",
+        resetZoom: "Eredeti méret",
         prev: "Előző kép",
         next: "Következő kép",
       },
@@ -112,6 +115,9 @@ export const commonResources = {
       lightbox: {
         open: "Enlarge photo: {{alt}}",
         close: "Close",
+        zoomIn: "Zoom in",
+        zoomOut: "Zoom out",
+        resetZoom: "Reset zoom",
         prev: "Previous photo",
         next: "Next photo",
       },
@@ -200,6 +206,9 @@ export const commonResources = {
       lightbox: {
         open: "Bild vergrößern: {{alt}}",
         close: "Schließen",
+        zoomIn: "Vergrößern",
+        zoomOut: "Verkleinern",
+        resetZoom: "Originalgröße",
         prev: "Vorheriges Bild",
         next: "Nächstes Bild",
       },
@@ -288,6 +297,9 @@ export const commonResources = {
       lightbox: {
         open: "Ingrandisci foto: {{alt}}",
         close: "Chiudi",
+        zoomIn: "Ingrandisci",
+        zoomOut: "Riduci",
+        resetZoom: "Dimensione originale",
         prev: "Foto precedente",
         next: "Foto successiva",
       },
