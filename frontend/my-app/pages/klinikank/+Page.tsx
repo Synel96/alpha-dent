@@ -2,6 +2,7 @@ import React from "react";
 import { Award, Building2, Gem, Users } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
+import { AutoGallery } from "../../components/ui/auto-gallery";
 import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
 import { RevealGroup } from "../../components/ui/reveal-section";
@@ -9,6 +10,7 @@ import { ZoomableImage } from "../../components/ui/lightbox";
 import { PhotoGrid, type GridPhoto } from "../../components/ui/photo-grid";
 import { ServiceImage } from "../../components/ui/service-image";
 import { cloudinarySrcSet, cloudinaryUrl } from "../../lib/cloudinary";
+import { LAB_CRAFT_IMAGES } from "../../lib/lab-gallery";
 import { localizeHref } from "../../lib/locale";
 
 export { Page };
@@ -26,7 +28,6 @@ const IMPLANT_IMAGE =
   "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0053_gz8nis.webp";
 
 const MACHINE_PHOTOS: GridPhoto[] = [];
-const LAB_WORK_PHOTOS: GridPhoto[] = [];
 
 type Highlight = { value: string; label: string };
 
@@ -142,7 +143,9 @@ function Page() {
           title={t("clinicPage.work.title")}
           paragraphs={list("clinicPage.work.paragraphs")}
         >
-          <PhotoGrid photos={LAB_WORK_PHOTOS} columns={2} />
+          <AutoGallery
+            images={LAB_CRAFT_IMAGES.map((src) => ({ src, alt: t("services.implantologia.galleryImageAlt") }))}
+          />
         </Section>
 
         <section className="grid items-center gap-8 md:grid-cols-2 md:gap-12">

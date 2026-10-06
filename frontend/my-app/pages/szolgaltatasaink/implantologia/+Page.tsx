@@ -6,26 +6,13 @@ import { CtaButton } from "../../../components/ui/cta-button";
 import { PageContainer } from "../../../components/ui/page-container";
 import { RevealGroup } from "../../../components/ui/reveal-section";
 import { ServiceImage } from "../../../components/ui/service-image";
+import { LAB_CRAFT_IMAGES } from "../../../lib/lab-gallery";
 import { localizeHref } from "../../../lib/locale";
 
 export { Page };
 
 const IMPLANT_IMAGE =
   "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0053_gz8nis.webp";
-
-const CRAFT_IMAGES = [
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1791209525/Alphadent_fogtechnika_2026_0107_em3cnb.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1791209525/Alphadent_fogtechnika_2026_0108_1_worwlv.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1791209524/Alphadent_fogtechnika_2026_0169_ukzx3t.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1791209524/Alphadent_fogtechnika_2026_0165_1_w3ecki.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1791209524/Alphadent_fogtechnika_2026_0155_csbsqq.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1791209523/Alphadent_fogtechnika_2026_0126_1_bvjv0i.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1791209523/Alphadent_fogtechnika_2026_0121_gherds.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1791209523/Alphadent_fogtechnika_2026_0111_qmlch4.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1791209523/Alphadent_fogtechnika_2026_0183_1_ab8hun.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1791209523/Alphadent_fogtechnika_2026_0129_adiawh.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1791209523/Alphadent_fogtechnika_2026_0175_1_j8lgv3.webp",
-];
 
 type Item = { title: string; text: string };
 
@@ -90,7 +77,7 @@ function Page() {
           {t("services.implantologia.closing")}
         </p>
 
-        {CRAFT_IMAGES.length > 0 ? (
+        {LAB_CRAFT_IMAGES.length > 0 ? (
           <section>
             <h2 className="mb-5 flex items-center gap-3 text-xl font-semibold text-brand-gold-light md:text-2xl">
               <span
@@ -102,7 +89,7 @@ function Page() {
               {t("services.implantologia.galleryTitle")}
             </h2>
             <AutoGallery
-              images={CRAFT_IMAGES.map((src) => ({ src, alt: t("services.implantologia.galleryImageAlt") }))}
+              images={LAB_CRAFT_IMAGES.map((src) => ({ src, alt: t("services.implantologia.galleryImageAlt") }))}
             />
           </section>
         ) : null}

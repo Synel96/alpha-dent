@@ -24,6 +24,7 @@ vi.mock("vike-react/usePageContext", () => ({
 }));
 
 import { Page as KlinikankPage } from "../../pages/klinikank/+Page";
+import { LAB_CRAFT_IMAGES } from "../../lib/lab-gallery";
 
 describe("Klinikánk oldal", () => {
   it("megjeleníti a címet és a kiemelt tényeket", () => {
@@ -46,5 +47,12 @@ describe("Klinikánk oldal", () => {
     expect(screen.getByRole("img", { name: "clinicPage.rooms.panoramaAlt" })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: "clinicPage.rooms.waitingRoomAlt" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "home.intro.ctaButton" })).toHaveAttribute("href", "/hu/kapcsolat");
+  });
+
+  it("a labormunkák szekcióban körhintán mutatja a labor képeit", () => {
+    render(<KlinikankPage />);
+    expect(screen.getAllByRole("img", { name: "services.implantologia.galleryImageAlt" })).toHaveLength(
+      LAB_CRAFT_IMAGES.length
+    );
   });
 });
