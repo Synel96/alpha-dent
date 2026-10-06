@@ -73,3 +73,39 @@
     animation: none !important;
   }
 }
+
+/* Image loading skeleton (components/ui/image-skeleton.tsx): a dark slot
+   with a faint gold sheen sweeping across it. Only `transform` is
+   animated, so the shimmer runs on the compositor. */
+.image-skeleton {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(140deg, #18181d, #0e0e11);
+}
+
+.image-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(228, 196, 106, 0.13) 50%,
+    transparent 80%
+  );
+  animation: image-skeleton-shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes image-skeleton-shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-skeleton::after {
+    animation: none;
+  }
+}

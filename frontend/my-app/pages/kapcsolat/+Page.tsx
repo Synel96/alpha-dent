@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
+import { RevealGroup } from "../../components/ui/reveal-section";
 import { TextImageReveal } from "../../components/ui/text-image-reveal";
 import { formatClockTime, weekdayName, WEEKLY_HOURS } from "../../lib/opening-hours";
 import { useOpenStatus } from "../../lib/use-open-status";
@@ -56,183 +57,185 @@ function Page() {
 
   return (
     <PageContainer className="py-10 md:py-14 space-y-10 md:space-y-12">
-      <TextImageReveal
-        eyebrow={t("contactPage.eyebrow")}
-        title={t("contactPage.title")}
-        description={t("contactPage.intro")}
-        imageSrc="https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3395_ba4hbc.webp"
-        imageAlt={t("contactPage.imageAlt")}
-      >
-        <div className="flex flex-wrap gap-3">
-          <CtaButton
-            href={CONTACT_INFO.mobileHref}
-            badge={t("contactPage.cards.mobile")}
-            title={t("contactPage.actions.callNow")}
-            subtitle={CONTACT_INFO.mobileDisplay}
-            icon={Phone}
-            className="min-w-[260px]"
-          />
-          <CtaButton
-            href={CONTACT_INFO.emailHref}
-            badge={t("contactPage.cards.email")}
-            title={t("contactPage.actions.sendEmail")}
-            subtitle={CONTACT_INFO.email}
-            icon={Mail}
-            className="min-w-[260px]"
-          />
-          <CtaButton
-            href={CONTACT_INFO.mapUrl}
-            target="_blank"
-            rel="noreferrer"
-            badge={t("contactPage.cards.address")}
-            title={t("contactPage.actions.openMap")}
-            subtitle={CONTACT_INFO.address}
-            icon={MapPin}
-            className="min-w-[280px]"
-          />
-        </div>
-      </TextImageReveal>
-
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-            {t("contactPage.cards.address")}
-          </h3>
-          <p className="mb-3 text-sm text-white">{CONTACT_INFO.address}</p>
-          <a
-            href={CONTACT_INFO.mapUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm text-white hover:text-brand-gold-light"
-          >
-            {t("contactPage.actions.openMap")}
-          </a>
-        </article>
-
-        <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-            {t("openingHours.title")}
-          </h3>
-          <dl className="space-y-1 text-sm">
-            {WEEKLY_HOURS.map((hours, weekday) => {
-              const name = weekdayName(weekday, locale);
-              return (
-                <div
-                  key={weekday}
-                  className={cn(
-                    "flex justify-between gap-4",
-                    weekday === todayWeekday ? "font-semibold text-brand-gold-light" : "text-white"
-                  )}
-                >
-                  <dt>{name.charAt(0).toLocaleUpperCase(locale) + name.slice(1)}</dt>
-                  <dd>
-                    {hours
-                      ? `${formatClockTime(hours[0])}–${formatClockTime(hours[1])}`
-                      : t("openingHours.closed")}
-                  </dd>
-                </div>
-              );
-            })}
-          </dl>
-        </article>
-
-        <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-            {t("contactPage.cards.mobile")}
-          </h3>
-          <a
-            href={CONTACT_INFO.mobileHref}
-            className="text-sm text-white hover:text-brand-gold-light"
-          >
-            {CONTACT_INFO.mobileDisplay}
-          </a>
-        </article>
-
-        <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-            {t("contactPage.cards.phone")}
-          </h3>
-          <div className="space-y-2">
-            <a
-              href={CONTACT_INFO.phoneMainHref}
-              className="block text-sm text-white hover:text-brand-gold-light"
-            >
-              {CONTACT_INFO.phoneMainDisplay}
-            </a>
-            <a
-              href={CONTACT_INFO.phoneAltHref}
-              className="block text-sm text-white hover:text-brand-gold-light"
-            >
-              {CONTACT_INFO.phoneAltDisplay}
-            </a>
+      <RevealGroup skip={1}>
+        <TextImageReveal
+          eyebrow={t("contactPage.eyebrow")}
+          title={t("contactPage.title")}
+          description={t("contactPage.intro")}
+          imageSrc="https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3395_ba4hbc.webp"
+          imageAlt={t("contactPage.imageAlt")}
+        >
+          <div className="flex flex-wrap gap-3">
+            <CtaButton
+              href={CONTACT_INFO.mobileHref}
+              badge={t("contactPage.cards.mobile")}
+              title={t("contactPage.actions.callNow")}
+              subtitle={CONTACT_INFO.mobileDisplay}
+              icon={Phone}
+              className="min-w-[260px]"
+            />
+            <CtaButton
+              href={CONTACT_INFO.emailHref}
+              badge={t("contactPage.cards.email")}
+              title={t("contactPage.actions.sendEmail")}
+              subtitle={CONTACT_INFO.email}
+              icon={Mail}
+              className="min-w-[260px]"
+            />
+            <CtaButton
+              href={CONTACT_INFO.mapUrl}
+              target="_blank"
+              rel="noreferrer"
+              badge={t("contactPage.cards.address")}
+              title={t("contactPage.actions.openMap")}
+              subtitle={CONTACT_INFO.address}
+              icon={MapPin}
+              className="min-w-[280px]"
+            />
           </div>
-        </article>
+        </TextImageReveal>
 
-        <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-            {t("contactPage.cards.email")}
-          </h3>
-          <a
-            href={CONTACT_INFO.emailHref}
-            className="text-sm text-white hover:text-brand-gold-light"
-          >
-            {CONTACT_INFO.email}
-          </a>
-        </article>
-
-        <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-            {t("contactPage.cards.languages")}
-          </h3>
-          <p className="text-sm text-white">{t("contactPage.languages")}</p>
-        </article>
-
-        <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-            {t("contactPage.cards.gps")}
-          </h3>
-          <p className="mb-3 text-sm text-white">{CONTACT_INFO.gps}</p>
-          <div className="flex flex-wrap gap-4">
+        <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
+            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+              {t("contactPage.cards.address")}
+            </h3>
+            <p className="mb-3 text-sm text-white">{CONTACT_INFO.address}</p>
             <a
-              href={CONTACT_INFO.gpsMapUrl}
+              href={CONTACT_INFO.mapUrl}
               target="_blank"
               rel="noreferrer"
               className="text-sm text-white hover:text-brand-gold-light"
             >
-              {t("contactPage.actions.openByGps")}
+              {t("contactPage.actions.openMap")}
             </a>
+          </article>
+
+          <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
+            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+              {t("openingHours.title")}
+            </h3>
+            <dl className="space-y-1 text-sm">
+              {WEEKLY_HOURS.map((hours, weekday) => {
+                const name = weekdayName(weekday, locale);
+                return (
+                  <div
+                    key={weekday}
+                    className={cn(
+                      "flex justify-between gap-4",
+                      weekday === todayWeekday ? "font-semibold text-brand-gold-light" : "text-white"
+                    )}
+                  >
+                    <dt>{name.charAt(0).toLocaleUpperCase(locale) + name.slice(1)}</dt>
+                    <dd>
+                      {hours
+                        ? `${formatClockTime(hours[0])}–${formatClockTime(hours[1])}`
+                        : t("openingHours.closed")}
+                    </dd>
+                  </div>
+                );
+              })}
+            </dl>
+          </article>
+
+          <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
+            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+              {t("contactPage.cards.mobile")}
+            </h3>
             <a
-              href={CONTACT_INFO.websiteUrl}
-              target="_blank"
-              rel="noreferrer"
+              href={CONTACT_INFO.mobileHref}
               className="text-sm text-white hover:text-brand-gold-light"
             >
-              {t("contactPage.actions.openWebsite")}
+              {CONTACT_INFO.mobileDisplay}
             </a>
-          </div>
-        </article>
+          </article>
 
-        <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
-          <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-            {t("contactPage.cards.social")}
-          </h3>
-          <div className="flex gap-4">
-            {SOCIAL_LINKS.map(({ icon, label, href }) => (
+          <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
+            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+              {t("contactPage.cards.phone")}
+            </h3>
+            <div className="space-y-2">
               <a
-                key={label}
-                href={href}
+                href={CONTACT_INFO.phoneMainHref}
+                className="block text-sm text-white hover:text-brand-gold-light"
+              >
+                {CONTACT_INFO.phoneMainDisplay}
+              </a>
+              <a
+                href={CONTACT_INFO.phoneAltHref}
+                className="block text-sm text-white hover:text-brand-gold-light"
+              >
+                {CONTACT_INFO.phoneAltDisplay}
+              </a>
+            </div>
+          </article>
+
+          <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
+            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+              {t("contactPage.cards.email")}
+            </h3>
+            <a
+              href={CONTACT_INFO.emailHref}
+              className="text-sm text-white hover:text-brand-gold-light"
+            >
+              {CONTACT_INFO.email}
+            </a>
+          </article>
+
+          <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
+            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+              {t("contactPage.cards.languages")}
+            </h3>
+            <p className="text-sm text-white">{t("contactPage.languages")}</p>
+          </article>
+
+          <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
+            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+              {t("contactPage.cards.gps")}
+            </h3>
+            <p className="mb-3 text-sm text-white">{CONTACT_INFO.gps}</p>
+            <div className="flex flex-wrap gap-4">
+              <a
+                href={CONTACT_INFO.gpsMapUrl}
                 target="_blank"
                 rel="noreferrer"
-                aria-label={label}
-                className="inline-flex items-center justify-center text-brand-gold-muted hover:text-brand-gold-light transition-colors"
-                title={label}
+                className="text-sm text-white hover:text-brand-gold-light"
               >
-                {icon}
+                {t("contactPage.actions.openByGps")}
               </a>
-            ))}
-          </div>
-        </article>
-      </section>
+              <a
+                href={CONTACT_INFO.websiteUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm text-white hover:text-brand-gold-light"
+              >
+                {t("contactPage.actions.openWebsite")}
+              </a>
+            </div>
+          </article>
+
+          <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5">
+            <h3 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+              {t("contactPage.cards.social")}
+            </h3>
+            <div className="flex gap-4">
+              {SOCIAL_LINKS.map(({ icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  className="inline-flex items-center justify-center text-brand-gold-muted hover:text-brand-gold-light transition-colors"
+                  title={label}
+                >
+                  {icon}
+                </a>
+              ))}
+            </div>
+          </article>
+        </section>
+      </RevealGroup>
     </PageContainer>
   );
 }

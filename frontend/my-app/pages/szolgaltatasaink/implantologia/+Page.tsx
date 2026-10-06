@@ -4,6 +4,7 @@ import { usePageContext } from "vike-react/usePageContext";
 import { AutoGallery } from "../../../components/ui/auto-gallery";
 import { CtaButton } from "../../../components/ui/cta-button";
 import { PageContainer } from "../../../components/ui/page-container";
+import { RevealGroup } from "../../../components/ui/reveal-section";
 import { ServiceImage } from "../../../components/ui/service-image";
 import { localizeHref } from "../../../lib/locale";
 
@@ -38,95 +39,97 @@ function Page() {
 
   return (
     <PageContainer className="py-10 md:py-14 space-y-10 md:space-y-12">
-      <a
-        href={localizeHref(locale, "/szolgaltatasaink")}
-        className="text-sm text-brand-gold-muted hover:text-brand-gold"
-      >
-        ← {t("servicesHub.title")}
-      </a>
+      <RevealGroup skip={2}>
+        <a
+          href={localizeHref(locale, "/szolgaltatasaink")}
+          className="text-sm text-brand-gold-muted hover:text-brand-gold"
+        >
+          ← {t("servicesHub.title")}
+        </a>
 
-      <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-        <div className="space-y-4">
-          <p className="text-xs uppercase tracking-[0.22em] text-brand-gold-muted">
-            {t("nav.services")}
-          </p>
-          <h1 className="text-2xl font-semibold text-brand-gold-light md:text-4xl">
-            {t("services.implantologia.title")}
-          </h1>
-          <p className="text-lg italic leading-snug text-brand-gold-light/90">
-            {t("services.implantologia.tagline")}
-          </p>
-          {paragraphs.map((paragraph) => (
-            <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
-              {paragraph}
+        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+          <div className="space-y-4">
+            <p className="text-xs uppercase tracking-[0.22em] text-brand-gold-muted">
+              {t("nav.services")}
             </p>
-          ))}
+            <h1 className="text-2xl font-semibold text-brand-gold-light md:text-4xl">
+              {t("services.implantologia.title")}
+            </h1>
+            <p className="text-lg italic leading-snug text-brand-gold-light/90">
+              {t("services.implantologia.tagline")}
+            </p>
+            {paragraphs.map((paragraph) => (
+              <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+
+          <ServiceImage
+            src={IMPLANT_IMAGE}
+            alt={t("services.implantologia.imageAlt")}
+            caption={t("services.implantologia.imageCaption")}
+          />
         </div>
 
-        <ServiceImage
-          src={IMPLANT_IMAGE}
-          alt={t("services.implantologia.imageAlt")}
-          caption={t("services.implantologia.imageCaption")}
-        />
-      </div>
-
-      <section className="grid gap-4 sm:grid-cols-3">
-        {cases.map((item) => (
-          <article
-            key={item.title}
-            className="rounded-xl border border-brand-gold/25 bg-brand-surface/60 p-5"
-          >
-            <h3 className="mb-2 text-sm uppercase tracking-[0.15em] text-brand-gold-light">
-              {item.title}
-            </h3>
-            <p className="text-sm leading-relaxed text-white">{item.text}</p>
-          </article>
-        ))}
-      </section>
-
-      <p className="max-w-3xl text-sm italic leading-relaxed text-white">
-        {t("services.implantologia.closing")}
-      </p>
-
-      {CRAFT_IMAGES.length > 0 ? (
-        <section>
-          <h2 className="mb-5 flex items-center gap-3 text-xl font-semibold text-brand-gold-light md:text-2xl">
-            <span
-              aria-hidden
-              className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-brand-gold/45 bg-brand-black/40 text-brand-gold-light"
+        <section className="grid gap-4 sm:grid-cols-3">
+          {cases.map((item) => (
+            <article
+              key={item.title}
+              className="rounded-xl border border-brand-gold/25 bg-brand-surface/60 p-5"
             >
-              <Palette className="size-5" />
-            </span>
-            {t("services.implantologia.galleryTitle")}
-          </h2>
-          <AutoGallery
-            images={CRAFT_IMAGES.map((src) => ({ src, alt: t("services.implantologia.galleryImageAlt") }))}
-          />
-        </section>
-      ) : null}
-
-      <section>
-        <h2 className="mb-5 text-xl font-semibold text-brand-gold-light md:text-2xl">
-          {t("services.implantologia.processTitle")}
-        </h2>
-        <ol className="space-y-4">
-          {steps.map((step) => (
-            <li
-              key={step.title}
-              className="rounded-xl border border-brand-gold/25 bg-brand-surface/40 p-4"
-            >
-              <h3 className="text-sm font-semibold text-brand-gold-light">{step.title}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-white">{step.text}</p>
-            </li>
+              <h3 className="mb-2 text-sm uppercase tracking-[0.15em] text-brand-gold-light">
+                {item.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-white">{item.text}</p>
+            </article>
           ))}
-        </ol>
-      </section>
+        </section>
 
-      <CtaButton
-        href={localizeHref(locale, "/kapcsolat")}
-        badge={t("nav.contact")}
-        title={t("home.intro.ctaButton")}
-      />
+        <p className="max-w-3xl text-sm italic leading-relaxed text-white">
+          {t("services.implantologia.closing")}
+        </p>
+
+        {CRAFT_IMAGES.length > 0 ? (
+          <section>
+            <h2 className="mb-5 flex items-center gap-3 text-xl font-semibold text-brand-gold-light md:text-2xl">
+              <span
+                aria-hidden
+                className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-brand-gold/45 bg-brand-black/40 text-brand-gold-light"
+              >
+                <Palette className="size-5" />
+              </span>
+              {t("services.implantologia.galleryTitle")}
+            </h2>
+            <AutoGallery
+              images={CRAFT_IMAGES.map((src) => ({ src, alt: t("services.implantologia.galleryImageAlt") }))}
+            />
+          </section>
+        ) : null}
+
+        <section>
+          <h2 className="mb-5 text-xl font-semibold text-brand-gold-light md:text-2xl">
+            {t("services.implantologia.processTitle")}
+          </h2>
+          <ol className="space-y-4">
+            {steps.map((step) => (
+              <li
+                key={step.title}
+                className="rounded-xl border border-brand-gold/25 bg-brand-surface/40 p-4"
+              >
+                <h3 className="text-sm font-semibold text-brand-gold-light">{step.title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-white">{step.text}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <CtaButton
+          href={localizeHref(locale, "/kapcsolat")}
+          badge={t("nav.contact")}
+          title={t("home.intro.ctaButton")}
+        />
+      </RevealGroup>
     </PageContainer>
   );
 }

@@ -1,6 +1,7 @@
-import React from "react";
 import { cn } from "@/lib/utils";
 import { cloudinarySrcSet, cloudinaryUrl, TILE_IMAGE_WIDTHS } from "@/lib/cloudinary";
+import { useReveal } from "@/lib/use-reveal";
+import { ImageSkeleton, useImageLoaded } from "./image-skeleton";
 
 const TILE_SIZES = "(min-width: 1280px) 22vw, (min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw";
 
@@ -19,38 +20,8 @@ export function ServiceTile({
   className,
   delayMs = 0,
 }: ServiceTileProps) {
-  const rootRef = React.useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = React.useState(false);
-
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) {
-      setVisible(true);
-      return;
-    }
-
-    const node = rootRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry?.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      {
-        threshold: 0.2,
-        rootMargin: "0px 0px -10% 0px",
-      }
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  const { ref: rootRef, visible } = useReveal<HTMLElement>({ threshold: 0.2 });
+  const image = useImageLoaded();
 
   return (
     <article
@@ -68,8 +39,12 @@ export function ServiceTile({
         href={href}
         className="relative block w-full aspect-[4/3] overflow-hidden rounded-xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/80 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black"
       >
+        {imageUrl ? <ImageSkeleton visible={!image.loaded} /> : null}
         {imageUrl ? (
           <img
+            ref={image.ref}
+            onLoad={image.onLoad}
+            onError={image.onError}
             src={cloudinaryUrl(imageUrl, { width: TILE_IMAGE_WIDTHS.at(-1) })}
             srcSet={cloudinarySrcSet(imageUrl, TILE_IMAGE_WIDTHS)}
             sizes={TILE_SIZES}

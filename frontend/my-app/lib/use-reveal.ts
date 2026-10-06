@@ -1,14 +1,54 @@
 import React from "react";
 
-// Scroll-triggered reveal: content stays fully opaque (so it's never hidden
-// from crawlers, Lighthouse, or a user without JS) and only slides up a few
-// pixels once its container enters the viewport. Skip this above the fold
-// (e.g. the hero) - it delays nothing there and just adds animation cost to
-// content that should already be visible on first paint.
+type RevealOptions = { threshold?: number; rootMargin?: string };
+
+// One IntersectionObserver per distinct option set, shared by every reveal
+// on the page, rather than one observer per element - with a reveal on
+// every section and tile of every page that adds up. Each element is
+// unobserved as soon as it has been revealed.
+const sharedObservers = new Map<
+  string,
+  { observer: IntersectionObserver; callbacks: Map<Element, () => void> }
+>();
+
+function observeOnce(node: Element, { threshold, rootMargin }: Required<RevealOptions>, onVisible: () => void) {
+  const key = `${threshold}|${rootMargin}`;
+  let shared = sharedObservers.get(key);
+  if (!shared) {
+    const callbacks = new Map<Element, () => void>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const callback = callbacks.get(entry.target);
+          callbacks.delete(entry.target);
+          observer.unobserve(entry.target);
+          callback?.();
+        }
+      },
+      { threshold, rootMargin }
+    );
+    shared = { observer, callbacks };
+    sharedObservers.set(key, shared);
+  }
+
+  const { observer, callbacks } = shared;
+  callbacks.set(node, onVisible);
+  observer.observe(node);
+  return () => {
+    callbacks.delete(node);
+    observer.unobserve(node);
+  };
+}
+
+// Scroll-triggered reveal: flips `visible` once the element's container
+// enters the viewport. Skip this above the fold (e.g. the hero or a page's
+// title block) - it delays nothing there and just holds back content that
+// should already be visible on first paint.
 export function useReveal<T extends HTMLElement = HTMLElement>({
   threshold = 0.22,
   rootMargin = "0px 0px -10% 0px",
-}: { threshold?: number; rootMargin?: string } = {}) {
+}: RevealOptions = {}) {
   const ref = React.useRef<T | null>(null);
   const [visible, setVisible] = React.useState(false);
 
@@ -24,19 +64,7 @@ export function useReveal<T extends HTMLElement = HTMLElement>({
     const node = ref.current;
     if (!node) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry?.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold, rootMargin }
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
+    return observeOnce(node, { threshold, rootMargin }, () => setVisible(true));
   }, []);
 
   return { ref, visible };

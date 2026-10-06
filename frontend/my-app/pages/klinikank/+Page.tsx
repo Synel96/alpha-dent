@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
+import { RevealGroup } from "../../components/ui/reveal-section";
 import { ZoomableImage } from "../../components/ui/lightbox";
 import { PhotoGrid, type GridPhoto } from "../../components/ui/photo-grid";
 import { ServiceImage } from "../../components/ui/service-image";
@@ -72,113 +73,115 @@ function Page() {
 
   return (
     <PageContainer className="space-y-16 py-10 md:space-y-24 md:py-14">
-      <header className="space-y-10">
-        <div className="max-w-3xl space-y-4">
-          <p className="text-xs uppercase tracking-[0.22em] text-brand-gold-muted">
-            {t("clinicPage.eyebrow")}
-          </p>
-          <h1 className="text-2xl font-semibold leading-tight text-brand-gold-light md:text-4xl">
-            {t("clinicPage.title")}
-          </h1>
-          <p className="text-sm leading-relaxed text-white md:text-base">{t("clinicPage.intro")}</p>
-        </div>
-
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {highlights.map((item, index) => {
-            const Icon = HIGHLIGHT_ICONS[index];
-            return (
-              <li
-                key={item.value}
-                className="rounded-2xl border border-brand-gold/25 bg-[radial-gradient(circle_at_10%_0%,rgba(228,196,106,0.14),transparent_55%),linear-gradient(140deg,rgba(17,17,20,0.96),rgba(8,8,10,0.96))] p-5"
-              >
-                {Icon ? (
-                  <span
-                    aria-hidden
-                    className="mb-4 inline-flex size-10 items-center justify-center rounded-full border border-brand-gold/45 bg-brand-black/40 text-brand-gold-light"
-                  >
-                    <Icon className="size-5" />
-                  </span>
-                ) : null}
-                <p className="text-2xl font-semibold text-brand-gold-light md:text-3xl">{item.value}</p>
-                <p className="mt-2 text-sm leading-relaxed text-white/85">{item.label}</p>
-              </li>
-            );
-          })}
-        </ul>
-      </header>
-
-      <Section
-        eyebrow={t("clinicPage.rooms.eyebrow")}
-        title={t("clinicPage.rooms.title")}
-        paragraphs={list("clinicPage.rooms.paragraphs")}
-      >
-        <ZoomableImage image={{ src: PANORAMA_IMAGE, alt: t("clinicPage.rooms.panoramaAlt") }}>
-          <img
-            src={cloudinaryUrl(PANORAMA_IMAGE, { width: 1280 })}
-            srcSet={cloudinarySrcSet(PANORAMA_IMAGE, PANORAMA_IMAGE_WIDTHS)}
-            sizes="(min-width: 1280px) 1216px, 100vw"
-            alt={t("clinicPage.rooms.panoramaAlt")}
-            loading="lazy"
-            decoding="async"
-            crossOrigin="anonymous"
-            className="aspect-[16/9] w-full rounded-2xl border border-brand-gold/25 object-cover shadow-[0_18px_36px_-24px_rgba(201,168,76,0.45)] sm:aspect-[21/9] lg:aspect-[3/1]"
-          />
-        </ZoomableImage>
-        <PhotoGrid photos={clinicPhotos} />
-      </Section>
-
-      <Section
-        eyebrow={t("clinicPage.lab.eyebrow")}
-        title={t("clinicPage.lab.title")}
-        paragraphs={list("clinicPage.lab.paragraphs")}
-      >
-        <PhotoGrid photos={MACHINE_PHOTOS} columns={2} />
-      </Section>
-
-      <Section
-        eyebrow={t("clinicPage.work.eyebrow")}
-        title={t("clinicPage.work.title")}
-        paragraphs={list("clinicPage.work.paragraphs")}
-      >
-        <PhotoGrid photos={LAB_WORK_PHOTOS} columns={2} />
-      </Section>
-
-      <section className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-        <div className="space-y-3">
-          <p className="text-xs uppercase tracking-[0.22em] text-brand-gold-muted">
-            {t("clinicPage.implants.eyebrow")}
-          </p>
-          <h2 className="text-xl font-semibold text-brand-gold-light md:text-3xl">
-            {t("clinicPage.implants.title")}
-          </h2>
-          {list("clinicPage.implants.paragraphs").map((paragraph) => (
-            <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
-              {paragraph}
+      <RevealGroup skip={1}>
+        <header className="space-y-10">
+          <div className="max-w-3xl space-y-4">
+            <p className="text-xs uppercase tracking-[0.22em] text-brand-gold-muted">
+              {t("clinicPage.eyebrow")}
             </p>
-          ))}
-        </div>
-        <ServiceImage
-          src={IMPLANT_IMAGE}
-          alt={t("services.implantologia.imageAlt")}
-          caption={t("services.implantologia.imageCaption")}
-        />
-      </section>
+            <h1 className="text-2xl font-semibold leading-tight text-brand-gold-light md:text-4xl">
+              {t("clinicPage.title")}
+            </h1>
+            <p className="text-sm leading-relaxed text-white md:text-base">{t("clinicPage.intro")}</p>
+          </div>
 
-      <section className="rounded-2xl border border-brand-gold/25 bg-[radial-gradient(circle_at_10%_0%,rgba(228,196,106,0.16),transparent_45%),linear-gradient(140deg,rgba(17,17,20,0.96),rgba(8,8,10,0.96))] p-6 md:p-10">
-        <p className="max-w-3xl text-sm leading-relaxed text-white md:text-base">
-          {t("clinicPage.closing.text")}
-        </p>
-        <p className="mt-4 max-w-3xl text-lg italic leading-snug text-brand-gold-light md:text-xl">
-          {t("clinicPage.closing.quote")}
-        </p>
-        <div className="mt-6">
-          <CtaButton
-            href={localizeHref(locale, "/kapcsolat")}
-            badge={t("nav.contact")}
-            title={t("home.intro.ctaButton")}
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {highlights.map((item, index) => {
+              const Icon = HIGHLIGHT_ICONS[index];
+              return (
+                <li
+                  key={item.value}
+                  className="rounded-2xl border border-brand-gold/25 bg-[radial-gradient(circle_at_10%_0%,rgba(228,196,106,0.14),transparent_55%),linear-gradient(140deg,rgba(17,17,20,0.96),rgba(8,8,10,0.96))] p-5"
+                >
+                  {Icon ? (
+                    <span
+                      aria-hidden
+                      className="mb-4 inline-flex size-10 items-center justify-center rounded-full border border-brand-gold/45 bg-brand-black/40 text-brand-gold-light"
+                    >
+                      <Icon className="size-5" />
+                    </span>
+                  ) : null}
+                  <p className="text-2xl font-semibold text-brand-gold-light md:text-3xl">{item.value}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/85">{item.label}</p>
+                </li>
+              );
+            })}
+          </ul>
+        </header>
+
+        <Section
+          eyebrow={t("clinicPage.rooms.eyebrow")}
+          title={t("clinicPage.rooms.title")}
+          paragraphs={list("clinicPage.rooms.paragraphs")}
+        >
+          <ZoomableImage image={{ src: PANORAMA_IMAGE, alt: t("clinicPage.rooms.panoramaAlt") }}>
+            <img
+              src={cloudinaryUrl(PANORAMA_IMAGE, { width: 1280 })}
+              srcSet={cloudinarySrcSet(PANORAMA_IMAGE, PANORAMA_IMAGE_WIDTHS)}
+              sizes="(min-width: 1280px) 1216px, 100vw"
+              alt={t("clinicPage.rooms.panoramaAlt")}
+              loading="lazy"
+              decoding="async"
+              crossOrigin="anonymous"
+              className="aspect-[16/9] w-full rounded-2xl border border-brand-gold/25 object-cover shadow-[0_18px_36px_-24px_rgba(201,168,76,0.45)] sm:aspect-[21/9] lg:aspect-[3/1]"
+            />
+          </ZoomableImage>
+          <PhotoGrid photos={clinicPhotos} />
+        </Section>
+
+        <Section
+          eyebrow={t("clinicPage.lab.eyebrow")}
+          title={t("clinicPage.lab.title")}
+          paragraphs={list("clinicPage.lab.paragraphs")}
+        >
+          <PhotoGrid photos={MACHINE_PHOTOS} columns={2} />
+        </Section>
+
+        <Section
+          eyebrow={t("clinicPage.work.eyebrow")}
+          title={t("clinicPage.work.title")}
+          paragraphs={list("clinicPage.work.paragraphs")}
+        >
+          <PhotoGrid photos={LAB_WORK_PHOTOS} columns={2} />
+        </Section>
+
+        <section className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+          <div className="space-y-3">
+            <p className="text-xs uppercase tracking-[0.22em] text-brand-gold-muted">
+              {t("clinicPage.implants.eyebrow")}
+            </p>
+            <h2 className="text-xl font-semibold text-brand-gold-light md:text-3xl">
+              {t("clinicPage.implants.title")}
+            </h2>
+            {list("clinicPage.implants.paragraphs").map((paragraph) => (
+              <p key={paragraph} className="text-sm leading-relaxed text-white md:text-base">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+          <ServiceImage
+            src={IMPLANT_IMAGE}
+            alt={t("services.implantologia.imageAlt")}
+            caption={t("services.implantologia.imageCaption")}
           />
-        </div>
-      </section>
+        </section>
+
+        <section className="rounded-2xl border border-brand-gold/25 bg-[radial-gradient(circle_at_10%_0%,rgba(228,196,106,0.16),transparent_45%),linear-gradient(140deg,rgba(17,17,20,0.96),rgba(8,8,10,0.96))] p-6 md:p-10">
+          <p className="max-w-3xl text-sm leading-relaxed text-white md:text-base">
+            {t("clinicPage.closing.text")}
+          </p>
+          <p className="mt-4 max-w-3xl text-lg italic leading-snug text-brand-gold-light md:text-xl">
+            {t("clinicPage.closing.quote")}
+          </p>
+          <div className="mt-6">
+            <CtaButton
+              href={localizeHref(locale, "/kapcsolat")}
+              badge={t("nav.contact")}
+              title={t("home.intro.ctaButton")}
+            />
+          </div>
+        </section>
+      </RevealGroup>
     </PageContainer>
   );
 }

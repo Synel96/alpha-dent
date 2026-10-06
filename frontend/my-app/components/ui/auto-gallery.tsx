@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { cloudinarySrcSet, cloudinaryUrl } from "@/lib/cloudinary";
 import { cn } from "@/lib/utils";
+import { ImageSkeleton, useImageLoaded } from "./image-skeleton";
 import { Lightbox, ZoomBadge } from "./lightbox";
 
 const GALLERY_IMAGE_WIDTHS = [400, 640, 960] as const;
@@ -33,14 +34,15 @@ const ARROW_CLASS =
 // it in the Lightbox.
 //
 // The auto-scroll drives the container's real scrollLeft (not a CSS
-// transform), so manual scrolling and the animation share one position. It
-// only starts once the strip is on screen (IntersectionObserver) and never
-// under prefers-reduced-motion - the strip then simply stays manual.
+// transform), so manual scrolling and the animation share one position. Its
+// frame loop only runs while the strip is on screen (IntersectionObserver),
+// so an off-screen gallery costs nothing, and never under
+// prefers-reduced-motion - the strip then simply stays manual.
 export function AutoGallery({ images, className }: AutoGalleryProps) {
   const { t } = useTranslation();
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
   const trackRef = React.useRef<HTMLDivElement | null>(null);
-  const [active, setActive] = React.useState(false);
+  const [inView, setInView] = React.useState(false);
   const [lightboxIndex, setLightboxIndex] = React.useState<number | null>(null);
   const [dragging, setDragging] = React.useState(false);
 
@@ -60,15 +62,29 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
 
   // Width of one copy of the image list (the track holds two back to back):
   // scrolling by exactly this much lands on an identical frame, which is
-  // what makes the loop seamless in both directions.
-  const loopWidth = React.useCallback(() => {
+  // what makes the loop seamless in both directions. Measured only when the
+  // track resizes (ResizeObserver), never per frame, so the frame loop and
+  // scroll handler don't force a layout on every tick.
+  const loopWidthRef = React.useRef(0);
+  const loopWidth = () => loopWidthRef.current;
+
+  React.useEffect(() => {
     const track = trackRef.current;
-    const firstCopy = track?.children[0] as HTMLElement | undefined;
-    const secondCopy = track?.children[images.length] as HTMLElement | undefined;
-    if (!firstCopy || !secondCopy) return 0;
-    return secondCopy.offsetLeft - firstCopy.offsetLeft;
+    if (!track) return;
+    const measure = () => {
+      const firstCopy = track.children[0] as HTMLElement | undefined;
+      const secondCopy = track.children[images.length] as HTMLElement | undefined;
+      loopWidthRef.current = firstCopy && secondCopy ? secondCopy.offsetLeft - firstCopy.offsetLeft : 0;
+    };
+    measure();
+    if (typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(measure);
+    observer.observe(track);
+    return () => observer.disconnect();
   }, [images.length]);
 
+  // Kept observing (not disconnected after the first hit) so the frame loop
+  // can stop again whenever the strip scrolls out of view.
   React.useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -81,12 +97,9 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
-        if (entry?.isIntersecting) {
-          setActive(true);
-          observer.disconnect();
-        }
+        if (entry) setInView(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      { threshold: 0 }
     );
 
     observer.observe(node);
@@ -94,30 +107,36 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
   }, []);
 
   React.useEffect(() => {
-    if (!active) return;
+    if (!inView) return;
     const node = scrollRef.current;
     if (!node) return;
 
     // Fractional position kept here, since browsers may round scrollLeft.
     let position = node.scrollLeft;
     let last = performance.now();
+    let wasPaused = false;
     let frame = 0;
 
     const tick = (now: number) => {
       const elapsed = Math.min(now - last, 100);
       last = now;
-      const width = loopWidth();
+      const width = loopWidthRef.current;
       const paused =
         hoverRef.current ||
         touchRef.current ||
         dragRef.current !== null ||
         lightboxOpenRef.current ||
         now < idleUntilRef.current ||
-        document.hidden;
+        width <= 0;
 
-      if (paused || width <= 0) {
-        position = node.scrollLeft;
+      if (paused) {
+        wasPaused = true;
       } else {
+        // Pick up from wherever the visitor left the strip.
+        if (wasPaused) {
+          position = node.scrollLeft;
+          wasPaused = false;
+        }
         const speed = width / (images.length * SECONDS_PER_IMAGE * 1000);
         position += speed * elapsed;
         if (position >= width) position -= width;
@@ -128,7 +147,7 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
 
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [active, images.length, loopWidth]);
+  }, [inView, images.length]);
 
   // Manual scrolling past either end jumps by one copy's width, so swiping
   // or dragging never hits a wall either way.
@@ -251,33 +270,15 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
         style={{ scrollbarWidth: "none" }}
       >
         <div ref={trackRef} className="flex w-max gap-4">
-          {track.map((image, index) => {
-            const isCopy = index >= images.length;
-            return (
-              <button
-                key={index}
-                type="button"
-                aria-hidden={isCopy || undefined}
-                tabIndex={isCopy ? -1 : undefined}
-                aria-label={isCopy ? undefined : t("common.lightbox.open", { alt: image.alt })}
-                onClick={() => setLightboxIndex(index % images.length)}
-                className="group relative h-56 w-72 shrink-0 cursor-zoom-in overflow-hidden rounded-2xl border border-brand-border bg-brand-surface/60 shadow-[0_18px_36px_-24px_rgba(201,168,76,0.4)] transition-colors hover:border-brand-gold/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 sm:h-64 sm:w-96"
-              >
-                <img
-                  src={cloudinaryUrl(image.src, { width: 640 })}
-                  srcSet={cloudinarySrcSet(image.src, GALLERY_IMAGE_WIDTHS)}
-                  sizes="(min-width: 640px) 384px, 288px"
-                  alt={isCopy ? "" : image.alt}
-                  loading="lazy"
-                  decoding="async"
-                  crossOrigin="anonymous"
-                  draggable={false}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-                <ZoomBadge />
-              </button>
-            );
-          })}
+          {track.map((image, index) => (
+            <GalleryTile
+              key={index}
+              image={image}
+              isCopy={index >= images.length}
+              label={t("common.lightbox.open", { alt: image.alt })}
+              onOpen={() => setLightboxIndex(index % images.length)}
+            />
+          ))}
         </div>
       </div>
 
@@ -312,5 +313,48 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
         }}
       />
     </div>
+  );
+}
+
+type GalleryTileProps = {
+  image: GalleryImage;
+  // The second, looping copy of the list: hidden from assistive tech and
+  // the tab order so the photos aren't announced twice.
+  isCopy: boolean;
+  label: string;
+  onOpen: () => void;
+};
+
+function GalleryTile({ image, isCopy, label, onOpen }: GalleryTileProps) {
+  const { ref, loaded, onLoad, onError } = useImageLoaded();
+
+  return (
+    <button
+      type="button"
+      aria-hidden={isCopy || undefined}
+      tabIndex={isCopy ? -1 : undefined}
+      aria-label={isCopy ? undefined : label}
+      onClick={onOpen}
+      className="group relative h-56 w-72 shrink-0 cursor-zoom-in overflow-hidden rounded-2xl border border-brand-border bg-brand-surface/60 shadow-[0_18px_36px_-24px_rgba(201,168,76,0.4)] transition-colors hover:border-brand-gold/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 sm:h-64 sm:w-96"
+    >
+      <ImageSkeleton visible={!loaded} />
+      <img
+        ref={ref}
+        src={cloudinaryUrl(image.src, { width: 640 })}
+        srcSet={cloudinarySrcSet(image.src, GALLERY_IMAGE_WIDTHS)}
+        sizes="(min-width: 640px) 384px, 288px"
+        alt={isCopy ? "" : image.alt}
+        width={384}
+        height={256}
+        loading="lazy"
+        decoding="async"
+        crossOrigin="anonymous"
+        draggable={false}
+        onLoad={onLoad}
+        onError={onError}
+        className="relative h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+      />
+      <ZoomBadge />
+    </button>
   );
 }

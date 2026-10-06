@@ -5,6 +5,7 @@ import { localizeHref } from "../../lib/locale";
 import { CtaButton } from "../../components/ui/cta-button";
 import { FaqAccordion } from "../../components/ui/faq-accordion";
 import { PageContainer } from "../../components/ui/page-container";
+import { RevealGroup } from "../../components/ui/reveal-section";
 import { TextImageReveal } from "../../components/ui/text-image-reveal";
 
 type FaqItem = {
@@ -43,30 +44,32 @@ function Page() {
 
   return (
     <PageContainer className="py-10 md:py-14 space-y-10 md:space-y-12">
-      <TextImageReveal
-        eyebrow={t("faqPage.eyebrow")}
-        title={t("faqPage.title")}
-        description={t("faqPage.intro")}
-        imageSrc="https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3397_gii27w.webp"
-        imageAlt={t("faqPage.imageAlt")}
-      />
+      <RevealGroup skip={2}>
+        <TextImageReveal
+          eyebrow={t("faqPage.eyebrow")}
+          title={t("faqPage.title")}
+          description={t("faqPage.intro")}
+          imageSrc="https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3397_gii27w.webp"
+          imageAlt={t("faqPage.imageAlt")}
+        />
 
-      <FaqAccordion items={items} />
+        <FaqAccordion items={items} />
 
-      <section className="rounded-2xl border border-brand-gold/25 bg-[radial-gradient(circle_at_10%_0%,rgba(228,196,106,0.16),transparent_45%),linear-gradient(140deg,rgba(17,17,20,0.96),rgba(8,8,10,0.96))] p-6 md:p-8">
-        <h2 className="text-xl font-semibold text-brand-gold-light">{t("faqPage.ctaTitle")}</h2>
-        <p className="mt-2 max-w-2xl text-sm text-white md:text-base">
-          {t("faqPage.ctaDescription")}
-        </p>
-        <div className="mt-5">
-          <CtaButton
-            href={localizeHref(locale, "/kapcsolat")}
-            badge={t("nav.contact")}
-            title={t("faqPage.ctaButton")}
-            className="min-w-[260px]"
-          />
-        </div>
-      </section>
+        <section className="rounded-2xl border border-brand-gold/25 bg-[radial-gradient(circle_at_10%_0%,rgba(228,196,106,0.16),transparent_45%),linear-gradient(140deg,rgba(17,17,20,0.96),rgba(8,8,10,0.96))] p-6 md:p-8">
+          <h2 className="text-xl font-semibold text-brand-gold-light">{t("faqPage.ctaTitle")}</h2>
+          <p className="mt-2 max-w-2xl text-sm text-white md:text-base">
+            {t("faqPage.ctaDescription")}
+          </p>
+          <div className="mt-5">
+            <CtaButton
+              href={localizeHref(locale, "/kapcsolat")}
+              badge={t("nav.contact")}
+              title={t("faqPage.ctaButton")}
+              className="min-w-[260px]"
+            />
+          </div>
+        </section>
+      </RevealGroup>
     </PageContainer>
   );
 }
