@@ -40,6 +40,8 @@ describe("Adatkezelési tájékoztató", () => {
       expect(text).toContain("Alphadent Kft.");
       expect(text).toContain("9400 Sopron, Arany János u. 13.");
       expect(text).toContain("info@alpha-dent.eu");
+      expect(text).toContain("08-09-017400");
+      expect(text).toContain("14027493-2-08");
       expect(text).not.toMatch(/\bnull\b|\bundefined\b/);
     }
   });

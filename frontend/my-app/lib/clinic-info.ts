@@ -32,12 +32,12 @@ export const CLINIC_ADDRESS_LINE = `${CLINIC.postalCode} ${CLINIC.city}, ${CLINI
 // (e-cegjegyzek.hu) when available.
 export const COMPANY = {
   legalName: "Alphadent Kft.",
-  // Registered seat, if it differs from the clinic address above.
-  registeredSeat: null as string | null,
-  // Cégjegyzékszám, e.g. "08-09-000000".
-  companyRegistrationNumber: null as string | null,
-  // Adószám, e.g. "12345678-1-08".
-  taxNumber: null as string | null,
+  // Registered seat, as in the company register.
+  registeredSeat: "9400 Sopron, Arany J. utca 13." as string | null,
+  // Cégjegyzékszám.
+  companyRegistrationNumber: "08-09-017400" as string | null,
+  // Adószám.
+  taxNumber: "14027493-2-08" as string | null,
   // Name of the managing director (ügyvezető).
   representative: null as string | null,
   // Data protection officer's contact, only if one has been appointed.
