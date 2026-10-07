@@ -1,9 +1,11 @@
 import { cn } from "@/lib/utils";
-import { cloudinarySrcSet, cloudinaryUrl, TILE_IMAGE_WIDTHS } from "@/lib/cloudinary";
+import { cloudinarySrcSet, cloudinaryUrl, THUMBNAIL_QUALITY, TILE_IMAGE_WIDTHS } from "@/lib/cloudinary";
 import { useReveal } from "@/lib/use-reveal";
 import { ImageSkeleton, useImageLoaded } from "./image-skeleton";
 
-const TILE_SIZES = "(min-width: 1280px) 22vw, (min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw";
+// Default: the services hub grid (1 / 2 / 4 columns). Carousels pass their own.
+const TILE_SIZES = "(min-width: 1280px) 300px, (min-width: 1024px) 24vw, (min-width: 640px) 48vw, 92vw";
+const TILE_IMAGE = { aspectRatio: "4:3", quality: THUMBNAIL_QUALITY } as const;
 
 type ServiceTileProps = {
   title: string;
@@ -14,6 +16,8 @@ type ServiceTileProps = {
   // 3 under a section heading (homepage), 2 when the tiles sit straight
   // under the page's h1 (services hub) - keeps the heading outline gapless.
   headingLevel?: 2 | 3;
+  // The tile's rendered width, for the image's `sizes` (see TILE_SIZES).
+  sizes?: string;
 };
 
 export function ServiceTile({
@@ -23,6 +27,7 @@ export function ServiceTile({
   className,
   delayMs = 0,
   headingLevel = 3,
+  sizes = TILE_SIZES,
 }: ServiceTileProps) {
   const Heading = headingLevel === 2 ? "h2" : "h3";
   const { ref: rootRef, visible } = useReveal<HTMLElement>({ threshold: 0.2 });
@@ -50,9 +55,9 @@ export function ServiceTile({
             ref={image.ref}
             onLoad={image.onLoad}
             onError={image.onError}
-            src={cloudinaryUrl(imageUrl, { width: TILE_IMAGE_WIDTHS.at(-1) })}
-            srcSet={cloudinarySrcSet(imageUrl, TILE_IMAGE_WIDTHS)}
-            sizes={TILE_SIZES}
+            src={cloudinaryUrl(imageUrl, { width: TILE_IMAGE_WIDTHS.at(-1), ...TILE_IMAGE })}
+            srcSet={cloudinarySrcSet(imageUrl, TILE_IMAGE_WIDTHS, TILE_IMAGE)}
+            sizes={sizes}
             // Decorative: the tile's heading already names the service, and a
             // repeated alt would just be read out twice.
             alt=""

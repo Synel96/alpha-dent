@@ -12,8 +12,8 @@ export function ServiceImage({ src, alt, caption }: ServiceImageProps) {
     <figure>
       <ZoomableImage image={{ src, alt }}>
         <img
-          src={cloudinaryUrl(src, { width: 960 })}
-          srcSet={cloudinarySrcSet(src, REVEAL_IMAGE_WIDTHS)}
+          src={cloudinaryUrl(src, { width: 960, aspectRatio: "3:2" })}
+          srcSet={cloudinarySrcSet(src, REVEAL_IMAGE_WIDTHS, { aspectRatio: "3:2" })}
           sizes="(min-width: 768px) 50vw, 100vw"
           alt={alt}
           width={960}

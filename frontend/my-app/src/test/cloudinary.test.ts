@@ -22,6 +22,12 @@ describe("cloudinaryUrl", () => {
     );
   });
 
+  it("a megadott képarányra vágja a képet (ar_), hogy ne töltsön le levágott részt", () => {
+    expect(cloudinaryUrl(BASE, { width: 600, aspectRatio: "4:3", quality: 70 })).toBe(
+      "https://res.cloudinary.com/demo/image/upload/w_600,ar_4:3,c_fill,g_auto,q_70,f_auto/v1/sample.jpg"
+    );
+  });
+
   it("egyéni crop/gravity/quality/format értékeket alkalmaz", () => {
     expect(
       cloudinaryUrl(BASE, { width: 200, crop: "thumb", gravity: "face", quality: 80, format: "webp" })

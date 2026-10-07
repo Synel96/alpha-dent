@@ -1,6 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { cloudinarySrcSet, cloudinaryUrl, TILE_IMAGE_WIDTHS } from "@/lib/cloudinary";
+import { cloudinarySrcSet, cloudinaryUrl, THUMBNAIL_QUALITY, TILE_IMAGE_WIDTHS } from "@/lib/cloudinary";
+
+const GRID_IMAGE = { aspectRatio: "4:3", quality: THUMBNAIL_QUALITY } as const;
 import { cn } from "@/lib/utils";
 import { ImageSkeleton, useImageLoaded } from "./image-skeleton";
 import { Lightbox, ZoomBadge } from "./lightbox";
@@ -64,8 +66,8 @@ function PhotoTile({ photo, columns, label, onOpen }: PhotoTileProps) {
       <ImageSkeleton visible={!loaded} />
       <img
         ref={ref}
-        src={cloudinaryUrl(photo.src, { width: 800 })}
-        srcSet={cloudinarySrcSet(photo.src, TILE_IMAGE_WIDTHS)}
+        src={cloudinaryUrl(photo.src, { width: 800, ...GRID_IMAGE })}
+        srcSet={cloudinarySrcSet(photo.src, TILE_IMAGE_WIDTHS, GRID_IMAGE)}
         sizes={columns === 3 ? "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" : "(min-width: 640px) 50vw, 100vw"}
         alt={photo.alt}
         width={800}

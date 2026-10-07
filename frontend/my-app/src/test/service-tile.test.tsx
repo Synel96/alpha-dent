@@ -27,7 +27,7 @@ describe("ServiceTile", () => {
     expect(img).toHaveAttribute("alt", "");
     expect(img).toHaveAttribute(
       "src",
-      "https://res.cloudinary.com/demo/image/upload/w_800,c_fill,g_auto,q_78,f_auto/v1/consult.jpg"
+      "https://res.cloudinary.com/demo/image/upload/w_800,ar_4:3,c_fill,g_auto,q_70,f_auto/v1/consult.jpg"
     );
     expect(img.getAttribute("srcset")).toContain("400w");
     expect(img.getAttribute("srcset")).toContain("800w");

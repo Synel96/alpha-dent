@@ -190,6 +190,7 @@ function Page() {
                   imageUrl={SERVICE_IMAGES[key]}
                   delayMs={index * 60}
                   className="w-[80%] shrink-0 snap-start sm:w-[48%] lg:w-[34%] xl:w-[27%]"
+                  sizes="(min-width: 1280px) 330px, (min-width: 1024px) 34vw, (min-width: 640px) 48vw, 80vw"
                 />
               ))}
             </ServiceCarousel>

@@ -9,6 +9,10 @@ const UPLOAD_MARKER = "/upload/";
 export type CloudinaryTransformOptions = {
   width?: number;
   height?: number;
+  // e.g. "4:3": with c_fill, Cloudinary crops to the ratio the image is
+  // actually shown at, so no pixels are downloaded only to be cropped away
+  // by object-cover in the browser.
+  aspectRatio?: string;
   crop?: "fill" | "fit" | "limit" | "scale" | "thumb";
   gravity?: string;
   quality?: "auto" | number;
@@ -22,7 +26,7 @@ function isCloudinaryUrl(url: string): boolean {
 export function cloudinaryUrl(url: string, options: CloudinaryTransformOptions = {}): string {
   if (!isCloudinaryUrl(url)) return url;
 
-  const { width, height, crop = "fill", gravity = "auto", quality = 78, format = "auto" } = options;
+  const { width, height, aspectRatio, crop = "fill", gravity = "auto", quality = 78, format = "auto" } = options;
   // Gravity only means something (and Cloudinary only accepts it) for the
   // modes that actually crop; with c_limit/c_fit/c_scale it makes the
   // request fail instead of being ignored.
@@ -30,6 +34,7 @@ export function cloudinaryUrl(url: string, options: CloudinaryTransformOptions =
   const transform = [
     width ? `w_${width}` : null,
     width && height ? `h_${height}` : null,
+    width && aspectRatio && !height ? `ar_${aspectRatio}` : null,
     width ? `c_${crop}` : null,
     width && crops ? `g_${gravity}` : null,
     `q_${quality}`,
@@ -55,3 +60,7 @@ export function cloudinarySrcSet(
 // ServiceTile/szolgaltatasaink and TextImageReveal usages).
 export const TILE_IMAGE_WIDTHS = [400, 600, 800] as const;
 export const REVEAL_IMAGE_WIDTHS = [480, 768, 960] as const;
+
+// Small tiles (carousels, grids): a lower quality is invisible at that size,
+// and the lightbox fetches its own full-quality rendition anyway.
+export const THUMBNAIL_QUALITY = 70;

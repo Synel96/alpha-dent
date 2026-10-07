@@ -20,6 +20,10 @@ export function Head() {
   return (
     <>
       <meta name="theme-color" content="#08080a" />
+      {/* All photos come from Cloudinary: open that connection right away
+          (crossOrigin to match the images' CORS mode, or it's not reused),
+          instead of only when the parser reaches the hero image. */}
+      <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
       <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.85em' x='0.08em' font-size='82' fill='%23C9A84C'%3E%CE%B1%3C/text%3E%3C/svg%3E" />
       <link rel="canonical" href={canonical} />
       {hreflangAlternates(urlPathname).map(({ hreflang, href }) => (

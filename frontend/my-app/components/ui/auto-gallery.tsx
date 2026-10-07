@@ -1,12 +1,14 @@
 import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { cloudinarySrcSet, cloudinaryUrl } from "@/lib/cloudinary";
+import { cloudinarySrcSet, cloudinaryUrl, THUMBNAIL_QUALITY } from "@/lib/cloudinary";
 import { cn } from "@/lib/utils";
 import { ImageSkeleton, useImageLoaded } from "./image-skeleton";
 import { Lightbox, ZoomBadge } from "./lightbox";
 
 const GALLERY_IMAGE_WIDTHS = [400, 640, 960] as const;
+// The desktop tile is 384x256 (3:2); the slightly taller phone tile just trims the sides.
+const GALLERY_IMAGE = { aspectRatio: "3:2", quality: THUMBNAIL_QUALITY } as const;
 // Per image, so the strip moves at the same speed whatever the image count.
 const SECONDS_PER_IMAGE = 8;
 // How long the auto-scroll waits after the last swipe, drag, wheel or arrow
@@ -350,8 +352,8 @@ function GalleryTile({ image, isCopy, label, onOpen }: GalleryTileProps) {
       <ImageSkeleton visible={!loaded} />
       <img
         ref={ref}
-        src={cloudinaryUrl(image.src, { width: 640 })}
-        srcSet={cloudinarySrcSet(image.src, GALLERY_IMAGE_WIDTHS)}
+        src={cloudinaryUrl(image.src, { width: 640, ...GALLERY_IMAGE })}
+        srcSet={cloudinarySrcSet(image.src, GALLERY_IMAGE_WIDTHS, GALLERY_IMAGE)}
         sizes="(min-width: 640px) 384px, 288px"
         alt={isCopy ? "" : image.alt}
         width={384}
