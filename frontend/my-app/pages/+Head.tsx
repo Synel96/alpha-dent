@@ -10,6 +10,12 @@ import {
 } from "../lib/seo";
 import { clinicStructuredData, serializeJsonLd } from "../lib/structured-data";
 
+const FONT_PRELOADS = [
+  "/fonts/geist-5.2.9-latin-wght-normal.woff2",
+  "/fonts/geist-5.2.9-latin-wght-italic.woff2",
+  "/fonts/geist-5.2.9-latin-ext-wght-normal.woff2",
+];
+
 // og:title, og:description and og:image/twitter:card come from vike-react
 // itself (see +title.ts, +description.ts, +image.ts); the rest of the link
 // preview and the schema.org markup are added here.
@@ -24,6 +30,12 @@ export function Head() {
           (crossOrigin to match the images' CORS mode, or it's not reused),
           instead of only when the parser reaches the hero image. */}
       <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+      {/* Only the fonts the first screen needs: regular + italic (the hero
+          quote, the LCP text on mobile) latin, and regular latin-ext for
+          ő/ű. latin-ext italic loads on demand via unicode-range. */}
+      {FONT_PRELOADS.map((href) => (
+        <link key={href} rel="preload" href={href} as="font" type="font/woff2" crossOrigin="anonymous" />
+      ))}
       <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.85em' x='0.08em' font-size='82' fill='%23C9A84C'%3E%CE%B1%3C/text%3E%3C/svg%3E" />
       <link rel="canonical" href={canonical} />
       {hreflangAlternates(urlPathname).map(({ hreflang, href }) => (

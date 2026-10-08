@@ -43,10 +43,24 @@ describe("OpenStatusCard", () => {
     ]);
   });
 
-  it("nyitva csak a hívás gomb látszik", () => {
+  it("nyitva is a hívás az első, az e-mail tartalékként mellette", () => {
     vi.useFakeTimers({ toFake: ["Date"] });
     vi.setSystemTime(new Date("2026-09-28T08:00:00Z"));
     render(<OpenStatusCard />);
-    expect(screen.getAllByRole("link")).toHaveLength(1);
+    expect(screen.getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
+      "tel:+36208080600",
+      "mailto:info@alpha-dent.eu",
+    ]);
+  });
+
+  it("a nem aktuális állapot rétege rejtett, így a kártya magassága nem változik hidratáláskor", () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date("2026-09-28T08:00:00Z"));
+    const { container } = render(<OpenStatusCard />);
+    const layers = container.firstElementChild!.children;
+    expect(layers).toHaveLength(2);
+    expect(layers[0]).not.toHaveAttribute("aria-hidden");
+    expect(layers[1]).toHaveAttribute("aria-hidden", "true");
+    expect(layers[1]).toHaveClass("invisible");
   });
 });

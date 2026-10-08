@@ -25,6 +25,14 @@ async function findHtmlFiles(dir) {
 const beasties = new Beasties({
   path: distDir,
   logLevel: "warn",
+  // Also inline the @font-face rules the critical CSS uses: otherwise the
+  // faces only register once the deferred full stylesheet arrives, and the
+  // text first paints in a fallback font and then visibly swaps - even
+  // though pages/+Head.tsx already preloads the font files.
+  inlineFonts: true,
+  // Those preloads are hand-picked in +Head.tsx (only the above-the-fold
+  // subsets); don't add more.
+  preloadFonts: false,
 });
 
 const htmlFiles = await findHtmlFiles(distDir);

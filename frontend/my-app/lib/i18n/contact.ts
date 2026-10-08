@@ -32,7 +32,7 @@ export const contactResources = {
       opensToday: "Nyitás: ma {{time}}",
       opensTomorrow: "Nyitás: holnap {{time}}",
       opensOn: "Nyitás: {{day}} {{time}}",
-      openMessage: "Keressen minket bátran telefonon!",
+      openMessage: "Keressen minket bátran telefonon! Ha nem sikerül elérnie minket, írjon e-mailt.",
       closedMessage:
         "Rendelési időn kívül is fogadjuk hívását napközben. Ha telefonon nem sikerül elérnie minket, írjon e-mailt, és hamarosan válaszolunk!",
     },
@@ -70,7 +70,7 @@ export const contactResources = {
       opensToday: "Opens today at {{time}}",
       opensTomorrow: "Opens tomorrow at {{time}}",
       opensOn: "Opens {{day}} at {{time}}",
-      openMessage: "Feel free to give us a call!",
+      openMessage: "Feel free to give us a call! If you can't reach us, send us an email.",
       closedMessage:
         "We also take calls during the day outside opening hours. If you can't reach us by phone, send us an email and we'll get back to you soon.",
     },
@@ -108,7 +108,7 @@ export const contactResources = {
       opensToday: "Öffnet heute um {{time}} Uhr",
       opensTomorrow: "Öffnet morgen um {{time}} Uhr",
       opensOn: "Öffnet am {{day}} um {{time}} Uhr",
-      openMessage: "Rufen Sie uns gerne an!",
+      openMessage: "Rufen Sie uns gerne an! Wenn Sie uns nicht erreichen, schreiben Sie uns eine E-Mail.",
       closedMessage:
         "Auch außerhalb der Öffnungszeiten nehmen wir tagsüber Anrufe entgegen. Wenn Sie uns telefonisch nicht erreichen, schreiben Sie uns eine E-Mail – wir melden uns bald.",
     },
@@ -146,7 +146,7 @@ export const contactResources = {
       opensToday: "Apre oggi alle {{time}}",
       opensTomorrow: "Apre domani alle {{time}}",
       opensOn: "Apre {{day}} alle {{time}}",
-      openMessage: "Non esiti a chiamarci!",
+      openMessage: "Non esiti a chiamarci! Se non riesce a raggiungerci, ci scriva un'e-mail.",
       closedMessage:
         "Anche fuori orario rispondiamo alle chiamate durante il giorno. Se non riesce a raggiungerci per telefono, ci scriva un'e-mail: le risponderemo presto.",
     },
