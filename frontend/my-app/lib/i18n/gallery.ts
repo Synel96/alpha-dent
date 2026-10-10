@@ -7,6 +7,7 @@ export const galleryResources = {
         "Nézzen körül rendelőnkben és fogtechnikai laborunkban. Bármelyik képre kattintva nagyobb méretben is megnézheti, és lapozhat a képek között.",
       comingSoon: "A galéria képei hamarosan felkerülnek. Addig is nézzen körül a Klinikánk oldalon!",
       photoCount: "{{count}} kép",
+      tabsLabel: "Galéria kategóriák",
       sections: {
         clinic: {
           title: "A rendelő",
@@ -26,7 +27,9 @@ export const galleryResources = {
       intro:
         "Take a look around our clinic and our dental laboratory. Click any photo to see it larger and browse through the images.",
       comingSoon: "The gallery photos are coming soon. In the meantime, take a look at our clinic page!",
-      photoCount: "{{count}} photos",
+      photoCount_one: "{{count}} photo",
+      photoCount_other: "{{count}} photos",
+      tabsLabel: "Gallery categories",
       sections: {
         clinic: {
           title: "The clinic",
@@ -46,7 +49,9 @@ export const galleryResources = {
       intro:
         "Sehen Sie sich in unserer Praxis und unserem Dentallabor um. Klicken Sie auf ein Foto, um es größer anzusehen und durch die Bilder zu blättern.",
       comingSoon: "Die Fotos der Galerie folgen in Kürze. Schauen Sie sich bis dahin gerne auf unserer Praxisseite um!",
-      photoCount: "{{count}} Fotos",
+      photoCount_one: "{{count}} Foto",
+      photoCount_other: "{{count}} Fotos",
+      tabsLabel: "Galerie-Kategorien",
       sections: {
         clinic: {
           title: "Die Praxis",
@@ -67,6 +72,7 @@ export const galleryResources = {
         "Dia un'occhiata al nostro studio e al nostro laboratorio odontotecnico. Clicchi su una foto per vederla più grande e sfogliare le immagini.",
       comingSoon: "Le foto della galleria saranno pubblicate a breve. Nel frattempo, dia un'occhiata alla pagina del nostro studio!",
       photoCount: "{{count}} foto",
+      tabsLabel: "Categorie della galleria",
       sections: {
         clinic: {
           title: "Lo studio",
