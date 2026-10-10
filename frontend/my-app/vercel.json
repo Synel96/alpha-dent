@@ -36,6 +36,11 @@
       "permanent": true
     },
     {
+      "source": "/galeria",
+      "destination": "/hu/galeria",
+      "permanent": true
+    },
+    {
       "source": "/kerdesek",
       "destination": "/hu/kerdesek",
       "permanent": true

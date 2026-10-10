@@ -30,6 +30,7 @@ const PAGE_LINKS = [
   { labelKey: "nav.home", path: "/" },
   { labelKey: "nav.clinic", path: "/klinikank" },
   { labelKey: "nav.services", path: "/szolgaltatasaink" },
+  { labelKey: "nav.gallery", path: "/galeria" },
   { labelKey: "nav.faq", path: "/kerdesek" },
   { labelKey: "nav.contact", path: "/kapcsolat" },
 ];

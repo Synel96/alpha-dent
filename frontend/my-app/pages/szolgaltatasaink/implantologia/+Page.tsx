@@ -1,12 +1,9 @@
-import { Palette } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
-import { AutoGallery } from "../../../components/ui/auto-gallery";
 import { CtaButton } from "../../../components/ui/cta-button";
 import { PageContainer } from "../../../components/ui/page-container";
 import { RevealGroup } from "../../../components/ui/reveal-section";
 import { ServiceImage } from "../../../components/ui/service-image";
-import { LAB_CRAFT_IMAGES } from "../../../lib/lab-gallery";
 import { localizeHref } from "../../../lib/locale";
 
 export { Page };
@@ -76,23 +73,6 @@ function Page() {
         <p className="max-w-3xl text-sm italic leading-relaxed text-white">
           {t("services.implantologia.closing")}
         </p>
-
-        {LAB_CRAFT_IMAGES.length > 0 ? (
-          <section>
-            <h2 className="mb-5 flex items-center gap-3 text-xl font-semibold text-brand-gold-light md:text-2xl">
-              <span
-                aria-hidden
-                className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-brand-gold/45 bg-brand-black/40 text-brand-gold-light"
-              >
-                <Palette className="size-5" />
-              </span>
-              {t("services.implantologia.galleryTitle")}
-            </h2>
-            <AutoGallery
-              images={LAB_CRAFT_IMAGES.map((src) => ({ src, alt: t("services.implantologia.galleryImageAlt") }))}
-            />
-          </section>
-        ) : null}
 
         <section>
           <h2 className="mb-5 text-xl font-semibold text-brand-gold-light md:text-2xl">

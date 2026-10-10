@@ -6,6 +6,7 @@ import { commonResources } from "./i18n/common";
 import { contactResources } from "./i18n/contact";
 import { errorResources } from "./i18n/error";
 import { faqResources } from "./i18n/faq";
+import { galleryResources } from "./i18n/gallery";
 import { metaResources } from "./i18n/meta";
 import { servicesResources } from "./i18n/services";
 import { DEFAULT_LOCALE, LOCALES, type Locale } from "./locale";
@@ -18,6 +19,7 @@ const resources = {
       ...contactResources.hu,
       ...clinicResources.hu,
       ...faqResources.hu,
+      ...galleryResources.hu,
       ...servicesResources.hu,
       ...metaResources.hu,
     },
@@ -29,6 +31,7 @@ const resources = {
       ...contactResources.en,
       ...clinicResources.en,
       ...faqResources.en,
+      ...galleryResources.en,
       ...servicesResources.en,
       ...metaResources.en,
     },
@@ -40,6 +43,7 @@ const resources = {
       ...contactResources.de,
       ...clinicResources.de,
       ...faqResources.de,
+      ...galleryResources.de,
       ...servicesResources.de,
       ...metaResources.de,
     },
@@ -51,6 +55,7 @@ const resources = {
       ...contactResources.it,
       ...clinicResources.it,
       ...faqResources.it,
+      ...galleryResources.it,
       ...servicesResources.it,
       ...metaResources.it,
     },

@@ -41,6 +41,12 @@
     "de": "/leistungen/zahnerhaltung",
     "it": "/servizi/trattamenti-conservativi"
   },
+  "/galeria": {
+    "hu": "/galeria",
+    "en": "/gallery",
+    "de": "/galerie",
+    "it": "/galleria"
+  },
   "/kerdesek": {
     "hu": "/kerdesek",
     "en": "/faq",

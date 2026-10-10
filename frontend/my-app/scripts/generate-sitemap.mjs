@@ -23,6 +23,7 @@ const CONTENT_SOURCES = {
   "/szolgaltatasaink/szajsebeszet": ["lib/i18n/services.ts"],
   "/szolgaltatasaink/esztetikai-fogaszat": ["lib/i18n/services.ts"],
   "/szolgaltatasaink/fogmegtarto-kezelesek": ["lib/i18n/services.ts"],
+  "/galeria": ["lib/i18n/gallery.ts", "lib/gallery.ts"],
   "/kerdesek": ["lib/i18n/faq.ts"],
   "/kapcsolat": ["lib/i18n/contact.ts", "lib/clinic-info.ts", "lib/opening-hours.ts"],
   "/adatkezelesi-tajekoztato": ["lib/privacy-policy.ts", "lib/clinic-info.ts"],

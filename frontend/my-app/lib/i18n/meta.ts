@@ -11,6 +11,7 @@ export type MetaPage =
   | "szajsebeszet"
   | "esztetikaiFogaszat"
   | "fogmegtartoKezelesek"
+  | "gallery"
   | "faq"
   | "contact"
   | "privacy";
@@ -55,6 +56,11 @@ export const metaResources = {
           title: "Tömés és gyökérkezelés Sopronban | Alphadent",
           description:
             "Fogmegtartó kezelések Sopronban: esztétikus tömés, inlay, onlay és korszerű gépi gyökérkezelés, hogy saját foga minél tovább megmaradjon.",
+        },
+        gallery: {
+          title: "Galéria – fogászati rendelő és labor Sopronban | Alphadent",
+          description:
+            "Fotók az Alphadent soproni fogászati rendelőjéről és saját fogtechnikai laborjáról: kezelők, váró és a fogpótlások készítése közelről.",
         },
         faq: {
           title: "Gyakori kérdések – fogászat Sopronban | Alphadent",
@@ -112,6 +118,11 @@ export const metaResources = {
           description:
             "Tooth-preserving treatment in Sopron: tooth-coloured fillings, inlays, onlays and modern machine root canal treatment to keep your own teeth longer.",
         },
+        gallery: {
+          title: "Gallery – Dental Clinic & Lab in Sopron | Alphadent",
+          description:
+            "Photos of the Alphadent dental clinic in Sopron and its own dental lab: treatment rooms, waiting room and how restorations are made, up close.",
+        },
         faq: {
           title: "FAQ – Dental Care in Sopron, Hungary | Alphadent",
           description:
@@ -168,6 +179,11 @@ export const metaResources = {
           description:
             "Zahnerhaltung in Sopron: zahnfarbene Füllungen, Inlays, Onlays und moderne maschinelle Wurzelbehandlung, damit Ihre eigenen Zähne länger bleiben.",
         },
+        gallery: {
+          title: "Galerie – Zahnklinik & Labor in Sopron | Alphadent",
+          description:
+            "Fotos der Alphadent Zahnklinik in Sopron und ihres eigenen Dentallabors: Behandlungsräume, Wartezimmer und die Herstellung von Zahnersatz aus der Nähe.",
+        },
         faq: {
           title: "FAQ – Zahnarzt in Sopron, Ungarn | Alphadent",
           description:
@@ -223,6 +239,11 @@ export const metaResources = {
           title: "Otturazioni e devitalizzazione a Sopron | Alphadent",
           description:
             "Conservativa a Sopron: otturazioni estetiche, intarsi e moderna devitalizzazione meccanica, per conservare più a lungo i propri denti.",
+        },
+        gallery: {
+          title: "Galleria – studio e laboratorio a Sopron | Alphadent",
+          description:
+            "Foto dello studio dentistico Alphadent di Sopron e del suo laboratorio odontotecnico: sale di trattamento, sala d'attesa e la realizzazione delle protesi.",
         },
         faq: {
           title: "Domande frequenti – dentista a Sopron | Alphadent",
