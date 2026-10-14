@@ -90,7 +90,9 @@ export function LanguageSwitcherCompact() {
     <div ref={rootRef} className="relative">
       <button
         onClick={() => setIsOpen((value) => !value)}
-        className={`px-3 py-2 text-sm font-semibold text-brand-gold hover:bg-brand-surface rounded-md transition-colors ${FOCUS_RING}`}
+        // Same dark gold-ringed bubble as the navbar's social icons, so it
+        // stays readable over the hero photo too.
+        className={`inline-flex h-9 min-w-9 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/60 px-3 text-xs font-semibold tracking-wide text-brand-gold-light backdrop-blur-sm transition-colors hover:border-brand-gold hover:bg-brand-gold/15 hover:text-brand-gold ${FOCUS_RING}`}
         aria-label={`${t("common.language")}: ${LANGUAGE_LABELS[locale]}`}
         aria-haspopup="menu"
         aria-expanded={isOpen}
