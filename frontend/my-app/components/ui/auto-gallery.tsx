@@ -14,7 +14,10 @@ const SECONDS_PER_IMAGE = 8;
 // How long the auto-scroll waits after the last swipe, drag, wheel or arrow
 // click before it picks up again from wherever the user left the strip.
 const RESUME_DELAY_MS = 2500;
-const GAP_PX = 16;
+// Upper bound for the browser's smooth scroll after an arrow click: until
+// then a second click steps on from that click's photo, and the loop wrap
+// leaves the strip alone.
+const ARROW_SCROLL_MS = 700;
 // One loop unit (the stretch the strip scrolls before it repeats) must be
 // wider than the viewport, or the end of the loop shows empty space. A short
 // list is repeated until it has at least this many tiles: 8 x 400px covers
@@ -159,12 +162,19 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
     return () => cancelAnimationFrame(frame);
   }, [inView, unitLength]);
 
+  // Where an arrow click is currently scrolling to (scrollLeft) and until
+  // when that smooth scroll is assumed to run: a second click during it steps
+  // on from that photo, and the loop wrap below waits for it to finish
+  // (moving scrollLeft mid-animation would cancel it).
+  const arrowTargetRef = React.useRef<{ left: number; until: number } | null>(null);
+  const arrowScrolling = () => arrowTargetRef.current !== null && performance.now() < arrowTargetRef.current.until;
+
   // Manual scrolling past either end jumps by one copy's width, so swiping
   // or dragging never hits a wall either way.
   const handleScroll = () => {
     const node = scrollRef.current;
     const width = loopWidth();
-    if (!node || width <= 0) return;
+    if (!node || width <= 0 || arrowScrolling()) return;
     if (node.scrollLeft >= width) {
       node.scrollLeft -= width;
       if (dragRef.current) dragRef.current.startScrollLeft -= width;
@@ -174,20 +184,47 @@ export function AutoGallery({ images, className }: AutoGalleryProps) {
     }
   };
 
+  // The arrows always land a whole photo in the middle of the strip - the
+  // next one to the right (or left) of the centre - however the auto-scroll
+  // happened to leave the strip, even halfway between two photos.
   const scrollByCard = (direction: 1 | -1) => {
     const node = scrollRef.current;
-    if (!node) return;
+    const track = trackRef.current;
+    if (!node || !track) return;
     pauseForAWhile();
-    const card = trackRef.current?.firstElementChild as HTMLElement | null;
-    const amount = (card?.offsetWidth ?? node.clientWidth * 0.8) + GAP_PX;
+
+    const viewportLeft = node.getBoundingClientRect().left;
+    const half = node.clientWidth / 2;
+    // Photo centres in scroll coordinates (independent of the current scroll).
+    const centres = Array.from(track.children, (card) => {
+      const rect = card.getBoundingClientRect();
+      return node.scrollLeft + rect.left - viewportLeft + rect.width / 2;
+    });
+    const base = arrowScrolling() ? arrowTargetRef.current!.left : node.scrollLeft;
+    const middle = base + half;
+    const centre =
+      direction === 1
+        ? centres.find((c) => c > middle + 1)
+        : [...centres].reverse().find((c) => c < middle - 1);
+    if (centre === undefined) return;
+    let target = centre - half;
+
+    // Keep the target inside the scrollable range by jumping one loop unit
+    // first - an identical frame, so nothing visibly moves.
     const width = loopWidth();
-    // Wrap first, instantly, so the smooth scroll below never has to cross
-    // a loop boundary (adjusting scrollLeft mid-animation would cancel it).
     if (width > 0) {
-      if (direction === -1 && node.scrollLeft - amount < 0) node.scrollLeft += width;
-      if (direction === 1 && node.scrollLeft + amount >= width) node.scrollLeft -= width;
+      if (target <= 0) {
+        node.scrollLeft += width;
+        target += width;
+      } else if (target >= width && node.scrollLeft >= width) {
+        node.scrollLeft -= width;
+        target -= width;
+      }
     }
-    node.scrollBy({ left: direction * amount, behavior: "smooth" });
+    target = Math.min(target, node.scrollWidth - node.clientWidth);
+
+    arrowTargetRef.current = { left: target, until: performance.now() + ARROW_SCROLL_MS };
+    node.scrollTo({ left: target, behavior: "smooth" });
   };
 
   // Click-and-drag for mouse users: a plain overflow-x-auto strip with a
