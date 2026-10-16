@@ -3,6 +3,8 @@ export const servicesResources = {
     servicesHub: {
       eyebrow: "Szolgáltatások",
       title: "Amiben számíthat ránk",
+      // The hub page's H1 (title stays the shorter label used in menus).
+      heading: "Fogászati szolgáltatások Sopronban",
       intro:
         "Soproni rendelőnkben az implantológiától a fogmegtartó kezelésekig mindent egy helyen kínálunk. Válassza ki, mire kíváncsi, és ismerje meg részletesen az adott kezelési területet.",
       toolkitTitle: "Egyedülálló eszközpark",
@@ -30,7 +32,7 @@ export const servicesResources = {
     services: {
       implantologia: {
         nav: "Implantológia",
-        title: "Implantológia",
+        title: "Implantológia Sopronban",
         imageAlt: "CAMLOG implantátum a rá rögzített fogkoronával, bemutató modellen",
         imageCaption: "CAMLOG arany fokozatú referenciarendelőként dolgozunk.",
         tagline:
@@ -85,7 +87,7 @@ export const servicesResources = {
       },
       szajsebeszet: {
         nav: "Szájsebészet",
-        title: "Szájsebészet",
+        title: "Szájsebészet Sopronban",
         tagline: "Biztonságos megoldások a komplikált esetekre is.",
         intro:
           "A szájsebészeti beavatkozásoknál különösen fontos a pontos diagnózis, a megfelelő tervezés és a tapasztalat.",
@@ -127,7 +129,7 @@ export const servicesResources = {
       },
       esztetikaiFogaszat: {
         nav: "Esztétikai fogászat",
-        title: "Esztétikai fogászat",
+        title: "Esztétikai fogászat Sopronban",
         imageAlt: "Természetes mosoly közelről",
         tagline: "A természetes mosoly nem tökéletes. Hanem harmonikus.",
         paragraphs: [
@@ -150,7 +152,7 @@ export const servicesResources = {
       },
       fogmegtartoKezelesek: {
         nav: "Fogmegtartó kezelések",
-        title: "Fogmegtartó kezelések",
+        title: "Fogmegtartó kezelések Sopronban",
         imageAlt: "Fogkefe, fogselyem és fogköztisztító kefék egy sötét kőpulton",
         tagline: "Amit lehet, megpróbálunk megmenteni.",
         paragraphs: [
@@ -164,6 +166,7 @@ export const servicesResources = {
     servicesHub: {
       eyebrow: "Services",
       title: "What you can count on us for",
+      heading: "Dental services in Sopron",
       intro: "At our dental clinic in Sopron, everything from implants to tooth-preserving treatments is under one roof - just across the Austrian border. Pick what you'd like to know more about, and explore that area of care in detail.",
       toolkitTitle: "Outstanding equipment",
       toolkitIntro:
@@ -320,7 +323,8 @@ export const servicesResources = {
   de: {
     servicesHub: {
       eyebrow: "Leistungen",
-      title: "Worauf du bei uns zählen kannst",
+      title: "Worauf Sie bei uns zählen können",
+      heading: "Zahnärztliche Leistungen in Sopron",
       intro: "In unserer Zahnarztpraxis in Sopron - direkt an der österreichischen Grenze - bieten wir von der Implantologie bis zur Zahnerhaltung alles unter einem Dach. Wählen Sie, worüber Sie mehr erfahren möchten, und entdecken Sie den jeweiligen Behandlungsbereich im Detail.",
       toolkitTitle: "Herausragende Ausstattung",
       toolkitIntro:
@@ -478,6 +482,7 @@ export const servicesResources = {
     servicesHub: {
       eyebrow: "Servizi",
       title: "Su cosa puoi contare da noi",
+      heading: "Servizi odontoiatrici a Sopron",
       intro: "Nel nostro studio dentistico di Sopron, a due passi dal confine austriaco, offriamo tutto sotto lo stesso tetto, dall'implantologia ai trattamenti conservativi. Scelga l'argomento che Le interessa e scopra nel dettaglio quell'area di cura.",
       toolkitTitle: "Attrezzature all'avanguardia",
       toolkitIntro:

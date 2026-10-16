@@ -46,7 +46,7 @@ function Page() {
             {t("servicesHub.eyebrow")}
           </p>
           <h1 className="text-2xl font-semibold text-brand-gold-light md:text-4xl">
-            {t("servicesHub.title")}
+            {t("servicesHub.heading")}
           </h1>
           <p className="text-sm leading-relaxed text-brand-gold-muted md:text-base">
             {t("servicesHub.intro")}
