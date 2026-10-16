@@ -24,7 +24,7 @@ vi.mock("vike-react/usePageContext", () => ({
 }));
 
 import { Page as KlinikankPage } from "../../pages/klinikank/+Page";
-import { LAB_CRAFT_IMAGES } from "../../lib/lab-gallery";
+import { GALLERY_SECTIONS } from "../../lib/gallery";
 
 describe("Klinikánk oldal", () => {
   it("megjeleníti a címet és a kiemelt tényeket", () => {
@@ -59,8 +59,10 @@ describe("Klinikánk oldal", () => {
 
   it("a labormunkák szekcióban körhintán mutatja a labor képeit", () => {
     render(<KlinikankPage />);
-    expect(screen.getAllByRole("img", { name: "services.implantologia.galleryImageAlt" })).toHaveLength(
-      LAB_CRAFT_IMAGES.length
-    );
+    const labPhotos = GALLERY_SECTIONS.find((section) => section.key === "lab")!.photos;
+    expect(labPhotos.length).toBeGreaterThan(0);
+    // The Galéria lab photos, each with its own alt text, first one first.
+    expect(screen.getAllByRole("img", { name: /^galleryPage\.photos\./ })).toHaveLength(labPhotos.length);
+    expect(screen.getAllByRole("img", { name: /^galleryPage\.photos\./ })[0]).toHaveAttribute("alt", labPhotos[0].altKey);
   });
 });

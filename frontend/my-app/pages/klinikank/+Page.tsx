@@ -9,7 +9,7 @@ import { RevealGroup } from "../../components/ui/reveal-section";
 import { PhotoGrid, type GridPhoto } from "../../components/ui/photo-grid";
 import { ServiceImage } from "../../components/ui/service-image";
 import { CLINIC_PHOTOS } from "../../lib/clinic-photos";
-import { LAB_CRAFT_IMAGES } from "../../lib/lab-gallery";
+import { GALLERY_SECTIONS } from "../../lib/gallery";
 import { localizeHref } from "../../lib/locale";
 
 export { Page };
@@ -18,6 +18,10 @@ const IMPLANT_IMAGE =
   "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0053_gz8nis.webp";
 
 const MACHINE_PHOTOS: GridPhoto[] = [];
+
+// The dental-lab photos of the Galéria page, in the same order and with the
+// same alt texts.
+const LAB_PHOTOS = GALLERY_SECTIONS.find((section) => section.key === "lab")?.photos ?? [];
 
 type Highlight = { value: string; label: string };
 
@@ -122,7 +126,7 @@ function Page() {
           paragraphs={list("clinicPage.work.paragraphs")}
         >
           <AutoGallery
-            images={LAB_CRAFT_IMAGES.map((src) => ({ src, alt: t("services.implantologia.galleryImageAlt") }))}
+            images={LAB_PHOTOS.map(({ src, altKey }) => ({ src, alt: t(altKey) }))}
           />
         </Section>
 
