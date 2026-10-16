@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 
 vi.mock("react-i18next", () => ({
@@ -22,14 +22,37 @@ describe("Kerdesek (FAQ) oldal", () => {
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
   });
 
-  it("mind a 15 kérdést megjeleníti, összecsukható panelként", () => {
+  it("a 16 kérdést 4 témakörben, összecsukható panelként jeleníti meg, a megközelítéssel kezdve", () => {
     mockPageContext.mockReturnValue({ locale: "hu" });
     render(<Page />);
-    expect(screen.getByText("faqPage.items.q1.question")).toBeInTheDocument();
-    expect(screen.getByText("faqPage.items.q15.question")).toBeInTheDocument();
-    expect(screen.getAllByRole("button", { name: /faqPage\.items\.q\d+\.question/ })).toHaveLength(
-      15
-    );
+    const topics = screen.getAllByRole("heading", { level: 2, name: /faqPage\.topics\./ });
+    expect(topics.map((heading) => heading.textContent)).toEqual([
+      "faqPage.topics.location.title",
+      "faqPage.topics.international.title",
+      "faqPage.topics.treatment.title",
+      "faqPage.topics.costs.title",
+    ]);
+    const questions = screen.getAllByRole("button", { name: /faqPage\.items\.q\d+\.question/ });
+    expect(questions).toHaveLength(16);
+    // Each question is listed once; the duplicates (q11, q12) are gone.
+    expect(new Set(questions.map((button) => button.textContent)).size).toBe(16);
+    expect(screen.queryByText("faqPage.items.q11.question")).not.toBeInTheDocument();
+    // Getting here first, and only the very first question starts open.
+    expect(questions[0]).toHaveTextContent("faqPage.items.q16.question");
+    expect(questions.filter((button) => button.getAttribute("aria-expanded") === "true")).toHaveLength(1);
+    expect(questions[0]).toHaveAttribute("aria-expanded", "true");
+  });
+
+  it("a témák gombsora a téma szekcióira ugrik, és a panelazonosítók egyediek", () => {
+    mockPageContext.mockReturnValue({ locale: "hu" });
+    const { container } = render(<Page />);
+    const nav = screen.getByRole("navigation", { name: "faqPage.topicsLabel" });
+    for (const link of within(nav).getAllByRole("link")) {
+      const target = link.getAttribute("href")!;
+      expect(container.querySelector(target)).not.toBeNull();
+    }
+    const panelIds = [...container.querySelectorAll("[role=region]")].map((panel) => panel.id);
+    expect(new Set(panelIds).size).toBe(panelIds.length);
   });
 
   it("a kapcsolatfelvétel CTA gomb az aktuális nyelv prefixelt kapcsolat oldalára mutat (en)", () => {

@@ -1,14 +1,23 @@
+// The questions are grouped into topics on the page (see pages/kerdesek),
+// in the order and grouping given there.
 export const faqResources = {
   hu: {
     faqPage: {
       eyebrow: "GYIK",
       title: "Gyakran Ismételt Kérdések",
       intro:
-        "Itt találja betegeink által leggyakrabban feltett kérdéseket a magyarországi fogászati kezelésekkel kapcsolatban. További kérdéseivel forduljon hozzánk bizalommal!",
+        "Itt találja betegeink által leggyakrabban feltett kérdéseket soproni rendelőnkkel és a magyarországi fogászati kezelésekkel kapcsolatban, témák szerint csoportosítva. További kérdéseivel forduljon hozzánk bizalommal!",
       imageAlt: "Az Alphadent világos váróterme bőr kanapéval",
-      ctaTitle: "Nem találtad meg a választ?",
-      ctaDescription: "Vedd fel velünk a kapcsolatot, és segítünk eligazodni.",
+      ctaTitle: "Nem találta meg a választ?",
+      ctaDescription: "Vegye fel velünk a kapcsolatot, és segítünk eligazodni.",
       ctaButton: "Kapcsolatfelvétel",
+      topicsLabel: "Témák",
+      topics: {
+        location: { title: "Megközelítés és parkolás" },
+        international: { title: "Külföldről érkező pácienseknek" },
+        treatment: { title: "Kezelés és fogpótlás" },
+        costs: { title: "Költségek és fizetés" },
+      },
       items: {
         q1: {
           question: "Lesznek-e nyelvi problémáim?",
@@ -18,7 +27,7 @@ export const faqResources = {
         q2: {
           question: "Mennyibe kerül a fogászati beavatkozás?",
           answer:
-            "Részletes kezelési tervet és árajánlatot kaphat e-mailen, faxon vagy postán. Csupán egy panorámaröntgent kell küldenie, vagy az otthoni fogorvosának a kezelési tervét. A költségek különböznek a fogászati kezelés típusa, mértéke és a felhasznált anyagok szerint.",
+            "A pontos ár mindig az egyéni kezelési tervtől és a választott megoldástól függ, mert a költségek a kezelés típusa, mértéke és a felhasznált anyagok szerint különböznek. Részletes kezelési tervet és árajánlatot kaphat e-mailen vagy postán: ehhez csupán egy panorámaröntgent kell küldenie, vagy az otthoni fogorvosa kezelési tervét.",
         },
         q3: {
           question: "Mennyi és milyen gyakori kezelésre van szükségem?",
@@ -32,8 +41,7 @@ export const faqResources = {
         },
         q5: {
           question: "Kapok-e számlát az elvégzett fogászati beavatkozásról?",
-          answer:
-            "Természetesen, minden egyes beavatkozásról állítunk ki számlát.",
+          answer: "Természetesen, minden egyes beavatkozásról állítunk ki számlát.",
         },
         q6: {
           question: "Mikor kell a kezelésemért fizetnem?",
@@ -41,8 +49,7 @@ export const faqResources = {
             "A kezelés megkezdésekor előleget kell fizetni, majd a fogmű elkészülte után a hátralékot, és erről részletes számlát kap.",
         },
         q7: {
-          question:
-            "Az én országom egészségpénztára hozzájárul-e a magyarországi fogászati kezelésekhez?",
+          question: "Az én országom egészségpénztára hozzájárul-e a magyarországi fogászati kezelésekhez?",
           answer:
             "A külföldi egészségpénztárak elfogadják a számlánkat, de minden páciensnek javasoljuk, hogy előzetesen érdeklődjön a saját egészségpénztáránál és szerezze be a szükséges dokumentumokat, amelyeket mi készséggel kitöltünk.",
         },
@@ -60,15 +67,6 @@ export const faqResources = {
           answer:
             "Magyarországon ugyanazokat az anyagokat használják, mint Nyugat-Európában, az Egyesült Királyságban, Németországban, Ausztriában, Svájcban és más országokban.",
         },
-        q11: {
-          question: "Milyen nyelven tudok kommunikálni a rendelőben?",
-          answer: "Munkatársainkkal magyarul, angolul és németül is kommunikálhat.",
-        },
-        q12: {
-          question: "Hogyan tudom meg, mennyibe kerül a kezelésem?",
-          answer:
-            "A pontos ár mindig az egyéni kezelési tervtől és a választott megoldástól függ. A vizsgálatot követően részletes kezelési tervet és árajánlatot készítünk.",
-        },
         q13: {
           question: "Mennyi idő alatt készül el a fogpótlás?",
           answer:
@@ -84,6 +82,21 @@ export const faqResources = {
           answer:
             "Igen. Külföldi pácienseink számára a kezelés megszervezésében és az utazással kapcsolatos információkban is segítséget nyújtunk.",
         },
+        q16: {
+          question: "Hol található a rendelő, és milyen messze van Ausztriától?",
+          answer:
+            "Rendelőnk Sopronban, a 9400 Sopron, Arany János u. 13. alatt található, közvetlenül az osztrák határ mellett. Bécsből autóval nagyjából egy óra alatt érhető el.",
+        },
+        q17: {
+          question: "Megközelíthető tömegközlekedéssel?",
+          answer:
+            "Igen, nagyon könnyen: a soproni vasútállomás közvetlenül a rendelő mellett van, így vonattal, akár Ausztriából is, szinte az ajtónkig utazhat.",
+        },
+        q18: {
+          question: "Hol tudok parkolni?",
+          answer:
+            "Pácienseink a rendelő zárt udvarában ingyenesen parkolhatnak, így autóval érkezve sem kell parkolóhelyet keresnie.",
+        },
       },
     },
   },
@@ -92,11 +105,18 @@ export const faqResources = {
       eyebrow: "FAQ",
       title: "Frequently Asked Questions",
       intro:
-        "Here you can find the questions most frequently asked by our patients about dental treatments in Hungary. If you have further questions, feel free to contact us.",
+        "Here you can find the questions our patients ask most often about our clinic in Sopron and dental treatment in Hungary, grouped by topic. If you have further questions, feel free to contact us.",
       imageAlt: "The bright Alphadent waiting room with a leather sofa",
-      ctaTitle: "Didn\'t find your answer?",
+      ctaTitle: "Didn't find your answer?",
       ctaDescription: "Reach out to us and we will help you right away.",
       ctaButton: "Contact us",
+      topicsLabel: "Topics",
+      topics: {
+        location: { title: "Getting here and parking" },
+        international: { title: "For patients from abroad" },
+        treatment: { title: "Treatment and restorations" },
+        costs: { title: "Costs and payment" },
+      },
       items: {
         q1: {
           question: "Will I have language difficulties?",
@@ -106,7 +126,7 @@ export const faqResources = {
         q2: {
           question: "How much does a dental procedure cost?",
           answer:
-            "You can receive a detailed treatment plan and quotation by email, fax or post. You only need to send a panoramic X-ray or your home dentist's treatment plan. Costs vary by treatment type, complexity and materials used.",
+            "The exact price always depends on your individual treatment plan and the chosen solution, as costs vary by treatment type, complexity and materials used. You can receive a detailed treatment plan and quotation by email or post: you only need to send a panoramic X-ray or your home dentist's treatment plan.",
         },
         q3: {
           question: "How many treatments will I need and how often?",
@@ -120,8 +140,7 @@ export const faqResources = {
         },
         q5: {
           question: "Will I receive an invoice for the treatment?",
-          answer:
-            "Of course. We issue an invoice for every procedure.",
+          answer: "Of course. We issue an invoice for every procedure.",
         },
         q6: {
           question: "When do I have to pay for my treatment?",
@@ -129,14 +148,13 @@ export const faqResources = {
             "An advance payment is required at the start of treatment, and the remaining balance is paid after the final work is completed. You receive a detailed invoice.",
         },
         q7: {
-          question:
-            "Will my country's health insurance contribute to treatments in Hungary?",
+          question: "Will my country's health insurance contribute to treatments in Hungary?",
           answer:
             "Foreign health insurers usually accept our invoices, but we recommend checking with your own insurer in advance and obtaining the required documents. We are happy to help complete them.",
         },
         q8: {
-          question: "Do you provide warranty for completed dental work?",
-          answer: "Yes, we provide warranty for the dental work we produce.",
+          question: "Do you provide a warranty for completed dental work?",
+          answer: "Yes, we provide a warranty for the dental work we produce.",
         },
         q9: {
           question: "Can you help me organize my trip?",
@@ -147,15 +165,6 @@ export const faqResources = {
           question: "What materials are used in Hungary?",
           answer:
             "The same materials are used in Hungary as in Western Europe, the UK, Germany, Austria, Switzerland and similar countries.",
-        },
-        q11: {
-          question: "What languages can I use at the clinic?",
-          answer: "You can communicate with our staff in Hungarian, English, and German.",
-        },
-        q12: {
-          question: "How do I find out how much my treatment will cost?",
-          answer:
-            "The exact price always depends on your individual treatment plan and the chosen solution. After the examination, we prepare a detailed treatment plan and quote.",
         },
         q13: {
           question: "How long does it take to make a dental restoration?",
@@ -172,78 +181,89 @@ export const faqResources = {
           answer:
             "Yes. We help our international patients organize their treatment as well as with travel-related information.",
         },
+        q16: {
+          question: "Where is the clinic, and how far is it from Austria?",
+          answer:
+            "Our clinic is in Sopron, at Arany János u. 13., 9400 Sopron - right on the Austrian border. From Vienna it is about an hour's drive.",
+        },
+        q17: {
+          question: "Can I get there by public transport?",
+          answer:
+            "Yes, very easily: Sopron railway station is right next to the clinic, so you can come by train - even from Austria - almost to our door.",
+        },
+        q18: {
+          question: "Where can I park?",
+          answer:
+            "Our patients can park free of charge in the clinic's enclosed courtyard, so there's no need to look for a parking space when you come by car.",
+        },
       },
     },
   },
   de: {
     faqPage: {
       eyebrow: "FAQ",
-      title: "Haufig gestellte Fragen",
+      title: "Häufig gestellte Fragen",
       intro:
-        "Hier findest du die haufigsten Fragen unserer Patienten zu zahnarztlichen Behandlungen in Ungarn. Bei weiteren Fragen kannst du uns jederzeit kontaktieren.",
+        "Hier finden Sie die häufigsten Fragen unserer Patienten zu unserer Zahnarztpraxis in Sopron und zu Zahnbehandlungen in Ungarn, nach Themen geordnet. Bei weiteren Fragen können Sie uns jederzeit kontaktieren.",
       imageAlt: "Das helle Wartezimmer von Alphadent mit Ledersofa",
       ctaTitle: "Keine passende Antwort gefunden?",
-      ctaDescription: "Kontaktiere uns direkt und wir helfen dir gerne weiter.",
+      ctaDescription: "Kontaktieren Sie uns direkt, wir helfen Ihnen gerne weiter.",
       ctaButton: "Kontakt aufnehmen",
+      topicsLabel: "Themen",
+      topics: {
+        location: { title: "Anreise und Parken" },
+        international: { title: "Für Patienten aus dem Ausland" },
+        treatment: { title: "Behandlung und Zahnersatz" },
+        costs: { title: "Kosten und Bezahlung" },
+      },
       items: {
         q1: {
           question: "Werde ich Sprachprobleme haben?",
           answer:
-            "Nein. Unsere Mitarbeiter (Rezeption, Arzte und Assistenten) sprechen Fremdsprachen gut. Du kannst auf Englisch, Deutsch und Ungarisch kommunizieren.",
+            "Nein. Unsere Mitarbeiter (Rezeption, Ärzte und Assistenz) sprechen gut Fremdsprachen. Sie können sich auf Deutsch, Englisch und Ungarisch verständigen.",
         },
         q2: {
-          question: "Wie viel kostet eine zahnarztliche Behandlung?",
+          question: "Wie viel kostet eine zahnärztliche Behandlung?",
           answer:
-            "Du kannst einen detaillierten Behandlungsplan und Kostenvoranschlag per Email, Fax oder Post erhalten. Dafur brauchst du nur ein Panoramarontgen oder den Plan deines Hauszahnarztes. Die Kosten hangen von Art, Umfang und Material ab.",
+            "Der genaue Preis hängt immer vom individuellen Behandlungsplan und der gewählten Lösung ab, denn die Kosten richten sich nach Art und Umfang der Behandlung sowie nach dem Material. Einen detaillierten Behandlungsplan mit Kostenvoranschlag erhalten Sie per E-Mail oder Post: Dafür genügt ein Panoramaröntgen oder der Behandlungsplan Ihres Hauszahnarztes.",
         },
         q3: {
-          question: "Wie viele und wie haufige Behandlungen brauche ich?",
+          question: "Wie viele Behandlungen brauche ich und in welchen Abständen?",
           answer:
-            "Der Behandlungsplan ist individuell. Fur eine Vollprothese sind meist 2 Termine mit 2-3 Tagen Abstand notig. Fur Krone, Brucke und Inlay meist 2 Termine mit etwa 1 Woche Abstand. Der Implantat-Zeitplan ist im Implantat-Bereich beschrieben.",
+            "Der Behandlungsplan ist individuell. Für eine Vollprothese sind meist 2 Termine im Abstand von 2-3 Tagen nötig, für Krone, Brücke und Inlay meist 2 Termine im Abstand von etwa einer Woche. Den Zeitplan einer Implantation finden Sie im Bereich Implantologie.",
         },
         q4: {
           question: "Wie kann ich in Ungarn bezahlen?",
           answer:
-            "Unsere Praxis akzeptiert Barzahlung. Du kannst in EUR, GBP, HUF, DKK und anderen konvertierbaren Wahrungen zahlen.",
+            "Unsere Praxis akzeptiert Barzahlung. Sie können in Euro, britischen Pfund, Forint, Dänischen Kronen und anderen konvertierbaren Währungen bezahlen.",
         },
         q5: {
-          question: "Bekomme ich eine Rechnung fur die Behandlung?",
-          answer:
-            "Selbstverstandlich. Fur jede Behandlung stellen wir eine Rechnung aus.",
+          question: "Bekomme ich eine Rechnung für die Behandlung?",
+          answer: "Selbstverständlich. Für jede Behandlung stellen wir eine Rechnung aus.",
         },
         q6: {
-          question: "Wann muss ich fur meine Behandlung bezahlen?",
+          question: "Wann muss ich für meine Behandlung bezahlen?",
           answer:
-            "Zu Beginn der Behandlung ist eine Anzahlung fallig. Der Restbetrag wird nach Fertigstellung bezahlt. Du erhaltst eine detaillierte Rechnung.",
+            "Zu Beginn der Behandlung ist eine Anzahlung fällig, der Restbetrag nach Fertigstellung des Zahnersatzes. Sie erhalten darüber eine detaillierte Rechnung.",
         },
         q7: {
-          question:
-            "Beteiligt sich meine Krankenversicherung an Behandlungen in Ungarn?",
+          question: "Beteiligt sich meine Krankenversicherung an Behandlungen in Ungarn?",
           answer:
-            "Auslandische Versicherungen akzeptieren unsere Rechnungen oft, aber wir empfehlen, vorab bei der eigenen Versicherung nachzufragen und die notigen Unterlagen mitzubringen. Wir helfen beim Ausfullen.",
+            "Ausländische Krankenversicherungen akzeptieren unsere Rechnungen, wir empfehlen jedoch, sich vorab bei Ihrer eigenen Versicherung zu erkundigen und die nötigen Unterlagen zu besorgen. Beim Ausfüllen helfen wir Ihnen gerne.",
         },
         q8: {
-          question: "Gebt ihr Garantie auf den Zahnersatz?",
+          question: "Geben Sie Garantie auf den Zahnersatz?",
           answer: "Ja, auf den von uns angefertigten Zahnersatz geben wir Garantie.",
         },
         q9: {
-          question: "Konnt ihr mir bei der Reiseorganisation helfen?",
+          question: "Können Sie mir bei der Reiseplanung helfen?",
           answer:
-            "Ja. Unsere Klinik unterstutzt dich bei der Reiseplanung. Anreise ist mit Auto, Bus, Zug oder Flug moglich, und wir konnen Transfers organisieren.",
+            "Ja, gerne unterstützen wir Sie bei der Organisation Ihrer Reise. Sie können mit dem Auto, dem Bus, dem Zug oder dem Flugzeug anreisen, für Letzteres können wir einen Transfer organisieren.",
         },
         q10: {
           question: "Welche Materialien werden in Ungarn verwendet?",
           answer:
-            "In Ungarn werden dieselben Materialien verwendet wie in Westeuropa, im Vereinigten Konigreich, in Deutschland, Osterreich, der Schweiz und anderen Landern.",
-        },
-        q11: {
-          question: "In welcher Sprache kann ich in der Praxis kommunizieren?",
-          answer: "Mit unserem Team können Sie auf Ungarisch, Englisch und Deutsch kommunizieren.",
-        },
-        q12: {
-          question: "Wie erfahre ich, wie viel meine Behandlung kostet?",
-          answer:
-            "Der genaue Preis hängt immer vom individuellen Behandlungsplan und der gewählten Lösung ab. Nach der Untersuchung erstellen wir einen detaillierten Behandlungsplan mit Kostenvoranschlag.",
+            "In Ungarn werden dieselben Materialien verwendet wie in Westeuropa, im Vereinigten Königreich, in Deutschland, Österreich, der Schweiz und anderen Ländern.",
         },
         q13: {
           question: "Wie lange dauert die Anfertigung des Zahnersatzes?",
@@ -260,6 +280,21 @@ export const faqResources = {
           answer:
             "Ja. Für unsere internationalen Patienten helfen wir sowohl bei der Organisation der Behandlung als auch mit reisebezogenen Informationen.",
         },
+        q16: {
+          question: "Wo liegt die Praxis, und wie weit ist es von Österreich?",
+          answer:
+            "Unsere Zahnarztpraxis befindet sich in Sopron (Arany János u. 13., 9400 Sopron), direkt an der österreichischen Grenze. Von Wien aus erreichen Sie uns mit dem Auto in etwa einer Stunde.",
+        },
+        q17: {
+          question: "Ist die Praxis mit öffentlichen Verkehrsmitteln erreichbar?",
+          answer:
+            "Ja, ganz einfach: Der Bahnhof Sopron liegt direkt neben der Praxis, so kommen Sie mit dem Zug, auch aus Österreich, fast bis vor unsere Tür.",
+        },
+        q18: {
+          question: "Wo kann ich parken?",
+          answer:
+            "Unsere Patienten parken kostenlos im geschlossenen Innenhof der Praxis, Sie müssen also keinen Parkplatz suchen, wenn Sie mit dem Auto kommen.",
+        },
       },
     },
   },
@@ -268,85 +303,96 @@ export const faqResources = {
       eyebrow: "FAQ",
       title: "Domande Frequenti",
       intro:
-        "Qui trovi le domande piu frequenti dei nostri pazienti sui trattamenti dentistici in Ungheria. Per ulteriori domande, contattaci con fiducia.",
+        "Qui trova le domande più frequenti dei nostri pazienti sul nostro studio di Sopron e sui trattamenti dentistici in Ungheria, suddivise per argomento. Per ulteriori domande, ci contatti con fiducia.",
       imageAlt: "La luminosa sala d'attesa di Alphadent con divano in pelle",
-      ctaTitle: "Non hai trovato la risposta?",
-      ctaDescription: "Contattaci e ti aiuteremo subito.",
+      ctaTitle: "Non ha trovato la risposta?",
+      ctaDescription: "Ci contatti e la aiuteremo subito.",
       ctaButton: "Contattaci",
+      topicsLabel: "Argomenti",
+      topics: {
+        location: { title: "Come raggiungerci e parcheggio" },
+        international: { title: "Per i pazienti dall'estero" },
+        treatment: { title: "Trattamenti e protesi" },
+        costs: { title: "Costi e pagamento" },
+      },
       items: {
         q1: {
-          question: "Avro problemi di lingua?",
+          question: "Avrò problemi di lingua?",
           answer:
-            "No. Il nostro team (receptionist, medici e assistenti) parla bene le lingue straniere. Puoi comunicare in inglese, tedesco e ungherese.",
+            "No. Il nostro team (receptionist, medici e assistenti) parla bene le lingue straniere. Può comunicare in inglese, tedesco e ungherese.",
         },
         q2: {
           question: "Quanto costa un intervento dentistico?",
           answer:
-            "Puoi ricevere un piano di trattamento dettagliato e un preventivo via email, fax o posta. Basta inviare una panoramica dentale o il piano del tuo dentista. I costi variano in base al tipo di trattamento, alla complessita e ai materiali utilizzati.",
+            "Il prezzo esatto dipende sempre dal piano di trattamento individuale e dalla soluzione scelta, perché i costi variano in base al tipo di trattamento, alla sua complessità e ai materiali utilizzati. Può ricevere un piano di trattamento dettagliato e un preventivo via email o per posta: basta inviarci una radiografia panoramica o il piano del Suo dentista.",
         },
         q3: {
           question: "Quanti trattamenti mi servono e con quale frequenza?",
           answer:
-            "Il piano di trattamento e personalizzato. Una protesi completa richiede di solito 2 sedute a distanza di 2-3 giorni. Corone, ponti e intarsi richiedono di solito 2 sedute con circa 1 settimana di intervallo. Il calendario implantologico e descritto nella sezione dedicata.",
+            "Il piano di trattamento è personalizzato. Una protesi completa richiede di solito 2 sedute a distanza di 2-3 giorni. Corone, ponti e intarsi richiedono di solito 2 sedute a circa 1 settimana di distanza. Il calendario implantologico è descritto nella sezione dedicata.",
         },
         q4: {
           question: "Come posso pagare in Ungheria?",
           answer:
-            "La nostra clinica accetta contanti. Puoi pagare in EUR, GBP, HUF, DKK e altre valute convertibili.",
+            "Il nostro studio accetta contanti. Può pagare in euro, sterline, fiorini, corone danesi e altre valute convertibili.",
         },
         q5: {
-          question: "Ricevero una fattura per il trattamento?",
-          answer:
-            "Certamente. Emettiamo una fattura per ogni intervento.",
+          question: "Riceverò una fattura per il trattamento?",
+          answer: "Certamente. Emettiamo una fattura per ogni intervento.",
         },
         q6: {
           question: "Quando devo pagare il trattamento?",
           answer:
-            "All'inizio del trattamento e richiesto un anticipo, poi il saldo viene pagato dopo il completamento del lavoro. Riceverai una fattura dettagliata.",
+            "All'inizio del trattamento è richiesto un anticipo, il saldo si paga dopo il completamento del lavoro. Riceverà una fattura dettagliata.",
         },
         q7: {
-          question:
-            "La mia assicurazione sanitaria contribuisce ai trattamenti in Ungheria?",
+          question: "La mia assicurazione sanitaria contribuisce ai trattamenti in Ungheria?",
           answer:
-            "Le assicurazioni estere spesso accettano la nostra fattura, ma consigliamo di verificare in anticipo con la propria assicurazione e procurare i documenti necessari. Ti aiutiamo volentieri a compilarli.",
+            "Le assicurazioni estere accettano la nostra fattura, ma consigliamo di informarsi in anticipo presso la propria assicurazione e di procurarsi i documenti necessari. La aiutiamo volentieri a compilarli.",
         },
         q8: {
-          question: "Fornite garanzia sui lavori protesici realizzati?",
-          answer: "Si, forniamo garanzia sui lavori protesici realizzati da noi.",
+          question: "Fornite una garanzia sui lavori protesici?",
+          answer: "Sì, forniamo una garanzia sui lavori protesici realizzati da noi.",
         },
         q9: {
           question: "Potete aiutarmi a organizzare il viaggio?",
           answer:
-            "Si. La nostra clinica puo aiutarti a organizzare il viaggio. Puoi arrivare in auto, autobus, treno o aereo, e possiamo fornire supporto transfer.",
+            "Sì. Il nostro studio La aiuta volentieri a organizzare il viaggio. Può arrivare in auto, autobus, treno o aereo, e in quest'ultimo caso possiamo organizzare un transfer.",
         },
         q10: {
           question: "Quali materiali vengono usati in Ungheria?",
           answer:
             "In Ungheria vengono utilizzati gli stessi materiali dell'Europa occidentale, del Regno Unito, della Germania, dell'Austria, della Svizzera e di altri paesi.",
         },
-        q11: {
-          question: "In quale lingua posso comunicare nello studio?",
-          answer: "Puoi comunicare con il nostro personale in ungherese, inglese e tedesco.",
-        },
-        q12: {
-          question: "Come faccio a sapere quanto costerà il mio trattamento?",
-          answer:
-            "Il prezzo esatto dipende sempre dal piano di trattamento individuale e dalla soluzione scelta. Dopo la visita, prepariamo un piano di trattamento dettagliato con preventivo.",
-        },
         q13: {
           question: "Quanto tempo richiede la realizzazione della protesi?",
           answer:
-            "Dipende dal trattamento scelto. Alcune corone e ponti possono essere completati in poche sedute, mentre l'intero processo di implantologia può richiedere diversi mesi.",
+            "Dipende dal trattamento scelto. Alcune corone e ponti possono essere completati in poche sedute, mentre l'intero processo implantologico può richiedere diversi mesi.",
         },
         q14: {
           question: "Come si svolge un'implantazione?",
           answer:
-            "Il processo inizia con la valutazione e la pianificazione, seguita dall'inserimento dell'impianto, dal periodo di guarigione e infine dalla realizzazione della protesi definitiva.",
+            "Il processo inizia con la valutazione e la pianificazione, seguite dall'inserimento dell'impianto, dal periodo di guarigione e infine dalla realizzazione della protesi definitiva.",
         },
         q15: {
           question: "Aiutate a organizzare il trattamento se arrivo dall'estero?",
           answer:
             "Sì. Ai nostri pazienti internazionali offriamo supporto sia nell'organizzazione del trattamento sia con informazioni relative al viaggio.",
+        },
+        q16: {
+          question: "Dove si trova lo studio e quanto dista dall'Austria?",
+          answer:
+            "Il nostro studio si trova a Sopron, in Arany János u. 13., 9400 Sopron, proprio al confine con l'Austria. Da Vienna si raggiunge in auto in circa un'ora.",
+        },
+        q17: {
+          question: "È raggiungibile con i mezzi pubblici?",
+          answer:
+            "Sì, molto facilmente: la stazione ferroviaria di Sopron è proprio accanto allo studio, quindi può arrivare in treno, anche dall'Austria, quasi fino alla nostra porta.",
+        },
+        q18: {
+          question: "Dove posso parcheggiare?",
+          answer:
+            "I nostri pazienti possono parcheggiare gratuitamente nel cortile chiuso dello studio, quindi non deve cercare parcheggio se arriva in auto.",
         },
       },
     },

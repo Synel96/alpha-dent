@@ -4,7 +4,7 @@ export const contactResources = {
       eyebrow: "Kapcsolat",
       title: "Tegye meg az első lépést a mosolya felé.",
       intro:
-        "Az első konzultáció során felmérjük a helyzetet, válaszolunk a kérdéseire, és megmutatjuk a lehetséges kezelési irányokat.",
+        "Az első konzultáció során felmérjük a helyzetet, válaszolunk a kérdéseire, és megmutatjuk a lehetséges kezelési irányokat. Soproni rendelőnk közvetlenül az osztrák határ mellett, a vasútállomás szomszédságában található, autóval érkező pácienseinknek pedig ingyenes parkolót biztosítunk a zárt udvarban.",
       imageAlt: "Alphadent logó",
       languages: "Magyar • Deutsch • English",
       parking: "Pácienseink számára ingyenes parkolás a rendelő zárt udvarában.",
@@ -42,7 +42,7 @@ export const contactResources = {
       eyebrow: "Contact",
       title: "Take the first step toward your smile.",
       intro:
-        "During the first consultation, we assess your situation, answer your questions, and show you the possible treatment directions.",
+        "During the first consultation, we assess your situation, answer your questions, and show you the possible treatment directions. Our clinic in Sopron is right on the Austrian border, about an hour's drive from Vienna and next door to the railway station - and if you come by car, free parking awaits you in our enclosed courtyard.",
       imageAlt: "Alphadent logo",
       languages: "Hungarian • German • English",
       parking: "Free parking for our patients in the clinic's enclosed courtyard.",
@@ -80,7 +80,7 @@ export const contactResources = {
       eyebrow: "Kontakt",
       title: "Machen Sie den ersten Schritt zu Ihrem Lächeln.",
       intro:
-        "Beim ersten Beratungsgespräch erfassen wir die Situation, beantworten Ihre Fragen und zeigen Ihnen die möglichen Behandlungsrichtungen.",
+        "Beim ersten Beratungsgespräch erfassen wir die Situation, beantworten Ihre Fragen und zeigen Ihnen die möglichen Behandlungsrichtungen. Unsere Zahnarztpraxis in Sopron liegt direkt an der österreichischen Grenze, etwa eine Autostunde von Wien entfernt und gleich neben dem Bahnhof - wer mit dem Auto kommt, parkt kostenlos in unserem geschlossenen Innenhof.",
       imageAlt: "Alphadent Logo",
       languages: "Ungarisch • Deutsch • Englisch",
       parking: "Kostenlose Parkplätze für unsere Patienten im geschlossenen Innenhof der Praxis.",
@@ -118,7 +118,7 @@ export const contactResources = {
       eyebrow: "Contatti",
       title: "Fai il primo passo verso il tuo sorriso.",
       intro:
-        "Durante la prima consulenza valutiamo la situazione, rispondiamo alle tue domande e ti mostriamo le possibili direzioni di trattamento.",
+        "Durante la prima consulenza valutiamo la situazione, rispondiamo alle tue domande e ti mostriamo le possibili direzioni di trattamento. Il nostro studio di Sopron si trova proprio al confine con l'Austria, accanto alla stazione ferroviaria; chi arriva in auto trova parcheggio gratuito nel nostro cortile chiuso.",
       imageAlt: "Logo Alphadent",
       languages: "Ungherese • Tedesco • Inglese",
       parking: "Parcheggio gratuito per i nostri pazienti nel cortile chiuso dello studio.",
