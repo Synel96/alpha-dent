@@ -25,6 +25,7 @@ import { PillBadge } from "../../components/ui/pill-badge";
 import { RevealSection } from "../../components/ui/reveal-section";
 import { ServiceCarousel } from "../../components/ui/service-carousel";
 import { ServiceTile } from "../../components/ui/service-tile";
+import { CLINIC_PHOTOS } from "../../lib/clinic-photos";
 import { localizeHref } from "../../lib/locale";
 import { useReveal } from "../../lib/use-reveal";
 import { cn } from "../../lib/utils";
@@ -56,14 +57,6 @@ const SERVICE_IMAGES: Partial<Record<(typeof SERVICE_SLUGS)[number], string>> = 
   fogmegtartoKezelesek:
     "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0047_nsmuvv.webp",
 };
-
-const GALLERY_IMAGES = [
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3397_gii27w.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3396_vw5kcw.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3395_ba4hbc.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3399_xpizts.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381100/IMG_3398_1_xfmfz8.webp",
-] as const;
 
 // One icon per "Miért Alphadent?" paragraph, in the same order as
 // home.whyUs.paragraphs: since-1996 lab+clinic, experienced technicians /
@@ -243,7 +236,7 @@ function Page() {
           </div>
         </PageContainer>
         <AutoGallery
-          images={GALLERY_IMAGES.map((src) => ({ src, alt: t("home.gallery.imageAlt") }))}
+          images={CLINIC_PHOTOS.map(({ key, src }) => ({ src, alt: t(`clinicPage.rooms.photos.${key}`) }))}
         />
       </section>
 

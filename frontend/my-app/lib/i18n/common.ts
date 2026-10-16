@@ -62,7 +62,6 @@ export const commonResources = {
       },
       gallery: {
         eyebrow: "Bepillantás",
-        imageAlt: "Részlet az Alphadent rendelőből",
       },
       mission: {
         eyebrow: "Szemléletünk",
@@ -154,7 +153,6 @@ export const commonResources = {
       },
       gallery: {
         eyebrow: "A Look Inside",
-        imageAlt: "A glimpse of the Alphadent clinic",
       },
       mission: {
         eyebrow: "Our Approach",
@@ -246,7 +244,6 @@ export const commonResources = {
       },
       gallery: {
         eyebrow: "Einblick",
-        imageAlt: "Einblick in die Alphadent Praxis",
       },
       mission: {
         eyebrow: "Unser Ansatz",
@@ -338,7 +335,6 @@ export const commonResources = {
       },
       gallery: {
         eyebrow: "Uno sguardo dentro",
-        imageAlt: "Uno scorcio dello studio Alphadent",
       },
       mission: {
         eyebrow: "Il nostro approccio",
