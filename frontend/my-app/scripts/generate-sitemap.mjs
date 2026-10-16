@@ -16,10 +16,10 @@ const ROUTE_SLUGS = JSON.parse(
 // directly in it - not a child page's) plus the translation file holding
 // its texts. meta.ts (titles/descriptions) counts for every page.
 const CONTENT_SOURCES = {
-  "/": ["pages/index", "lib/i18n/common.ts"],
-  "/klinikank": ["lib/i18n/clinic.ts"],
+  "/": ["pages/index", "lib/i18n/common.ts", "lib/clinic-photos.ts"],
+  "/klinikank": ["lib/i18n/clinic.ts", "lib/clinic-photos.ts", "lib/gallery.ts", "lib/i18n/gallery.ts"],
   "/szolgaltatasaink": ["lib/i18n/services.ts"],
-  "/szolgaltatasaink/implantologia": ["lib/i18n/services.ts", "lib/lab-gallery.ts"],
+  "/szolgaltatasaink/implantologia": ["lib/i18n/services.ts"],
   "/szolgaltatasaink/szajsebeszet": ["lib/i18n/services.ts"],
   "/szolgaltatasaink/esztetikai-fogaszat": ["lib/i18n/services.ts"],
   "/szolgaltatasaink/fogmegtarto-kezelesek": ["lib/i18n/services.ts"],
