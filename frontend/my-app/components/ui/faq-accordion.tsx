@@ -9,6 +9,7 @@ type FaqItem = {
 type FaqAccordionProps = {
   items: FaqItem[];
   className?: string;
+  // -1: every question starts closed.
   defaultOpenIndex?: number;
 };
 
@@ -19,6 +20,8 @@ export function FaqAccordion({
 }: FaqAccordionProps) {
   const [openIndex, setOpenIndex] = React.useState<number>(defaultOpenIndex);
   const [visible, setVisible] = React.useState(false);
+  // Unique per accordion: a page can show several (one per FAQ topic).
+  const idPrefix = React.useId();
   const rootRef = React.useRef<HTMLElement | null>(null);
 
   React.useEffect(() => {
@@ -70,8 +73,9 @@ export function FaqAccordion({
               type="button"
               onClick={() => setOpenIndex(open ? -1 : index)}
               className="flex w-full items-start gap-4 px-5 py-4 text-left transition-colors hover:bg-brand-surface/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-gold-light/70"
+              id={`${idPrefix}-question-${index}`}
               aria-expanded={open}
-              aria-controls={`faq-panel-${index}`}
+              aria-controls={`${idPrefix}-panel-${index}`}
             >
               <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/45 bg-brand-black/40 text-xs font-semibold text-brand-gold-light">
                 {String(index + 1).padStart(2, "0")}
@@ -90,7 +94,9 @@ export function FaqAccordion({
             </button>
 
             <div
-              id={`faq-panel-${index}`}
+              id={`${idPrefix}-panel-${index}`}
+              role="region"
+              aria-labelledby={`${idPrefix}-question-${index}`}
               className={`grid transition-all duration-300 ease-out ${
                 open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
               }`}

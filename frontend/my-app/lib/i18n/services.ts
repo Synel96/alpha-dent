@@ -4,7 +4,7 @@ export const servicesResources = {
       eyebrow: "Szolgáltatások",
       title: "Amiben számíthat ránk",
       intro:
-        "Válassza ki, mire kíváncsi, és ismerje meg részletesen az adott kezelési területet.",
+        "Soproni rendelőnkben az implantológiától a fogmegtartó kezelésekig mindent egy helyen kínálunk. Válassza ki, mire kíváncsi, és ismerje meg részletesen az adott kezelési területet.",
       toolkitTitle: "Egyedülálló eszközpark",
       toolkitIntro:
         "Fogtechnikai laborunkban a legmodernebb eszközökkel dolgozunk. Azért, hogy pontosabban tervezzünk, kiszámíthatóbban dolgozzunk és esztétikusabb eredményt érjünk el.",
@@ -37,7 +37,7 @@ export const servicesResources = {
           "Akár egy vagy több foga hiányzik, nem kell együtt élnie a hiánnyal.",
         paragraphs: [
           "Sőt, a hiányzó fog nemcsak esztétikai kérdés. Megváltoztathatja a rágást, a beszédet, a megmaradt fogak terhelését, és hosszú távon a száj egészségére is hatással lehet.",
-          "A fogászati implantátum a hiányzó fog gyökerének mesterséges pótlása, amelyre korona, híd vagy más fogpótlás kerülhet. Az implantáció segítségével nemcsak a mosoly, hanem a rágófunkció és a komfortérzet is helyreállítható.",
+          "A fogászati implantátum a hiányzó fog gyökerének mesterséges pótlása, amelyre korona, híd vagy más fogpótlás kerülhet. Soproni rendelőnkben az implantáció segítségével nemcsak a mosoly, hanem a rágófunkció és a komfortérzet is helyreállítható.",
         ],
         cases: [
           {
@@ -89,7 +89,7 @@ export const servicesResources = {
         tagline: "Biztonságos megoldások a komplikált esetekre is.",
         intro:
           "A szájsebészeti beavatkozásoknál különösen fontos a pontos diagnózis, a megfelelő tervezés és a tapasztalat.",
-        listIntro: "Rendelőnkben többek között az alábbi beavatkozásokat végezzük:",
+        listIntro: "Soproni rendelőnkben többek között az alábbi beavatkozásokat végezzük:",
         imageAlt:
           "Az Alphadent világos, modern kezelőszobája fogorvosi székkel, panorámafelvételen",
         comfortTitle: "Biztonságban, kíméletesen",
@@ -133,7 +133,7 @@ export const servicesResources = {
         paragraphs: [
           "Az esztétikai fogászat célja nem az, hogy mindenki ugyanolyan fehér, szabályos fogakat kapjon. A jó esztétikai eredmény illeszkedik az arc karakteréhez, a mosolyvonalhoz és a természetes fogazathoz.",
           "A jó fogpótlás nem csak szép, pontosan illeszkedik, megfelelően működik, és harmonikusan illeszkedik az arc és a természetes fogak karakteréhez.",
-          "Saját fogtechnikai laborunkban tapasztalt szakemberek dolgoznak modern CAD/CAM technológiával. A fogorvosi és fogtechnikai munka szoros együttműködése lehetővé teszi, hogy a tervezés és a kivitelezés egymást kiegészítve történjen.",
+          "Sopronban, a rendelővel egy épületben működő saját fogtechnikai laborunkban tapasztalt szakemberek dolgoznak modern CAD/CAM technológiával. A fogorvosi és fogtechnikai munka szoros együttműködése lehetővé teszi, hogy a tervezés és a kivitelezés egymást kiegészítve történjen.",
         ],
         listIntro: "Kezeléseink között megtalálható többek között:",
         items: [
@@ -155,7 +155,7 @@ export const servicesResources = {
         tagline: "Amit lehet, megpróbálunk megmenteni.",
         paragraphs: [
           "Egy saját fog általában érték. Ezért ha a fog állapota lehetővé teszi, elsődleges célunk annak megtartása.",
-          "Esztétikus tömések, inlayek, onlayek és korszerű gépi gyökérkezelés segítségével számos károsodott fog hosszú távon is megőrizhető.",
+          "Soproni rendelőnkben esztétikus tömések, inlayek, onlayek és korszerű gépi gyökérkezelés segítségével számos károsodott fog hosszú távon is megőrizhető.",
         ],
       },
     },
@@ -164,7 +164,7 @@ export const servicesResources = {
     servicesHub: {
       eyebrow: "Services",
       title: "What you can count on us for",
-      intro: "Pick what you'd like to know more about, and explore that area of care in detail.",
+      intro: "At our dental clinic in Sopron, everything from implants to tooth-preserving treatments is under one roof - just across the Austrian border. Pick what you'd like to know more about, and explore that area of care in detail.",
       toolkitTitle: "Outstanding equipment",
       toolkitIntro:
         "Our dental lab works with the most modern equipment available - so we can plan more precisely, work more predictably, and achieve more natural-looking results.",
@@ -190,13 +190,13 @@ export const servicesResources = {
     services: {
       implantologia: {
         nav: "Implantology",
-        title: "Implantology",
+        title: "Dental Implants in Sopron",
         imageAlt: "CAMLOG implant with a crown attached, on a demonstration model",
         imageCaption: "We are a CAMLOG Gold-level reference practice.",
         tagline: "Whether you're missing one tooth or several, you don't have to live with the gap.",
         paragraphs: [
           "In fact, a missing tooth isn't only a cosmetic issue. It can change the way you chew and speak, put extra load on your remaining teeth, and affect your oral health in the long run.",
-          "A dental implant is an artificial replacement for the root of a missing tooth, which can then carry a crown, bridge, or other restoration. Implants restore not only your smile, but also chewing function and comfort.",
+          "A dental implant is an artificial replacement for the root of a missing tooth, which can then carry a crown, bridge, or other restoration. At our Sopron clinic, implants restore not only your smile, but also chewing function and comfort.",
         ],
         cases: [
           {
@@ -243,10 +243,10 @@ export const servicesResources = {
       },
       szajsebeszet: {
         nav: "Oral Surgery",
-        title: "Oral Surgery",
+        title: "Oral Surgery in Sopron",
         tagline: "Safe solutions, even for complicated cases.",
         intro: "In oral surgery, an accurate diagnosis, proper planning, and experience matter more than anywhere else.",
-        listIntro: "Among others, we perform the following procedures:",
+        listIntro: "At our Sopron clinic we perform, among others, the following procedures:",
         imageAlt:
           "Panoramic view of Alphadent's bright, modern treatment room with the dental chair",
         comfortTitle: "Safe and gentle care",
@@ -284,13 +284,13 @@ export const servicesResources = {
       },
       esztetikaiFogaszat: {
         nav: "Cosmetic Dentistry",
-        title: "Cosmetic Dentistry",
+        title: "Cosmetic Dentistry in Sopron",
         imageAlt: "Close-up of a natural smile",
         tagline: "A natural smile isn't perfect. It's harmonious.",
         paragraphs: [
           "The goal of cosmetic dentistry isn't to give everyone the same uniformly white, perfectly even teeth. A good aesthetic result fits your facial character, your smile line, and your natural teeth.",
           "A good restoration isn't just beautiful - it fits precisely, functions properly, and blends harmoniously with your face and your natural teeth.",
-          "Our own dental lab employs experienced specialists working with modern CAD/CAM technology. Close cooperation between the dentist and the dental technician lets design and execution complement each other.",
+          "Our own dental lab, in the same building as our clinic in Sopron, employs experienced specialists working with modern CAD/CAM technology. Close cooperation between the dentist and the dental technician lets design and execution complement each other.",
         ],
         listIntro: "Our treatments include, among others:",
         items: [
@@ -307,12 +307,12 @@ export const servicesResources = {
       },
       fogmegtartoKezelesek: {
         nav: "Tooth-Preserving Treatments",
-        title: "Tooth-Preserving Treatments",
+        title: "Tooth-Preserving Treatments in Sopron",
         imageAlt: "Toothbrush, dental floss and interdental brushes on a dark stone countertop",
         tagline: "Whatever can be saved, we try to save.",
         paragraphs: [
           "Your own natural tooth is generally worth preserving. That's why, whenever the tooth's condition allows it, our primary goal is to keep it.",
-          "With aesthetic fillings, inlays, onlays, and modern machine-assisted root canal treatment, many damaged teeth can be preserved for the long term.",
+          "At our Sopron clinic, aesthetic fillings, inlays, onlays, and modern machine-assisted root canal treatment allow many damaged teeth to be preserved for the long term.",
         ],
       },
     },
@@ -321,7 +321,7 @@ export const servicesResources = {
     servicesHub: {
       eyebrow: "Leistungen",
       title: "Worauf du bei uns zählen kannst",
-      intro: "Wähle, worüber du mehr erfahren möchtest, und entdecke den jeweiligen Behandlungsbereich im Detail.",
+      intro: "In unserer Zahnarztpraxis in Sopron - direkt an der österreichischen Grenze - bieten wir von der Implantologie bis zur Zahnerhaltung alles unter einem Dach. Wählen Sie, worüber Sie mehr erfahren möchten, und entdecken Sie den jeweiligen Behandlungsbereich im Detail.",
       toolkitTitle: "Herausragende Ausstattung",
       toolkitIntro:
         "In unserem Dentallabor arbeiten wir mit modernster Ausstattung - damit wir präziser planen, verlässlicher arbeiten und ästhetischere Ergebnisse erzielen können.",
@@ -347,13 +347,13 @@ export const servicesResources = {
     services: {
       implantologia: {
         nav: "Implantologie",
-        title: "Implantologie",
+        title: "Zahnimplantate in Sopron",
         imageAlt: "CAMLOG-Implantat mit aufgesetzter Zahnkrone auf einem Demonstrationsmodell",
         imageCaption: "Wir sind eine CAMLOG-Referenzpraxis in Gold.",
         tagline: "Ob ein oder mehrere Zähne fehlen - mit der Lücke müssen Sie nicht leben.",
         paragraphs: [
           "Ein fehlender Zahn ist nämlich nicht nur eine ästhetische Frage. Er kann das Kauen und Sprechen verändern, die verbliebenen Zähne stärker belasten und sich langfristig auf die Mundgesundheit auswirken.",
-          "Ein Zahnimplantat ist ein künstlicher Ersatz für die Wurzel eines fehlenden Zahns, auf den eine Krone, Brücke oder ein anderer Zahnersatz gesetzt werden kann. Mit einem Implantat lassen sich nicht nur das Lächeln, sondern auch Kaufunktion und Komfort wiederherstellen.",
+          "Ein Zahnimplantat ist ein künstlicher Ersatz für die Wurzel eines fehlenden Zahns, auf den eine Krone, Brücke oder ein anderer Zahnersatz gesetzt werden kann. In unserer Praxis in Sopron lassen sich mit einem Implantat nicht nur das Lächeln, sondern auch Kaufunktion und Komfort wiederherstellen.",
         ],
         cases: [
           {
@@ -400,10 +400,10 @@ export const servicesResources = {
       },
       szajsebeszet: {
         nav: "Oralchirurgie",
-        title: "Oralchirurgie",
+        title: "Oralchirurgie in Sopron",
         tagline: "Sichere Lösungen auch für komplizierte Fälle.",
         intro: "Bei oralchirurgischen Eingriffen sind eine genaue Diagnose, sorgfältige Planung und Erfahrung besonders wichtig.",
-        listIntro: "In unserer Praxis führen wir unter anderem folgende Eingriffe durch:",
+        listIntro: "In unserer Praxis in Sopron führen wir unter anderem folgende Eingriffe durch:",
         imageAlt:
           "Panoramaansicht des hellen, modernen Behandlungsraums von Alphadent mit Behandlungsstuhl",
         comfortTitle: "Sicher und schonend",
@@ -441,13 +441,13 @@ export const servicesResources = {
       },
       esztetikaiFogaszat: {
         nav: "Ästhetische Zahnheilkunde",
-        title: "Ästhetische Zahnheilkunde",
+        title: "Ästhetische Zahnheilkunde in Sopron",
         imageAlt: "Natürliches Lächeln in Nahaufnahme",
         tagline: "Ein natürliches Lächeln ist nicht perfekt. Sondern harmonisch.",
         paragraphs: [
           "Ziel der ästhetischen Zahnheilkunde ist nicht, dass alle die gleichen, gleichmäßig weißen Zähne bekommen. Ein gutes ästhetisches Ergebnis passt zum Charakter des Gesichts, zur Lachlinie und zu den natürlichen Zähnen.",
           "Guter Zahnersatz ist nicht nur schön - er passt exakt, funktioniert einwandfrei und fügt sich harmonisch in den Charakter von Gesicht und natürlichen Zähnen ein.",
-          "In unserem eigenen Dentallabor arbeiten erfahrene Fachkräfte mit moderner CAD/CAM-Technologie. Die enge Zusammenarbeit von Zahnarzt und Zahntechniker sorgt dafür, dass sich Planung und Umsetzung gegenseitig ergänzen.",
+          "In unserem eigenen Dentallabor, im selben Haus wie unsere Praxis in Sopron, arbeiten erfahrene Fachkräfte mit moderner CAD/CAM-Technologie. Die enge Zusammenarbeit von Zahnarzt und Zahntechniker sorgt dafür, dass sich Planung und Umsetzung gegenseitig ergänzen.",
         ],
         listIntro: "Zu unseren Behandlungen gehören unter anderem:",
         items: [
@@ -464,12 +464,12 @@ export const servicesResources = {
       },
       fogmegtartoKezelesek: {
         nav: "Zahnerhaltende Behandlungen",
-        title: "Zahnerhaltende Behandlungen",
+        title: "Zahnerhaltende Behandlungen in Sopron",
         imageAlt: "Zahnbürste, Zahnseide und Interdentalbürsten auf einer dunklen Steinplatte",
         tagline: "Was sich retten lässt, versuchen wir zu retten.",
         paragraphs: [
           "Ein eigener Zahn ist in der Regel wertvoll. Erlaubt es der Zustand des Zahns, ist unser vorrangiges Ziel deshalb, ihn zu erhalten.",
-          "Mit ästhetischen Füllungen, Inlays, Onlays und moderner maschineller Wurzelkanalbehandlung lassen sich viele geschädigte Zähne langfristig erhalten.",
+          "In unserer Praxis in Sopron lassen sich mit ästhetischen Füllungen, Inlays, Onlays und moderner maschineller Wurzelkanalbehandlung viele geschädigte Zähne langfristig erhalten.",
         ],
       },
     },
@@ -478,7 +478,7 @@ export const servicesResources = {
     servicesHub: {
       eyebrow: "Servizi",
       title: "Su cosa puoi contare da noi",
-      intro: "Scegli l'argomento che ti interessa e scopri nel dettaglio quell'area di cura.",
+      intro: "Nel nostro studio dentistico di Sopron, a due passi dal confine austriaco, offriamo tutto sotto lo stesso tetto, dall'implantologia ai trattamenti conservativi. Scelga l'argomento che Le interessa e scopra nel dettaglio quell'area di cura.",
       toolkitTitle: "Attrezzature all'avanguardia",
       toolkitIntro:
         "Nel nostro laboratorio odontotecnico lavoriamo con le attrezzature più moderne, per pianificare con maggiore precisione, lavorare in modo più prevedibile e ottenere risultati più estetici.",
@@ -510,7 +510,7 @@ export const servicesResources = {
         tagline: "Che manchi uno o più denti, non devi conviverci.",
         paragraphs: [
           "Un dente mancante, infatti, non è solo una questione estetica. Può modificare la masticazione, la fonazione, il carico sui denti rimanenti e, a lungo termine, incidere sulla salute del cavo orale.",
-          "L'impianto dentale è una sostituzione artificiale della radice del dente mancante, su cui può essere posizionata una corona, un ponte o un'altra protesi. Grazie all'implantologia si può ripristinare non solo il sorriso, ma anche la funzione masticatoria e il comfort.",
+          "L'impianto dentale è una sostituzione artificiale della radice del dente mancante, su cui può essere posizionata una corona, un ponte o un'altra protesi. Nel nostro studio di Sopron, grazie all'implantologia si può ripristinare non solo il sorriso, ma anche la funzione masticatoria e il comfort.",
         ],
         cases: [
           {
@@ -560,7 +560,7 @@ export const servicesResources = {
         title: "Chirurgia Orale",
         tagline: "Soluzioni sicure anche per i casi complicati.",
         intro: "Negli interventi di chirurgia orale sono particolarmente importanti una diagnosi precisa, una pianificazione adeguata e l'esperienza.",
-        listIntro: "Nel nostro studio eseguiamo, tra gli altri, i seguenti interventi:",
+        listIntro: "Nel nostro studio di Sopron eseguiamo, tra gli altri, i seguenti interventi:",
         imageAlt:
           "Vista panoramica della luminosa e moderna sala di trattamento Alphadent con la poltrona odontoiatrica",
         comfortTitle: "In sicurezza, con delicatezza",
@@ -604,7 +604,7 @@ export const servicesResources = {
         paragraphs: [
           "L'obiettivo dell'odontoiatria estetica non è dare a tutti gli stessi denti, bianchi e uniformi. Un buon risultato estetico si adatta al carattere del viso, alla linea del sorriso e ai denti naturali.",
           "Una buona protesi non è solo bella: si adatta con precisione, funziona correttamente e si integra in modo armonioso con il carattere del viso e dei denti naturali.",
-          "Nel nostro laboratorio odontotecnico lavorano specialisti esperti con moderna tecnologia CAD/CAM. La stretta collaborazione tra odontoiatra e odontotecnico permette a progettazione ed esecuzione di completarsi a vicenda.",
+          "Nel nostro laboratorio odontotecnico, nello stesso edificio dello studio di Sopron, lavorano specialisti esperti con moderna tecnologia CAD/CAM. La stretta collaborazione tra odontoiatra e odontotecnico permette a progettazione ed esecuzione di completarsi a vicenda.",
         ],
         listIntro: "Tra i nostri trattamenti sono inclusi, tra gli altri:",
         items: [
@@ -626,7 +626,7 @@ export const servicesResources = {
         tagline: "Ciò che si può salvare, cerchiamo di salvarlo.",
         paragraphs: [
           "Un dente naturale ha generalmente un valore. Per questo, se le condizioni del dente lo consentono, il nostro obiettivo primario è preservarlo.",
-          "Con otturazioni estetiche, inlay, onlay e una moderna cura canalare meccanizzata, molti denti danneggiati possono essere preservati a lungo termine.",
+          "Nel nostro studio di Sopron, con otturazioni estetiche, inlay, onlay e una moderna cura canalare meccanizzata, molti denti danneggiati possono essere preservati a lungo termine.",
         ],
       },
     },
