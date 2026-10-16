@@ -509,7 +509,7 @@ export const servicesResources = {
     services: {
       implantologia: {
         nav: "Implantologia",
-        title: "Implantologia",
+        title: "Implantologia a Sopron",
         imageAlt: "Impianto CAMLOG con corona applicata, su un modello dimostrativo",
         imageCaption: "Siamo uno studio di riferimento CAMLOG di livello Gold.",
         tagline: "Che manchi uno o più denti, non devi conviverci.",
@@ -562,7 +562,7 @@ export const servicesResources = {
       },
       szajsebeszet: {
         nav: "Chirurgia Orale",
-        title: "Chirurgia Orale",
+        title: "Chirurgia orale a Sopron",
         tagline: "Soluzioni sicure anche per i casi complicati.",
         intro: "Negli interventi di chirurgia orale sono particolarmente importanti una diagnosi precisa, una pianificazione adeguata e l'esperienza.",
         listIntro: "Nel nostro studio di Sopron eseguiamo, tra gli altri, i seguenti interventi:",
@@ -603,7 +603,7 @@ export const servicesResources = {
       },
       esztetikaiFogaszat: {
         nav: "Odontoiatria Estetica",
-        title: "Odontoiatria Estetica",
+        title: "Odontoiatria estetica a Sopron",
         imageAlt: "Primo piano di un sorriso naturale",
         tagline: "Il sorriso naturale non è perfetto. È armonioso.",
         paragraphs: [
@@ -626,7 +626,7 @@ export const servicesResources = {
       },
       fogmegtartoKezelesek: {
         nav: "Trattamenti Conservativi",
-        title: "Trattamenti Conservativi",
+        title: "Trattamenti conservativi a Sopron",
         imageAlt: "Spazzolino, filo interdentale e scovolini su un piano in pietra scura",
         tagline: "Ciò che si può salvare, cerchiamo di salvarlo.",
         paragraphs: [
