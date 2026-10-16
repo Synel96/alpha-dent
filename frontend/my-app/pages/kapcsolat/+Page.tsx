@@ -4,6 +4,7 @@ import { usePageContext } from "vike-react/usePageContext";
 import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
 import { RevealGroup } from "../../components/ui/reveal-section";
+import { ServiceImage } from "../../components/ui/service-image";
 import { TextImageReveal } from "../../components/ui/text-image-reveal";
 import { CLINIC, CLINIC_ADDRESS_LINE } from "../../lib/clinic-info";
 import { formatClockTime, weekdayName, WEEKLY_HOURS } from "../../lib/opening-hours";
@@ -47,6 +48,9 @@ const SOCIAL_LINKS = [
 ];
 
 export { Page };
+
+const PARKING_IMAGE =
+  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1792169413/Alphadent_portfolio_0107_tblmms.webp";
 
 function Page() {
   const { t } = useTranslation();
@@ -93,25 +97,30 @@ function Page() {
           </div>
         </TextImageReveal>
 
+        {/* Desktop: a 3x3 grid - the parking card (with a photo of the gate)
+            fills two columns and two rows, opening hours the third column,
+            and the three small cards the bottom row. */}
         <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {/* First card: the address is in the map button above, and parking is
               the next thing someone arriving by car wants to know. */}
-          <article className="flex gap-4 rounded-xl border border-brand-gold/40 bg-brand-surface/60 p-5">
-            <span
-              aria-hidden
-              className="flex size-11 shrink-0 items-center justify-center rounded-lg border-2 border-brand-gold-light bg-brand-black/40 text-xl font-bold leading-none text-brand-gold-light"
-            >
-              P
-            </span>
-            <div>
-              <h2 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
-                {t("contactPage.cards.parking")}
-              </h2>
-              <p className="text-sm leading-relaxed text-white">{t("contactPage.parking")}</p>
+          <article className="grid items-center gap-5 rounded-xl border border-brand-gold/40 bg-brand-surface/60 p-5 sm:col-span-2 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:row-span-2">
+            <ServiceImage src={PARKING_IMAGE} alt={t("clinicPage.rooms.photos.parking")} />
+            <div className="flex gap-4">
+              <span
+                aria-hidden
+                className="flex size-11 shrink-0 items-center justify-center rounded-lg border-2 border-brand-gold-light bg-brand-black/40 text-xl font-bold leading-none text-brand-gold-light"
+              >
+                P
+              </span>
+              <div>
+                <h2 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
+                  {t("contactPage.cards.parking")}
+                </h2>
+                <p className="text-sm leading-relaxed text-white">{t("contactPage.parking")}</p>
+              </div>
             </div>
           </article>
 
-          {/* Spans both rows on desktop, so the five cards fill a 3x2 grid. */}
           <article className="rounded-xl border border-brand-border bg-brand-surface/60 p-5 lg:row-span-2">
             <h2 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
               {t("openingHours.title")}
