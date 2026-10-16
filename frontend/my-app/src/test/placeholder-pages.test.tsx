@@ -45,8 +45,15 @@ describe("Klinikánk oldal", () => {
   it("a rendelő képeit (panorámával együtt) körhintában és az időpontkérő gombot a kapcsolat oldalra mutatva jeleníti meg", () => {
     render(<KlinikankPage />);
     // Each photo is exposed once, even though the carousel repeats short lists.
-    expect(screen.getAllByRole("img", { name: "clinicPage.rooms.panoramaAlt" })).toHaveLength(1);
-    expect(screen.getAllByRole("img", { name: "clinicPage.rooms.waitingRoomAlt" })).toHaveLength(1);
+    expect(screen.getAllByRole("img", { name: "clinicPage.rooms.photos.panorama" })).toHaveLength(1);
+    expect(screen.getAllByRole("img", { name: "clinicPage.rooms.photos.waitingRoom" })).toHaveLength(1);
+    // In the order the clinic chose: entrance first, the building last.
+    const roomPhotos = screen
+      .getAllByRole("img", { name: /^clinicPage\.rooms\.photos\./ })
+      .map((img) => img.getAttribute("alt"));
+    expect(roomPhotos[0]).toBe("clinicPage.rooms.photos.entrance");
+    expect(roomPhotos).toHaveLength(10);
+    expect(roomPhotos[9]).toBe("clinicPage.rooms.photos.building");
     expect(screen.getByRole("link", { name: /home\.intro\.ctaButton/ })).toHaveAttribute("href", "/hu/kapcsolat");
   });
 
