@@ -90,7 +90,7 @@ export const faqResources = {
         q17: {
           question: "Megközelíthető tömegközlekedéssel?",
           answer:
-            "Igen, nagyon könnyen: a soproni vasútállomás közvetlenül a rendelő mellett van, így vonattal, akár Ausztriából is, szinte az ajtónkig utazhat.",
+            "Igen, nagyon könnyen: a soproni vasútállomás közvetlenül a rendelő mellett van, így vonattal szinte az ajtónkig utazhat. Ausztriából közvetlen vonatok is járnak Sopronba.",
         },
         q18: {
           question: "Hol tudok parkolni?",
@@ -189,7 +189,7 @@ export const faqResources = {
         q17: {
           question: "Can I get there by public transport?",
           answer:
-            "Yes, very easily: Sopron railway station is right next to the clinic, so you can come by train - even from Austria - almost to our door.",
+            "Yes, very easily: Sopron railway station is right next to the clinic, so you can come by train almost to our door. There are also direct trains to Sopron from Austria.",
         },
         q18: {
           question: "Where can I park?",
@@ -288,7 +288,7 @@ export const faqResources = {
         q17: {
           question: "Ist die Praxis mit öffentlichen Verkehrsmitteln erreichbar?",
           answer:
-            "Ja, ganz einfach: Der Bahnhof Sopron liegt direkt neben der Praxis, so kommen Sie mit dem Zug, auch aus Österreich, fast bis vor unsere Tür.",
+            "Ja, ganz einfach: Der Bahnhof Sopron liegt direkt neben der Praxis, so kommen Sie mit dem Zug fast bis vor unsere Tür. Aus Österreich gibt es auch direkte Zugverbindungen nach Sopron.",
         },
         q18: {
           question: "Wo kann ich parken?",
@@ -387,7 +387,7 @@ export const faqResources = {
         q17: {
           question: "È raggiungibile con i mezzi pubblici?",
           answer:
-            "Sì, molto facilmente: la stazione ferroviaria di Sopron è proprio accanto allo studio, quindi può arrivare in treno, anche dall'Austria, quasi fino alla nostra porta.",
+            "Sì, molto facilmente: la stazione ferroviaria di Sopron è proprio accanto allo studio, quindi può arrivare in treno quasi fino alla nostra porta. Dall'Austria ci sono anche treni diretti per Sopron.",
         },
         q18: {
           question: "Dove posso parcheggiare?",
