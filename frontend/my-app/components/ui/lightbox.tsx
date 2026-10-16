@@ -213,6 +213,9 @@ function useZoomPan(imageKey: string) {
 const ZOOM_BUTTON_CLASS =
   "inline-flex size-9 items-center justify-center rounded-full text-brand-gold-light transition hover:bg-brand-gold/15 hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 disabled:cursor-default disabled:opacity-35 disabled:hover:bg-transparent";
 
+// A load faster than this never shows the spinner.
+const SPINNER_DELAY_MS = 300;
+
 const NAV_BUTTON_CLASS =
   "inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-brand-gold/45 bg-brand-black/75 text-brand-gold-light shadow-lg backdrop-blur-sm transition hover:border-brand-gold hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70";
 
@@ -235,12 +238,22 @@ export function Lightbox({ images, index, onIndexChange, onClose }: LightboxProp
   const useOriginal = current !== undefined && failedSrc === current.src;
   const imageKey = current ? `${current.src}${useOriginal ? "#original" : ""}` : "";
   const loaded = loadedKey === imageKey;
+  // The spinner only appears once a photo has been loading for a noticeable
+  // while - a fast (or cached) load never flashes it.
+  const [slowKey, setSlowKey] = React.useState<string | null>(null);
+  const showSpinner = current !== undefined && !loaded && slowKey === imageKey;
   const swipeRef = React.useRef<{ pointerId: number; startX: number; startY: number } | null>(null);
   const swipedRef = React.useRef(false);
   // There is no Radix <Trigger> (galleries open it from many thumbnails),
   // so remember what had focus and hand it back on close ourselves.
   const returnFocusRef = React.useRef<HTMLElement | null>(null);
   const zoom = useZoomPan(open ? imageKey : "");
+
+  React.useEffect(() => {
+    if (!open || loaded) return;
+    const timer = window.setTimeout(() => setSlowKey(imageKey), SPINNER_DELAY_MS);
+    return () => window.clearTimeout(timer);
+  }, [open, loaded, imageKey]);
   const zoomed = zoom.view.scale > 1;
 
   const step = (direction: 1 | -1) => {
@@ -324,7 +337,10 @@ export function Lightbox({ images, index, onIndexChange, onClose }: LightboxProp
           onClick={handleBackdropClick}
           // pan-y + pinch-zoom: horizontal finger moves reach the swipe
           // handlers instead of being claimed by the browser, pinch still works.
-          className="fixed inset-0 z-[61] flex flex-col items-center justify-center gap-4 overflow-hidden px-4 pb-6 pt-16 outline-none [touch-action:pan-y_pinch-zoom] sm:px-20"
+          // pb-28 keeps the bottom free for the caption, which is pinned
+          // there: it no longer jumps from the middle of the screen to below
+          // the photo once the photo has loaded.
+          className="fixed inset-0 z-[61] flex flex-col items-center justify-center overflow-hidden px-4 pb-28 pt-16 outline-none [touch-action:pan-y_pinch-zoom] sm:px-20"
         >
           <DialogPrimitive.Title className="sr-only">{current?.alt}</DialogPrimitive.Title>
 
@@ -376,14 +392,15 @@ export function Lightbox({ images, index, onIndexChange, onClose }: LightboxProp
             </button>
           </DialogPrimitive.Close>
 
-          {current && !loaded ? (
-            <span aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          {showSpinner ? (
+            // Centred in the photo's area (between the toolbar and the caption).
+            <span aria-hidden className="pointer-events-none absolute inset-x-0 bottom-28 top-16 flex items-center justify-center">
               <span className="size-10 animate-spin rounded-full border-2 border-brand-gold/25 border-t-brand-gold-light" />
             </span>
           ) : null}
 
           {current ? (
-            <figure className="flex max-h-full min-h-0 flex-col items-center gap-3">
+            <figure className="flex max-h-full min-h-0 flex-col items-center">
               {/* The zoom/pan surface: touch-action none so pinches and
                   drags reach our handlers instead of zooming the page. */}
               <div
@@ -417,7 +434,7 @@ export function Lightbox({ images, index, onIndexChange, onClose }: LightboxProp
                   transform: `translate(${zoom.view.x}px, ${zoom.view.y}px) scale(${zoom.view.scale})`,
                 }}
                 className={cn(
-                  "lightbox-animate max-h-[calc(100dvh-10rem)] min-h-0 w-auto max-w-full select-none rounded-2xl border border-brand-gold/30 object-contain shadow-[0_24px_64px_-24px_rgba(201,168,76,0.45)] will-change-transform",
+                  "lightbox-animate max-h-[calc(100dvh-11rem)] min-h-0 w-auto max-w-full select-none rounded-2xl border border-brand-gold/30 object-contain shadow-[0_24px_64px_-24px_rgba(201,168,76,0.45)] will-change-transform",
                   // Smooth for button/double-click zoom, immediate while a
                   // finger or the mouse is moving it.
                   !zoom.gesturing && "transition-transform duration-200 ease-out motion-reduce:transition-none",
@@ -426,8 +443,10 @@ export function Lightbox({ images, index, onIndexChange, onClose }: LightboxProp
               />
               </div>
               <figcaption
+                // Pinned to the bottom of the screen (positioned against the
+                // dialog), whatever the photo's size or loading state.
                 className={cn(
-                  "max-w-2xl text-center text-sm leading-relaxed text-white/85 transition-opacity",
+                  "absolute inset-x-4 bottom-6 mx-auto max-w-2xl text-center text-sm leading-relaxed text-white/85 transition-opacity sm:inset-x-20",
                   zoomed && "opacity-0"
                 )}
               >
