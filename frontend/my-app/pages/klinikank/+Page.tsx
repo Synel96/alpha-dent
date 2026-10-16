@@ -13,14 +13,22 @@ import { localizeHref } from "../../lib/locale";
 
 export { Page };
 
-const PANORAMA_IMAGE =
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1790500751/pano_crop_tlmpc3.webp";
-const WAITING_ROOM_IMAGE =
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3397_gii27w.webp";
-const CLINIC_IMAGES = [
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3396_vw5kcw.webp",
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789381101/IMG_3399_xpizts.webp",
-];
+const CLOUDINARY = "https://res.cloudinary.com/dmwulp3dl/image/upload";
+
+// The "A rendelő" carousel, in the order the clinic chose. Each photo's alt
+// text is clinicPage.rooms.photos.<key>.
+const CLINIC_PHOTOS = [
+  { key: "entrance", src: `${CLOUDINARY}/v1789381101/IMG_3396_vw5kcw.webp` },
+  { key: "waitingRoom", src: `${CLOUDINARY}/v1792169412/Alphadent_portfolio_0043_xx4jbj.webp` },
+  { key: "panorama", src: `${CLOUDINARY}/v1792169411/pano_crop_uwb9so.webp` },
+  { key: "stairwell", src: `${CLOUDINARY}/v1792169411/Alphadent_portfolio_0005_qn3dta.webp` },
+  { key: "waitingArea", src: `${CLOUDINARY}/v1792169413/Alphadent_portfolio_0010_hwllsc.webp` },
+  { key: "treatmentUnit", src: `${CLOUDINARY}/v1792169413/Alphadent_portfolio_0017_hsi2u8.webp` },
+  { key: "treatmentRoom", src: `${CLOUDINARY}/v1792169413/Alphadent_portfolio_0019_daswiz.webp` },
+  { key: "millingUnits", src: `${CLOUDINARY}/v1792169411/Alphadent_portfolio_0075_jjxlho.webp` },
+  { key: "parking", src: `${CLOUDINARY}/v1792169413/Alphadent_portfolio_0107_tblmms.webp` },
+  { key: "building", src: `${CLOUDINARY}/v1792169413/Alphadent_portfolio_0067_mzysg9.webp` },
+] as const;
 const IMPLANT_IMAGE =
   "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0053_gz8nis.webp";
 
@@ -64,11 +72,10 @@ function Page() {
   const list = (key: string) => t(key, { returnObjects: true }) as string[];
 
   const highlights = t("clinicPage.highlights", { returnObjects: true }) as Highlight[];
-  const clinicPhotos: GridPhoto[] = [
-    { src: PANORAMA_IMAGE, alt: t("clinicPage.rooms.panoramaAlt") },
-    { src: WAITING_ROOM_IMAGE, alt: t("clinicPage.rooms.waitingRoomAlt") },
-    ...CLINIC_IMAGES.map((src) => ({ src, alt: t("clinicPage.rooms.photoAlt") })),
-  ];
+  const clinicPhotos: GridPhoto[] = CLINIC_PHOTOS.map(({ key, src }) => ({
+    src,
+    alt: t(`clinicPage.rooms.photos.${key}`),
+  }));
 
   return (
     <PageContainer className="space-y-16 py-10 md:space-y-24 md:py-14">
