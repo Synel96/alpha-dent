@@ -19,7 +19,8 @@ afterEach(() => {
 describe("OpenStatusCard", () => {
   it("nyitvatartási időben hívásra buzdít telefonszámmal", () => {
     vi.useFakeTimers({ toFake: ["Date"] });
-    vi.setSystemTime(new Date("2026-09-28T08:00:00Z"));
+    // A Tuesday morning: open.
+    vi.setSystemTime(new Date("2026-09-29T08:00:00Z"));
     render(<OpenStatusCard />);
 
     expect(screen.getByText("openingHours.openNow")).toBeInTheDocument();
@@ -31,7 +32,8 @@ describe("OpenStatusCard", () => {
 
   it("zárva is a hívás az első lehetőség (napközben veszik fel), mellette az e-mail", () => {
     vi.useFakeTimers({ toFake: ["Date"] });
-    vi.setSystemTime(new Date("2026-10-03T10:00:00Z"));
+    // A Monday: closed all day.
+    vi.setSystemTime(new Date("2026-09-28T08:00:00Z"));
     render(<OpenStatusCard />);
 
     expect(screen.getByText("openingHours.closedNow")).toBeInTheDocument();
@@ -45,7 +47,8 @@ describe("OpenStatusCard", () => {
 
   it("nyitva is a hívás az első, az e-mail tartalékként mellette", () => {
     vi.useFakeTimers({ toFake: ["Date"] });
-    vi.setSystemTime(new Date("2026-09-28T08:00:00Z"));
+    // A Saturday at noon: open until 13:00.
+    vi.setSystemTime(new Date("2026-10-03T10:00:00Z"));
     render(<OpenStatusCard />);
     expect(screen.getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
       "tel:+36208080600",
@@ -55,7 +58,8 @@ describe("OpenStatusCard", () => {
 
   it("a nem aktuális állapot rétege rejtett, így a kártya magassága nem változik hidratáláskor", () => {
     vi.useFakeTimers({ toFake: ["Date"] });
-    vi.setSystemTime(new Date("2026-09-28T08:00:00Z"));
+    // A Tuesday morning: open.
+    vi.setSystemTime(new Date("2026-09-29T08:00:00Z"));
     const { container } = render(<OpenStatusCard />);
     const layers = container.firstElementChild!.children;
     expect(layers).toHaveLength(2);

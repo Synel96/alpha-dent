@@ -15,7 +15,7 @@ const BUTTON_CLASS =
 // Typical states, used for whichever layer isn't the current one (and for
 // both before the real status is known on mount).
 const SAMPLE_OPEN: OpenStatus = { open: true, closesAt: 17 * 60 };
-const SAMPLE_CLOSED: OpenStatus = { open: false, opensAt: 8 * 60, weekday: 0, daysUntil: 3 };
+const SAMPLE_CLOSED: OpenStatus = { open: false, opensAt: 8 * 60, weekday: 1, daysUntil: 3 };
 
 // The open and closed layouts can differ in height (different message
 // lengths). Both are rendered on top of each other in a

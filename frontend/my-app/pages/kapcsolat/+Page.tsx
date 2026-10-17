@@ -154,6 +154,12 @@ function Page() {
             </h2>
             <div className="space-y-2">
               <a
+                href={CONTACT_INFO.mobileHref}
+                className="block text-sm text-white hover:text-brand-gold-light"
+              >
+                {CONTACT_INFO.mobileDisplay}
+              </a>
+              <a
                 href={CONTACT_INFO.phoneMainHref}
                 className="block text-sm text-white hover:text-brand-gold-light"
               >

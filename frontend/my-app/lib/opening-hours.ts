@@ -1,12 +1,12 @@
 // Weekly schedule in clinic-local (Europe/Budapest) minutes since midnight,
 // indexed Monday = 0 ... Sunday = 6. null = closed all day.
 export const WEEKLY_HOURS: readonly (readonly [open: number, close: number] | null)[] = [
-  [8 * 60, 17 * 60],
-  [8 * 60, 17 * 60],
-  [8 * 60, 17 * 60],
-  [8 * 60, 17 * 60],
-  [8 * 60, 17 * 60],
   null,
+  [8 * 60, 17 * 60],
+  [8 * 60, 17 * 60],
+  [8 * 60, 17 * 60],
+  [8 * 60, 17 * 60],
+  [8 * 60, 13 * 60],
   null,
 ];
 
