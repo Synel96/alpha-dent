@@ -26,6 +26,13 @@ const SOCIAL_LINKS = [
   },
 ];
 
+// SynelWeb has no Italian version, so "it" falls back to English.
+const SYNELWEB_URLS: Record<string, string> = {
+  hu: "https://synelweb.hu/hu/",
+  en: "https://synelweb.hu/en/",
+  de: "https://synelweb.hu/de/",
+};
+
 const PAGE_LINKS = [
   { labelKey: "nav.home", path: "/" },
   { labelKey: "nav.clinic", path: "/klinikank" },
@@ -141,6 +148,18 @@ export function Footer() {
           className="transition-colors hover:text-brand-gold-light"
         >
           {t("privacyPage.title")}
+        </a>
+        <a
+          href={SYNELWEB_URLS[locale] ?? SYNELWEB_URLS.en}
+          target="_blank"
+          rel="noopener"
+          className="group inline-flex items-center gap-1.5"
+        >
+          <span>{t("footer.madeBy")}</span>
+          {/* Same wordmark as the SynelWeb navbar: Orbitron, warm-to-hot gradient. */}
+          <span className="bg-[linear-gradient(120deg,#f59e0b,#f43f5e_62%,#f59e0b)] bg-clip-text font-[Orbitron,sans-serif] text-[0.7rem] font-semibold tracking-[0.14em] text-transparent uppercase transition-[filter] duration-300 group-hover:brightness-125">
+            SynelWeb
+          </span>
         </a>
       </div>
     </footer>

@@ -84,6 +84,7 @@ export const commonResources = {
     },
     footer: {
       allRightsReserved: "Minden jog fenntartva.",
+      madeBy: "Készítette",
       pages: "Oldalak",
     },
     privacyPage: {
@@ -175,6 +176,7 @@ export const commonResources = {
     },
     footer: {
       allRightsReserved: "All rights reserved.",
+      madeBy: "Made by",
       pages: "Pages",
     },
     privacyPage: {
@@ -266,6 +268,7 @@ export const commonResources = {
     },
     footer: {
       allRightsReserved: "Alle Rechte vorbehalten.",
+      madeBy: "Erstellt von",
       pages: "Seiten",
     },
     privacyPage: {
@@ -357,6 +360,7 @@ export const commonResources = {
     },
     footer: {
       allRightsReserved: "Tutti i diritti riservati.",
+      madeBy: "Realizzato da",
       pages: "Pagine",
     },
     privacyPage: {
