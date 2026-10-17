@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 
 vi.mock("react-i18next", () => ({
@@ -54,11 +54,12 @@ describe("Kapcsolat oldal", () => {
     );
   });
 
-  it("megjeleníti a heti nyitvatartást, hétvégén zárva", () => {
+  it("megjeleníti a heti nyitvatartást: hétfőn és vasárnap zárva, szombaton 8–13", () => {
     render(<Page />);
     expect(screen.getByText("openingHours.title")).toBeInTheDocument();
     expect(screen.getByText("Hétfő")).toBeInTheDocument();
-    expect(screen.getAllByText("8:00–17:00")).toHaveLength(5);
+    expect(screen.getAllByText("8:00–17:00")).toHaveLength(4);
+    expect(screen.getAllByText("8:00–13:00")).toHaveLength(1);
     expect(screen.getAllByText("openingHours.closed")).toHaveLength(2);
   });
 
@@ -69,8 +70,15 @@ describe("Kapcsolat oldal", () => {
     expect(cardTitles).not.toContain("contactPage.cards.address");
     expect(cardTitles).not.toContain("contactPage.cards.email");
     expect(screen.queryByText("47.6777786, 16.5896789")).not.toBeInTheDocument();
-    // The mobile number and the address are still one tap away at the top.
-    expect(screen.getByText("+36 20 80 80 600")).toBeInTheDocument();
+    // The address is one tap away at the top; the mobile number is there
+    // too, and also heads the phone card's list (above the two landlines).
+    expect(screen.getAllByText("+36 20 80 80 600")).toHaveLength(2);
+    const phoneCard = screen.getByRole("heading", { level: 2, name: "contactPage.cards.phone" }).closest("article")!;
+    expect(within(phoneCard).getAllByRole("link").map((link) => link.textContent)).toEqual([
+      "+36 20 80 80 600",
+      "+36 99 788 888",
+      "+36 99 340 707",
+    ]);
     expect(screen.getByText("9400 Sopron, Arany János u. 13.")).toBeInTheDocument();
   });
 });
