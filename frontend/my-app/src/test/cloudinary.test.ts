@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { cloudinarySrcSet, cloudinaryUrl, cloudinaryVideoFrameUrl, cloudinaryVideoUrl } from "../../lib/cloudinary";
+import { cloudinarySrcSet, cloudinaryUrl, cloudinaryVideoUrl } from "../../lib/cloudinary";
 
 const BASE = "https://res.cloudinary.com/demo/image/upload/v1/sample.jpg";
 
@@ -63,12 +63,6 @@ describe("Cloudinary videó", () => {
     );
     expect(cloudinaryVideoUrl(video, { width: 1920, extension: "webm" })).toBe(
       "https://res.cloudinary.com/demo/video/upload/w_1920,c_limit,q_auto/v1/clip_abc.webm"
-    );
-  });
-
-  it("a videó első képkockáját állóképként adja (so_0)", () => {
-    expect(cloudinaryVideoFrameUrl(video, 960)).toBe(
-      "https://res.cloudinary.com/demo/video/upload/so_0,w_960,c_limit,q_auto,f_auto/v1/clip_abc.jpg"
     );
   });
 });

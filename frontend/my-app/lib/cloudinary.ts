@@ -67,16 +67,6 @@ export function cloudinaryVideoUrl(url: string, { width, extension }: { width: n
   return withTransform.replace(/\.[a-z0-9]+$/i, `.${extension}`);
 }
 
-// The video's first frame as a still image (Cloudinary extracts it with
-// so_0), at most `width` wide, in the best image format for the browser -
-// the poster that the video then starts from without a visible jump.
-export function cloudinaryVideoFrameUrl(url: string, width: number): string {
-  if (!isCloudinaryUrl(url)) return url;
-  const insertAt = url.indexOf(UPLOAD_MARKER) + UPLOAD_MARKER.length;
-  const withTransform = `${url.slice(0, insertAt)}so_0,w_${width},c_limit,q_auto,f_auto/${url.slice(insertAt)}`;
-  return withTransform.replace(/\.[a-z0-9]+$/i, ".jpg");
-}
-
 // Roughly matched to the grids these widths are used in (see
 // ServiceTile/szolgaltatasaink and TextImageReveal usages).
 export const TILE_IMAGE_WIDTHS = [400, 600, 800] as const;

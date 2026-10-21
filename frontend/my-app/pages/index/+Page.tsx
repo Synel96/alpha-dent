@@ -32,8 +32,10 @@ import { cn } from "../../lib/utils";
 
 export { Page };
 
+// The still shown while the hero video loads (and instead of it for reduced
+// motion / data saver).
 const HERO_IMAGE =
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789138056/IMG_3392_faedmf.webp";
+  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1792589308/Screenshot_20261021_152235419_jctcef.jpg";
 const HERO_VIDEO =
   "https://res.cloudinary.com/dmwulp3dl/video/upload/v1792588721/HnVideoEditor_2026_10_21_151406270_jvppld.webm";
 
