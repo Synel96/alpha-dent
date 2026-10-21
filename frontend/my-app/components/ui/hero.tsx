@@ -48,32 +48,6 @@ function wantsHeroVideo(): boolean {
   return !connection?.saveData;
 }
 
-// Runs `callback` once the page has fully loaded (and the browser is idle),
-// so the video never competes with the photo, fonts and scripts the first
-// screen needs - the photo stays the LCP element.
-function afterPageLoad(callback: () => void): () => void {
-  let cancelled = false;
-  let idleHandle: number | undefined;
-  const run = () => {
-    if (cancelled) return;
-    if (typeof window.requestIdleCallback === "function") {
-      idleHandle = window.requestIdleCallback(callback, { timeout: 2000 });
-    } else {
-      idleHandle = window.setTimeout(callback, 200);
-    }
-  };
-  if (document.readyState === "complete") run();
-  else window.addEventListener("load", run, { once: true });
-  return () => {
-    cancelled = true;
-    window.removeEventListener("load", run);
-    if (idleHandle !== undefined) {
-      if (typeof window.cancelIdleCallback === "function") window.cancelIdleCallback(idleHandle);
-      window.clearTimeout(idleHandle);
-    }
-  };
-}
-
 type HeroProps = {
   imageSrc: string;
   imageAlt?: string;
@@ -119,33 +93,31 @@ export function Hero({
   userPausedRef.current = userPaused;
   const inViewRef = React.useRef(true);
 
-  // After the page has loaded, downloads the whole video in the background
-  // and only then hands it to the <video> - so it never starts before it is
-  // all there and never stutters on a slow connection (or while Cloudinary
-  // is still transcoding a first request). Fetched anonymously: no cookies
-  // or other credentials are sent. Until then the still photo stays.
+  // Starts downloading the whole video straight away (no lazy loading), and
+  // only hands it to the <video> once it is all there - so it never starts
+  // early and stutters on a slow connection (or while Cloudinary is still
+  // transcoding a first request). Fetched anonymously: no cookies or other
+  // credentials are sent. Until then the still photo stays.
   React.useEffect(() => {
     if (!videoSrc || !wantsHeroVideo()) return;
     const controller = new AbortController();
     let objectUrl: string | null = null;
-    const cancelWait = afterPageLoad(() => {
-      const width = window.innerWidth < 768 ? HERO_VIDEO_WIDTH.small : HERO_VIDEO_WIDTH.large;
-      fetch(cloudinaryVideoUrl(videoSrc, { width, extension: heroVideoExtension() }), {
-        credentials: "omit",
-        mode: "cors",
-        referrerPolicy: "no-referrer",
-        signal: controller.signal,
+    const width = window.innerWidth < 768 ? HERO_VIDEO_WIDTH.small : HERO_VIDEO_WIDTH.large;
+    fetch(cloudinaryVideoUrl(videoSrc, { width, extension: heroVideoExtension() }), {
+      credentials: "omit",
+      mode: "cors",
+      referrerPolicy: "no-referrer",
+      priority: "high",
+      signal: controller.signal,
+    } as RequestInit & { priority?: "high" | "low" | "auto" })
+      .then((response) => (response.ok ? response.blob() : Promise.reject(new Error(String(response.status)))))
+      .then((blob) => {
+        objectUrl = URL.createObjectURL(blob);
+        setVideoUrl(objectUrl);
       })
-        .then((response) => (response.ok ? response.blob() : Promise.reject(new Error(String(response.status)))))
-        .then((blob) => {
-          objectUrl = URL.createObjectURL(blob);
-          setVideoUrl(objectUrl);
-        })
-        // No video (offline, blocked, aborted): the still photo simply stays.
-        .catch(() => {});
-    });
+      // No video (offline, blocked, aborted): the still photo simply stays.
+      .catch(() => {});
     return () => {
-      cancelWait();
       controller.abort();
       if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
