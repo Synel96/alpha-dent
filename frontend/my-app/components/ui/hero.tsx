@@ -35,7 +35,10 @@ const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1920] as const;
 // Phones get a lighter rendition of the background video.
 const HERO_VIDEO_WIDTH = { small: 1280, large: 1920 } as const;
 
-type VideoSource = { src: string; type: string };
+// WebM (VP9) is smaller; MP4 (H.264) for browsers without it, e.g. older Safari.
+function heroVideoExtension(): "webm" | "mp4" {
+  return document.createElement("video").canPlayType('video/webm; codecs="vp9"') ? "webm" : "mp4";
+}
 
 // Whether to fetch the background video at all: never for visitors who ask
 // for less motion or less data - they keep the still photo.
@@ -108,37 +111,65 @@ export function Hero({
   const { t } = useTranslation();
   const sectionRef = React.useRef<HTMLElement | null>(null);
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
-  const [videoSources, setVideoSources] = React.useState<VideoSource[] | null>(null);
+  // An object URL of the fully downloaded video - see the effect below.
+  const [videoUrl, setVideoUrl] = React.useState<string | null>(null);
   const [videoVisible, setVideoVisible] = React.useState(false);
   const [userPaused, setUserPaused] = React.useState(false);
   const userPausedRef = React.useRef(false);
   userPausedRef.current = userPaused;
+  const inViewRef = React.useRef(true);
 
-  // Picks the rendition for this screen only after the page has loaded.
+  // After the page has loaded, downloads the whole video in the background
+  // and only then hands it to the <video> - so it never starts before it is
+  // all there and never stutters on a slow connection (or while Cloudinary
+  // is still transcoding a first request). Fetched anonymously: no cookies
+  // or other credentials are sent. Until then the still photo stays.
   React.useEffect(() => {
     if (!videoSrc || !wantsHeroVideo()) return;
-    return afterPageLoad(() => {
+    const controller = new AbortController();
+    let objectUrl: string | null = null;
+    const cancelWait = afterPageLoad(() => {
       const width = window.innerWidth < 768 ? HERO_VIDEO_WIDTH.small : HERO_VIDEO_WIDTH.large;
-      setVideoSources([
-        { src: cloudinaryVideoUrl(videoSrc, { width, extension: "webm" }), type: "video/webm" },
-        { src: cloudinaryVideoUrl(videoSrc, { width, extension: "mp4" }), type: "video/mp4" },
-      ]);
+      fetch(cloudinaryVideoUrl(videoSrc, { width, extension: heroVideoExtension() }), {
+        credentials: "omit",
+        mode: "cors",
+        referrerPolicy: "no-referrer",
+        signal: controller.signal,
+      })
+        .then((response) => (response.ok ? response.blob() : Promise.reject(new Error(String(response.status)))))
+        .then((blob) => {
+          objectUrl = URL.createObjectURL(blob);
+          setVideoUrl(objectUrl);
+        })
+        // No video (offline, blocked, aborted): the still photo simply stays.
+        .catch(() => {});
     });
+    return () => {
+      cancelWait();
+      controller.abort();
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    };
   }, [videoSrc]);
+
+  const playIfWanted = () => {
+    const video = videoRef.current;
+    if (video && inViewRef.current && !userPausedRef.current) void video.play().catch(() => {});
+  };
 
   // Plays only while the hero is on screen (and the visitor hasn't paused it),
   // so a scrolled-away video costs no CPU or battery.
   React.useEffect(() => {
     const video = videoRef.current;
     const section = sectionRef.current;
-    if (!videoSources || !video || !section || typeof IntersectionObserver === "undefined") return;
+    if (!videoUrl || !video || !section || typeof IntersectionObserver === "undefined") return;
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry?.isIntersecting && !userPausedRef.current) void video.play().catch(() => {});
+      inViewRef.current = Boolean(entry?.isIntersecting);
+      if (inViewRef.current) playIfWanted();
       else video.pause();
     });
     observer.observe(section);
     return () => observer.disconnect();
-  }, [videoSources]);
+  }, [videoUrl]);
 
   const toggleVideo = () => {
     const video = videoRef.current;
@@ -209,28 +240,25 @@ export function Hero({
           fetchPriority="high"
           crossOrigin="anonymous"
         />
-        {videoSources ? (
+        {videoUrl ? (
           <video
             ref={videoRef}
+            src={videoUrl}
             aria-hidden
             tabIndex={-1}
-            autoPlay
             muted
             loop
             playsInline
             preload="auto"
-            crossOrigin="anonymous"
             disablePictureInPicture
+            // Already fully downloaded; start once it is decoded and ready.
+            onCanPlayThrough={playIfWanted}
             onPlaying={() => setVideoVisible(true)}
             className={cn(
-              "absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ease-out",
+              "absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out",
               videoVisible ? "opacity-100" : "opacity-0"
             )}
-          >
-            {videoSources.map((source) => (
-              <source key={source.type} src={source.src} type={source.type} />
-            ))}
-          </video>
+          />
         ) : null}
         {hasCopy ? (
           // Darken in from the left, where the copy sits. Below md the quote spans
