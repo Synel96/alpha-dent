@@ -8,8 +8,9 @@ import { localizeHref } from "../../../lib/locale";
 
 export { Page };
 
-const HYGIENE_IMAGE =
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1790519995/file_0000000054fc82109139ba990ae6dd0a_hdjdtl.png";
+// VDW Raypex 6 apex locator, used for precise root canal treatment.
+const APEX_LOCATOR_IMAGE =
+  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1792599192/file_000000009df081f4ba4fcf9374c1c1ee_v5ffwt.webp";
 
 function Page() {
   const { t } = useTranslation();
@@ -48,7 +49,7 @@ function Page() {
           </div>
 
           <ServiceImage
-            src={HYGIENE_IMAGE}
+            src={APEX_LOCATOR_IMAGE}
             alt={t("services.fogmegtartoKezelesek.imageAlt")}
           />
         </div>
