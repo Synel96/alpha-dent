@@ -158,6 +158,7 @@ export const servicesResources = {
         paragraphs: [
           "Egy saját fog általában érték. Ezért ha a fog állapota lehetővé teszi, elsődleges célunk annak megtartása.",
           "Soproni rendelőnkben esztétikus tömések, inlayek, onlayek és korszerű gépi gyökérkezelés segítségével számos károsodott fog hosszú távon is megőrizhető.",
+          "Gyökérkezelésnél a gyökércsatorna pontos hosszát VDW Raypex 6 elektronikus apexlokátorral mérjük. Így a csatornát egészen a gyökércsúcsig pontosan meg tudjuk tisztítani és le tudjuk zárni, ami a kezelés hosszú távú sikerének egyik kulcsa, és kevesebb röntgenfelvételre is szükség lehet.",
         ],
       },
     },
@@ -316,6 +317,7 @@ export const servicesResources = {
         paragraphs: [
           "Your own natural tooth is generally worth preserving. That's why, whenever the tooth's condition allows it, our primary goal is to keep it.",
           "At our Sopron clinic, aesthetic fillings, inlays, onlays, and modern machine-assisted root canal treatment allow many damaged teeth to be preserved for the long term.",
+          "During root canal treatment, we measure the exact length of the root canal with a VDW Raypex 6 electronic apex locator. This lets us clean and seal the canal precisely all the way to the root tip - one of the keys to a lasting result - and fewer X-rays may be needed.",
         ],
       },
     },
@@ -474,6 +476,7 @@ export const servicesResources = {
         paragraphs: [
           "Ein eigener Zahn ist in der Regel wertvoll. Erlaubt es der Zustand des Zahns, ist unser vorrangiges Ziel deshalb, ihn zu erhalten.",
           "In unserer Praxis in Sopron lassen sich mit ästhetischen Füllungen, Inlays, Onlays und moderner maschineller Wurzelkanalbehandlung viele geschädigte Zähne langfristig erhalten.",
+          "Bei der Wurzelkanalbehandlung bestimmen wir die genaue Länge des Wurzelkanals mit dem elektronischen Apexlokator VDW Raypex 6. So können wir den Kanal präzise bis zur Wurzelspitze reinigen und verschließen - einer der Schlüssel für ein dauerhaftes Ergebnis -, und es sind unter Umständen weniger Röntgenaufnahmen nötig.",
         ],
       },
     },
@@ -632,6 +635,7 @@ export const servicesResources = {
         paragraphs: [
           "Un dente naturale ha generalmente un valore. Per questo, se le condizioni del dente lo consentono, il nostro obiettivo primario è preservarlo.",
           "Nel nostro studio di Sopron, con otturazioni estetiche, inlay, onlay e una moderna cura canalare meccanizzata, molti denti danneggiati possono essere preservati a lungo termine.",
+          "Durante la cura canalare misuriamo la lunghezza esatta del canale radicolare con il localizzatore apicale elettronico VDW Raypex 6. Così possiamo pulire e sigillare il canale con precisione fino all'apice della radice, uno dei fattori chiave per un risultato duraturo, e possono essere necessarie meno radiografie.",
         ],
       },
     },
