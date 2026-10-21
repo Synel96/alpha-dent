@@ -235,9 +235,11 @@ export function Hero({
         {hasCopy ? (
           // Darken in from the left, where the copy sits. Below md the quote spans
           // nearly the full width, so the right side needs darkening there too.
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30 md:from-black/80 md:via-black/45 md:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/10 md:from-black/55 md:via-black/20 md:to-transparent" />
         ) : null}
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/10 to-transparent" />
+        {/* Only the bottom third fades into the page background, so the video
+            stays bright and the hero still flows into the next section. */}
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-black to-transparent" />
       </div>
 
       {/* WCAG 2.2.2: moving content that plays on its own needs a way to stop it. */}
