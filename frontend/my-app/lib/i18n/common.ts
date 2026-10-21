@@ -22,6 +22,10 @@ export const commonResources = {
         prev: "Előző képek",
         next: "Következő képek",
       },
+      heroVideo: {
+        pause: "Háttérvideó megállítása",
+        play: "Háttérvideó lejátszása",
+      },
       lightbox: {
         open: "Kép megnagyítása: {{alt}}",
         close: "Bezárás",
@@ -113,6 +117,10 @@ export const commonResources = {
       gallery: {
         prev: "Previous photos",
         next: "Next photos",
+      },
+      heroVideo: {
+        pause: "Pause background video",
+        play: "Play background video",
       },
       lightbox: {
         open: "Enlarge photo: {{alt}}",
@@ -206,6 +214,10 @@ export const commonResources = {
         prev: "Vorherige Bilder",
         next: "Nächste Bilder",
       },
+      heroVideo: {
+        pause: "Hintergrundvideo anhalten",
+        play: "Hintergrundvideo abspielen",
+      },
       lightbox: {
         open: "Bild vergrößern: {{alt}}",
         close: "Schließen",
@@ -297,6 +309,10 @@ export const commonResources = {
       gallery: {
         prev: "Foto precedenti",
         next: "Foto successive",
+      },
+      heroVideo: {
+        pause: "Metti in pausa il video di sfondo",
+        play: "Riproduci il video di sfondo",
       },
       lightbox: {
         open: "Ingrandisci foto: {{alt}}",

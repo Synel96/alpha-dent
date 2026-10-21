@@ -56,6 +56,27 @@ export function cloudinarySrcSet(
   return widths.map((width) => `${cloudinaryUrl(url, { ...options, width })} ${width}w`).join(", ");
 }
 
+// A Cloudinary video in the given container format, scaled down to at most
+// `width` pixels wide (never up) at automatic quality. Cloudinary transcodes
+// to whatever the extension asks for, so one upload serves both WebM (VP9,
+// smaller) and MP4 (H.264, for Safari/iOS).
+export function cloudinaryVideoUrl(url: string, { width, extension }: { width: number; extension: "webm" | "mp4" }): string {
+  if (!isCloudinaryUrl(url)) return url;
+  const insertAt = url.indexOf(UPLOAD_MARKER) + UPLOAD_MARKER.length;
+  const withTransform = `${url.slice(0, insertAt)}w_${width},c_limit,q_auto/${url.slice(insertAt)}`;
+  return withTransform.replace(/\.[a-z0-9]+$/i, `.${extension}`);
+}
+
+// The video's first frame as a still image (Cloudinary extracts it with
+// so_0), at most `width` wide, in the best image format for the browser -
+// the poster that the video then starts from without a visible jump.
+export function cloudinaryVideoFrameUrl(url: string, width: number): string {
+  if (!isCloudinaryUrl(url)) return url;
+  const insertAt = url.indexOf(UPLOAD_MARKER) + UPLOAD_MARKER.length;
+  const withTransform = `${url.slice(0, insertAt)}so_0,w_${width},c_limit,q_auto,f_auto/${url.slice(insertAt)}`;
+  return withTransform.replace(/\.[a-z0-9]+$/i, ".jpg");
+}
+
 // Roughly matched to the grids these widths are used in (see
 // ServiceTile/szolgaltatasaink and TextImageReveal usages).
 export const TILE_IMAGE_WIDTHS = [400, 600, 800] as const;

@@ -1,6 +1,8 @@
 import React from "react";
+import { Pause, Play } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
-import { cloudinaryUrl, cloudinarySrcSet } from "@/lib/cloudinary";
+import { cloudinaryUrl, cloudinarySrcSet, cloudinaryVideoFrameUrl, cloudinaryVideoUrl } from "@/lib/cloudinary";
 import { CtaButton } from "@/components/ui/cta-button";
 
 // Layout's navbar reads this to fade from transparent (over the hero media)
@@ -30,12 +32,53 @@ export function getHeroProgressServerSnapshot() {
 }
 
 const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1920] as const;
+// Phones get a lighter rendition of the background video.
+const HERO_VIDEO_WIDTH = { small: 1280, large: 1920 } as const;
+
+type VideoSource = { src: string; type: string };
+
+// Whether to fetch the background video at all: never for visitors who ask
+// for less motion or less data - they keep the still photo.
+function wantsHeroVideo(): boolean {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
+  const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+  return !connection?.saveData;
+}
+
+// Runs `callback` once the page has fully loaded (and the browser is idle),
+// so the video never competes with the photo, fonts and scripts the first
+// screen needs - the photo stays the LCP element.
+function afterPageLoad(callback: () => void): () => void {
+  let cancelled = false;
+  let idleHandle: number | undefined;
+  const run = () => {
+    if (cancelled) return;
+    if (typeof window.requestIdleCallback === "function") {
+      idleHandle = window.requestIdleCallback(callback, { timeout: 2000 });
+    } else {
+      idleHandle = window.setTimeout(callback, 200);
+    }
+  };
+  if (document.readyState === "complete") run();
+  else window.addEventListener("load", run, { once: true });
+  return () => {
+    cancelled = true;
+    window.removeEventListener("load", run);
+    if (idleHandle !== undefined) {
+      if (typeof window.cancelIdleCallback === "function") window.cancelIdleCallback(idleHandle);
+      window.clearTimeout(idleHandle);
+    }
+  };
+}
 
 type HeroProps = {
   imageSrc: string;
   imageAlt?: string;
-  // Swap in a looping background video later without touching the navbar
-  // logic below - it only cares about the section's scroll position.
+  // Looping background video (a Cloudinary video URL). Its first frame is
+  // shown as the still image (first paint / LCP, the poster while the video
+  // loads, and the fallback for reduced motion or data saver), so the video
+  // starts playing from exactly that picture, without a jump. imageSrc is
+  // then only used without a video.
   videoSrc?: string;
   eyebrow?: string;
   quote?: React.ReactNode;
@@ -64,7 +107,48 @@ export function Hero({
   aside,
   className,
 }: HeroProps) {
+  const { t } = useTranslation();
   const sectionRef = React.useRef<HTMLElement | null>(null);
+  const videoRef = React.useRef<HTMLVideoElement | null>(null);
+  const [videoSources, setVideoSources] = React.useState<VideoSource[] | null>(null);
+  const [videoVisible, setVideoVisible] = React.useState(false);
+  const [userPaused, setUserPaused] = React.useState(false);
+  const userPausedRef = React.useRef(false);
+  userPausedRef.current = userPaused;
+
+  // Picks the rendition for this screen only after the page has loaded.
+  React.useEffect(() => {
+    if (!videoSrc || !wantsHeroVideo()) return;
+    return afterPageLoad(() => {
+      const width = window.innerWidth < 768 ? HERO_VIDEO_WIDTH.small : HERO_VIDEO_WIDTH.large;
+      setVideoSources([
+        { src: cloudinaryVideoUrl(videoSrc, { width, extension: "webm" }), type: "video/webm" },
+        { src: cloudinaryVideoUrl(videoSrc, { width, extension: "mp4" }), type: "video/mp4" },
+      ]);
+    });
+  }, [videoSrc]);
+
+  // Plays only while the hero is on screen (and the visitor hasn't paused it),
+  // so a scrolled-away video costs no CPU or battery.
+  React.useEffect(() => {
+    const video = videoRef.current;
+    const section = sectionRef.current;
+    if (!videoSources || !video || !section || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting && !userPausedRef.current) void video.play().catch(() => {});
+      else video.pause();
+    });
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [videoSources]);
+
+  const toggleVideo = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (userPaused) void video.play().catch(() => {});
+    else video.pause();
+    setUserPaused(!userPaused);
+  };
 
   React.useLayoutEffect(() => {
     if (typeof window === "undefined") return;
@@ -116,28 +200,44 @@ export function Hero({
       )}
     >
       <div className="absolute inset-0">
-        {videoSrc ? (
+        <img
+          src={videoSrc ? cloudinaryVideoFrameUrl(videoSrc, 1920) : cloudinaryUrl(imageSrc, { width: 1920 })}
+          srcSet={
+            videoSrc
+              ? HERO_IMAGE_WIDTHS.map((width) => `${cloudinaryVideoFrameUrl(videoSrc, width)} ${width}w`).join(", ")
+              : cloudinarySrcSet(imageSrc, HERO_IMAGE_WIDTHS)
+          }
+          sizes="100vw"
+          alt={imageAlt}
+          className="h-full w-full object-cover"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+          crossOrigin="anonymous"
+        />
+        {videoSources ? (
           <video
-            className="h-full w-full object-cover"
-            src={videoSrc}
+            ref={videoRef}
+            aria-hidden
+            tabIndex={-1}
             autoPlay
             muted
             loop
             playsInline
-          />
-        ) : (
-          <img
-            src={cloudinaryUrl(imageSrc, { width: 1920 })}
-            srcSet={cloudinarySrcSet(imageSrc, HERO_IMAGE_WIDTHS)}
-            sizes="100vw"
-            alt={imageAlt}
-            className="h-full w-full object-cover"
-            loading="eager"
-            decoding="async"
-            fetchPriority="high"
+            preload="auto"
             crossOrigin="anonymous"
-          />
-        )}
+            disablePictureInPicture
+            onPlaying={() => setVideoVisible(true)}
+            className={cn(
+              "absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ease-out",
+              videoVisible ? "opacity-100" : "opacity-0"
+            )}
+          >
+            {videoSources.map((source) => (
+              <source key={source.type} src={source.src} type={source.type} />
+            ))}
+          </video>
+        ) : null}
         {hasCopy ? (
           // Darken in from the left, where the copy sits. Below md the quote spans
           // nearly the full width, so the right side needs darkening there too.
@@ -145,6 +245,19 @@ export function Hero({
         ) : null}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/10 to-transparent" />
       </div>
+
+      {/* WCAG 2.2.2: moving content that plays on its own needs a way to stop it. */}
+      {videoVisible ? (
+        <button
+          type="button"
+          onClick={toggleVideo}
+          aria-label={userPaused ? t("common.heroVideo.play") : t("common.heroVideo.pause")}
+          aria-pressed={userPaused}
+          className="absolute bottom-5 right-5 z-20 inline-flex size-10 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/60 text-brand-gold-light backdrop-blur-sm transition-colors hover:border-brand-gold hover:bg-brand-gold/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 sm:bottom-6 sm:right-6"
+        >
+          {userPaused ? <Play aria-hidden className="size-4" /> : <Pause aria-hidden className="size-4" />}
+        </button>
+      ) : null}
 
       {hasCopy ? (
         <div className="relative z-10 flex w-full flex-col gap-5 px-6 sm:px-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-16">

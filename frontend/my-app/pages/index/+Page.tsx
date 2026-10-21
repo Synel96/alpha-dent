@@ -34,6 +34,8 @@ export { Page };
 
 const HERO_IMAGE =
   "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789138056/IMG_3392_faedmf.webp";
+const HERO_VIDEO =
+  "https://res.cloudinary.com/dmwulp3dl/video/upload/v1792588721/HnVideoEditor_2026_10_21_151406270_jvppld.webm";
 
 const SERVICE_SLUGS = [
   "implantologia",
@@ -89,6 +91,7 @@ function Page() {
     <>
       <Hero
         imageSrc={HERO_IMAGE}
+        videoSrc={HERO_VIDEO}
         imageAlt="Alphadent"
         quote={t("home.hero.motto")}
         brandMark={
