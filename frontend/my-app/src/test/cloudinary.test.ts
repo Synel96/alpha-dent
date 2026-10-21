@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { cloudinaryUrl, cloudinarySrcSet } from "../../lib/cloudinary";
+import { cloudinarySrcSet, cloudinaryUrl, cloudinaryVideoFrameUrl, cloudinaryVideoUrl } from "../../lib/cloudinary";
 
 const BASE = "https://res.cloudinary.com/demo/image/upload/v1/sample.jpg";
 
@@ -51,5 +51,24 @@ describe("cloudinarySrcSet", () => {
 
   it("nem Cloudinary URL esetén undefined-ot ad (nincs kitalált srcSet)", () => {
     expect(cloudinarySrcSet("https://example.com/image.jpg", [400, 800])).toBeUndefined();
+  });
+});
+
+describe("Cloudinary videó", () => {
+  const video = "https://res.cloudinary.com/demo/video/upload/v1/clip_abc.webm";
+
+  it("a videót a kért konténerformátumban, legfeljebb a megadott szélességben kéri", () => {
+    expect(cloudinaryVideoUrl(video, { width: 1280, extension: "mp4" })).toBe(
+      "https://res.cloudinary.com/demo/video/upload/w_1280,c_limit,q_auto/v1/clip_abc.mp4"
+    );
+    expect(cloudinaryVideoUrl(video, { width: 1920, extension: "webm" })).toBe(
+      "https://res.cloudinary.com/demo/video/upload/w_1920,c_limit,q_auto/v1/clip_abc.webm"
+    );
+  });
+
+  it("a videó első képkockáját állóképként adja (so_0)", () => {
+    expect(cloudinaryVideoFrameUrl(video, 960)).toBe(
+      "https://res.cloudinary.com/demo/video/upload/so_0,w_960,c_limit,q_auto,f_auto/v1/clip_abc.jpg"
+    );
   });
 });
