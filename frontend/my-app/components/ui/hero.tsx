@@ -2,7 +2,7 @@ import React from "react";
 import { Pause, Play } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
-import { cloudinaryUrl, cloudinarySrcSet, cloudinaryVideoFrameUrl, cloudinaryVideoUrl } from "@/lib/cloudinary";
+import { cloudinaryUrl, cloudinarySrcSet, cloudinaryVideoUrl } from "@/lib/cloudinary";
 import { CtaButton } from "@/components/ui/cta-button";
 
 // Layout's navbar reads this to fade from transparent (over the hero media)
@@ -74,11 +74,9 @@ function afterPageLoad(callback: () => void): () => void {
 type HeroProps = {
   imageSrc: string;
   imageAlt?: string;
-  // Looping background video (a Cloudinary video URL). Its first frame is
-  // shown as the still image (first paint / LCP, the poster while the video
-  // loads, and the fallback for reduced motion or data saver), so the video
-  // starts playing from exactly that picture, without a jump. imageSrc is
-  // then only used without a video.
+  // Looping background video (a Cloudinary video URL), faded in over the
+  // photo once it can play. imageSrc stays the first paint (LCP), the still
+  // while the video loads, and the fallback for reduced motion / data saver.
   videoSrc?: string;
   eyebrow?: string;
   quote?: React.ReactNode;
@@ -201,12 +199,8 @@ export function Hero({
     >
       <div className="absolute inset-0">
         <img
-          src={videoSrc ? cloudinaryVideoFrameUrl(videoSrc, 1920) : cloudinaryUrl(imageSrc, { width: 1920 })}
-          srcSet={
-            videoSrc
-              ? HERO_IMAGE_WIDTHS.map((width) => `${cloudinaryVideoFrameUrl(videoSrc, width)} ${width}w`).join(", ")
-              : cloudinarySrcSet(imageSrc, HERO_IMAGE_WIDTHS)
-          }
+          src={cloudinaryUrl(imageSrc, { width: 1920 })}
+          srcSet={cloudinarySrcSet(imageSrc, HERO_IMAGE_WIDTHS)}
           sizes="100vw"
           alt={imageAlt}
           className="h-full w-full object-cover"
