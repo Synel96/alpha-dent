@@ -36,9 +36,13 @@ export function Head() {
       {FONT_PRELOADS.map((href) => (
         <link key={href} rel="preload" href={href} as="font" type="font/woff2" crossOrigin="anonymous" />
       ))}
-      {/* The clinic's logo mark (public/brand); iOS home screens need a PNG. */}
-      <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml" />
-      <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
+      {/* The clinic's logo mark: favicon.ico for browsers and crawlers that
+          only look at the site root, the SVG for the rest, a PNG for iOS
+          home screens. ?v= makes browsers drop a cached older icon - bump it
+          whenever the icons change. */}
+      <link rel="icon" href="/favicon.ico?v=2" sizes="32x32" />
+      <link rel="icon" href="/brand/favicon.svg?v=2" type="image/svg+xml" />
+      <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png?v=2" />
       <link rel="canonical" href={canonical} />
       {hreflangAlternates(urlPathname).map(({ hreflang, href }) => (
         <link key={hreflang} rel="alternate" hrefLang={hreflang} href={href} />
