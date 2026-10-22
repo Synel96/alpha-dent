@@ -2,6 +2,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { localizeHref } from "@/lib/locale";
+import { AlphadentLogo } from "./alphadent-logo";
 
 const SOCIAL_LINKS = [
   {
@@ -62,9 +63,10 @@ export function Footer() {
         <div>
           <a
             href={localizeHref(locale, "/")}
-            className="text-lg font-semibold uppercase tracking-[0.32em] text-brand-gold transition-colors hover:text-brand-gold-light"
+            className="inline-flex rounded-md text-brand-logo transition-colors hover:text-brand-logo-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
           >
-            Alphadent
+            <AlphadentLogo className="h-10 w-auto" />
+            <span className="sr-only">Alphadent</span>
           </a>
           <div className="mt-5 flex items-center gap-4">
             {SOCIAL_LINKS.map(({ icon, label, href }) => (

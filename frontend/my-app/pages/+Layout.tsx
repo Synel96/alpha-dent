@@ -8,6 +8,7 @@ import "../lib/i18n";
 import { localizeHref } from "../lib/locale";
 import { Footer } from "../components/ui/footer";
 import { LoadingScreen } from "../components/ui/loading-screen";
+import { AlphadentLogo } from "../components/ui/alphadent-logo";
 import { PageBackground } from "../components/ui/page-background";
 import {
   subscribeHeroProgress,
@@ -210,9 +211,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <a
               href={homeHref}
               onClick={(event) => handleInternalLink(event, homeHref)}
-              className="flex items-center rounded-md text-lg font-semibold text-brand-gold transition-colors hover:text-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
+              className="flex items-center rounded-md text-brand-logo transition-colors hover:text-brand-logo-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
             >
-              <span className="uppercase tracking-[0.32em]">Alphadent</span>
+              <AlphadentLogo className="h-8 w-auto sm:h-9" />
+              <span className="sr-only">Alphadent</span>
             </a>
 
             <div className="hidden lg:flex flex-1 justify-center">
