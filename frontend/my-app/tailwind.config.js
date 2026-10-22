@@ -16,6 +16,9 @@ export default {
           "gold-light": "#E4C46A",
           "gold-muted": "#A68A4C",
           muted: "#5a5a62",
+          // The clinic's own logo grey (public/brand/alphadent-logo.svg).
+          logo: "#BCBCBC",
+          "logo-light": "#DCDCDC",
         },
       },
       fontFamily: {

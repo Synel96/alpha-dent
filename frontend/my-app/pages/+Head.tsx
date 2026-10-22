@@ -36,7 +36,9 @@ export function Head() {
       {FONT_PRELOADS.map((href) => (
         <link key={href} rel="preload" href={href} as="font" type="font/woff2" crossOrigin="anonymous" />
       ))}
-      <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.85em' x='0.08em' font-size='82' fill='%23C9A84C'%3E%CE%B1%3C/text%3E%3C/svg%3E" />
+      {/* The clinic's logo mark (public/brand); iOS home screens need a PNG. */}
+      <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml" />
+      <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
       <link rel="canonical" href={canonical} />
       {hreflangAlternates(urlPathname).map(({ hreflang, href }) => (
         <link key={hreflang} rel="alternate" hrefLang={hreflang} href={href} />
