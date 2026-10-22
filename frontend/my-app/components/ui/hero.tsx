@@ -34,14 +34,27 @@ export function getHeroProgressServerSnapshot() {
 const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1920] as const;
 const HERO_VIDEO_WIDTHS = [1280, 1920] as const;
 
-// The video fills the (full-height) hero with object-cover, so on a portrait
-// phone the landscape clip is scaled up by the screen's HEIGHT, not its
-// width: a 390px-wide phone still shows it ~844px tall, at 3 device pixels
-// per CSS pixel. Pick the smallest rendition that covers that (assuming a
-// 16:9 clip), so phones aren't sent a low-resolution one that then looks
+// Portrait phones (matches Tailwind's `max-md:portrait:`). Covering the whole
+// full-height hero there would zoom the landscape clip in to its middle
+// quarter - too close to make out what happens in it - and the copy would
+// cover even that. So there the whole 16:9 frame sits uncropped, full width,
+// right under the navbar with the copy below it, and a blurred, enlarged copy
+// of it fills the rest of the screen.
+const FIT_QUERY = "(max-width: 767px) and (orientation: portrait)";
+const FIT_BAND_CLASS =
+  "max-md:portrait:inset-auto max-md:portrait:inset-x-0 max-md:portrait:top-[var(--nav-height,72px)] max-md:portrait:aspect-video max-md:portrait:[mask-image:linear-gradient(to_bottom,transparent,black_6%,black_94%,transparent)]";
+// The band's height is 56.25vw (16:9 at full width).
+const FIT_BELOW_BAND_CLASS = "max-md:portrait:top-[calc(var(--nav-height,72px)+56.25vw)]";
+const FIT_FILL_CLASS = "h-full w-full scale-110 object-cover blur-2xl brightness-75";
+
+// The video covers the full-height hero, so it is scaled by the hero's
+// height as well as its width; on portrait phones it only spans the width.
+// Pick the smallest rendition that covers that in device pixels (assuming a
+// 16:9 clip), so no one is sent a low-resolution one that then looks
 // pixelated once stretched.
 function heroVideoWidth(): number {
-  const needed = Math.max(window.innerWidth, (window.innerHeight * 16) / 9) * (window.devicePixelRatio || 1);
+  const coveredHeight = window.matchMedia(FIT_QUERY).matches ? 0 : (window.innerHeight * 16) / 9;
+  const needed = Math.max(window.innerWidth, coveredHeight) * (window.devicePixelRatio || 1);
   return HERO_VIDEO_WIDTHS.find((width) => width >= needed) ?? HERO_VIDEO_WIDTHS[HERO_VIDEO_WIDTHS.length - 1];
 }
 
@@ -95,6 +108,10 @@ export function Hero({
   const { t } = useTranslation();
   const sectionRef = React.useRef<HTMLElement | null>(null);
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
+  const fillVideoRef = React.useRef<HTMLVideoElement | null>(null);
+  // Whether the blurred fill is showing (FIT_QUERY): only then is its second
+  // <video> mounted, so other screens don't decode the clip twice.
+  const [fitMode, setFitMode] = React.useState(false);
   // An object URL of the fully downloaded video - see the effect below.
   const [videoUrl, setVideoUrl] = React.useState<string | null>(null);
   const [videoVisible, setVideoVisible] = React.useState(false);
@@ -151,6 +168,27 @@ export function Hero({
     observer.observe(section);
     return () => observer.disconnect();
   }, [videoUrl]);
+
+  React.useEffect(() => {
+    if (!videoSrc) return;
+    const query = window.matchMedia(FIT_QUERY);
+    const update = () => setFitMode(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, [videoSrc]);
+
+  // The blurred fill just mirrors the sharp video: it plays and pauses with
+  // it (pause button, scrolled off screen), including when it mounts late,
+  // e.g. after the phone is turned upright.
+  const syncFill = () => {
+    const video = videoRef.current;
+    const fill = fillVideoRef.current;
+    if (!video || !fill) return;
+    if (video.paused) fill.pause();
+    else void fill.play().catch(() => {});
+  };
+  React.useEffect(syncFill, [fitMode, videoUrl]);
 
   const toggleVideo = () => {
     const video = videoRef.current;
@@ -212,46 +250,92 @@ export function Hero({
       }}
       className={cn(
         "relative flex min-h-screen w-full items-center overflow-hidden bg-brand-black",
+        // Portrait phones: the copy starts below the video band (overrides the
+        // inline paddingTop, hence the !).
+        videoSrc && "max-md:portrait:!pt-[calc(var(--nav-height,72px)+56.25vw+1.5rem)]",
         hasCopy ? "justify-start" : "justify-center",
         className
       )}
     >
       <div className="absolute inset-0">
-        <img
-          src={cloudinaryUrl(imageSrc, { width: 1920 })}
-          srcSet={cloudinarySrcSet(imageSrc, HERO_IMAGE_WIDTHS)}
-          sizes="100vw"
-          alt={imageAlt}
-          className="h-full w-full object-cover"
-          loading="eager"
-          decoding="async"
-          fetchPriority="high"
-          crossOrigin="anonymous"
-        />
-        {videoUrl ? (
-          <video
-            ref={videoRef}
-            src={videoUrl}
-            aria-hidden
-            tabIndex={-1}
-            muted
-            loop
-            playsInline
-            preload="auto"
-            disablePictureInPicture
-            // Already fully downloaded; start once it is decoded and ready.
-            onCanPlayThrough={playIfWanted}
-            onPlaying={() => setVideoVisible(true)}
-            className={cn(
-              "absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out",
-              videoVisible ? "opacity-100" : "opacity-0"
-            )}
-          />
+        {videoSrc ? (
+          // Same srcset and sizes as the sharp photo below, so the browser
+          // reuses that one download.
+          <div aria-hidden className="absolute inset-0 hidden overflow-hidden max-md:portrait:block">
+            <img
+              src={cloudinaryUrl(imageSrc, { width: 1920 })}
+              srcSet={cloudinarySrcSet(imageSrc, HERO_IMAGE_WIDTHS)}
+              sizes="100vw"
+              alt=""
+              className={FIT_FILL_CLASS}
+              loading="eager"
+              decoding="async"
+              crossOrigin="anonymous"
+            />
+            {videoUrl && fitMode ? (
+              <video
+                ref={fillVideoRef}
+                src={videoUrl}
+                tabIndex={-1}
+                muted
+                loop
+                playsInline
+                preload="auto"
+                disablePictureInPicture
+                className={cn(
+                  "absolute inset-0 transition-opacity duration-500 ease-out",
+                  FIT_FILL_CLASS,
+                  videoVisible ? "opacity-100" : "opacity-0"
+                )}
+              />
+            ) : null}
+          </div>
         ) : null}
+        <div className={cn("absolute inset-0", videoSrc && FIT_BAND_CLASS)}>
+          <img
+            src={cloudinaryUrl(imageSrc, { width: 1920 })}
+            srcSet={cloudinarySrcSet(imageSrc, HERO_IMAGE_WIDTHS)}
+            sizes="100vw"
+            alt={imageAlt}
+            className="h-full w-full object-cover"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+            crossOrigin="anonymous"
+          />
+          {videoUrl ? (
+            <video
+              ref={videoRef}
+              src={videoUrl}
+              aria-hidden
+              tabIndex={-1}
+              muted
+              loop
+              playsInline
+              preload="auto"
+              disablePictureInPicture
+              // Already fully downloaded; start once it is decoded and ready.
+              onCanPlayThrough={playIfWanted}
+              onPlaying={() => setVideoVisible(true)}
+              onPlay={syncFill}
+              onPause={syncFill}
+              className={cn(
+                "absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out",
+                videoVisible ? "opacity-100" : "opacity-0"
+              )}
+            />
+          ) : null}
+        </div>
         {hasCopy ? (
           // Darken in from the left, where the copy sits. Below md the quote spans
           // nearly the full width, so the right side needs darkening there too.
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/10 md:from-black/55 md:via-black/20 md:to-transparent" />
+          <div
+            className={cn(
+              "absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/10 md:from-black/55 md:via-black/20 md:to-transparent",
+              // Portrait phones: only behind the copy, not over the video above it.
+              videoSrc && FIT_BELOW_BAND_CLASS
+            )}
+          />
         ) : null}
         {/* Only the bottom third fades into the page background, so the video
             stays bright and the hero still flows into the next section. */}
@@ -265,7 +349,12 @@ export function Hero({
           onClick={toggleVideo}
           aria-label={userPaused ? t("common.heroVideo.play") : t("common.heroVideo.pause")}
           aria-pressed={userPaused}
-          className="absolute bottom-5 right-5 z-20 inline-flex size-10 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/60 text-brand-gold-light backdrop-blur-sm transition-colors hover:border-brand-gold hover:bg-brand-gold/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 sm:bottom-6 sm:right-6"
+          className={cn(
+            "absolute bottom-5 right-5 z-20 inline-flex size-10 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/60 text-brand-gold-light backdrop-blur-sm transition-colors hover:border-brand-gold hover:bg-brand-gold/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 sm:bottom-6 sm:right-6",
+            // Portrait phones: on the video band's corner (its bottom edge is
+            // 56.25vw below the navbar), clear of the copy below it.
+            videoSrc && "max-md:portrait:bottom-auto max-md:portrait:right-3 max-md:portrait:top-[calc(var(--nav-height,72px)+56.25vw-3.25rem)]"
+          )}
         >
           {userPaused ? <Play aria-hidden className="size-4" /> : <Pause aria-hidden className="size-4" />}
         </button>
