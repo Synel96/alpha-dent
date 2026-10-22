@@ -16,7 +16,9 @@ async function findHtmlFiles(dir) {
     entries.map((entry) => {
       const full = path.join(dir, entry.name);
       if (entry.isDirectory()) return findHtmlFiles(full);
-      return entry.name.endsWith(".html") ? [full] : [];
+      // Not the Search Console verification file (public/google*.html): it
+      // must stay byte for byte as Google issued it.
+      return entry.name.endsWith(".html") && !/^google[0-9a-f]+\.html$/.test(entry.name) ? [full] : [];
     })
   );
   return files.flat();
