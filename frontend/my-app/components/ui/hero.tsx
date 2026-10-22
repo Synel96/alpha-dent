@@ -125,30 +125,37 @@ export function Hero({
   userPausedRef.current = userPaused;
   const inViewRef = React.useRef(true);
 
-  // Starts downloading the whole video straight away (no lazy loading), and
-  // only hands it to the <video> once it is all there - so it never starts
-  // early and stutters on a slow connection (or while Cloudinary is still
-  // transcoding a first request). Fetched anonymously: no cookies or other
-  // credentials are sent. Until then the still photo stays.
+  // Starts downloading the whole video as soon as the page itself has loaded
+  // (no lazy loading - it doesn't wait for a scroll), and only hands it to the
+  // <video> once it is all there - so it never starts early and stutters on a
+  // slow connection (or while Cloudinary is still transcoding a first request).
+  // Waiting for the load event keeps the multi-megabyte download from
+  // competing with the hero photo (the LCP) and the page's own files for
+  // bandwidth. Fetched anonymously: no cookies or other credentials are sent.
+  // Until then the still photo stays.
   React.useEffect(() => {
     if (!videoSrc || !wantsHeroVideo()) return;
     const controller = new AbortController();
     let objectUrl: string | null = null;
-    fetch(cloudinaryVideoUrl(videoSrc, { width: heroVideoWidth(), extension: heroVideoExtension() }), {
-      credentials: "omit",
-      mode: "cors",
-      referrerPolicy: "no-referrer",
-      priority: "high",
-      signal: controller.signal,
-    } as RequestInit & { priority?: "high" | "low" | "auto" })
-      .then((response) => (response.ok ? response.blob() : Promise.reject(new Error(String(response.status)))))
-      .then((blob) => {
-        objectUrl = URL.createObjectURL(blob);
-        setVideoUrl(objectUrl);
+    const start = () => {
+      fetch(cloudinaryVideoUrl(videoSrc, { width: heroVideoWidth(), extension: heroVideoExtension() }), {
+        credentials: "omit",
+        mode: "cors",
+        referrerPolicy: "no-referrer",
+        signal: controller.signal,
       })
-      // No video (offline, blocked, aborted): the still photo simply stays.
-      .catch(() => {});
+        .then((response) => (response.ok ? response.blob() : Promise.reject(new Error(String(response.status)))))
+        .then((blob) => {
+          objectUrl = URL.createObjectURL(blob);
+          setVideoUrl(objectUrl);
+        })
+        // No video (offline, blocked, aborted): the still photo simply stays.
+        .catch(() => {});
+    };
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
     return () => {
+      window.removeEventListener("load", start);
       controller.abort();
       if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
