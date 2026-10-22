@@ -32,7 +32,8 @@ export const contactResources = {
       opensToday: "Nyitás: ma {{time}}",
       opensTomorrow: "Nyitás: holnap {{time}}",
       opensOn: "Nyitás: {{day}} {{time}}",
-      openMessage: "Keressen minket bátran telefonon! Ha nem sikerül elérnie minket, írjon e-mailt.",
+      openMessage:
+        "Keressen minket bizalommal telefonon! Ha épp nem tudjuk fogadni a hívását, írjon nekünk e-mailt, és mihamarabb válaszolunk.",
       closedMessage:
         "Rendelési időn kívül is fogadjuk hívását napközben. Ha telefonon nem sikerül elérnie minket, írjon e-mailt, és hamarosan válaszolunk!",
     },
