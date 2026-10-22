@@ -17,6 +17,7 @@ export const commonResources = {
       carousel: {
         prev: "Előző",
         next: "Következő",
+        goTo: "Ugrás a(z) {{index}}. kártyára",
       },
       gallery: {
         prev: "Előző képek",
@@ -113,6 +114,7 @@ export const commonResources = {
       carousel: {
         prev: "Previous",
         next: "Next",
+        goTo: "Go to card {{index}}",
       },
       gallery: {
         prev: "Previous photos",
@@ -209,6 +211,7 @@ export const commonResources = {
       carousel: {
         prev: "Zurück",
         next: "Weiter",
+        goTo: "Zur Karte {{index}}",
       },
       gallery: {
         prev: "Vorherige Bilder",
@@ -305,6 +308,7 @@ export const commonResources = {
       carousel: {
         prev: "Precedente",
         next: "Successivo",
+        goTo: "Vai alla scheda {{index}}",
       },
       gallery: {
         prev: "Foto precedenti",

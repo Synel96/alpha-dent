@@ -9,9 +9,17 @@ type ServiceCarouselProps = {
 };
 
 // Horizontal, snap-based carousel. On touch devices the row scrolls (and
-// snaps) natively via CSS, no JS needed. On pointer devices the prev/next
-// buttons drive the same scroll container with scrollBy, since a bare
-// horizontal overflow is easy to miss without a visible grid.
+// snaps) natively via CSS. Since a bare horizontal overflow is easy to miss,
+// it always shows that it can be paged: one dot per stop (the current one
+// highlighted, each a button to jump there) and prev/next arrows - beside
+// the row from sm up, next to the dots on phones. The arrows step one whole
+// card and are disabled at either end.
+const ARROW_CLASS =
+  "inline-flex items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/85 p-2 text-brand-gold-light shadow-lg transition hover:border-brand-gold hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 disabled:pointer-events-none disabled:opacity-35";
+// From sm up: vertically centred on the cards (the wrapper's height also
+// holds the dots row below them, hence the offset).
+const SIDE_ARROW_CLASS = "sm:absolute sm:top-[calc(50%-1.25rem)] sm:-translate-y-1/2";
+
 export function ServiceCarousel({ children, className }: ServiceCarouselProps) {
   const { t } = useTranslation();
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
@@ -20,15 +28,55 @@ export function ServiceCarousel({ children, className }: ServiceCarouselProps) {
   );
   const draggedRef = React.useRef(false);
   const [dragging, setDragging] = React.useState(false);
+  const count = React.Children.count(children);
+  // One dot per place the row can actually stop at: each card that can be
+  // brought to the left edge, plus the end of the row. On a wide screen most
+  // cards are visible at once, so there are fewer stops than cards.
+  const [stops, setStops] = React.useState(count);
+  const [active, setActive] = React.useState(0);
+  const [atStart, setAtStart] = React.useState(true);
+  const [atEnd, setAtEnd] = React.useState(count <= 1);
 
-  const scrollByCard = (direction: 1 | -1) => {
+  const measure = React.useCallback(() => {
     const node = scrollRef.current;
-    if (!node) return;
-    const card = node.firstElementChild as HTMLElement | null;
-    const gap = 16;
-    const amount = (card?.offsetWidth ?? node.clientWidth * 0.8) + gap;
-    node.scrollBy({ left: direction * amount, behavior: "smooth" });
+    // Not laid out (yet), e.g. inside a hidden parent: nothing to measure,
+    // so keep the default one-dot-per-card controls.
+    if (!node || node.clientWidth === 0) return null;
+    const starts = (Array.from(node.children) as HTMLElement[]).map((card) => card.offsetLeft - node.offsetLeft);
+    const maxScroll = Math.max(0, node.scrollWidth - node.clientWidth);
+    const lefts = maxScroll > 2 ? [...starts.filter((start) => start < maxScroll - 2), maxScroll] : [0];
+    return { node, lefts, maxScroll };
+  }, []);
+
+  const updatePosition = React.useCallback(() => {
+    const measured = measure();
+    if (!measured) return;
+    const { node, lefts, maxScroll } = measured;
+    const end = node.scrollLeft >= maxScroll - 2;
+    let index = 0;
+    lefts.forEach((left, i) => {
+      if (Math.abs(left - node.scrollLeft) < Math.abs(lefts[index] - node.scrollLeft)) index = i;
+    });
+    setStops(lefts.length);
+    setActive(end ? lefts.length - 1 : index);
+    setAtStart(node.scrollLeft <= 2);
+    setAtEnd(end);
+  }, [measure]);
+
+  React.useEffect(() => {
+    updatePosition();
+    window.addEventListener("resize", updatePosition);
+    return () => window.removeEventListener("resize", updatePosition);
+  }, [updatePosition]);
+
+  const goTo = (index: number) => {
+    const measured = measure();
+    if (!measured) return;
+    const { node, lefts } = measured;
+    node.scrollTo({ left: lefts[Math.max(0, Math.min(index, lefts.length - 1))], behavior: "smooth" });
   };
+
+  const scrollByCard = (direction: 1 | -1) => goTo(active + direction);
 
   // Click-and-drag scrolling for mouse users: the scrollbar is hidden for a
   // cleaner look, and a plain overflow-x-auto div doesn't respond to a
@@ -87,6 +135,7 @@ export function ServiceCarousel({ children, className }: ServiceCarouselProps) {
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
         onClickCapture={handleClickCapture}
+        onScroll={updatePosition}
         // The tiles are links with images, which the browser would otherwise
         // start dragging natively (HTML drag-and-drop) - that cancels the
         // pointer stream, so the row wouldn't scroll on a mouse drag.
@@ -110,22 +159,52 @@ export function ServiceCarousel({ children, className }: ServiceCarouselProps) {
         {children}
       </div>
 
-      <button
-        type="button"
-        aria-label={t("common.carousel.prev")}
-        onClick={() => scrollByCard(-1)}
-        className="absolute left-0 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/85 p-2 text-brand-gold-light shadow-lg transition hover:border-brand-gold hover:text-brand-gold sm:flex"
-      >
-        <ChevronLeft className="size-4" />
-      </button>
-      <button
-        type="button"
-        aria-label={t("common.carousel.next")}
-        onClick={() => scrollByCard(1)}
-        className="absolute right-0 top-1/2 hidden -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/85 p-2 text-brand-gold-light shadow-lg transition hover:border-brand-gold hover:text-brand-gold sm:flex"
-      >
-        <ChevronRight className="size-4" />
-      </button>
+      {stops > 1 ? (
+        // Not positioned itself, so from sm up the arrows can sit absolutely
+        // beside the row (against the outer wrapper) while on phones they
+        // flank the dots.
+        <div className="mt-4 flex items-center justify-center gap-3">
+          <button
+            type="button"
+            aria-label={t("common.carousel.prev")}
+            onClick={() => scrollByCard(-1)}
+            disabled={atStart}
+            className={cn(ARROW_CLASS, SIDE_ARROW_CLASS, "sm:left-0 sm:-translate-x-1/2")}
+          >
+            <ChevronLeft aria-hidden className="size-4" />
+          </button>
+          <div className="flex items-center">
+            {Array.from({ length: stops }, (_, index) => (
+              <button
+                key={index}
+                type="button"
+                aria-label={t("common.carousel.goTo", { index: index + 1 })}
+                aria-current={index === active ? "true" : undefined}
+                onClick={() => goTo(index)}
+                // 24px hit area (WCAG 2.5.8) around a small dot.
+                className="group inline-flex size-6 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
+              >
+                <span
+                  aria-hidden
+                  className={cn(
+                    "block h-2 rounded-full transition-all duration-300",
+                    index === active ? "w-5 bg-brand-gold-light" : "w-2 bg-brand-gold/35 group-hover:bg-brand-gold/70"
+                  )}
+                />
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            aria-label={t("common.carousel.next")}
+            onClick={() => scrollByCard(1)}
+            disabled={atEnd}
+            className={cn(ARROW_CLASS, SIDE_ARROW_CLASS, "sm:right-0 sm:translate-x-1/2")}
+          >
+            <ChevronRight aria-hidden className="size-4" />
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }
