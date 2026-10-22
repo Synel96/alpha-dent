@@ -10,10 +10,10 @@ vi.mock("react-i18next", () => ({
 import { ServiceCarousel } from "../../components/ui/service-carousel";
 
 describe("ServiceCarousel", () => {
-  const originalScrollBy = Element.prototype.scrollBy;
+  const originalScrollTo = Element.prototype.scrollTo;
 
   afterEach(() => {
-    Element.prototype.scrollBy = originalScrollBy;
+    Element.prototype.scrollTo = originalScrollTo;
   });
 
   it("megjeleníti az összes átadott kártyát", () => {
@@ -27,19 +27,29 @@ describe("ServiceCarousel", () => {
     expect(screen.getByText("Kártya 2")).toBeInTheDocument();
   });
 
-  it("a nyíl gombokon a lokalizált címkéket használja", () => {
+  it("egyetlen kártyánál nincs mit lapozni, így nincsenek lapozó gombok", () => {
     render(
       <ServiceCarousel>
         <div>Kártya</div>
+      </ServiceCarousel>
+    );
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
+  });
+
+  it("a nyíl gombokon a lokalizált címkéket használja", () => {
+    render(
+      <ServiceCarousel>
+        <div>Kártya 1</div>
+        <div>Kártya 2</div>
       </ServiceCarousel>
     );
     expect(screen.getByRole("button", { name: "common.carousel.prev" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "common.carousel.next" })).toBeInTheDocument();
   });
 
-  it("a következő/előző gombok a görgethető konténert görgetik, ellentétes irányba", () => {
-    const scrollBySpy = vi.fn();
-    Element.prototype.scrollBy = scrollBySpy;
+  it("a nyilak és a pöttyök egész kártyára lapoznak, a sor végén a megfelelő nyíl inaktív", () => {
+    const scrollToSpy = vi.fn();
+    Element.prototype.scrollTo = scrollToSpy as typeof Element.prototype.scrollTo;
 
     render(
       <ServiceCarousel>
@@ -47,17 +57,36 @@ describe("ServiceCarousel", () => {
         <div>Kártya 2</div>
       </ServiceCarousel>
     );
+    const row = screen.getByText("Kártya 1").parentElement!;
+    // jsdom has no layout: give the cards and the row their geometry.
+    Object.defineProperty(screen.getByText("Kártya 2"), "offsetLeft", { value: 300 });
+    Object.defineProperty(row, "scrollWidth", { value: 600 });
+    Object.defineProperty(row, "clientWidth", { value: 300 });
+    let scrollLeft = 0;
+    Object.defineProperty(row, "scrollLeft", { get: () => scrollLeft });
+    fireEvent.scroll(row);
 
-    fireEvent.click(screen.getByRole("button", { name: "common.carousel.next" }));
-    expect(scrollBySpy).toHaveBeenCalledTimes(1);
-    const nextArgs = scrollBySpy.mock.calls.at(-1)?.[0];
-    expect(nextArgs.left).toBeGreaterThan(0);
-    expect(nextArgs.behavior).toBe("smooth");
+    const prev = screen.getByRole("button", { name: "common.carousel.prev" });
+    const next = screen.getByRole("button", { name: "common.carousel.next" });
+    const dots = screen.getAllByRole("button", { name: "common.carousel.goTo" });
+    expect(dots).toHaveLength(2);
+    expect(dots[0]).toHaveAttribute("aria-current", "true");
+    expect(prev).toBeDisabled();
 
-    fireEvent.click(screen.getByRole("button", { name: "common.carousel.prev" }));
-    expect(scrollBySpy).toHaveBeenCalledTimes(2);
-    const prevArgs = scrollBySpy.mock.calls.at(-1)?.[0];
-    expect(prevArgs.left).toBeLessThan(0);
+    fireEvent.click(next);
+    expect(scrollToSpy).toHaveBeenLastCalledWith({ left: 300, behavior: "smooth" });
+
+    // The row has scrolled to its end.
+    scrollLeft = 300;
+    fireEvent.scroll(row);
+    expect(dots[1]).toHaveAttribute("aria-current", "true");
+    expect(next).toBeDisabled();
+    expect(prev).toBeEnabled();
+
+    fireEvent.click(prev);
+    expect(scrollToSpy).toHaveBeenLastCalledWith({ left: 0, behavior: "smooth" });
+    fireEvent.click(dots[1]);
+    expect(scrollToSpy).toHaveBeenLastCalledWith({ left: 300, behavior: "smooth" });
   });
 
   describe("egérrel (asztali nézet)", () => {
