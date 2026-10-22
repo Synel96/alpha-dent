@@ -32,8 +32,18 @@ export function getHeroProgressServerSnapshot() {
 }
 
 const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1920] as const;
-// Phones get a lighter rendition of the background video.
-const HERO_VIDEO_WIDTH = { small: 1280, large: 1920 } as const;
+const HERO_VIDEO_WIDTHS = [1280, 1920] as const;
+
+// The video fills the (full-height) hero with object-cover, so on a portrait
+// phone the landscape clip is scaled up by the screen's HEIGHT, not its
+// width: a 390px-wide phone still shows it ~844px tall, at 3 device pixels
+// per CSS pixel. Pick the smallest rendition that covers that (assuming a
+// 16:9 clip), so phones aren't sent a low-resolution one that then looks
+// pixelated once stretched.
+function heroVideoWidth(): number {
+  const needed = Math.max(window.innerWidth, (window.innerHeight * 16) / 9) * (window.devicePixelRatio || 1);
+  return HERO_VIDEO_WIDTHS.find((width) => width >= needed) ?? HERO_VIDEO_WIDTHS[HERO_VIDEO_WIDTHS.length - 1];
+}
 
 // WebM (VP9) is smaller; MP4 (H.264) for browsers without it, e.g. older Safari.
 function heroVideoExtension(): "webm" | "mp4" {
@@ -102,8 +112,7 @@ export function Hero({
     if (!videoSrc || !wantsHeroVideo()) return;
     const controller = new AbortController();
     let objectUrl: string | null = null;
-    const width = window.innerWidth < 768 ? HERO_VIDEO_WIDTH.small : HERO_VIDEO_WIDTH.large;
-    fetch(cloudinaryVideoUrl(videoSrc, { width, extension: heroVideoExtension() }), {
+    fetch(cloudinaryVideoUrl(videoSrc, { width: heroVideoWidth(), extension: heroVideoExtension() }), {
       credentials: "omit",
       mode: "cors",
       referrerPolicy: "no-referrer",
