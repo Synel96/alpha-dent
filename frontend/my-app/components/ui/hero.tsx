@@ -85,8 +85,12 @@ type HeroProps = {
   subtitle?: React.ReactNode;
   ctaHref?: string;
   ctaLabel?: string;
+  // Shown beside the CTA button, e.g. a call link.
+  secondaryAction?: React.ReactNode;
   children?: React.ReactNode;
-  // Shown beside the copy on desktop (lg+), below it on smaller screens.
+  // Shown beside the copy on desktop (lg+), below it on tablets, and on
+  // phones right under the hero - not over the video, where it would cover
+  // its lower third and make the hero taller than the screen.
   aside?: React.ReactNode;
   className?: string;
 };
@@ -101,6 +105,7 @@ export function Hero({
   subtitle,
   ctaHref,
   ctaLabel,
+  secondaryAction,
   children,
   aside,
   className,
@@ -234,153 +239,159 @@ export function Hero({
   const hasCopy = Boolean(quote || subtitle || eyebrow || (ctaHref && ctaLabel) || children || aside);
 
   return (
-    <section
-      ref={sectionRef}
-      // The header is `fixed` and adds matching top padding to <main> (see
-      // pages/+Layout.tsx) so it can float transparently over page content
-      // without pushing it down - Hero cancels that padding here so its
-      // media fills the viewport from y=0, right behind the header.
-      // The padding keeps the copy clear of that header: on a phone turned
-      // sideways the copy is taller than the screen, so instead of being
-      // centred it starts at the top - and would slide under the navbar.
-      style={{
-        marginTop: "calc(-1 * var(--nav-height, 72px))",
-        paddingTop: "calc(var(--nav-height, 72px) + 1.5rem)",
-        paddingBottom: "2.5rem",
-      }}
-      className={cn(
-        "relative flex min-h-screen w-full items-center overflow-hidden bg-brand-black",
-        hasCopy ? "justify-start" : "justify-center",
-        className
-      )}
-    >
-      <div className="absolute inset-0">
-        {videoSrc ? (
-          // Same srcset and sizes as the sharp photo below, so the browser
-          // reuses that one download.
-          <div aria-hidden className="absolute inset-0 hidden overflow-hidden max-md:portrait:block">
+    <>
+      <section
+        ref={sectionRef}
+        // The header is `fixed` and adds matching top padding to <main> (see
+        // pages/+Layout.tsx) so it can float transparently over page content
+        // without pushing it down - Hero cancels that padding here so its
+        // media fills the viewport from y=0, right behind the header.
+        // The padding keeps the copy clear of that header: on a phone turned
+        // sideways the copy is taller than the screen, so instead of being
+        // centred it starts at the top - and would slide under the navbar.
+        style={{
+          marginTop: "calc(-1 * var(--nav-height, 72px))",
+          paddingTop: "calc(var(--nav-height, 72px) + 1.5rem)",
+          paddingBottom: "2.5rem",
+        }}
+        className={cn(
+          "relative flex min-h-screen w-full items-center overflow-hidden bg-brand-black",
+          hasCopy ? "justify-start" : "justify-center",
+          className
+        )}
+      >
+        <div className="absolute inset-0">
+          {videoSrc ? (
+            // Same srcset and sizes as the sharp photo below, so the browser
+            // reuses that one download.
+            <div aria-hidden className="absolute inset-0 hidden overflow-hidden max-md:portrait:block">
+              <img
+                src={cloudinaryUrl(imageSrc, { width: 1920 })}
+                srcSet={cloudinarySrcSet(imageSrc, HERO_IMAGE_WIDTHS)}
+                sizes="100vw"
+                alt=""
+                className={FIT_FILL_CLASS}
+                loading="eager"
+                decoding="async"
+                crossOrigin="anonymous"
+              />
+              {videoUrl && fitMode ? (
+                <video
+                  ref={fillVideoRef}
+                  src={videoUrl}
+                  tabIndex={-1}
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  disablePictureInPicture
+                  className={cn(
+                    "absolute inset-0 transition-opacity duration-500 ease-out",
+                    FIT_FILL_CLASS,
+                    videoVisible ? "opacity-100" : "opacity-0"
+                  )}
+                />
+              ) : null}
+            </div>
+          ) : null}
+          <div className={cn("absolute inset-0", videoSrc && FIT_BAND_CLASS)}>
             <img
               src={cloudinaryUrl(imageSrc, { width: 1920 })}
               srcSet={cloudinarySrcSet(imageSrc, HERO_IMAGE_WIDTHS)}
               sizes="100vw"
-              alt=""
-              className={FIT_FILL_CLASS}
+              alt={imageAlt}
+              className="h-full w-full object-cover"
               loading="eager"
               decoding="async"
+              fetchPriority="high"
               crossOrigin="anonymous"
             />
-            {videoUrl && fitMode ? (
+            {videoUrl ? (
               <video
-                ref={fillVideoRef}
+                ref={videoRef}
                 src={videoUrl}
+                aria-hidden
                 tabIndex={-1}
                 muted
                 loop
                 playsInline
                 preload="auto"
                 disablePictureInPicture
+                // Already fully downloaded; start once it is decoded and ready.
+                onCanPlayThrough={playIfWanted}
+                onPlaying={() => setVideoVisible(true)}
+                onPlay={syncFill}
+                onPause={syncFill}
                 className={cn(
-                  "absolute inset-0 transition-opacity duration-500 ease-out",
-                  FIT_FILL_CLASS,
+                  "absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out",
                   videoVisible ? "opacity-100" : "opacity-0"
                 )}
               />
             ) : null}
           </div>
-        ) : null}
-        <div className={cn("absolute inset-0", videoSrc && FIT_BAND_CLASS)}>
-          <img
-            src={cloudinaryUrl(imageSrc, { width: 1920 })}
-            srcSet={cloudinarySrcSet(imageSrc, HERO_IMAGE_WIDTHS)}
-            sizes="100vw"
-            alt={imageAlt}
-            className="h-full w-full object-cover"
-            loading="eager"
-            decoding="async"
-            fetchPriority="high"
-            crossOrigin="anonymous"
-          />
-          {videoUrl ? (
-            <video
-              ref={videoRef}
-              src={videoUrl}
-              aria-hidden
-              tabIndex={-1}
-              muted
-              loop
-              playsInline
-              preload="auto"
-              disablePictureInPicture
-              // Already fully downloaded; start once it is decoded and ready.
-              onCanPlayThrough={playIfWanted}
-              onPlaying={() => setVideoVisible(true)}
-              onPlay={syncFill}
-              onPause={syncFill}
-              className={cn(
-                "absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out",
-                videoVisible ? "opacity-100" : "opacity-0"
-              )}
-            />
+          {hasCopy ? (
+            // Darken in from the left, where the copy sits. Below md the quote spans
+            // nearly the full width, so the right side needs darkening there too.
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/10 md:from-black/55 md:via-black/20 md:to-transparent" />
           ) : null}
+          {/* Only the bottom third fades into the page background, so the video
+              stays bright and the hero still flows into the next section. */}
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-black to-transparent" />
         </div>
-        {hasCopy ? (
-          // Darken in from the left, where the copy sits. Below md the quote spans
-          // nearly the full width, so the right side needs darkening there too.
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/10 md:from-black/55 md:via-black/20 md:to-transparent" />
+
+        {/* WCAG 2.2.2: moving content that plays on its own needs a way to stop it. */}
+        {videoVisible ? (
+          <button
+            type="button"
+            onClick={toggleVideo}
+            aria-label={userPaused ? t("common.heroVideo.play") : t("common.heroVideo.pause")}
+            aria-pressed={userPaused}
+            className="absolute bottom-5 right-5 z-20 inline-flex size-10 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/60 text-brand-gold-light backdrop-blur-sm transition-colors hover:border-brand-gold hover:bg-brand-gold/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 sm:bottom-6 sm:right-6"
+          >
+            {userPaused ? <Play aria-hidden className="size-4" /> : <Pause aria-hidden className="size-4" />}
+          </button>
         ) : null}
-        {/* Only the bottom third fades into the page background, so the video
-            stays bright and the hero still flows into the next section. */}
-        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-black to-transparent" />
-      </div>
 
-      {/* WCAG 2.2.2: moving content that plays on its own needs a way to stop it. */}
-      {videoVisible ? (
-        <button
-          type="button"
-          onClick={toggleVideo}
-          aria-label={userPaused ? t("common.heroVideo.play") : t("common.heroVideo.pause")}
-          aria-pressed={userPaused}
-          className="absolute bottom-5 right-5 z-20 inline-flex size-10 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/60 text-brand-gold-light backdrop-blur-sm transition-colors hover:border-brand-gold hover:bg-brand-gold/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 sm:bottom-6 sm:right-6"
-        >
-          {userPaused ? <Play aria-hidden className="size-4" /> : <Pause aria-hidden className="size-4" />}
-        </button>
-      ) : null}
-
-      {hasCopy ? (
-        <div className="relative z-10 flex w-full flex-col gap-5 px-6 sm:px-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-16">
-          <div className="flex max-w-xl flex-col items-start gap-5 text-left">
-            {eyebrow ? (
-              <p className="text-xs uppercase tracking-[0.32em] text-brand-gold-light/90">
-                {eyebrow}
-              </p>
-            ) : null}
-            {/* The quote is the big visual line, but the brand line under it is
-                the page's <h1>: that's what tells search engines what the page
-                is ("Alphadent - dental clinic, Sopron"), which a motto can't. */}
-            {quote ? (
-              <blockquote
-                style={{ fontFamily: '"Geist Variable", Georgia, "Times New Roman", serif' }}
-                className="text-2xl italic font-light leading-snug text-brand-gold-light [text-shadow:0_2px_16px_rgba(0,0,0,0.65)] md:text-4xl"
-              >
-                <p>{quote}</p>
-              </blockquote>
-            ) : null}
-            {brandMark ? (
-              <h1 className="text-sm font-semibold uppercase leading-relaxed tracking-[0.32em] text-brand-gold [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
-                {brandMark}
-              </h1>
-            ) : null}
-            {subtitle ? (
-              <p className="max-w-2xl text-sm text-brand-gold-muted md:text-base">{subtitle}</p>
-            ) : null}
-            {ctaHref && ctaLabel ? (
-              <CtaButton href={ctaHref} title={ctaLabel} variant="ghost" className="mt-1" />
-            ) : null}
-            {children}
+        {hasCopy ? (
+          <div className="relative z-10 flex w-full flex-col gap-5 px-6 sm:px-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-16">
+            <div className="flex max-w-xl flex-col items-start gap-5 text-left">
+              {eyebrow ? (
+                <p className="text-xs uppercase tracking-[0.32em] text-brand-gold-light/90">
+                  {eyebrow}
+                </p>
+              ) : null}
+              {/* The quote is the big visual line, but the brand line under it is
+                  the page's <h1>: that's what tells search engines what the page
+                  is ("Alphadent - dental clinic, Sopron"), which a motto can't. */}
+              {quote ? (
+                <blockquote
+                  style={{ fontFamily: '"Geist Variable", Georgia, "Times New Roman", serif' }}
+                  className="text-2xl italic font-light leading-snug text-brand-gold-light [text-shadow:0_2px_16px_rgba(0,0,0,0.65)] md:text-4xl"
+                >
+                  <p>{quote}</p>
+                </blockquote>
+              ) : null}
+              {brandMark ? (
+                <h1 className="text-sm font-semibold uppercase leading-relaxed tracking-[0.32em] text-brand-gold [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
+                  {brandMark}
+                </h1>
+              ) : null}
+              {subtitle ? (
+                <p className="max-w-2xl text-sm text-brand-gold-muted md:text-base">{subtitle}</p>
+              ) : null}
+              {(ctaHref && ctaLabel) || secondaryAction ? (
+                <div className="mt-1 flex flex-wrap items-center gap-3">
+                  {ctaHref && ctaLabel ? <CtaButton href={ctaHref} title={ctaLabel} variant="ghost" /> : null}
+                  {secondaryAction}
+                </div>
+              ) : null}
+              {children}
+            </div>
+            {aside ? <div className="w-full max-w-sm max-md:hidden lg:shrink-0">{aside}</div> : null}
           </div>
-          {aside ? <div className="w-full max-w-sm lg:shrink-0">{aside}</div> : null}
-        </div>
-      ) : null}
-    </section>
+        ) : null}
+      </section>
+      {aside ? <div className="bg-brand-black px-6 pb-2 sm:px-10 md:hidden">{aside}</div> : null}
+    </>
   );
 }

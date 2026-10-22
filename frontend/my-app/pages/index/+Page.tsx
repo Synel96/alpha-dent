@@ -19,13 +19,14 @@ import { usePageContext } from "vike-react/usePageContext";
 import { AutoGallery } from "../../components/ui/auto-gallery";
 import { Hero } from "../../components/ui/hero";
 import { OpenStatusCard } from "../../components/ui/open-status";
-import { CtaButton } from "../../components/ui/cta-button";
+import { CtaButton, GHOST_BUTTON_CLASS } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
 import { PillBadge } from "../../components/ui/pill-badge";
 import { RevealSection } from "../../components/ui/reveal-section";
 import { ServiceCarousel } from "../../components/ui/service-carousel";
 import { ServiceTile } from "../../components/ui/service-tile";
 import { CLINIC_PHOTOS } from "../../lib/clinic-photos";
+import { CLINIC } from "../../lib/clinic-info";
 import { localizeHref } from "../../lib/locale";
 import { useReveal } from "../../lib/use-reveal";
 import { cn } from "../../lib/utils";
@@ -107,6 +108,14 @@ function Page() {
         }
         ctaHref={kapcsolatHref}
         ctaLabel={t("home.intro.ctaButton")}
+        secondaryAction={
+          // Phones only: one tap to call. From md up the status card beside
+          // the copy already has the number.
+          <a href={`tel:${CLINIC.phoneE164}`} className={cn(GHOST_BUTTON_CLASS, "md:hidden")}>
+            <Phone aria-hidden className="size-4" />
+            {t("home.hero.call")}
+          </a>
+        }
         aside={<OpenStatusCard />}
       />
 

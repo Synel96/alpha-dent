@@ -46,6 +46,7 @@ export const commonResources = {
       hero: {
         motto: "„A szép mosoly nem csak esztétikai igény, hanem az egészség záloga is.”",
         brandLine: "Fogászati klinika Sopron",
+        call: "Hívás",
       },
       intro: {
         eyebrow: "Teljes körű fogászat",
@@ -143,6 +144,7 @@ export const commonResources = {
       hero: {
         motto: "“A beautiful smile isn't just an aesthetic wish - it's also the key to good health.”",
         brandLine: "Dental clinic Sopron",
+        call: "Call us",
       },
       intro: {
         eyebrow: "Comprehensive dental care",
@@ -240,6 +242,7 @@ export const commonResources = {
       hero: {
         motto: "„Ein schönes Lächeln ist nicht nur ein ästhetischer Wunsch, sondern auch die Grundlage für Gesundheit.“",
         brandLine: "Zahnklinik Sopron",
+        call: "Anrufen",
       },
       intro: {
         eyebrow: "Umfassende Zahnmedizin",
@@ -337,6 +340,7 @@ export const commonResources = {
       hero: {
         motto: "«Un bel sorriso non è solo un desiderio estetico, ma anche la chiave della salute.»",
         brandLine: "Clinica dentale Sopron",
+        call: "Chiamaci",
       },
       intro: {
         eyebrow: "Odontoiatria completa",

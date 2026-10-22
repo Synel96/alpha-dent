@@ -16,6 +16,14 @@ type CtaButtonProps = {
   className?: string;
 } & Omit<React.ComponentProps<"a">, "href" | "children" | "className">;
 
+// The light outlined pill, e.g. over the hero video. Exported for links that
+// look the same but aren't a CtaButton (no » arrow), like the hero's call link.
+export const GHOST_BUTTON_CLASS = cn(
+  "group inline-flex items-center gap-2 rounded-full border border-brand-gold-light/60 bg-black/20 px-5 py-2.5 text-sm font-medium text-brand-gold-light backdrop-blur-sm",
+  "transition-colors duration-300 hover:border-brand-gold-light hover:bg-black/35",
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black"
+);
+
 export function CtaButton({
   href,
   title,
@@ -30,12 +38,7 @@ export function CtaButton({
     return (
       <a
         href={href}
-        className={cn(
-          "group inline-flex items-center gap-2 rounded-full border border-brand-gold-light/60 bg-black/20 px-5 py-2.5 text-sm font-medium text-brand-gold-light backdrop-blur-sm",
-          "transition-colors duration-300 hover:border-brand-gold-light hover:bg-black/35",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black",
-          className
-        )}
+        className={cn(GHOST_BUTTON_CLASS, className)}
         {...props}
       >
         {title}
