@@ -52,7 +52,7 @@ export const commonResources = {
         eyebrow: "Teljes körű fogászat",
         title: "Modern fogászat, szájsebészet és fogtechnikai labor Sopronban",
         description:
-          "Legyen szó egyetlen hiányzó fogról, teljes fogpótlásról, szájsebészeti beavatkozásról vagy esztétikai kezelésről, nálunk a cél ugyanaz: egészséges, természetes és hosszú távon is működő mosoly. Az Alphadentnél a több évtizedes szakmai tapasztalatot a legmodernebb technológiával és saját fogtechnikai háttérrel ötvözzük a 15 fős szakmai csapattal.",
+          "Legyen szó egyetlen hiányzó fogról, teljes fogpótlásról, szájsebészeti beavatkozásról vagy esztétikai kezelésről, nálunk a cél ugyanaz: egészséges, természetes és hosszú távon is működő mosoly. Az Alphadent fogászati klinika Sopron vasútállomása mellett található: 15 fős szakmai csapatunk a több évtizedes szakmai tapasztalatot a legmodernebb technológiával és saját fogtechnikai háttérrel ötvözi.",
         ctaButton: "Időpontot kérek",
       },
       whyUs: {

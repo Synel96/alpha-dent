@@ -42,6 +42,8 @@ const HERO_VIDEO_WIDTHS = [1280, 1920] as const;
 // a blurred, enlarged copy of it that fills the rest: the hero is still all
 // moving video, the copy on top of it as before.
 const FIT_QUERY = "(max-width: 767px) and (orientation: portrait)";
+// Below Tailwind's md breakpoint (matches `max-md:`).
+const PHONE_QUERY = "(max-width: 767px)";
 const FIT_HEIGHT = 0.6;
 const FIT_BAND_CLASS =
   "max-md:portrait:inset-auto max-md:portrait:inset-x-0 max-md:portrait:top-1/2 max-md:portrait:h-[60%] max-md:portrait:-translate-y-1/2 max-md:portrait:[mask-image:linear-gradient(to_bottom,transparent,black_22%,black_78%,transparent)]";
@@ -90,7 +92,8 @@ type HeroProps = {
   children?: React.ReactNode;
   // Shown beside the copy on desktop (lg+), below it on tablets, and on
   // phones right under the hero - not over the video, where it would cover
-  // its lower third and make the hero taller than the screen.
+  // its lower third and make the hero taller than the screen. Rendered once
+  // either way (see `asideBelow`).
   aside?: React.ReactNode;
   className?: string;
 };
@@ -117,6 +120,13 @@ export function Hero({
   // Whether the blurred fill is showing (FIT_QUERY): only then is its second
   // <video> mounted, so other screens don't decode the clip twice.
   const [fitMode, setFitMode] = React.useState(false);
+  // Phones show the aside under the hero instead of in it. Only one copy is
+  // ever in the page - not one per layout with the other hidden, which
+  // reads as duplicate text to search engines and SEO checkers: the
+  // prerendered HTML has the in-hero one (CSS hides it on phones), and on a
+  // phone it moves under the hero once the script runs. That spot is below
+  // the fold, so the move shifts nothing on screen.
+  const [asideBelow, setAsideBelow] = React.useState(false);
   // An object URL of the fully downloaded video - see the effect below.
   const [videoUrl, setVideoUrl] = React.useState<string | null>(null);
   const [videoVisible, setVideoVisible] = React.useState(false);
@@ -180,6 +190,15 @@ export function Hero({
     observer.observe(section);
     return () => observer.disconnect();
   }, [videoUrl]);
+
+  React.useEffect(() => {
+    if (!aside) return;
+    const query = window.matchMedia(PHONE_QUERY);
+    const update = () => setAsideBelow(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, [aside]);
 
   React.useEffect(() => {
     if (!videoSrc) return;
@@ -394,11 +413,11 @@ export function Hero({
               ) : null}
               {children}
             </div>
-            {aside ? <div className="w-full max-w-sm max-md:hidden lg:shrink-0">{aside}</div> : null}
+            {aside && !asideBelow ? <div className="w-full max-w-sm max-md:hidden lg:shrink-0">{aside}</div> : null}
           </div>
         ) : null}
       </section>
-      {aside ? <div className="bg-brand-black px-6 pb-2 sm:px-10 md:hidden">{aside}</div> : null}
+      {aside && asideBelow ? <div className="bg-brand-black px-6 pb-2 sm:px-10 md:hidden">{aside}</div> : null}
     </>
   );
 }

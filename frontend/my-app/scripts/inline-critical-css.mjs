@@ -30,17 +30,24 @@ const beasties = new Beasties({
   // text first paints in a fallback font and then visibly swaps - even
   // though pages/+Head.tsx already preloads the font files.
   inlineFonts: true,
-  // Those preloads are hand-picked in +Head.tsx (only the above-the-fold
-  // subsets); don't add more.
+  // Those preloads are hand-picked in +Head.tsx; don't add more.
   preloadFonts: false,
 });
+
+// Beasties re-serializes the page and writes an empty attribute bare, so a
+// decorative image's alt="" comes out as just `alt`. That is valid HTML
+// (still an empty alt), but SEO checkers such as Seobility read it as a
+// missing alt attribute - so spell it out again.
+function withExplicitEmptyAlts(html) {
+  return html.replace(/<img\b[^>]*>/g, (tag) => tag.replace(/\salt(?=[\s/>])/, ' alt=""'));
+}
 
 const htmlFiles = await findHtmlFiles(distDir);
 
 for (const file of htmlFiles) {
   const html = await readFile(file, "utf8");
   const inlined = await beasties.process(html);
-  await writeFile(file, inlined);
+  await writeFile(file, withExplicitEmptyAlts(inlined));
 }
 
 console.log(`Inlined critical CSS into ${htmlFiles.length} page(s).`);
