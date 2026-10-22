@@ -1,6 +1,3 @@
-// First, before anything that might need it. (Not via a +client.ts: that
-// makes Vike start the page with an inline <script>, which the CSP blocks.)
-import "../lib/polyfills";
 import React from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { navigate } from "vike/client/router";
