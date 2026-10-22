@@ -34,14 +34,27 @@ export function getHeroProgressServerSnapshot() {
 const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1920] as const;
 const HERO_VIDEO_WIDTHS = [1280, 1920] as const;
 
-// The video fills the (full-height) hero with object-cover, so on a portrait
-// phone the landscape clip is scaled up by the screen's HEIGHT, not its
-// width: a 390px-wide phone still shows it ~844px tall, at 3 device pixels
-// per CSS pixel. Pick the smallest rendition that covers that (assuming a
-// 16:9 clip), so phones aren't sent a low-resolution one that then looks
-// pixelated once stretched.
+// Portrait phones (matches Tailwind's `max-md:portrait:`). Covering the whole
+// full-height hero there zooms the landscape clip in to its middle quarter -
+// too close to make out what happens in it. So there the sharp video only
+// covers the middle FIT_HEIGHT of the hero (keep the two in sync), which
+// shows ~1.7x as much of its width, and fades out at the top and bottom into
+// a blurred, enlarged copy of it that fills the rest: the hero is still all
+// moving video, the copy on top of it as before.
+const FIT_QUERY = "(max-width: 767px) and (orientation: portrait)";
+const FIT_HEIGHT = 0.6;
+const FIT_BAND_CLASS =
+  "max-md:portrait:inset-auto max-md:portrait:inset-x-0 max-md:portrait:top-1/2 max-md:portrait:h-[60%] max-md:portrait:-translate-y-1/2 max-md:portrait:[mask-image:linear-gradient(to_bottom,transparent,black_22%,black_78%,transparent)]";
+const FIT_FILL_CLASS = "h-full w-full scale-110 object-cover blur-2xl brightness-75";
+
+// The video covers the full-height hero (on portrait phones FIT_HEIGHT of
+// it), so it is scaled by that height as well as the screen width. Pick the
+// smallest rendition that covers that in device pixels (assuming a 16:9
+// clip), so no one is sent a low-resolution one that then looks pixelated
+// once stretched.
 function heroVideoWidth(): number {
-  const needed = Math.max(window.innerWidth, (window.innerHeight * 16) / 9) * (window.devicePixelRatio || 1);
+  const coveredHeight = ((window.matchMedia(FIT_QUERY).matches ? FIT_HEIGHT : 1) * window.innerHeight * 16) / 9;
+  const needed = Math.max(window.innerWidth, coveredHeight) * (window.devicePixelRatio || 1);
   return HERO_VIDEO_WIDTHS.find((width) => width >= needed) ?? HERO_VIDEO_WIDTHS[HERO_VIDEO_WIDTHS.length - 1];
 }
 
@@ -95,6 +108,10 @@ export function Hero({
   const { t } = useTranslation();
   const sectionRef = React.useRef<HTMLElement | null>(null);
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
+  const fillVideoRef = React.useRef<HTMLVideoElement | null>(null);
+  // Whether the blurred fill is showing (FIT_QUERY): only then is its second
+  // <video> mounted, so other screens don't decode the clip twice.
+  const [fitMode, setFitMode] = React.useState(false);
   // An object URL of the fully downloaded video - see the effect below.
   const [videoUrl, setVideoUrl] = React.useState<string | null>(null);
   const [videoVisible, setVideoVisible] = React.useState(false);
@@ -151,6 +168,27 @@ export function Hero({
     observer.observe(section);
     return () => observer.disconnect();
   }, [videoUrl]);
+
+  React.useEffect(() => {
+    if (!videoSrc) return;
+    const query = window.matchMedia(FIT_QUERY);
+    const update = () => setFitMode(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, [videoSrc]);
+
+  // The blurred fill just mirrors the sharp video: it plays and pauses with
+  // it (pause button, scrolled off screen), including when it mounts late,
+  // e.g. after the phone is turned upright.
+  const syncFill = () => {
+    const video = videoRef.current;
+    const fill = fillVideoRef.current;
+    if (!video || !fill) return;
+    if (video.paused) fill.pause();
+    else void fill.play().catch(() => {});
+  };
+  React.useEffect(syncFill, [fitMode, videoUrl]);
 
   const toggleVideo = () => {
     const video = videoRef.current;
@@ -217,37 +255,74 @@ export function Hero({
       )}
     >
       <div className="absolute inset-0">
-        <img
-          src={cloudinaryUrl(imageSrc, { width: 1920 })}
-          srcSet={cloudinarySrcSet(imageSrc, HERO_IMAGE_WIDTHS)}
-          sizes="100vw"
-          alt={imageAlt}
-          className="h-full w-full object-cover"
-          loading="eager"
-          decoding="async"
-          fetchPriority="high"
-          crossOrigin="anonymous"
-        />
-        {videoUrl ? (
-          <video
-            ref={videoRef}
-            src={videoUrl}
-            aria-hidden
-            tabIndex={-1}
-            muted
-            loop
-            playsInline
-            preload="auto"
-            disablePictureInPicture
-            // Already fully downloaded; start once it is decoded and ready.
-            onCanPlayThrough={playIfWanted}
-            onPlaying={() => setVideoVisible(true)}
-            className={cn(
-              "absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out",
-              videoVisible ? "opacity-100" : "opacity-0"
-            )}
-          />
+        {videoSrc ? (
+          // Same srcset and sizes as the sharp photo below, so the browser
+          // reuses that one download.
+          <div aria-hidden className="absolute inset-0 hidden overflow-hidden max-md:portrait:block">
+            <img
+              src={cloudinaryUrl(imageSrc, { width: 1920 })}
+              srcSet={cloudinarySrcSet(imageSrc, HERO_IMAGE_WIDTHS)}
+              sizes="100vw"
+              alt=""
+              className={FIT_FILL_CLASS}
+              loading="eager"
+              decoding="async"
+              crossOrigin="anonymous"
+            />
+            {videoUrl && fitMode ? (
+              <video
+                ref={fillVideoRef}
+                src={videoUrl}
+                tabIndex={-1}
+                muted
+                loop
+                playsInline
+                preload="auto"
+                disablePictureInPicture
+                className={cn(
+                  "absolute inset-0 transition-opacity duration-500 ease-out",
+                  FIT_FILL_CLASS,
+                  videoVisible ? "opacity-100" : "opacity-0"
+                )}
+              />
+            ) : null}
+          </div>
         ) : null}
+        <div className={cn("absolute inset-0", videoSrc && FIT_BAND_CLASS)}>
+          <img
+            src={cloudinaryUrl(imageSrc, { width: 1920 })}
+            srcSet={cloudinarySrcSet(imageSrc, HERO_IMAGE_WIDTHS)}
+            sizes="100vw"
+            alt={imageAlt}
+            className="h-full w-full object-cover"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+            crossOrigin="anonymous"
+          />
+          {videoUrl ? (
+            <video
+              ref={videoRef}
+              src={videoUrl}
+              aria-hidden
+              tabIndex={-1}
+              muted
+              loop
+              playsInline
+              preload="auto"
+              disablePictureInPicture
+              // Already fully downloaded; start once it is decoded and ready.
+              onCanPlayThrough={playIfWanted}
+              onPlaying={() => setVideoVisible(true)}
+              onPlay={syncFill}
+              onPause={syncFill}
+              className={cn(
+                "absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out",
+                videoVisible ? "opacity-100" : "opacity-0"
+              )}
+            />
+          ) : null}
+        </div>
         {hasCopy ? (
           // Darken in from the left, where the copy sits. Below md the quote spans
           // nearly the full width, so the right side needs darkening there too.
