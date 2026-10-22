@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import { useReveal } from "@/lib/use-reveal";
 
 type FaqItem = {
   question: string;
@@ -19,40 +20,9 @@ export function FaqAccordion({
   defaultOpenIndex = 0,
 }: FaqAccordionProps) {
   const [openIndex, setOpenIndex] = React.useState<number>(defaultOpenIndex);
-  const [visible, setVisible] = React.useState(false);
   // Unique per accordion: a page can show several (one per FAQ topic).
   const idPrefix = React.useId();
-  const rootRef = React.useRef<HTMLElement | null>(null);
-
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) {
-      setVisible(true);
-      return;
-    }
-
-    const node = rootRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry?.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      {
-        threshold: 0.16,
-        rootMargin: "0px 0px -8% 0px",
-      }
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  const { ref: rootRef, visible } = useReveal<HTMLElement>({ threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
 
   return (
     <section ref={rootRef} className={cn("space-y-3", className)}>
