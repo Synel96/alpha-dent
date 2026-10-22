@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { localizeHref } from "@/lib/locale";
 import { AlphadentLogo } from "./alphadent-logo";
+import { SynelWebWordmark } from "./synelweb-wordmark";
 
 const SOCIAL_LINKS = [
   {
@@ -158,10 +159,8 @@ export function Footer() {
           className="group inline-flex items-center gap-1.5"
         >
           <span>{t("footer.madeBy")}</span>
-          {/* Same wordmark as the SynelWeb navbar: Orbitron, warm-to-hot gradient. */}
-          <span className="bg-[linear-gradient(120deg,#f59e0b,#f43f5e_62%,#f59e0b)] bg-clip-text font-[Orbitron,sans-serif] text-[0.7rem] font-semibold tracking-[0.14em] text-transparent uppercase transition-[filter] duration-300 group-hover:brightness-125">
-            SynelWeb
-          </span>
+          {/* Same wordmark as the SynelWeb navbar. */}
+          <SynelWebWordmark className="text-[0.7rem] transition-[filter] duration-300 group-hover:brightness-125" />
         </a>
       </div>
     </footer>
