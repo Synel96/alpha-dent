@@ -35,25 +35,25 @@ const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1920] as const;
 const HERO_VIDEO_WIDTHS = [1280, 1920] as const;
 
 // Portrait phones (matches Tailwind's `max-md:portrait:`). Covering the whole
-// full-height hero there would zoom the landscape clip in to its middle
-// quarter - too close to make out what happens in it - and the copy would
-// cover even that. So there the whole 16:9 frame sits uncropped, full width,
-// right under the navbar with the copy below it, and a blurred, enlarged copy
-// of it fills the rest of the screen.
+// full-height hero there zooms the landscape clip in to its middle quarter -
+// too close to make out what happens in it. So there the sharp video only
+// covers the middle FIT_HEIGHT of the hero (keep the two in sync), which
+// shows ~1.7x as much of its width, and fades out at the top and bottom into
+// a blurred, enlarged copy of it that fills the rest: the hero is still all
+// moving video, the copy on top of it as before.
 const FIT_QUERY = "(max-width: 767px) and (orientation: portrait)";
+const FIT_HEIGHT = 0.6;
 const FIT_BAND_CLASS =
-  "max-md:portrait:inset-auto max-md:portrait:inset-x-0 max-md:portrait:top-[var(--nav-height,72px)] max-md:portrait:aspect-video max-md:portrait:[mask-image:linear-gradient(to_bottom,transparent,black_6%,black_94%,transparent)]";
-// The band's height is 56.25vw (16:9 at full width).
-const FIT_BELOW_BAND_CLASS = "max-md:portrait:top-[calc(var(--nav-height,72px)+56.25vw)]";
+  "max-md:portrait:inset-auto max-md:portrait:inset-x-0 max-md:portrait:top-1/2 max-md:portrait:h-[60%] max-md:portrait:-translate-y-1/2 max-md:portrait:[mask-image:linear-gradient(to_bottom,transparent,black_22%,black_78%,transparent)]";
 const FIT_FILL_CLASS = "h-full w-full scale-110 object-cover blur-2xl brightness-75";
 
-// The video covers the full-height hero, so it is scaled by the hero's
-// height as well as its width; on portrait phones it only spans the width.
-// Pick the smallest rendition that covers that in device pixels (assuming a
-// 16:9 clip), so no one is sent a low-resolution one that then looks
-// pixelated once stretched.
+// The video covers the full-height hero (on portrait phones FIT_HEIGHT of
+// it), so it is scaled by that height as well as the screen width. Pick the
+// smallest rendition that covers that in device pixels (assuming a 16:9
+// clip), so no one is sent a low-resolution one that then looks pixelated
+// once stretched.
 function heroVideoWidth(): number {
-  const coveredHeight = window.matchMedia(FIT_QUERY).matches ? 0 : (window.innerHeight * 16) / 9;
+  const coveredHeight = ((window.matchMedia(FIT_QUERY).matches ? FIT_HEIGHT : 1) * window.innerHeight * 16) / 9;
   const needed = Math.max(window.innerWidth, coveredHeight) * (window.devicePixelRatio || 1);
   return HERO_VIDEO_WIDTHS.find((width) => width >= needed) ?? HERO_VIDEO_WIDTHS[HERO_VIDEO_WIDTHS.length - 1];
 }
@@ -250,9 +250,6 @@ export function Hero({
       }}
       className={cn(
         "relative flex min-h-screen w-full items-center overflow-hidden bg-brand-black",
-        // Portrait phones: the copy starts below the video band (overrides the
-        // inline paddingTop, hence the !).
-        videoSrc && "max-md:portrait:!pt-[calc(var(--nav-height,72px)+56.25vw+1.5rem)]",
         hasCopy ? "justify-start" : "justify-center",
         className
       )}
@@ -329,13 +326,7 @@ export function Hero({
         {hasCopy ? (
           // Darken in from the left, where the copy sits. Below md the quote spans
           // nearly the full width, so the right side needs darkening there too.
-          <div
-            className={cn(
-              "absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/10 md:from-black/55 md:via-black/20 md:to-transparent",
-              // Portrait phones: only behind the copy, not over the video above it.
-              videoSrc && FIT_BELOW_BAND_CLASS
-            )}
-          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/10 md:from-black/55 md:via-black/20 md:to-transparent" />
         ) : null}
         {/* Only the bottom third fades into the page background, so the video
             stays bright and the hero still flows into the next section. */}
@@ -349,12 +340,7 @@ export function Hero({
           onClick={toggleVideo}
           aria-label={userPaused ? t("common.heroVideo.play") : t("common.heroVideo.pause")}
           aria-pressed={userPaused}
-          className={cn(
-            "absolute bottom-5 right-5 z-20 inline-flex size-10 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/60 text-brand-gold-light backdrop-blur-sm transition-colors hover:border-brand-gold hover:bg-brand-gold/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 sm:bottom-6 sm:right-6",
-            // Portrait phones: on the video band's corner (its bottom edge is
-            // 56.25vw below the navbar), clear of the copy below it.
-            videoSrc && "max-md:portrait:bottom-auto max-md:portrait:right-3 max-md:portrait:top-[calc(var(--nav-height,72px)+56.25vw-3.25rem)]"
-          )}
+          className="absolute bottom-5 right-5 z-20 inline-flex size-10 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/60 text-brand-gold-light backdrop-blur-sm transition-colors hover:border-brand-gold hover:bg-brand-gold/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 sm:bottom-6 sm:right-6"
         >
           {userPaused ? <Play aria-hidden className="size-4" /> : <Pause aria-hidden className="size-4" />}
         </button>
