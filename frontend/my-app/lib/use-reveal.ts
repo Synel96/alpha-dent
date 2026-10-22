@@ -45,25 +45,27 @@ function observeOnce(node: Element, { threshold, rootMargin }: Required<RevealOp
 // enters the viewport. Skip this above the fold (e.g. the hero or a page's
 // title block) - it delays nothing there and just holds back content that
 // should already be visible on first paint.
+//
+// Starts out revealed - in the prerendered HTML too - so the content is all
+// there even if the page's JavaScript never runs (an old browser that
+// chokes on it, a failed download): an older phone once showed the home
+// page as empty black gaps, every section stuck hidden. Only once the
+// script runs does it hide what's below the fold, before the next paint,
+// ready to reveal it on scroll; whatever is already on screen stays put.
 export function useReveal<T extends HTMLElement = HTMLElement>({
   threshold = 0.22,
   rootMargin = "0px 0px -10% 0px",
 }: RevealOptions = {}) {
   const ref = React.useRef<T | null>(null);
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = React.useState(true);
 
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) {
-      setVisible(true);
-      return;
-    }
-
+  React.useLayoutEffect(() => {
     const node = ref.current;
-    if (!node) return;
+    if (!node || typeof IntersectionObserver === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (node.getBoundingClientRect().top < window.innerHeight) return;
 
+    setVisible(false);
     return observeOnce(node, { threshold, rootMargin }, () => setVisible(true));
   }, []);
 
