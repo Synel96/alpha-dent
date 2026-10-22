@@ -193,7 +193,14 @@ export function Hero({
       // pages/+Layout.tsx) so it can float transparently over page content
       // without pushing it down - Hero cancels that padding here so its
       // media fills the viewport from y=0, right behind the header.
-      style={{ marginTop: "calc(-1 * var(--nav-height, 72px))" }}
+      // The padding keeps the copy clear of that header: on a phone turned
+      // sideways the copy is taller than the screen, so instead of being
+      // centred it starts at the top - and would slide under the navbar.
+      style={{
+        marginTop: "calc(-1 * var(--nav-height, 72px))",
+        paddingTop: "calc(var(--nav-height, 72px) + 1.5rem)",
+        paddingBottom: "2.5rem",
+      }}
       className={cn(
         "relative flex min-h-screen w-full items-center overflow-hidden bg-brand-black",
         hasCopy ? "justify-start" : "justify-center",
