@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://alpha-dent.eu/hu</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de" />
@@ -11,7 +11,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/en</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de" />
@@ -20,7 +20,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/de</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de" />
@@ -29,7 +29,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/it</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de" />
@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/hu/szolgaltatasaink</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen" />
@@ -83,7 +83,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/en/services</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen" />
@@ -92,7 +92,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/de/leistungen</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen" />
@@ -101,7 +101,7 @@
   </url>
   <url>
     <loc>https://alpha-dent.eu/it/servizi</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="hu" href="https://alpha-dent.eu/hu/szolgaltatasaink" />
     <xhtml:link rel="alternate" hreflang="en" href="https://alpha-dent.eu/en/services" />
     <xhtml:link rel="alternate" hreflang="de" href="https://alpha-dent.eu/de/leistungen" />
