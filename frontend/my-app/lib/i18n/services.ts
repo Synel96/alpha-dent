@@ -160,6 +160,12 @@ export const servicesResources = {
           "Soproni rendelőnkben esztétikus tömések, inlayek, onlayek és korszerű gépi gyökérkezelés segítségével számos károsodott fog hosszú távon is megőrizhető.",
           "Gyökérkezelésnél a gyökércsatorna pontos hosszát VDW Raypex 6 elektronikus apexlokátorral mérjük. Így a csatornát egészen a gyökércsúcsig pontosan meg tudjuk tisztítani és le tudjuk zárni, ami a kezelés hosszú távú sikerének egyik kulcsa, és kevesebb röntgenfelvételre is szükség lehet.",
         ],
+        obturation: {
+          title: "Gyökértömés meleg guttaperchával",
+          text:
+            "A megtisztított gyökércsatornát VDW BeeFill 2in1 meleg guttaperchás tömőrendszerrel zárjuk le. A felmelegített, képlékeny guttapercha a csatorna egyenetlenségeit és oldalágait is kitölti, így a tömés tömören, rés nélkül zár. Ez csökkenti az újrafertőződés esélyét, és hosszú távon is védi a fogat.",
+          imageAlt: "VDW BeeFill 2in1 meleg guttaperchás gyökértömő készülék a Pack és Fill kézidarabbal",
+        },
       },
     },
   },
@@ -319,6 +325,12 @@ export const servicesResources = {
           "At our Sopron clinic, aesthetic fillings, inlays, onlays, and modern machine-assisted root canal treatment allow many damaged teeth to be preserved for the long term.",
           "During root canal treatment, we measure the exact length of the root canal with a VDW Raypex 6 electronic apex locator. This lets us clean and seal the canal precisely all the way to the root tip - one of the keys to a lasting result - and fewer X-rays may be needed.",
         ],
+        obturation: {
+          title: "Root canal filling with warm gutta-percha",
+          text:
+            "We seal the cleaned root canal with the VDW BeeFill 2in1 warm gutta-percha obturation system. Heated and softened, the gutta-percha also fills the canal's irregularities and lateral branches, so the filling seals tightly, without gaps. This reduces the risk of reinfection and protects the tooth for the long term.",
+          imageAlt: "VDW BeeFill 2in1 warm gutta-percha obturation unit with its Pack and Fill handpieces",
+        },
       },
     },
   },
@@ -478,6 +490,12 @@ export const servicesResources = {
           "In unserer Praxis in Sopron lassen sich mit ästhetischen Füllungen, Inlays, Onlays und moderner maschineller Wurzelkanalbehandlung viele geschädigte Zähne langfristig erhalten.",
           "Bei der Wurzelkanalbehandlung bestimmen wir die genaue Länge des Wurzelkanals mit dem elektronischen Apexlokator VDW Raypex 6. So können wir den Kanal präzise bis zur Wurzelspitze reinigen und verschließen - einer der Schlüssel für ein dauerhaftes Ergebnis -, und es sind unter Umständen weniger Röntgenaufnahmen nötig.",
         ],
+        obturation: {
+          title: "Wurzelfüllung mit warmer Guttapercha",
+          text:
+            "Den gereinigten Wurzelkanal verschließen wir mit dem Obturationssystem VDW BeeFill 2in1 für warme Guttapercha. Die erwärmte, plastische Guttapercha füllt auch Unregelmäßigkeiten und Seitenkanäle aus, sodass die Füllung dicht und lückenlos abschließt. Das senkt das Risiko einer erneuten Infektion und schützt den Zahn langfristig.",
+          imageAlt: "VDW BeeFill 2in1 Gerät zur Wurzelfüllung mit warmer Guttapercha, mit Pack- und Fill-Handstück",
+        },
       },
     },
   },
@@ -637,6 +655,12 @@ export const servicesResources = {
           "Nel nostro studio di Sopron, con otturazioni estetiche, inlay, onlay e una moderna cura canalare meccanizzata, molti denti danneggiati possono essere preservati a lungo termine.",
           "Durante la cura canalare misuriamo la lunghezza esatta del canale radicolare con il localizzatore apicale elettronico VDW Raypex 6. Così possiamo pulire e sigillare il canale con precisione fino all'apice della radice, uno dei fattori chiave per un risultato duraturo, e possono essere necessarie meno radiografie.",
         ],
+        obturation: {
+          title: "Otturazione canalare con guttaperca calda",
+          text:
+            "Sigilliamo il canale radicolare pulito con il sistema di otturazione a guttaperca calda VDW BeeFill 2in1. Riscaldata e resa plastica, la guttaperca riempie anche le irregolarità e i canali laterali, così l'otturazione sigilla in modo compatto e senza spazi vuoti. Questo riduce il rischio di reinfezione e protegge il dente nel lungo periodo.",
+          imageAlt: "Apparecchio VDW BeeFill 2in1 per l'otturazione canalare con guttaperca calda, con i manipoli Pack e Fill",
+        },
       },
     },
   },
