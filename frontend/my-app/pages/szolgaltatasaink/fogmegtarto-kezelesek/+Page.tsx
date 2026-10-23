@@ -8,12 +8,10 @@ import { localizeHref } from "../../../lib/locale";
 
 export { Page };
 
-// VDW Raypex 6 apex locator, used for precise root canal treatment.
-const APEX_LOCATOR_IMAGE =
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1792599192/file_000000009df081f4ba4fcf9374c1c1ee_v5ffwt.webp";
-// A warm gutta-percha unit like the clinic's VDW BeeFill 2in1, which seals the
-// root canal (an illustration, so its alt text names no brand).
-const OBTURATION_IMAGE = "https://res.cloudinary.com/dmwulp3dl/image/upload/v1792765885/1792765755832_qk997t.webp";
+// A warm gutta-percha root canal filling unit like the clinic's VDW BeeFill
+// 2in1 (an illustration, so its alt text names no brand). The Raypex 6 photo
+// is this service's card image (lib/service-cards.ts), so not repeated here.
+const PAGE_IMAGE = "https://res.cloudinary.com/dmwulp3dl/image/upload/v1792765885/1792765755832_qk997t.webp";
 
 function Page() {
   const { t } = useTranslation();
@@ -52,28 +50,10 @@ function Page() {
           </div>
 
           <ServiceImage
-            src={APEX_LOCATOR_IMAGE}
+            src={PAGE_IMAGE}
             alt={t("services.fogmegtartoKezelesek.imageAlt")}
           />
         </div>
-
-        {/* Image first from md up, so the two blocks alternate sides. */}
-        <section className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-          <div className="space-y-4 md:order-2">
-            <h2 className="text-xl font-semibold text-brand-gold-light md:text-2xl">
-              {t("services.fogmegtartoKezelesek.obturation.title")}
-            </h2>
-            <p className="text-sm leading-relaxed text-white md:text-base">
-              {t("services.fogmegtartoKezelesek.obturation.text")}
-            </p>
-          </div>
-          <div className="md:order-1">
-            <ServiceImage
-              src={OBTURATION_IMAGE}
-              alt={t("services.fogmegtartoKezelesek.obturation.imageAlt")}
-            />
-          </div>
-        </section>
 
         <CtaButton
           href={localizeHref(locale, "/kapcsolat")}
