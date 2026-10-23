@@ -28,6 +28,7 @@ import { ServiceTile } from "../../components/ui/service-tile";
 import { CLINIC_PHOTOS } from "../../lib/clinic-photos";
 import { CLINIC } from "../../lib/clinic-info";
 import { localizeHref } from "../../lib/locale";
+import { SERVICE_IMAGES, SERVICE_PATHS, SERVICE_SLUGS } from "../../lib/service-cards";
 import { useReveal } from "../../lib/use-reveal";
 import { cn } from "../../lib/utils";
 
@@ -39,29 +40,6 @@ const HERO_IMAGE =
   "https://res.cloudinary.com/dmwulp3dl/image/upload/v1792589308/Screenshot_20261021_152235419_jctcef.jpg";
 const HERO_VIDEO =
   "https://res.cloudinary.com/dmwulp3dl/video/upload/v1792588721/HnVideoEditor_2026_10_21_151406270_jvppld.webm";
-
-const SERVICE_SLUGS = [
-  "implantologia",
-  "szajsebeszet",
-  "esztetikaiFogaszat",
-  "fogmegtartoKezelesek",
-] as const;
-
-const SERVICE_PATHS: Record<(typeof SERVICE_SLUGS)[number], string> = {
-  implantologia: "/szolgaltatasaink/implantologia",
-  szajsebeszet: "/szolgaltatasaink/szajsebeszet",
-  esztetikaiFogaszat: "/szolgaltatasaink/esztetikai-fogaszat",
-  fogmegtartoKezelesek: "/szolgaltatasaink/fogmegtarto-kezelesek",
-};
-
-const SERVICE_IMAGES: Partial<Record<(typeof SERVICE_SLUGS)[number], string>> = {
-  implantologia: "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0053_gz8nis.webp",
-  szajsebeszet: "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789215806/IMG_3398_dmrstv.webp",
-  esztetikaiFogaszat:
-    "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789138056/IMG_3392_faedmf.webp",
-  fogmegtartoKezelesek:
-    "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0047_nsmuvv.webp",
-};
 
 // One icon per "Miért Alphadent?" paragraph, in the same order as
 // home.whyUs.paragraphs: since-1996 lab+clinic, experienced technicians /
