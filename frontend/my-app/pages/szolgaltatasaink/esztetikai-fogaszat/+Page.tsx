@@ -9,8 +9,7 @@ import { localizeHref } from "../../../lib/locale";
 
 export { Page };
 
-const SMILE_IMAGE =
-  "https://res.cloudinary.com/dmwulp3dl/image/upload/v1790610784/file_00000000ea2481f4b11af39991847f2f_esa65q.png";
+const SMILE_IMAGE = "https://res.cloudinary.com/dmwulp3dl/image/upload/v1792766333/1792766066486_pkxglf.webp";
 
 function Page() {
   const { t } = useTranslation();
