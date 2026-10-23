@@ -4,31 +4,9 @@ import { PageContainer } from "../../components/ui/page-container";
 import { RevealGroup } from "../../components/ui/reveal-section";
 import { ServiceTile } from "../../components/ui/service-tile";
 import { localizeHref } from "../../lib/locale";
+import { SERVICE_IMAGES, SERVICE_PATHS, SERVICE_SLUGS } from "../../lib/service-cards";
 
 export { Page };
-
-const SERVICE_SLUGS = [
-  "implantologia",
-  "szajsebeszet",
-  "esztetikaiFogaszat",
-  "fogmegtartoKezelesek",
-] as const;
-
-const SERVICE_PATHS: Record<(typeof SERVICE_SLUGS)[number], string> = {
-  implantologia: "/szolgaltatasaink/implantologia",
-  szajsebeszet: "/szolgaltatasaink/szajsebeszet",
-  esztetikaiFogaszat: "/szolgaltatasaink/esztetikai-fogaszat",
-  fogmegtartoKezelesek: "/szolgaltatasaink/fogmegtarto-kezelesek",
-};
-
-const SERVICE_IMAGES: Partial<Record<(typeof SERVICE_SLUGS)[number], string>> = {
-  implantologia: "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789208024/IMG_3400_dsepbw.webp",
-  szajsebeszet: "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789215806/IMG_3398_dmrstv.webp",
-  esztetikaiFogaszat:
-    "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0053_gz8nis.webp",
-  fogmegtartoKezelesek:
-    "https://res.cloudinary.com/dmwulp3dl/image/upload/v1789221230/Alphadent_portfolio_0047_nsmuvv.webp",
-};
 
 type ToolkitItem = { title: string; text: string };
 
