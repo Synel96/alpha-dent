@@ -11,8 +11,9 @@ export { Page };
 // VDW Raypex 6 apex locator, used for precise root canal treatment.
 const APEX_LOCATOR_IMAGE =
   "https://res.cloudinary.com/dmwulp3dl/image/upload/v1792599192/file_000000009df081f4ba4fcf9374c1c1ee_v5ffwt.webp";
-// VDW BeeFill 2in1, the warm gutta-percha unit that seals the root canal.
-const OBTURATION_IMAGE = "https://res.cloudinary.com/dmwulp3dl/image/upload/v1792765233/1792764991338_xftmqb.webp";
+// A warm gutta-percha unit like the clinic's VDW BeeFill 2in1, which seals the
+// root canal (an illustration, so its alt text names no brand).
+const OBTURATION_IMAGE = "https://res.cloudinary.com/dmwulp3dl/image/upload/v1792765885/1792765755832_qk997t.webp";
 
 function Page() {
   const { t } = useTranslation();

@@ -164,7 +164,7 @@ export const servicesResources = {
           title: "Gyökértömés meleg guttaperchával",
           text:
             "A megtisztított gyökércsatornát VDW BeeFill 2in1 meleg guttaperchás tömőrendszerrel zárjuk le. A felmelegített, képlékeny guttapercha a csatorna egyenetlenségeit és oldalágait is kitölti, így a tömés tömören, rés nélkül zár. Ez csökkenti az újrafertőződés esélyét, és hosszú távon is védi a fogat.",
-          imageAlt: "VDW BeeFill 2in1 meleg guttaperchás gyökértömő készülék a Pack és Fill kézidarabbal",
+          imageAlt: "Meleg guttaperchás gyökértömő készülék két kézidarabbal egy fogorvosi rendelőben",
         },
       },
     },
@@ -329,7 +329,7 @@ export const servicesResources = {
           title: "Root canal filling with warm gutta-percha",
           text:
             "We seal the cleaned root canal with the VDW BeeFill 2in1 warm gutta-percha obturation system. Heated and softened, the gutta-percha also fills the canal's irregularities and lateral branches, so the filling seals tightly, without gaps. This reduces the risk of reinfection and protects the tooth for the long term.",
-          imageAlt: "VDW BeeFill 2in1 warm gutta-percha obturation unit with its Pack and Fill handpieces",
+          imageAlt: "Warm gutta-percha root canal filling unit with two handpieces in a dental surgery",
         },
       },
     },
@@ -494,7 +494,7 @@ export const servicesResources = {
           title: "Wurzelfüllung mit warmer Guttapercha",
           text:
             "Den gereinigten Wurzelkanal verschließen wir mit dem Obturationssystem VDW BeeFill 2in1 für warme Guttapercha. Die erwärmte, plastische Guttapercha füllt auch Unregelmäßigkeiten und Seitenkanäle aus, sodass die Füllung dicht und lückenlos abschließt. Das senkt das Risiko einer erneuten Infektion und schützt den Zahn langfristig.",
-          imageAlt: "VDW BeeFill 2in1 Gerät zur Wurzelfüllung mit warmer Guttapercha, mit Pack- und Fill-Handstück",
+          imageAlt: "Gerät zur Wurzelfüllung mit warmer Guttapercha mit zwei Handstücken in einer Zahnarztpraxis",
         },
       },
     },
@@ -659,7 +659,7 @@ export const servicesResources = {
           title: "Otturazione canalare con guttaperca calda",
           text:
             "Sigilliamo il canale radicolare pulito con il sistema di otturazione a guttaperca calda VDW BeeFill 2in1. Riscaldata e resa plastica, la guttaperca riempie anche le irregolarità e i canali laterali, così l'otturazione sigilla in modo compatto e senza spazi vuoti. Questo riduce il rischio di reinfezione e protegge il dente nel lungo periodo.",
-          imageAlt: "Apparecchio VDW BeeFill 2in1 per l'otturazione canalare con guttaperca calda, con i manipoli Pack e Fill",
+          imageAlt: "Apparecchio per l'otturazione canalare con guttaperca calda, con due manipoli, in uno studio dentistico",
         },
       },
     },
