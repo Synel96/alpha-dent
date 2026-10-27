@@ -56,4 +56,8 @@ describe("vercel.json átirányítások", () => {
     // First, so they win over the path redirects (Vercel applies the first match).
     expect(vercelConfig.redirects.slice(0, 2)).toEqual(domainRedirects);
   });
+
+  it("a perjelre végződő címek (pl. a régi WordPress-oldal /de/ címei) a perjel nélküli változatra irányítanak", () => {
+    expect(vercelConfig.trailingSlash).toBe(false);
+  });
 });
