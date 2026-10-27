@@ -1,9 +1,12 @@
 import { CLINIC } from "./clinic-info";
+import { commonResources } from "./i18n/common";
 import { contactResources } from "./i18n/contact";
+import { servicesResources } from "./i18n/services";
 import { pageMeta } from "./i18n/meta";
 import { DEFAULT_LOCALE, type Locale } from "./locale";
 import { WEEKLY_HOURS } from "./opening-hours";
-import { absoluteLocalizedUrl, ogImageUrl, SITE_URL } from "./seo";
+import { absoluteLocalizedUrl, absoluteUrl, ogImageUrl, SITE_URL } from "./seo";
+import { SERVICE_PATHS, SERVICE_SLUGS } from "./service-cards";
 
 const SCHEMA_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] as const;
 
@@ -43,6 +46,8 @@ export function clinicStructuredData(locale: Locale) {
         "@type": "Dentist",
         "@id": clinicId,
         name: CLINIC.name,
+        alternateName: CLINIC.alternateNames,
+        logo: absoluteUrl(CLINIC.logoPath),
         description: pageMeta(locale, "home").description,
         url: absoluteLocalizedUrl(locale, "/"),
         image: ogImageUrl(),
@@ -77,11 +82,57 @@ export function clinicStructuredData(locale: Locale) {
         "@id": `${SITE_URL}/#website`,
         url: absoluteLocalizedUrl(DEFAULT_LOCALE, "/"),
         name: CLINIC.name,
+        alternateName: ["Alpha Dent", "alpha-dent.eu"],
         inLanguage: locale,
         publisher: { "@id": clinicId },
       },
     ],
   };
+}
+
+// The short, menu-style name of each page, for breadcrumbs.
+function pageLabel(locale: Locale, pathname: string): string | undefined {
+  const { nav, privacyPage } = commonResources[locale];
+  const labels: Record<string, string> = {
+    "/": nav.home,
+    "/klinikank": nav.clinic,
+    "/szolgaltatasaink": nav.services,
+    "/galeria": nav.gallery,
+    "/kerdesek": nav.faq,
+    "/kapcsolat": nav.contact,
+    "/adatkezelesi-tajekoztato": privacyPage.title,
+  };
+  for (const slug of SERVICE_SLUGS) {
+    labels[SERVICE_PATHS[slug]] = servicesResources[locale].services[slug].nav;
+  }
+  return labels[pathname];
+}
+
+// Breadcrumbs for every page but the home page (Home > Services >
+// Implantology), which Google can show in a result in place of the bare URL.
+// `pathname` is the logical (Hungarian filesystem) one, see lib/locale.ts.
+export function breadcrumbStructuredData(locale: Locale, pathname: string) {
+  if (pathname === "/") return null;
+  const trail = pathname.startsWith("/szolgaltatasaink/") ? ["/", "/szolgaltatasaink", pathname] : ["/", pathname];
+  const items = trail.map((path) => ({ path, name: pageLabel(locale, path) }));
+  if (items.some((item) => !item.name)) return null;
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: absoluteLocalizedUrl(locale, item.path),
+    })),
+  };
+}
+
+// Everything a page's <head> carries: the clinic and website, plus the
+// page's breadcrumbs.
+export function pageStructuredData(locale: Locale, pathname: string) {
+  const data = clinicStructuredData(locale);
+  const breadcrumbs = breadcrumbStructuredData(locale, pathname);
+  return breadcrumbs ? { ...data, "@graph": [...data["@graph"], breadcrumbs] } : data;
 }
 
 // For a <script type="application/ld+json">: escape "<" so no string in the

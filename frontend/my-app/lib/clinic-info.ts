@@ -4,6 +4,12 @@
 // page shows (and what the Google Business Profile should say too).
 export const CLINIC = {
   name: "Alphadent",
+  // Other ways people write (and search for) the name - Search Console shows
+  // "alpha dent", "alfa dent", "alfadent" - plus the company's own form.
+  alternateNames: ["AlphaDent", "Alpha Dent", "Alfadent", "Alfa Dent", "AlphaDent Kft."],
+  // Square logo for search results (min. 112px): the favicon's mark, see
+  // public/brand/favicon.svg.
+  logoPath: "/brand/logo-512.png",
   streetAddress: "Arany János u. 13.",
   postalCode: "9400",
   city: "Sopron",
