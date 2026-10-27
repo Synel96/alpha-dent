@@ -8,7 +8,7 @@ import {
   ogLocale,
   ogLocaleAlternates,
 } from "../lib/seo";
-import { clinicStructuredData, serializeJsonLd } from "../lib/structured-data";
+import { pageStructuredData, serializeJsonLd } from "../lib/structured-data";
 
 const FONT_PRELOADS = ["/fonts/geist-1.8.2-latin-wght-normal.woff2", "/fonts/geist-1.8.2-latin-wght-italic.woff2"];
 
@@ -55,7 +55,7 @@ export function Head() {
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd(clinicStructuredData(locale)) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(pageStructuredData(locale, urlPathname)) }}
       />
     </>
   );
