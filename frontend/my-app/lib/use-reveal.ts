@@ -50,8 +50,12 @@ function observeOnce(node: Element, { threshold, rootMargin }: Required<RevealOp
 // there even if the page's JavaScript never runs (an old browser that
 // chokes on it, a failed download): an older phone once showed the home
 // page as empty black gaps, every section stuck hidden. Only once the
-// script runs does it hide what's below the fold, before the next paint,
-// ready to reveal it on scroll; whatever is already on screen stays put.
+// script runs does it hide what's below the fold - out of sight, so it can
+// happen after the first paint - ready to reveal it on scroll; whatever is
+// already on screen stays put. Checked in a passive effect rather than a
+// layout effect: by then the browser has laid the page out for that paint,
+// so reading positions costs nothing, whereas during hydration it forced
+// an extra layout pass (Lighthouse's "forced reflow").
 export function useReveal<T extends HTMLElement = HTMLElement>({
   threshold = 0.22,
   rootMargin = "0px 0px -10% 0px",
@@ -59,7 +63,7 @@ export function useReveal<T extends HTMLElement = HTMLElement>({
   const ref = React.useRef<T | null>(null);
   const [visible, setVisible] = React.useState(true);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     const node = ref.current;
     if (!node || typeof IntersectionObserver === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
