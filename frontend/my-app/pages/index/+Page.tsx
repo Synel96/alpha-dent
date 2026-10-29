@@ -75,9 +75,9 @@ function Page() {
         imageSrc={HERO_IMAGE}
         videoSrc={HERO_VIDEO}
         imageAlt="Alphadent"
-        eyebrow={t("home.hero.since")}
-        eyebrowIcon={ShieldCheck}
         quote={t("home.hero.motto")}
+        tagline={t("home.hero.since")}
+        taglineIcon={ShieldCheck}
         brandMark={
           <>
             Alphadent{" "}

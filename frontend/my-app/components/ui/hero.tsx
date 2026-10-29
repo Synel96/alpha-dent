@@ -81,9 +81,11 @@ type HeroProps = {
   // while the video loads, and the fallback for reduced motion / data saver.
   videoSrc?: string;
   eyebrow?: string;
-  // Small icon before the eyebrow, e.g. for a trust line ("since 1996").
-  eyebrowIcon?: LucideIcon;
   quote?: React.ReactNode;
+  // A short trust line under the quote (e.g. "since 1996"), with an
+  // optional icon before it.
+  tagline?: string;
+  taglineIcon?: LucideIcon;
   // Rendered as the page's <h1> - give it the brand plus what/where.
   brandMark?: React.ReactNode;
   subtitle?: React.ReactNode;
@@ -105,8 +107,9 @@ export function Hero({
   imageAlt = "",
   videoSrc,
   eyebrow,
-  eyebrowIcon: EyebrowIcon,
   quote,
+  tagline,
+  taglineIcon: TaglineIcon,
   brandMark,
   subtitle,
   ctaHref,
@@ -265,7 +268,7 @@ export function Hero({
     };
   }, []);
 
-  const hasCopy = Boolean(quote || subtitle || eyebrow || (ctaHref && ctaLabel) || children || aside);
+  const hasCopy = Boolean(quote || tagline || subtitle || eyebrow || (ctaHref && ctaLabel) || children || aside);
 
   return (
     <>
@@ -385,8 +388,7 @@ export function Hero({
           <div className="relative z-10 flex w-full flex-col gap-5 px-6 sm:px-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-16">
             <div className="flex max-w-xl flex-col items-start gap-5 text-left">
               {eyebrow ? (
-                <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.32em] text-brand-gold-light/90 [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
-                  {EyebrowIcon ? <EyebrowIcon aria-hidden className="size-4 shrink-0 text-brand-gold" /> : null}
+                <p className="text-xs uppercase tracking-[0.32em] text-brand-gold-light/90">
                   {eyebrow}
                 </p>
               ) : null}
@@ -400,6 +402,12 @@ export function Hero({
                 >
                   <p>{quote}</p>
                 </blockquote>
+              ) : null}
+              {tagline ? (
+                <p className="-mt-1 inline-flex items-center gap-2 text-sm text-brand-gold-muted [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
+                  {TaglineIcon ? <TaglineIcon aria-hidden className="size-4 shrink-0 text-brand-gold" /> : null}
+                  {tagline}
+                </p>
               ) : null}
               {brandMark ? (
                 <h1 className="text-sm font-semibold uppercase leading-relaxed tracking-[0.32em] text-brand-gold [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
