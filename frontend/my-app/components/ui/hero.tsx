@@ -1,5 +1,5 @@
 import React from "react";
-import { Pause, Play } from "lucide-react";
+import { Pause, Play, type LucideIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { cloudinaryUrl, cloudinarySrcSet, cloudinaryVideoUrl } from "@/lib/cloudinary";
@@ -81,6 +81,8 @@ type HeroProps = {
   // while the video loads, and the fallback for reduced motion / data saver.
   videoSrc?: string;
   eyebrow?: string;
+  // Small icon before the eyebrow, e.g. for a trust line ("since 1996").
+  eyebrowIcon?: LucideIcon;
   quote?: React.ReactNode;
   // Rendered as the page's <h1> - give it the brand plus what/where.
   brandMark?: React.ReactNode;
@@ -103,6 +105,7 @@ export function Hero({
   imageAlt = "",
   videoSrc,
   eyebrow,
+  eyebrowIcon: EyebrowIcon,
   quote,
   brandMark,
   subtitle,
@@ -382,7 +385,8 @@ export function Hero({
           <div className="relative z-10 flex w-full flex-col gap-5 px-6 sm:px-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-16">
             <div className="flex max-w-xl flex-col items-start gap-5 text-left">
               {eyebrow ? (
-                <p className="text-xs uppercase tracking-[0.32em] text-brand-gold-light/90">
+                <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.32em] text-brand-gold-light/90 [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
+                  {EyebrowIcon ? <EyebrowIcon aria-hidden className="size-4 shrink-0 text-brand-gold" /> : null}
                   {eyebrow}
                 </p>
               ) : null}

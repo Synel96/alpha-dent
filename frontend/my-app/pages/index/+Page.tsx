@@ -9,6 +9,7 @@ import {
   Layers,
   Phone,
   Puzzle,
+  ShieldCheck,
   Smile,
   Sparkles,
   Stethoscope,
@@ -74,6 +75,8 @@ function Page() {
         imageSrc={HERO_IMAGE}
         videoSrc={HERO_VIDEO}
         imageAlt="Alphadent"
+        eyebrow={t("home.hero.since")}
+        eyebrowIcon={ShieldCheck}
         quote={t("home.hero.motto")}
         brandMark={
           <>
