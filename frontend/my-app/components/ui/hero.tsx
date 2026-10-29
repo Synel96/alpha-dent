@@ -1,5 +1,5 @@
 import React from "react";
-import { Pause, Play } from "lucide-react";
+import { Pause, Play, type LucideIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { cloudinaryUrl, cloudinarySrcSet, cloudinaryVideoUrl } from "@/lib/cloudinary";
@@ -82,6 +82,10 @@ type HeroProps = {
   videoSrc?: string;
   eyebrow?: string;
   quote?: React.ReactNode;
+  // A short trust line under the quote (e.g. "since 1996"), with an
+  // optional icon before it.
+  tagline?: string;
+  taglineIcon?: LucideIcon;
   // Rendered as the page's <h1> - give it the brand plus what/where.
   brandMark?: React.ReactNode;
   subtitle?: React.ReactNode;
@@ -104,6 +108,8 @@ export function Hero({
   videoSrc,
   eyebrow,
   quote,
+  tagline,
+  taglineIcon: TaglineIcon,
   brandMark,
   subtitle,
   ctaHref,
@@ -262,7 +268,7 @@ export function Hero({
     };
   }, []);
 
-  const hasCopy = Boolean(quote || subtitle || eyebrow || (ctaHref && ctaLabel) || children || aside);
+  const hasCopy = Boolean(quote || tagline || subtitle || eyebrow || (ctaHref && ctaLabel) || children || aside);
 
   return (
     <>
@@ -396,6 +402,12 @@ export function Hero({
                 >
                   <p>{quote}</p>
                 </blockquote>
+              ) : null}
+              {tagline ? (
+                <p className="-mt-1 inline-flex items-center gap-2 text-sm text-brand-gold-muted [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
+                  {TaglineIcon ? <TaglineIcon aria-hidden className="size-4 shrink-0 text-brand-gold" /> : null}
+                  {tagline}
+                </p>
               ) : null}
               {brandMark ? (
                 <h1 className="text-sm font-semibold uppercase leading-relaxed tracking-[0.32em] text-brand-gold [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">

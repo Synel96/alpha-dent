@@ -9,6 +9,7 @@ import {
   Layers,
   Phone,
   Puzzle,
+  ShieldCheck,
   Smile,
   Sparkles,
   Stethoscope,
@@ -75,6 +76,8 @@ function Page() {
         videoSrc={HERO_VIDEO}
         imageAlt="Alphadent"
         quote={t("home.hero.motto")}
+        tagline={t("home.hero.since")}
+        taglineIcon={ShieldCheck}
         brandMark={
           <>
             Alphadent{" "}
