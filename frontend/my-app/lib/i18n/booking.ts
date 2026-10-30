@@ -1,12 +1,18 @@
 // The appointment request modal and e-mail behind the "Időpontot kérek"
-// buttons (see components/ui/booking-dialog.tsx). {{service}} is the treatment on a service
-// page, empty elsewhere.
+// buttons (see components/ui/booking-dialog.tsx). {{service}} is the
+// treatment on a service page, empty elsewhere. `body` is the whole e-mail
+// the buttons' plain mailto: link opens (no JavaScript); `message` is the
+// modal's template, without the name and phone lines - the modal asks for
+// those in their own fields and signs the e-mail with them.
 export const bookingResources = {
   hu: {
     booking: {
       subject: "Időpontkérés",
       body: "Tisztelt Alphadent!\n\nIdőpontot szeretnék kérni.\n\nNév: \nTelefonszám: \nKezelés: {{service}}\nMikor lenne alkalmas (nap, napszak): \n\nKöszönöm!",
+      message: "Tisztelt Alphadent!\n\nIdőpontot szeretnék kérni.\n\nKezelés: {{service}}\nMikor lenne alkalmas (nap, napszak): \n\nKöszönöm!",
       dialog: {
+        name: "Név",
+        phone: "Telefonszám",
         title: "Időpontkérés",
         intro: "Írja meg nekünk, mikor és milyen kezelésre jönne. A levelet kollégáink munkanapokon hamar megválaszolják.",
         subject: "Tárgy",
@@ -21,7 +27,10 @@ export const bookingResources = {
     booking: {
       subject: "Appointment request",
       body: "Dear Alphadent team,\n\nI would like to book an appointment.\n\nName: \nPhone number: \nTreatment: {{service}}\nPreferred day and time: \n\nThank you!",
+      message: "Dear Alphadent team,\n\nI would like to book an appointment.\n\nTreatment: {{service}}\nPreferred day and time: \n\nThank you!",
       dialog: {
+        name: "Name",
+        phone: "Phone number",
         title: "Appointment request",
         intro: "Tell us when you would like to come and for which treatment. Our team replies to e-mails quickly on working days.",
         subject: "Subject",
@@ -36,7 +45,10 @@ export const bookingResources = {
     booking: {
       subject: "Terminanfrage",
       body: "Sehr geehrtes Alphadent-Team,\n\nich möchte gerne einen Termin vereinbaren.\n\nName: \nTelefonnummer: \nBehandlung: {{service}}\nWunschtermin (Tag, Tageszeit): \n\nVielen Dank!",
+      message: "Sehr geehrtes Alphadent-Team,\n\nich möchte gerne einen Termin vereinbaren.\n\nBehandlung: {{service}}\nWunschtermin (Tag, Tageszeit): \n\nVielen Dank!",
       dialog: {
+        name: "Name",
+        phone: "Telefonnummer",
         title: "Terminanfrage",
         intro: "Schreiben Sie uns, wann und für welche Behandlung Sie kommen möchten. Unser Team beantwortet E-Mails an Werktagen schnell.",
         subject: "Betreff",
@@ -51,7 +63,10 @@ export const bookingResources = {
     booking: {
       subject: "Richiesta di appuntamento",
       body: "Gentile team Alphadent,\n\nvorrei fissare un appuntamento.\n\nNome: \nNumero di telefono: \nTrattamento: {{service}}\nGiorno e orario preferiti: \n\nGrazie!",
+      message: "Gentile team Alphadent,\n\nvorrei fissare un appuntamento.\n\nTrattamento: {{service}}\nGiorno e orario preferiti: \n\nGrazie!",
       dialog: {
+        name: "Nome",
+        phone: "Numero di telefono",
         title: "Richiesta di appuntamento",
         intro: "Ci scriva quando e per quale trattamento desidera venire. Il nostro team risponde rapidamente alle e-mail nei giorni lavorativi.",
         subject: "Oggetto",

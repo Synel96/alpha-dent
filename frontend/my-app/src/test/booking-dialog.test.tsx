@@ -43,13 +43,28 @@ describe("Időpontkérő modal", () => {
     );
   });
 
-  it("a „Tovább a küldéshez” a beírt tárggyal és üzenettel nyitja a levelezőt, a modal nyitva marad (ha nem nyílna meg a levelező)", () => {
+  it("a név és a telefonszám külön kötelező mező, a sablonban nincs rájuk sor", () => {
     renderWithProvider();
     fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
     const dialog = screen.getByRole("dialog");
+    expect(within(dialog).getByRole("textbox", { name: "Név" })).toBeRequired();
+    expect(within(dialog).getByRole("textbox", { name: "Telefonszám" })).toBeRequired();
+    const message = (within(dialog).getByRole("textbox", { name: "Üzenet" }) as HTMLTextAreaElement).value;
+    expect(message).not.toContain("Név:");
+    expect(message).not.toContain("Telefonszám:");
+  });
+
+  it("a „Tovább a küldéshez” a beírt tárggyal nyitja a levelezőt, az üzenet alján a névvel és a telefonszámmal", () => {
+    renderWithProvider();
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    const dialog = screen.getByRole("dialog");
+    fireEvent.change(within(dialog).getByRole("textbox", { name: "Név" }), { target: { value: " Kiss Anna " } });
+    fireEvent.change(within(dialog).getByRole("textbox", { name: "Telefonszám" }), {
+      target: { value: "+36 30 123 4567" },
+    });
     fireEvent.change(within(dialog).getByRole("textbox", { name: "Tárgy" }), { target: { value: "Fogfájás" } });
     fireEvent.change(within(dialog).getByRole("textbox", { name: "Üzenet" }), {
-      target: { value: "Holnap délelőtt jó lenne.\nKiss Anna" },
+      target: { value: "Holnap délelőtt jó lenne.\n" },
     });
     fireEvent.click(within(dialog).getByRole("button", { name: "Tovább a küldéshez" }));
 
@@ -57,7 +72,10 @@ describe("Időpontkérő modal", () => {
     const href = openMailto.mock.calls[0][0] as string;
     expect(href.startsWith("mailto:info@alpha-dent.eu?")).toBe(true);
     expect(mailtoParams(href).get("subject")).toBe("Fogfájás");
-    expect(mailtoParams(href).get("body")).toBe("Holnap délelőtt jó lenne.\r\nKiss Anna");
+    expect(mailtoParams(href).get("body")).toBe(
+      "Holnap délelőtt jó lenne.\r\n\r\nKiss Anna\r\nTelefonszám: +36 30 123 4567"
+    );
+    // Stays open, in case no mail app opened.
     expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
 
@@ -83,6 +101,7 @@ describe("Időpontkérő modal", () => {
     const { bookingResources } = await import("../../lib/i18n/booking");
     const keys = Object.keys(bookingResources.hu.booking.dialog).sort();
     for (const locale of ["en", "de", "it"] as const) {
+      expect(bookingResources[locale].booking.message, locale).toContain("{{service}}");
       const dialog = bookingResources[locale].booking.dialog;
       expect(Object.keys(dialog).sort(), locale).toEqual(keys);
       for (const value of Object.values(dialog)) expect(value, locale).not.toBe("");
