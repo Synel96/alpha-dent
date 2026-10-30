@@ -1,8 +1,14 @@
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { CalendarCheck, Eraser, MailCheck, RotateCcw, Send, X } from "lucide-react";
+import { CalendarCheck, Check, Copy, Eraser, ExternalLink, MailCheck, RotateCcw, Send, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { bookingMailto, openMailto, signedBookingMessage } from "@/lib/booking";
+import {
+  bookingMailto,
+  bookingWebmailLinks,
+  isDesktopPointer,
+  openMailto,
+  signedBookingMessage,
+} from "@/lib/booking";
 import { CLINIC } from "@/lib/clinic-info";
 import { localizeHref, type Locale } from "@/lib/locale";
 import type { ServiceSlug } from "@/lib/service-cards";
@@ -12,8 +18,9 @@ import { cn } from "@/lib/utils";
 // visitor gives their name and phone number, edits the subject and the
 // pre-written message, and "Tovább a küldéshez" opens their mail app with
 // the e-mail ready, signed with the name and number unless they untick
-// that (still no backend -
-// see lib/booking.ts). The buttons keep their mailto: href, so without
+// that (still no backend - see lib/booking.ts). On a computer, where a
+// mailto: link often opens nothing (most people use webmail), it asks
+// instead: mail app, Gmail, Outlook.com, or copy the text. The buttons keep their mailto: href, so without
 // JavaScript (or with a modified click) they open the mail app directly.
 
 type OpenBooking = (service?: ServiceSlug) => void;
@@ -88,20 +95,48 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
   // (the fields keep their values, for "Vissza a szerkesztéshez"): that's
   // what the visitor sees on coming back from the mail app, and if no mail
   // app opened, it says how else to reach the clinic.
-  const [sent, setSent] = React.useState(false);
-  const mailtoHref = bookingMailto(
-    subject,
-    includeContact ? signedBookingMessage(message, name, phone, t("booking.dialog.phone")) : message
-  );
+  // "mobile": the mail app was opened; "desktop": the visitor picks how to
+  // send it (see isDesktopPointer).
+  const [sent, setSent] = React.useState<false | "mobile" | "desktop">(false);
+  const body = includeContact ? signedBookingMessage(message, name, phone, t("booking.dialog.phone")) : message;
+  const mailtoHref = bookingMailto(subject, body);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Close the phone's keyboard first, so the page isn't resized again
     // while the mail app takes over.
     if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
-    setSent(true);
-    openMailto(mailtoHref);
+    if (isDesktopPointer()) {
+      setSent("desktop");
+    } else {
+      setSent("mobile");
+      openMailto(mailtoHref);
+    }
   };
+
+  const backButtons = (
+    <div className="grid gap-3 sm:grid-cols-2">
+      <button type="button" onClick={() => setSent(false)} className={SECONDARY_BUTTON_CLASS}>
+        {t("booking.dialog.edit")}
+      </button>
+      <DialogPrimitive.Close asChild>
+        <button type="button" className={SECONDARY_BUTTON_CLASS}>
+          {t("booking.dialog.done")}
+        </button>
+      </DialogPrimitive.Close>
+    </div>
+  );
+
+  if (sent === "desktop") {
+    return (
+      <div className="space-y-4">
+        <DialogHeader icon={MailCheck} title={t("booking.dialog.chooseTitle")} description={t("booking.dialog.chooseText")} />
+        <SendOptions subject={subject} body={body} mailtoHref={mailtoHref} />
+        {backButtons}
+        <ContactFallback />
+      </div>
+    );
+  }
 
   if (sent) {
     return (
@@ -114,16 +149,7 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
           <Send aria-hidden className="size-4" />
           {t("booking.dialog.reopen")}
         </a>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <button type="button" onClick={() => setSent(false)} className={SECONDARY_BUTTON_CLASS}>
-            {t("booking.dialog.edit")}
-          </button>
-          <DialogPrimitive.Close asChild>
-            <button type="button" className={SECONDARY_BUTTON_CLASS}>
-              {t("booking.dialog.done")}
-            </button>
-          </DialogPrimitive.Close>
-        </div>
+        {backButtons}
         <ContactFallback />
       </div>
     );
@@ -244,6 +270,60 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
 
       <ContactFallback />
     </form>
+  );
+}
+
+// The computer's ways to send the e-mail: the mail app (mailto:), Gmail or
+// Outlook.com in a new tab with everything filled in, or copying the text
+// (with the address and subject shown) to paste anywhere.
+function SendOptions({ subject, body, mailtoHref }: { subject: string; body: string; mailtoHref: string }) {
+  const { t } = useTranslation();
+  const webmail = bookingWebmailLinks(subject, body);
+  const [copyState, setCopyState] = React.useState<"idle" | "copied" | "failed">("idle");
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(body);
+      setCopyState("copied");
+    } catch {
+      setCopyState("failed");
+    }
+  };
+
+  return (
+    <div className="space-y-3">
+      <a href={mailtoHref} className={cn(PRIMARY_BUTTON_CLASS, "w-full")}>
+        <Send aria-hidden className="size-4" />
+        {t("booking.dialog.mailApp")}
+      </a>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <a href={webmail.gmail} target="_blank" rel="noopener noreferrer" className={cn(PRIMARY_BUTTON_CLASS, "font-medium")}>
+          <ExternalLink aria-hidden className="size-4" />
+          {t("booking.dialog.gmail")}
+        </a>
+        <a href={webmail.outlook} target="_blank" rel="noopener noreferrer" className={cn(PRIMARY_BUTTON_CLASS, "font-medium")}>
+          <ExternalLink aria-hidden className="size-4" />
+          {t("booking.dialog.outlook")}
+        </a>
+      </div>
+      <button type="button" onClick={copy} className={cn(PRIMARY_BUTTON_CLASS, "w-full font-medium")}>
+        {copyState === "copied" ? <Check aria-hidden className="size-4" /> : <Copy aria-hidden className="size-4" />}
+        {t(copyState === "copied" ? "booking.dialog.copied" : "booking.dialog.copy")}
+      </button>
+      <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 rounded-lg border border-brand-border bg-brand-black/40 px-3 py-2 text-xs">
+        <dt className="text-brand-gold-muted">{t("booking.dialog.to")}</dt>
+        <dd className="break-all text-white">{CLINIC.email}</dd>
+        <dt className="text-brand-gold-muted">{t("booking.dialog.subject")}</dt>
+        <dd className="break-words text-white">{subject}</dd>
+      </dl>
+      <p role="status" className="text-xs leading-relaxed text-white/70">
+        {copyState === "copied"
+          ? t("booking.dialog.copiedHint")
+          : copyState === "failed"
+            ? t("booking.dialog.copyFailed")
+            : null}
+      </p>
+    </div>
   );
 }
 
