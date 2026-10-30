@@ -91,6 +91,7 @@ type HeroProps = {
   subtitle?: React.ReactNode;
   ctaHref?: string;
   ctaLabel?: string;
+  onCtaClick?: React.MouseEventHandler<HTMLAnchorElement>;
   // Shown beside the CTA button, e.g. a call link.
   secondaryAction?: React.ReactNode;
   children?: React.ReactNode;
@@ -114,6 +115,7 @@ export function Hero({
   subtitle,
   ctaHref,
   ctaLabel,
+  onCtaClick,
   secondaryAction,
   children,
   aside,
@@ -419,7 +421,7 @@ export function Hero({
               ) : null}
               {(ctaHref && ctaLabel) || secondaryAction ? (
                 <div className="mt-1 flex flex-wrap items-center gap-3">
-                  {ctaHref && ctaLabel ? <CtaButton href={ctaHref} title={ctaLabel} variant="ghost" /> : null}
+                  {ctaHref && ctaLabel ? <CtaButton href={ctaHref} title={ctaLabel} variant="ghost" onClick={onCtaClick} /> : null}
                   {secondaryAction}
                 </div>
               ) : null}

@@ -9,3 +9,8 @@ export function bookingMailto(subject: string, body: string): string {
   const crlfBody = body.replace(/\r?\n/g, "\r\n");
   return `mailto:${CLINIC.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(crlfBody)}`;
 }
+
+// Kept apart so tests can stub it: jsdom can't follow a mailto: navigation.
+export function openMailto(href: string) {
+  window.location.href = href;
+}

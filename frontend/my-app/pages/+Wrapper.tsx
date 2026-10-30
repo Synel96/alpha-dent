@@ -3,8 +3,11 @@ export { Wrapper };
 import React from "react";
 import { I18nextProvider } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
+import { BookingDialogProvider } from "../components/ui/booking-dialog";
 import i18n, { createRequestI18n } from "../lib/i18n";
 
+// Also hosts the appointment request modal (components/ui/booking-dialog.tsx),
+// so every page's "Időpontot kérek" buttons can open it.
 function Wrapper({ children }: { children: React.ReactNode }) {
   const { locale } = usePageContext();
 
@@ -13,7 +16,9 @@ function Wrapper({ children }: { children: React.ReactNode }) {
   // other.
   if (typeof window === "undefined") {
     return (
-      <I18nextProvider i18n={createRequestI18n(locale)}>{children}</I18nextProvider>
+      <I18nextProvider i18n={createRequestI18n(locale)}>
+        <BookingDialogProvider>{children}</BookingDialogProvider>
+      </I18nextProvider>
     );
   }
 
@@ -25,5 +30,9 @@ function Wrapper({ children }: { children: React.ReactNode }) {
   if (i18n.language !== locale) {
     i18n.changeLanguage(locale);
   }
-  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+  return (
+    <I18nextProvider i18n={i18n}>
+      <BookingDialogProvider>{children}</BookingDialogProvider>
+    </I18nextProvider>
+  );
 }

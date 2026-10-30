@@ -6,7 +6,7 @@ import { PageContainer } from "../../../components/ui/page-container";
 import { RevealGroup } from "../../../components/ui/reveal-section";
 import { ServiceImage } from "../../../components/ui/service-image";
 import { localizeHref } from "../../../lib/locale";
-import { useBookingMailto } from "../../../lib/use-booking-mailto";
+import { useBookingCta } from "../../../components/ui/booking-dialog";
 
 export { Page };
 
@@ -14,7 +14,7 @@ const SMILE_IMAGE = "https://res.cloudinary.com/dmwulp3dl/image/upload/v17927663
 
 function Page() {
   const { t } = useTranslation();
-  const bookingHref = useBookingMailto("esztetikaiFogaszat");
+  const bookingCta = useBookingCta("esztetikaiFogaszat");
   const { locale } = usePageContext();
 
   const paragraphs = t("services.esztetikaiFogaszat.paragraphs", {
@@ -78,7 +78,8 @@ function Page() {
         </p>
 
         <CtaButton
-          href={bookingHref}
+          href={bookingCta.href}
+          onClick={bookingCta.onClick}
           badge={t("nav.contact")}
           title={t("home.intro.ctaButton")}
         />

@@ -11,7 +11,7 @@ import { ServiceImage } from "../../components/ui/service-image";
 import { CLINIC_PHOTOS } from "../../lib/clinic-photos";
 import { GALLERY_SECTIONS } from "../../lib/gallery";
 import { localizeHref } from "../../lib/locale";
-import { useBookingMailto } from "../../lib/use-booking-mailto";
+import { useBookingCta } from "../../components/ui/booking-dialog";
 
 export { Page };
 
@@ -58,7 +58,7 @@ function Section({
 
 function Page() {
   const { t } = useTranslation();
-  const bookingHref = useBookingMailto();
+  const bookingCta = useBookingCta();
   const { locale } = usePageContext();
   const list = (key: string) => t(key, { returnObjects: true }) as string[];
 
@@ -162,7 +162,8 @@ function Page() {
           </p>
           <div className="mt-6">
             <CtaButton
-              href={bookingHref}
+              href={bookingCta.href}
+              onClick={bookingCta.onClick}
               badge={t("nav.contact")}
               title={t("home.intro.ctaButton")}
             />
