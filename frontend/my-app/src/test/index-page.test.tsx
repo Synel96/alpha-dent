@@ -67,7 +67,7 @@ describe("Főoldal", () => {
     expect(screen.queryByText("home.faq.title")).not.toBeInTheDocument();
   });
 
-  it("a kapcsolat szekció csak egy rövid CTA-t mutat a kapcsolat oldalra, nem az elérhetőségeket", () => {
+  it("a kapcsolat szekció csak egy rövid időpontkérő e-mail CTA-t mutat, nem az elérhetőségeket", () => {
     render(<Page />);
     expect(screen.getByText("home.contact.title")).toBeInTheDocument();
     expect(screen.queryByText("9400 Sopron, Arany János u. 13.")).not.toBeInTheDocument();
@@ -75,7 +75,7 @@ describe("Főoldal", () => {
     const ctaLinks = screen.getAllByRole("link", { name: /home\.intro\.ctaButton/ });
     expect(ctaLinks.length).toBeGreaterThan(0);
     for (const link of ctaLinks) {
-      expect(link).toHaveAttribute("href", "/hu/kapcsolat");
+      expect(link).toHaveAttribute("href", expect.stringMatching(/^mailto:info@alpha-dent\.eu\?subject=/));
     }
   });
 });

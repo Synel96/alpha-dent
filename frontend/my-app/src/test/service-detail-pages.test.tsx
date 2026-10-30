@@ -29,7 +29,7 @@ import { Page as EsztetikaiFogaszatPage } from "../../pages/szolgaltatasaink/esz
 import { Page as FogmegtartoKezelesekPage } from "../../pages/szolgaltatasaink/fogmegtarto-kezelesek/+Page";
 
 describe("Szolgáltatás aloldalak", () => {
-  it("Implantológia: címet, bekezdéseket, eseteket/lépéseket és a kapcsolat CTA-t mutatja", () => {
+  it("Implantológia: címet, bekezdéseket, eseteket/lépéseket és az időpontkérő e-mail CTA-t mutatja", () => {
     render(<ImplantologiaPage />);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "services.implantologia.title"
@@ -42,11 +42,11 @@ describe("Szolgáltatás aloldalak", () => {
     );
     expect(screen.getByRole("link", { name: /home\.intro\.ctaButton/ })).toHaveAttribute(
       "href",
-      "/hu/kapcsolat"
+      expect.stringMatching(/^mailto:info@alpha-dent\.eu\?subject=/)
     );
   });
 
-  it("Szájsebészet: címet, felsorolást és a kapcsolat CTA-t mutatja", () => {
+  it("Szájsebészet: címet, felsorolást és az időpontkérő e-mail CTA-t mutatja", () => {
     render(<SzajsebeszetPage />);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "services.szajsebeszet.title"
@@ -54,7 +54,7 @@ describe("Szolgáltatás aloldalak", () => {
     expect(screen.getByText("services.szajsebeszet.items-0")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /home\.intro\.ctaButton/ })).toHaveAttribute(
       "href",
-      "/hu/kapcsolat"
+      expect.stringMatching(/^mailto:info@alpha-dent\.eu\?subject=/)
     );
   });
 
@@ -75,7 +75,7 @@ describe("Szolgáltatás aloldalak", () => {
     expect(screen.getByText("services.fogmegtartoKezelesek.paragraphs-0")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /home\.intro\.ctaButton/ })).toHaveAttribute(
       "href",
-      "/hu/kapcsolat"
+      expect.stringMatching(/^mailto:info@alpha-dent\.eu\?subject=/)
     );
   });
 });

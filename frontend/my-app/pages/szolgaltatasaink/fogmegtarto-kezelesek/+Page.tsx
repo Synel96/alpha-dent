@@ -5,6 +5,7 @@ import { PageContainer } from "../../../components/ui/page-container";
 import { RevealGroup } from "../../../components/ui/reveal-section";
 import { ServiceImage } from "../../../components/ui/service-image";
 import { localizeHref } from "../../../lib/locale";
+import { useBookingMailto } from "../../../lib/use-booking-mailto";
 
 export { Page };
 
@@ -15,6 +16,7 @@ const PAGE_IMAGE = "https://res.cloudinary.com/dmwulp3dl/image/upload/v179276588
 
 function Page() {
   const { t } = useTranslation();
+  const bookingHref = useBookingMailto("fogmegtartoKezelesek");
   const { locale } = usePageContext();
 
   const paragraphs = t("services.fogmegtartoKezelesek.paragraphs", {
@@ -56,7 +58,7 @@ function Page() {
         </div>
 
         <CtaButton
-          href={localizeHref(locale, "/kapcsolat")}
+          href={bookingHref}
           badge={t("nav.contact")}
           title={t("home.intro.ctaButton")}
         />

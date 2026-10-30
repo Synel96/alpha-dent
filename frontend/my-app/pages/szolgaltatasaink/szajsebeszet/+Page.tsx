@@ -7,6 +7,7 @@ import { cloudinarySrcSet, cloudinaryUrl } from "../../../lib/cloudinary";
 import { PageContainer } from "../../../components/ui/page-container";
 import { RevealGroup } from "../../../components/ui/reveal-section";
 import { localizeHref } from "../../../lib/locale";
+import { useBookingMailto } from "../../../lib/use-booking-mailto";
 
 export { Page };
 
@@ -22,6 +23,7 @@ type ComfortItem = { title: string; text: string };
 
 function Page() {
   const { t } = useTranslation();
+  const bookingHref = useBookingMailto("szajsebeszet");
   const { locale } = usePageContext();
 
   const items = t("services.szajsebeszet.items", { returnObjects: true }) as string[];
@@ -110,7 +112,7 @@ function Page() {
         </section>
 
         <CtaButton
-          href={localizeHref(locale, "/kapcsolat")}
+          href={bookingHref}
           badge={t("nav.contact")}
           title={t("home.intro.ctaButton")}
         />

@@ -42,7 +42,7 @@ describe("Klinikánk oldal", () => {
     }
   });
 
-  it("a rendelő képeit (panorámával együtt) körhintában és az időpontkérő gombot a kapcsolat oldalra mutatva jeleníti meg", () => {
+  it("a rendelő képeit (panorámával együtt) körhintában és az időpontkérő gombot előre megírt e-mailt nyitva jeleníti meg", () => {
     render(<KlinikankPage />);
     // Each photo is exposed once, even though the carousel repeats short lists.
     expect(screen.getAllByRole("img", { name: "clinicPage.rooms.photos.panorama" })).toHaveLength(1);
@@ -54,7 +54,7 @@ describe("Klinikánk oldal", () => {
     expect(roomPhotos[0]).toBe("clinicPage.rooms.photos.entrance");
     expect(roomPhotos).toHaveLength(10);
     expect(roomPhotos[9]).toBe("clinicPage.rooms.photos.building");
-    expect(screen.getByRole("link", { name: /home\.intro\.ctaButton/ })).toHaveAttribute("href", "/hu/kapcsolat");
+    expect(screen.getByRole("link", { name: /home\.intro\.ctaButton/ })).toHaveAttribute("href", expect.stringMatching(/^mailto:info@alpha-dent\.eu\?subject=/));
   });
 
   it("a labormunkák szekcióban körhintán mutatja a labor képeit", () => {
