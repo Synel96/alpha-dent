@@ -27,6 +27,9 @@ const renderWithProvider = (service?: ServiceSlug) =>
     </BookingDialogProvider>
   );
 
+const PRIVACY_CHECKBOX = { name: "Elolvastam és elfogadom az adatkezelési tájékoztatót." };
+const acceptPrivacy = () => fireEvent.click(screen.getByRole("checkbox", PRIVACY_CHECKBOX));
+
 const mailtoParams = (href: string) => new URLSearchParams(href.slice(href.indexOf("?") + 1));
 
 describe("Időpontkérő modal", () => {
@@ -66,6 +69,7 @@ describe("Időpontkérő modal", () => {
     fireEvent.change(within(dialog).getByRole("textbox", { name: "Üzenet" }), {
       target: { value: "Holnap délelőtt jó lenne.\n" },
     });
+    acceptPrivacy();
     fireEvent.click(within(dialog).getByRole("button", { name: "Tovább a küldéshez" }));
 
     expect(openMailto).toHaveBeenCalledTimes(1);
@@ -95,6 +99,7 @@ describe("Időpontkérő modal", () => {
     expect(within(dialog).getByRole("textbox", { name: "Telefonszám" })).not.toBeRequired();
     fireEvent.change(within(dialog).getByRole("textbox", { name: "Név" }), { target: { value: "Kiss Anna" } });
     fireEvent.change(within(dialog).getByRole("textbox", { name: "Üzenet" }), { target: { value: "Csak az üzenet." } });
+    acceptPrivacy();
     fireEvent.click(within(dialog).getByRole("button", { name: "Tovább a küldéshez" }));
 
     expect(mailtoParams(openMailto.mock.calls[0][0] as string).get("body")).toBe("Csak az üzenet.");
@@ -127,6 +132,7 @@ describe("Időpontkérő modal", () => {
     fireEvent.change(screen.getByRole("textbox", { name: "Név" }), { target: { value: "Kiss Anna" } });
     const phone = screen.getByRole("textbox", { name: "Telefonszám" });
     fireEvent.change(phone, { target: { value: "+36301234567" } });
+    acceptPrivacy();
     phone.focus();
     expect(phone).toHaveFocus();
     // What has focus at the moment the mail app is opened - by then the
@@ -150,11 +156,38 @@ describe("Időpontkérő modal", () => {
     expect(dialog.className).not.toMatch(/\bfixed\b|translate/);
   });
 
+  it("az adatkezelési tájékoztató elfogadása kötelező: nélküle nem nyílik meg a levelező", () => {
+    renderWithProvider();
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    fireEvent.change(screen.getByRole("textbox", { name: "Név" }), { target: { value: "Kiss Anna" } });
+    fireEvent.change(screen.getByRole("textbox", { name: "Telefonszám" }), { target: { value: "+36301234567" } });
+    const checkbox = screen.getByRole("checkbox", PRIVACY_CHECKBOX);
+    expect(checkbox).toBeRequired();
+    expect(checkbox).not.toBeChecked();
+
+    fireEvent.click(screen.getByRole("button", { name: "Tovább a küldéshez" }));
+    expect(openMailto).not.toHaveBeenCalled();
+    expect(screen.getByRole("dialog", { name: "Időpontkérés" })).toBeInTheDocument();
+
+    acceptPrivacy();
+    fireEvent.click(screen.getByRole("button", { name: "Tovább a küldéshez" }));
+    expect(openMailto).toHaveBeenCalledTimes(1);
+  });
+
+  it("a tájékoztató linkje az aktuális nyelvű oldalra mutat, új lapon (a kitöltött modal megmarad)", () => {
+    renderWithProvider();
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    const link = screen.getByRole("link", { name: "adatkezelési tájékoztatót" });
+    expect(link).toHaveAttribute("href", "/hu/adatkezelesi-tajekoztato");
+    expect(link).toHaveAttribute("target", "_blank");
+  });
+
   it("a „Kész” gomb bezárja a modalt", () => {
     renderWithProvider();
     fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
     fireEvent.change(screen.getByRole("textbox", { name: "Név" }), { target: { value: "Kiss Anna" } });
     fireEvent.change(screen.getByRole("textbox", { name: "Telefonszám" }), { target: { value: "+36301234567" } });
+    acceptPrivacy();
     fireEvent.click(screen.getByRole("button", { name: "Tovább a küldéshez" }));
     fireEvent.click(screen.getByRole("button", { name: "Kész" }));
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();

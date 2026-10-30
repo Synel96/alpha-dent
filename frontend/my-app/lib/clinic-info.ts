@@ -54,4 +54,4 @@ export const COMPANY = {
 };
 
 // Date the current privacy notice takes effect (YYYY-MM-DD).
-export const PRIVACY_POLICY_EFFECTIVE_DATE = "2026-10-06";
+export const PRIVACY_POLICY_EFFECTIVE_DATE = "2026-10-30";
