@@ -50,9 +50,15 @@ export function BookingDialogProvider({ children }: { children: React.ReactNode 
               visitor comes back from the mail app, the viewport resizes and
               a centred panel jumps and repaints. No backdrop-filter either -
               phones re-rasterize a blurred backdrop slowly after returning
-              from another app, which showed the panel's lower half late. */}
-          <DialogPrimitive.Overlay className="lightbox-animate fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-black/85 px-4 py-6 [animation:lightbox-fade_200ms_ease-out] sm:items-center">
-            <DialogPrimitive.Content className="relative w-full max-w-lg rounded-2xl border border-brand-gold/40 bg-brand-surface p-5 text-white shadow-[0_24px_60px_-20px_rgba(0,0,0,0.9)] outline-none sm:p-6">
+              from another app, which showed the panel's lower half late.
+              Centred with my-auto, not items-center: when the panel is taller
+              than the window (e.g. a laptop), items-center pushes its top
+              above the overlay where it can't be scrolled to - the panel
+              jumped while scrolling and its title and close button were
+              out of reach. overscroll-contain keeps the scroll from
+              bouncing through to the page behind. */}
+          <DialogPrimitive.Overlay className="lightbox-animate fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto overscroll-contain bg-black/85 px-4 py-6 [animation:lightbox-fade_200ms_ease-out]">
+            <DialogPrimitive.Content className="relative my-auto w-full max-w-lg rounded-2xl border border-brand-gold/40 bg-brand-surface p-5 text-white shadow-[0_24px_60px_-20px_rgba(0,0,0,0.9)] outline-none sm:p-6">
               <BookingForm key={session} service={service} />
             </DialogPrimitive.Content>
           </DialogPrimitive.Overlay>
