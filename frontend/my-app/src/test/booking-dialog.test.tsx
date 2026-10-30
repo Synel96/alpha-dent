@@ -162,6 +162,18 @@ describe("Időpontkérő modal", () => {
     expect(dialog.className).not.toMatch(/\bfixed\b|translate/);
   });
 
+  it("magas modal alacsony ablakban is a tetejétől görgethető (my-auto, nem items-center), és nem görgeti tovább az oldalt", () => {
+    renderWithProvider();
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    const dialog = screen.getByRole("dialog");
+    const overlay = dialog.parentElement!;
+    // items-center would push a too-tall panel's top out of reach.
+    expect(overlay.className).not.toMatch(/items-center/);
+    expect(overlay.className).toContain("items-start");
+    expect(dialog.className).toContain("my-auto");
+    expect(overlay.className).toContain("overscroll-contain");
+  });
+
   it("az adatkezelési tájékoztató elfogadása kötelező: nélküle nem nyílik meg a levelező", () => {
     renderWithProvider();
     fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
