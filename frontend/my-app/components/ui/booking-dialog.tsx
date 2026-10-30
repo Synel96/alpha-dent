@@ -2,14 +2,15 @@ import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { CalendarCheck, Send, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { bookingMailto, openMailto } from "@/lib/booking";
+import { bookingMailto, openMailto, signedBookingMessage } from "@/lib/booking";
 import { CLINIC } from "@/lib/clinic-info";
 import type { ServiceSlug } from "@/lib/service-cards";
 import { cn } from "@/lib/utils";
 
 // The appointment request modal behind every "Időpontot kérek" button: the
-// visitor edits the subject and the pre-written message here, and "Tovább a
-// küldéshez" opens their mail app with both filled in (still no backend -
+// visitor gives their name and phone number, edits the subject and the
+// pre-written message, and "Tovább a küldéshez" opens their mail app with
+// the e-mail ready, signed with the name and number (still no backend -
 // see lib/booking.ts). The buttons keep their mailto: href, so without
 // JavaScript (or with a modified click) they open the mail app directly.
 
@@ -47,18 +48,24 @@ export function BookingDialogProvider({ children }: { children: React.ReactNode 
 const FIELD_CLASS =
   "w-full rounded-lg border border-brand-border bg-brand-black/60 px-3 py-2 text-sm text-white placeholder:text-brand-muted focus:border-brand-gold/70 focus:outline-none focus:ring-2 focus:ring-brand-gold-light/40";
 
+const LABEL_CLASS = "text-xs uppercase tracking-[0.18em] text-brand-gold-muted";
+
 function BookingForm({ service }: { service?: ServiceSlug }) {
   const { t } = useTranslation();
+  const [name, setName] = React.useState("");
+  const [phone, setPhone] = React.useState("");
   const [subject, setSubject] = React.useState(() => t("booking.subject"));
   const [message, setMessage] = React.useState(() =>
-    t("booking.body", { service: service ? t(`services.${service}.nav`) : "" })
+    t("booking.message", { service: service ? t(`services.${service}.nav`) : "" })
   );
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // The modal stays open: if no mail app opens, the text isn't lost and
     // the phone number and address below are still in view.
-    openMailto(bookingMailto(subject, message));
+    openMailto(
+      bookingMailto(subject, signedBookingMessage(message, name, phone, t("booking.dialog.phone")))
+    );
   };
 
   return (
@@ -90,10 +97,33 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
         </button>
       </DialogPrimitive.Close>
 
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className="block space-y-1.5">
+          <span className={LABEL_CLASS}>{t("booking.dialog.name")}</span>
+          <input
+            type="text"
+            required
+            autoComplete="name"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            className={FIELD_CLASS}
+          />
+        </label>
+        <label className="block space-y-1.5">
+          <span className={LABEL_CLASS}>{t("booking.dialog.phone")}</span>
+          <input
+            type="tel"
+            required
+            autoComplete="tel"
+            value={phone}
+            onChange={(event) => setPhone(event.target.value)}
+            className={FIELD_CLASS}
+          />
+        </label>
+      </div>
+
       <label className="block space-y-1.5">
-        <span className="text-xs uppercase tracking-[0.18em] text-brand-gold-muted">
-          {t("booking.dialog.subject")}
-        </span>
+        <span className={LABEL_CLASS}>{t("booking.dialog.subject")}</span>
         <input
           type="text"
           required
@@ -104,12 +134,10 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
       </label>
 
       <label className="block space-y-1.5">
-        <span className="text-xs uppercase tracking-[0.18em] text-brand-gold-muted">
-          {t("booking.dialog.message")}
-        </span>
+        <span className={LABEL_CLASS}>{t("booking.dialog.message")}</span>
         <textarea
           required
-          rows={10}
+          rows={8}
           value={message}
           onChange={(event) => setMessage(event.target.value)}
           className={cn(FIELD_CLASS, "resize-y leading-relaxed")}

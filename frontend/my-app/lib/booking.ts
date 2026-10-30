@@ -10,6 +10,12 @@ export function bookingMailto(subject: string, body: string): string {
   return `mailto:${CLINIC.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(crlfBody)}`;
 }
 
+// The modal's message, signed with the name and phone number the visitor
+// gave in their own fields.
+export function signedBookingMessage(message: string, name: string, phone: string, phoneLabel: string): string {
+  return `${message.trimEnd()}\n\n${name.trim()}\n${phoneLabel}: ${phone.trim()}`;
+}
+
 // Kept apart so tests can stub it: jsdom can't follow a mailto: navigation.
 export function openMailto(href: string) {
   window.location.href = href;
