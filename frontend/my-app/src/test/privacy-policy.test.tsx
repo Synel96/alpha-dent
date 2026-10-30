@@ -82,4 +82,15 @@ describe("Adatkezelési tájékoztató", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Datenschutzerklärung");
     expect(screen.getByText(/ungarische Fassung maßgeblich/)).toBeInTheDocument();
   });
+
+  it("minden nyelven leírja az időpontkérő űrlapot: nem küld és nem tárol adatot, a 3.3. pont szerint kezeljük", () => {
+    const formWords = { hu: "időpontkérő űrlap", en: "appointment request form", de: "Terminanfrageformular", it: "modulo di richiesta appuntamento" };
+    for (const locale of LOCALES) {
+      const policy = privacyPolicy(locale);
+      const section = policy.sections.find((item) => item.id === "adatkezelesek")!;
+      const text = JSON.stringify(section);
+      expect(text, locale).toContain(formWords[locale]);
+      expect(text, locale).toMatch(/3\.3\. [^"]*(űrlap|form|formular|modulo)/i);
+    }
+  });
 });

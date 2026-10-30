@@ -4,9 +4,12 @@ import { SITE_URL } from "./seo";
 
 // Privacy notice (GDPR Art. 13) for the website and for contacting the
 // clinic through it. Written from what the site actually does - no cookies,
-// no analytics, no forms or embeds; hosting on Vercel, images from
-// Cloudinary, contact by e-mail/phone - so it has to be revisited whenever
-// one of those changes (e.g. adding analytics or a contact form).
+// no analytics, no embeds; hosting on Vercel, images from Cloudinary,
+// contact by e-mail/phone, and an appointment request form that only drafts
+// an e-mail in the visitor's own mail app (components/ui/booking-dialog.tsx:
+// the site itself sends and stores nothing) - so it has to be revisited
+// whenever one of those changes (e.g. adding analytics, or a form that
+// sends its data to a server).
 //
 // The Hungarian text is authoritative; the others are translations with
 // the same structure and the same legal references.
@@ -164,7 +167,7 @@ function hu(): PrivacyPolicy {
                 ),
               },
               {
-                title: "3.3. Kapcsolatfelvétel e-mailben vagy telefonon",
+                title: "3.3. Kapcsolatfelvétel e-mailben, telefonon vagy az időpontkérő űrlappal",
                 rows: row(
                   "Kérdései megválaszolása, időpont egyeztetése.",
                   "Név, e-mail cím, telefonszám, az üzenet tartalma és az egyeztetett időpont.",
@@ -186,6 +189,10 @@ function hu(): PrivacyPolicy {
           {
             kind: "p",
             text: "Kérjük, egészségügyi dokumentumot csak a kezelési terv elkészítéséhez szükséges mértékben küldjön, és ne küldje el más személy adatait. Felhívjuk figyelmét, hogy a hagyományos e-mail nem végponttól végpontig titkosított csatorna; ha ezt kockázatosnak tartja, a dokumentumokat személyesen is elhozhatja a rendelőbe.",
+          },
+          {
+            kind: "p",
+            text: "Az időpontkérő űrlap (az „Időpontot kérek” gombok) nem küld és nem tárol adatot: a beírt nevet, telefonszámot, tárgyat és üzenetet csak az Ön böngészője használja fel arra, hogy az Ön saját levelezőprogramjában előkészítse az időpontkérő levelet. Az adatok csak akkor jutnak el hozzánk, ha a levelet Ön a levelezőprogramjából elküldi; ettől kezdve a 3.3. pont szabályai szerint kezeljük őket. Kérjük, az üzenetben ne írjon részletes egészségügyi adatokat – ezeket a rendelésen beszéljük meg.",
           },
           {
             kind: "p",
@@ -392,7 +399,7 @@ function en(): PrivacyPolicy {
                 ),
               },
               {
-                title: "3.3. Contacting us by e-mail or phone",
+                title: "3.3. Contacting us by e-mail, phone or the appointment request form",
                 rows: row(
                   "Answering your questions and arranging appointments.",
                   "Name, e-mail address, phone number, the content of your message and the agreed appointment.",
@@ -414,6 +421,10 @@ function en(): PrivacyPolicy {
           {
             kind: "p",
             text: "Please send medical documents only to the extent needed for the treatment plan, and do not send other people's data. Please note that ordinary e-mail is not end-to-end encrypted; if you consider this a risk, you can bring the documents to the clinic in person.",
+          },
+          {
+            kind: "p",
+            text: "The appointment request form (the “Book an appointment” buttons) neither sends nor stores any data: the name, phone number, subject and message you enter are only used by your own browser to draft the appointment request e-mail in your own e-mail app. The data reach us only when you send that e-mail from your e-mail app; from then on we process them as described in 3.3. Please do not include detailed health information in the message – we will discuss it at your appointment.",
           },
           {
             kind: "p",
@@ -620,7 +631,7 @@ function de(): PrivacyPolicy {
                 ),
               },
               {
-                title: "3.3. Kontaktaufnahme per E-Mail oder Telefon",
+                title: "3.3. Kontaktaufnahme per E-Mail, Telefon oder Terminanfrageformular",
                 rows: row(
                   "Beantwortung Ihrer Fragen und Terminvereinbarung.",
                   "Name, E-Mail-Adresse, Telefonnummer, Inhalt Ihrer Nachricht und der vereinbarte Termin.",
@@ -642,6 +653,10 @@ function de(): PrivacyPolicy {
           {
             kind: "p",
             text: "Bitte senden Sie medizinische Unterlagen nur in dem für den Behandlungsplan erforderlichen Umfang und keine Daten anderer Personen. Bitte beachten Sie, dass herkömmliche E-Mails nicht Ende-zu-Ende-verschlüsselt sind; wenn Ihnen das zu riskant ist, können Sie die Unterlagen auch persönlich in die Praxis bringen.",
+          },
+          {
+            kind: "p",
+            text: "Das Terminanfrageformular (die Schaltflächen „Termin anfragen“) sendet und speichert keine Daten: Name, Telefonnummer, Betreff und Nachricht, die Sie eingeben, verwendet nur Ihr eigener Browser, um die Terminanfrage in Ihrem eigenen E-Mail-Programm vorzubereiten. Die Daten erreichen uns erst, wenn Sie diese E-Mail aus Ihrem E-Mail-Programm absenden; ab dann verarbeiten wir sie gemäß Punkt 3.3. Bitte schreiben Sie keine ausführlichen Gesundheitsangaben in die Nachricht – diese besprechen wir beim Termin.",
           },
           {
             kind: "p",
@@ -848,7 +863,7 @@ function it(): PrivacyPolicy {
                 ),
               },
               {
-                title: "3.3. Contatto via e-mail o telefono",
+                title: "3.3. Contatto via e-mail, telefono o modulo di richiesta appuntamento",
                 rows: row(
                   "Rispondere alle Sue domande e fissare appuntamenti.",
                   "Nome, indirizzo e-mail, numero di telefono, contenuto del messaggio e appuntamento concordato.",
@@ -870,6 +885,10 @@ function it(): PrivacyPolicy {
           {
             kind: "p",
             text: "La preghiamo di inviare documenti sanitari solo nella misura necessaria al piano di cura e di non inviare dati di altre persone. Tenga presente che la normale e-mail non è cifrata end-to-end; se lo ritiene un rischio, può portare i documenti di persona allo studio.",
+          },
+          {
+            kind: "p",
+            text: "Il modulo di richiesta appuntamento (i pulsanti «Richiedi un appuntamento») non invia né conserva alcun dato: nome, numero di telefono, oggetto e messaggio inseriti sono usati solo dal Suo browser per preparare l'e-mail di richiesta nel Suo programma di posta. I dati ci raggiungono solo quando Lei invia tale e-mail dal Suo programma di posta; da quel momento li trattiamo secondo il punto 3.3. La preghiamo di non indicare nel messaggio dati sanitari dettagliati: ne parleremo durante l'appuntamento.",
           },
           {
             kind: "p",

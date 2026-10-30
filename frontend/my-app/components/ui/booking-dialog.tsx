@@ -4,6 +4,7 @@ import { CalendarCheck, Eraser, MailCheck, RotateCcw, Send, X } from "lucide-rea
 import { useTranslation } from "react-i18next";
 import { bookingMailto, openMailto, signedBookingMessage } from "@/lib/booking";
 import { CLINIC } from "@/lib/clinic-info";
+import { localizeHref, type Locale } from "@/lib/locale";
 import type { ServiceSlug } from "@/lib/service-cards";
 import { cn } from "@/lib/utils";
 
@@ -69,12 +70,15 @@ const SECONDARY_BUTTON_CLASS =
   "inline-flex items-center justify-center rounded-xl border border-brand-border px-5 py-2.5 text-sm text-brand-gold-muted transition-colors hover:border-brand-gold/50 hover:text-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70";
 
 function BookingForm({ service }: { service?: ServiceSlug }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [name, setName] = React.useState("");
   const [phone, setPhone] = React.useState("");
   // Whether the name and number go at the end of the message (as its
   // signature); only then are the two fields required.
   const [includeContact, setIncludeContact] = React.useState(true);
+  // Required: the e-mail can only be drafted once the privacy notice is
+  // accepted (see section 3.3 of lib/privacy-policy.ts on this form).
+  const [privacyAccepted, setPrivacyAccepted] = React.useState(false);
   const [subject, setSubject] = React.useState(() => t("booking.subject"));
   const template = t("booking.message", { service: service ? t(`services.${service}.nav`) : "" });
   const [message, setMessage] = React.useState(template);
@@ -207,6 +211,29 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
           {t("booking.dialog.restoreMessage")}
         </button>
       )}
+
+      <label className="flex cursor-pointer items-start gap-2.5 text-sm text-white/85">
+        <input
+          type="checkbox"
+          required
+          checked={privacyAccepted}
+          onChange={(event) => setPrivacyAccepted(event.target.checked)}
+          className="mt-0.5 size-4 shrink-0 cursor-pointer accent-brand-gold"
+        />
+        <span>
+          {t("booking.dialog.privacyBefore")}
+          {/* A new tab, so what's typed in here isn't lost. */}
+          <a
+            href={localizeHref(i18n.language as Locale, "/adatkezelesi-tajekoztato")}
+            target="_blank"
+            rel="noopener"
+            className="text-brand-gold-light underline underline-offset-4 hover:text-brand-gold"
+          >
+            {t("booking.dialog.privacyLink")}
+          </a>
+          {t("booking.dialog.privacyAfter")}
+        </span>
+      </label>
 
       <p className="text-xs leading-relaxed text-white/70">{t("booking.dialog.hint")}</p>
 
