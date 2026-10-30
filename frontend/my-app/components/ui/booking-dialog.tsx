@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { CalendarCheck, MailCheck, Send, X } from "lucide-react";
+import { CalendarCheck, Eraser, MailCheck, RotateCcw, Send, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { bookingMailto, openMailto, signedBookingMessage } from "@/lib/booking";
 import { CLINIC } from "@/lib/clinic-info";
@@ -62,6 +62,9 @@ const LABEL_CLASS = "text-xs uppercase tracking-[0.18em] text-brand-gold-muted";
 const PRIMARY_BUTTON_CLASS =
   "inline-flex items-center justify-center gap-2 rounded-xl border border-brand-gold/60 bg-brand-gold/15 px-5 py-3 text-sm font-semibold text-brand-gold-light transition-colors hover:border-brand-gold hover:bg-brand-gold/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70";
 
+const TEXT_BUTTON_CLASS =
+  "-mt-2 inline-flex items-center gap-1.5 rounded-md px-1 py-1 text-sm text-brand-gold-muted transition-colors hover:text-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70";
+
 const SECONDARY_BUTTON_CLASS =
   "inline-flex items-center justify-center rounded-xl border border-brand-border px-5 py-2.5 text-sm text-brand-gold-muted transition-colors hover:border-brand-gold/50 hover:text-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70";
 
@@ -73,9 +76,9 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
   // signature); only then are the two fields required.
   const [includeContact, setIncludeContact] = React.useState(true);
   const [subject, setSubject] = React.useState(() => t("booking.subject"));
-  const [message, setMessage] = React.useState(() =>
-    t("booking.message", { service: service ? t(`services.${service}.nav`) : "" })
-  );
+  const template = t("booking.message", { service: service ? t(`services.${service}.nav`) : "" });
+  const [message, setMessage] = React.useState(template);
+  const messageRef = React.useRef<HTMLTextAreaElement>(null);
 
   // After "Tovább a küldéshez" the form gives way to a short confirmation
   // (the fields keep their values, for "Vissza a szerkesztéshez"): that's
@@ -175,6 +178,7 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
       <label className="block space-y-1.5">
         <span className={LABEL_CLASS}>{t("booking.dialog.message")}</span>
         <textarea
+          ref={messageRef}
           required
           rows={8}
           value={message}
@@ -182,6 +186,27 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
           className={cn(FIELD_CLASS, "resize-y leading-relaxed")}
         />
       </label>
+
+      {/* Clear the template to write an e-mail of one's own - or, once
+          cleared, bring it back. */}
+      {message.trim() ? (
+        <button
+          type="button"
+          onClick={() => {
+            setMessage("");
+            messageRef.current?.focus();
+          }}
+          className={TEXT_BUTTON_CLASS}
+        >
+          <Eraser aria-hidden className="size-4" />
+          {t(message === template ? "booking.dialog.clearMessage" : "booking.dialog.clearOwnMessage")}
+        </button>
+      ) : (
+        <button type="button" onClick={() => setMessage(template)} className={TEXT_BUTTON_CLASS}>
+          <RotateCcw aria-hidden className="size-4" />
+          {t("booking.dialog.restoreMessage")}
+        </button>
+      )}
 
       <p className="text-xs leading-relaxed text-white/70">{t("booking.dialog.hint")}</p>
 

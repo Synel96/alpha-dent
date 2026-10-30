@@ -100,6 +100,27 @@ describe("Időpontkérő modal", () => {
     expect(mailtoParams(openMailto.mock.calls[0][0] as string).get("body")).toBe("Csak az üzenet.");
   });
 
+  it("az „Alap üzenet törlése” kiüríti az üzenetet egyedi levélhez, és vissza is állítható", () => {
+    renderWithProvider("implantologia");
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    const dialog = screen.getByRole("dialog");
+    const message = within(dialog).getByRole("textbox", { name: "Üzenet" }) as HTMLTextAreaElement;
+    const template = message.value;
+
+    fireEvent.click(within(dialog).getByRole("button", { name: "Alap üzenet törlése" }));
+    expect(message).toHaveValue("");
+    expect(message).toHaveFocus();
+
+    fireEvent.change(message, { target: { value: "Saját levél" } });
+    expect(within(dialog).getByRole("button", { name: "Üzenet törlése" })).toBeInTheDocument();
+    fireEvent.click(within(dialog).getByRole("button", { name: "Üzenet törlése" }));
+    expect(message).toHaveValue("");
+
+    fireEvent.click(within(dialog).getByRole("button", { name: "Alap üzenet visszaállítása" }));
+    expect(message).toHaveValue(template);
+    expect(template).toContain("Kezelés: Implantológia");
+  });
+
   it("a „Kész” gomb bezárja a modalt", () => {
     renderWithProvider();
     fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
