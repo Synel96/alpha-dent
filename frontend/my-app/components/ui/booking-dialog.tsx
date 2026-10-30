@@ -10,7 +10,8 @@ import { cn } from "@/lib/utils";
 // The appointment request modal behind every "Időpontot kérek" button: the
 // visitor gives their name and phone number, edits the subject and the
 // pre-written message, and "Tovább a küldéshez" opens their mail app with
-// the e-mail ready, signed with the name and number (still no backend -
+// the e-mail ready, signed with the name and number unless they untick
+// that (still no backend -
 // see lib/booking.ts). The buttons keep their mailto: href, so without
 // JavaScript (or with a modified click) they open the mail app directly.
 
@@ -68,6 +69,9 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
   const { t } = useTranslation();
   const [name, setName] = React.useState("");
   const [phone, setPhone] = React.useState("");
+  // Whether the name and number go at the end of the message (as its
+  // signature); only then are the two fields required.
+  const [includeContact, setIncludeContact] = React.useState(true);
   const [subject, setSubject] = React.useState(() => t("booking.subject"));
   const [message, setMessage] = React.useState(() =>
     t("booking.message", { service: service ? t(`services.${service}.nav`) : "" })
@@ -80,7 +84,7 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
   const [sent, setSent] = React.useState(false);
   const mailtoHref = bookingMailto(
     subject,
-    signedBookingMessage(message, name, phone, t("booking.dialog.phone"))
+    includeContact ? signedBookingMessage(message, name, phone, t("booking.dialog.phone")) : message
   );
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -127,7 +131,7 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
           <span className={LABEL_CLASS}>{t("booking.dialog.name")}</span>
           <input
             type="text"
-            required
+            required={includeContact}
             autoComplete="name"
             value={name}
             onChange={(event) => setName(event.target.value)}
@@ -138,7 +142,7 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
           <span className={LABEL_CLASS}>{t("booking.dialog.phone")}</span>
           <input
             type="tel"
-            required
+            required={includeContact}
             autoComplete="tel"
             value={phone}
             onChange={(event) => setPhone(event.target.value)}
@@ -146,6 +150,16 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
           />
         </label>
       </div>
+
+      <label className="-mt-1 flex cursor-pointer items-start gap-2.5 text-sm text-white/85">
+        <input
+          type="checkbox"
+          checked={includeContact}
+          onChange={(event) => setIncludeContact(event.target.checked)}
+          className="mt-0.5 size-4 shrink-0 cursor-pointer accent-brand-gold"
+        />
+        {t("booking.dialog.includeContact")}
+      </label>
 
       <label className="block space-y-1.5">
         <span className={LABEL_CLASS}>{t("booking.dialog.subject")}</span>

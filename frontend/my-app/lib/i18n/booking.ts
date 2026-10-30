@@ -3,7 +3,8 @@
 // treatment on a service page, empty elsewhere. `body` is the whole e-mail
 // the buttons' plain mailto: link opens (no JavaScript); `message` is the
 // modal's template, without the name and phone lines - the modal asks for
-// those in their own fields and signs the e-mail with them.
+// those in their own fields and (if the visitor leaves it ticked) signs the
+// e-mail with them.
 export const bookingResources = {
   hu: {
     booking: {
@@ -13,6 +14,7 @@ export const bookingResources = {
       dialog: {
         name: "Név",
         phone: "Telefonszám",
+        includeContact: "Név és telefonszám beillesztése az üzenet végére",
         title: "Időpontkérés",
         intro: "Írja meg nekünk, mikor és milyen kezelésre jönne. A levelet kollégáink munkanapokon hamar megválaszolják.",
         subject: "Tárgy",
@@ -36,6 +38,7 @@ export const bookingResources = {
       dialog: {
         name: "Name",
         phone: "Phone number",
+        includeContact: "Add my name and phone number to the end of the message",
         title: "Appointment request",
         intro: "Tell us when you would like to come and for which treatment. Our team replies to e-mails quickly on working days.",
         subject: "Subject",
@@ -59,6 +62,7 @@ export const bookingResources = {
       dialog: {
         name: "Name",
         phone: "Telefonnummer",
+        includeContact: "Name und Telefonnummer ans Ende der Nachricht setzen",
         title: "Terminanfrage",
         intro: "Schreiben Sie uns, wann und für welche Behandlung Sie kommen möchten. Unser Team beantwortet E-Mails an Werktagen schnell.",
         subject: "Betreff",
@@ -82,6 +86,7 @@ export const bookingResources = {
       dialog: {
         name: "Nome",
         phone: "Numero di telefono",
+        includeContact: "Aggiungi nome e numero di telefono alla fine del messaggio",
         title: "Richiesta di appuntamento",
         intro: "Ci scriva quando e per quale trattamento desidera venire. Il nostro team risponde rapidamente alle e-mail nei giorni lavorativi.",
         subject: "Oggetto",

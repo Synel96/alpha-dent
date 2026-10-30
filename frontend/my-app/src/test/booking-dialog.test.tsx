@@ -84,6 +84,22 @@ describe("Időpontkérő modal", () => {
     expect(screen.getByRole("textbox", { name: "Tárgy" })).toHaveValue("Fogfájás");
   });
 
+  it("ha kiveszi a pipát, a név és a telefonszám nem kerül a levélbe, és nem kötelező", () => {
+    renderWithProvider();
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    const dialog = screen.getByRole("dialog");
+    const checkbox = within(dialog).getByRole("checkbox", { name: "Név és telefonszám beillesztése az üzenet végére" });
+    expect(checkbox).toBeChecked();
+    fireEvent.click(checkbox);
+    expect(within(dialog).getByRole("textbox", { name: "Név" })).not.toBeRequired();
+    expect(within(dialog).getByRole("textbox", { name: "Telefonszám" })).not.toBeRequired();
+    fireEvent.change(within(dialog).getByRole("textbox", { name: "Név" }), { target: { value: "Kiss Anna" } });
+    fireEvent.change(within(dialog).getByRole("textbox", { name: "Üzenet" }), { target: { value: "Csak az üzenet." } });
+    fireEvent.click(within(dialog).getByRole("button", { name: "Tovább a küldéshez" }));
+
+    expect(mailtoParams(openMailto.mock.calls[0][0] as string).get("body")).toBe("Csak az üzenet.");
+  });
+
   it("a „Kész” gomb bezárja a modalt", () => {
     renderWithProvider();
     fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
