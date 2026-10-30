@@ -5,7 +5,7 @@ import { PageContainer } from "../../../components/ui/page-container";
 import { RevealGroup } from "../../../components/ui/reveal-section";
 import { ServiceImage } from "../../../components/ui/service-image";
 import { localizeHref } from "../../../lib/locale";
-import { useBookingMailto } from "../../../lib/use-booking-mailto";
+import { useBookingCta } from "../../../components/ui/booking-dialog";
 
 export { Page };
 
@@ -16,7 +16,7 @@ type Item = { title: string; text: string };
 
 function Page() {
   const { t } = useTranslation();
-  const bookingHref = useBookingMailto("implantologia");
+  const bookingCta = useBookingCta("implantologia");
   const { locale } = usePageContext();
 
   const cases = t("services.implantologia.cases", { returnObjects: true }) as Item[];
@@ -94,7 +94,8 @@ function Page() {
         </section>
 
         <CtaButton
-          href={bookingHref}
+          href={bookingCta.href}
+          onClick={bookingCta.onClick}
           badge={t("nav.contact")}
           title={t("home.intro.ctaButton")}
         />
