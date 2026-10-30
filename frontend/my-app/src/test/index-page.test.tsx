@@ -78,4 +78,11 @@ describe("Főoldal", () => {
       expect(link).toHaveAttribute("href", expect.stringMatching(/^mailto:info@alpha-dent\.eu\?subject=/));
     }
   });
+
+  it("a bevezető alatt megjelennek a bizalmi számok (1996, csapat, CAMLOG Gold) ugyanabból a forrásból, mint a Klinikánk oldalon", () => {
+    render(<Page />);
+    // The i18n mock returns two items for any list key.
+    const items = screen.getAllByRole("listitem").filter((item) => item.closest("ul")?.className.includes("sm:grid-cols-3"));
+    expect(items).toHaveLength(2);
+  });
 });

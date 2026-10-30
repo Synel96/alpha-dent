@@ -8,6 +8,7 @@ import "../lib/i18n";
 import { localizeHref } from "../lib/locale";
 import { Footer } from "../components/ui/footer";
 import { LoadingScreen } from "../components/ui/loading-screen";
+import { MobileActionBar } from "../components/ui/mobile-action-bar";
 import { AlphadentLogo } from "../components/ui/alphadent-logo";
 import { PageBackground } from "../components/ui/page-background";
 import {
@@ -346,7 +347,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </header>
 
-        <PushDrawerBody open={open} className="flex flex-col">
+        {/* Outside <PushDrawerBody> like the header: its transform would
+            make a fixed bar scroll with the page. */}
+        <MobileActionBar hidden={open} />
+
+        {/* The bottom padding keeps the footer clear of the mobile action bar. */}
+        <PushDrawerBody open={open} className="flex flex-col pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pb-0">
           <main className="flex-1" style={{ paddingTop: "var(--nav-height, 72px)" }}>
             {children}
           </main>
