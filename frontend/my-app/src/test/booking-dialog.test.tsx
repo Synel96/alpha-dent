@@ -121,6 +121,35 @@ describe("Időpontkérő modal", () => {
     expect(template).toContain("Kezelés: Implantológia");
   });
 
+  it("küldéskor a levelező megnyitása előtt leveszi a fókuszt a mezőről (mobilon bezárul a billentyűzet)", () => {
+    renderWithProvider();
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    fireEvent.change(screen.getByRole("textbox", { name: "Név" }), { target: { value: "Kiss Anna" } });
+    const phone = screen.getByRole("textbox", { name: "Telefonszám" });
+    fireEvent.change(phone, { target: { value: "+36301234567" } });
+    phone.focus();
+    expect(phone).toHaveFocus();
+    // What has focus at the moment the mail app is opened - by then the
+    // field must have let go of it (the form itself only goes afterwards).
+    let focusedWhenOpened: Element | null = null;
+    openMailto.mockImplementationOnce(() => (focusedWhenOpened = document.activeElement));
+    // Submitting from the keyboard ("Enter" in the phone field).
+    fireEvent.submit(phone.closest("form")!);
+    expect(openMailto).toHaveBeenCalledTimes(1);
+    expect(focusedWhenOpened).not.toBe(phone);
+  });
+
+  it("a háttér nincs elmosva (backdrop-filter), és a panel a görgethető rétegben van, nem fixen középre igazítva", () => {
+    renderWithProvider();
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    const dialog = screen.getByRole("dialog");
+    const overlay = dialog.parentElement!;
+    expect(overlay.className).toContain("overflow-y-auto");
+    expect(overlay.className).toContain("fixed");
+    expect(overlay.className).not.toMatch(/backdrop-blur/);
+    expect(dialog.className).not.toMatch(/\bfixed\b|translate/);
+  });
+
   it("a „Kész” gomb bezárja a modalt", () => {
     renderWithProvider();
     fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
