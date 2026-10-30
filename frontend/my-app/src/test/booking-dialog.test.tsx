@@ -75,8 +75,23 @@ describe("Időpontkérő modal", () => {
     expect(mailtoParams(href).get("body")).toBe(
       "Holnap délelőtt jó lenne.\r\n\r\nKiss Anna\r\nTelefonszám: +36 30 123 4567"
     );
-    // Stays open, in case no mail app opened.
-    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    // A short confirmation follows, with the same e-mail one tap away in
+    // case no mail app opened; the fields keep their values.
+    const confirmation = screen.getByRole("dialog", { name: "Megnyílt a levelezője?" });
+    expect(within(confirmation).getByRole("link", { name: "Levelező megnyitása újra" })).toHaveAttribute("href", href);
+    fireEvent.click(within(confirmation).getByRole("button", { name: "Vissza a szerkesztéshez" }));
+    expect(screen.getByRole("textbox", { name: "Név" })).toHaveValue(" Kiss Anna ");
+    expect(screen.getByRole("textbox", { name: "Tárgy" })).toHaveValue("Fogfájás");
+  });
+
+  it("a „Kész” gomb bezárja a modalt", () => {
+    renderWithProvider();
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    fireEvent.change(screen.getByRole("textbox", { name: "Név" }), { target: { value: "Kiss Anna" } });
+    fireEvent.change(screen.getByRole("textbox", { name: "Telefonszám" }), { target: { value: "+36301234567" } });
+    fireEvent.click(screen.getByRole("button", { name: "Tovább a küldéshez" }));
+    fireEvent.click(screen.getByRole("button", { name: "Kész" }));
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
   it("újranyitáskor a sablonnal indul, nem az előző szöveggel", () => {
