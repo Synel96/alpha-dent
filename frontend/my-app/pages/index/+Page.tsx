@@ -29,6 +29,7 @@ import { ServiceTile } from "../../components/ui/service-tile";
 import { CLINIC_PHOTOS } from "../../lib/clinic-photos";
 import { CLINIC } from "../../lib/clinic-info";
 import { localizeHref } from "../../lib/locale";
+import { useBookingMailto } from "../../lib/use-booking-mailto";
 import { SERVICE_IMAGES, SERVICE_PATHS, SERVICE_SLUGS } from "../../lib/service-cards";
 import { useReveal } from "../../lib/use-reveal";
 import { cn } from "../../lib/utils";
@@ -67,7 +68,7 @@ function Page() {
   const whyUsParagraphs = t("home.whyUs.paragraphs", { returnObjects: true }) as string[];
   const missionParagraphs = t("home.mission.paragraphs", { returnObjects: true }) as string[];
 
-  const kapcsolatHref = localizeHref(locale, "/kapcsolat");
+  const bookingHref = useBookingMailto();
 
   return (
     <>
@@ -87,7 +88,7 @@ function Page() {
             <span className="block text-brand-gold-light/85 sm:inline">{t("home.hero.brandLine")}</span>
           </>
         }
-        ctaHref={kapcsolatHref}
+        ctaHref={bookingHref}
         ctaLabel={t("home.intro.ctaButton")}
         secondaryAction={
           // Phones only: one tap to call. From md up the status card beside
@@ -267,7 +268,7 @@ function Page() {
             </p>
             <div className="pt-2">
               <CtaButton
-                href={kapcsolatHref}
+                href={bookingHref}
                 badge={t("nav.contact")}
                 title={t("home.intro.ctaButton")}
               />

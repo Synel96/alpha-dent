@@ -1,6 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
+import { bookingResources } from "./i18n/booking";
 import { clinicResources } from "./i18n/clinic";
 import { commonResources } from "./i18n/common";
 import { contactResources } from "./i18n/contact";
@@ -22,6 +23,7 @@ const resources = {
       ...galleryResources.hu,
       ...servicesResources.hu,
       ...metaResources.hu,
+      ...bookingResources.hu,
     },
   },
   en: {
@@ -34,6 +36,7 @@ const resources = {
       ...galleryResources.en,
       ...servicesResources.en,
       ...metaResources.en,
+      ...bookingResources.en,
     },
   },
   de: {
@@ -46,6 +49,7 @@ const resources = {
       ...galleryResources.de,
       ...servicesResources.de,
       ...metaResources.de,
+      ...bookingResources.de,
     },
   },
   it: {
@@ -58,6 +62,7 @@ const resources = {
       ...galleryResources.it,
       ...servicesResources.it,
       ...metaResources.it,
+      ...bookingResources.it,
     },
   },
 } as const;
