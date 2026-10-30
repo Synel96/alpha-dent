@@ -1,8 +1,8 @@
 import React from "react";
-import { Award, Building2, Users } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { AutoGallery } from "../../components/ui/auto-gallery";
+import { ClinicHighlights } from "../../components/ui/clinic-highlights";
 import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
 import { RevealGroup } from "../../components/ui/reveal-section";
@@ -23,11 +23,6 @@ const MACHINE_PHOTOS: GridPhoto[] = [];
 // The dental-lab photos of the Galéria page, in the same order and with the
 // same alt texts.
 const LAB_PHOTOS = GALLERY_SECTIONS.find((section) => section.key === "lab")?.photos ?? [];
-
-type Highlight = { value: string; label: string };
-
-// Same order as clinicPage.highlights: since 1996, team, CAMLOG Gold.
-const HIGHLIGHT_ICONS = [Building2, Users, Award] as const;
 
 function Section({
   eyebrow,
@@ -62,7 +57,6 @@ function Page() {
   const { locale } = usePageContext();
   const list = (key: string) => t(key, { returnObjects: true }) as string[];
 
-  const highlights = t("clinicPage.highlights", { returnObjects: true }) as Highlight[];
   const clinicPhotos: GridPhoto[] = CLINIC_PHOTOS.map(({ key, src }) => ({
     src,
     alt: t(`clinicPage.rooms.photos.${key}`),
@@ -82,28 +76,7 @@ function Page() {
             <p className="text-sm leading-relaxed text-white md:text-base">{t("clinicPage.intro")}</p>
           </div>
 
-          <ul className="grid gap-4 sm:grid-cols-3">
-            {highlights.map((item, index) => {
-              const Icon = HIGHLIGHT_ICONS[index];
-              return (
-                <li
-                  key={item.value}
-                  className="rounded-2xl border border-brand-gold/25 bg-[radial-gradient(circle_at_10%_0%,rgba(228,196,106,0.14),transparent_55%),linear-gradient(140deg,rgba(17,17,20,0.96),rgba(8,8,10,0.96))] p-5"
-                >
-                  {Icon ? (
-                    <span
-                      aria-hidden
-                      className="mb-4 inline-flex size-10 items-center justify-center rounded-full border border-brand-gold/45 bg-brand-black/40 text-brand-gold-light"
-                    >
-                      <Icon className="size-5" />
-                    </span>
-                  ) : null}
-                  <p className="text-2xl font-semibold text-brand-gold-light md:text-3xl">{item.value}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-white/85">{item.label}</p>
-                </li>
-              );
-            })}
-          </ul>
+          <ClinicHighlights />
         </header>
 
         <Section

@@ -18,6 +18,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { AutoGallery } from "../../components/ui/auto-gallery";
+import { ClinicHighlights } from "../../components/ui/clinic-highlights";
 import { Hero } from "../../components/ui/hero";
 import { OpenStatusCard } from "../../components/ui/open-status";
 import { CtaButton, GHOST_BUTTON_CLASS } from "../../components/ui/cta-button";
@@ -157,6 +158,12 @@ function Page() {
               ))}
             </div>
           </div>
+
+          {/* Trust numbers - since 1996, the team, CAMLOG Gold - right where a
+              first-time visitor decides whether to read on. */}
+          <RevealSection className="mx-auto mt-12 max-w-5xl">
+            <ClinicHighlights />
+          </RevealSection>
         </PageContainer>
       </section>
 
