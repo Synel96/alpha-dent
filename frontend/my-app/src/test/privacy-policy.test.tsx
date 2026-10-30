@@ -91,6 +91,9 @@ describe("Adatkezelési tájékoztató", () => {
       const text = JSON.stringify(section);
       expect(text, locale).toContain(formWords[locale]);
       expect(text, locale).toMatch(/3\.3\. [^"]*(űrlap|form|formular|modulo)/i);
+      // The computer's Gmail / Outlook.com options send from the visitor's own account.
+      expect(text, locale).toContain("Gmail");
+      expect(text, locale).toContain("Outlook.com");
     }
   });
 });

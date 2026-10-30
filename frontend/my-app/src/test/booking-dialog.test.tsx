@@ -1,10 +1,13 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
 const openMailto = vi.fn();
+// Phone by default (jsdom has no fine pointer); the computer tests flip it.
+let desktop = false;
 vi.mock("../../lib/booking", async (importOriginal) => ({
   ...(await importOriginal<typeof import("../../lib/booking")>()),
   openMailto: (href: string) => openMailto(href),
+  isDesktopPointer: () => desktop,
 }));
 
 import "../../lib/i18n";
@@ -33,7 +36,10 @@ const acceptPrivacy = () => fireEvent.click(screen.getByRole("checkbox", PRIVACY
 const mailtoParams = (href: string) => new URLSearchParams(href.slice(href.indexOf("?") + 1));
 
 describe("Időpontkérő modal", () => {
-  beforeEach(() => openMailto.mockClear());
+  beforeEach(() => {
+    openMailto.mockClear();
+    desktop = false;
+  });
 
   it("a gomb a modalt nyitja, előre kitöltött tárggyal és üzenettel (a szolgáltatással)", () => {
     renderWithProvider("implantologia");
@@ -219,6 +225,96 @@ describe("Időpontkérő modal", () => {
       const dialog = bookingResources[locale].booking.dialog;
       expect(Object.keys(dialog).sort(), locale).toEqual(keys);
       for (const value of Object.values(dialog)) expect(value, locale).not.toBe("");
+    }
+  });
+});
+
+describe("Időpontkérő modal számítógépen", () => {
+  beforeEach(() => {
+    openMailto.mockClear();
+    desktop = true;
+  });
+
+  const fillAndSubmit = () => {
+    renderWithProvider("implantologia");
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    fireEvent.change(screen.getByRole("textbox", { name: "Név" }), { target: { value: "Kiss Anna" } });
+    fireEvent.change(screen.getByRole("textbox", { name: "Telefonszám" }), { target: { value: "+36 30 123 4567" } });
+    fireEvent.change(screen.getByRole("textbox", { name: "Üzenet" }), { target: { value: "Jövő héten jó lenne." } });
+    acceptPrivacy();
+    fireEvent.click(screen.getByRole("button", { name: "Tovább a küldéshez" }));
+    return screen.getByRole("dialog", { name: "Hogyan küldi el a levelet?" });
+  };
+  const expectedBody = "Jövő héten jó lenne.\r\n\r\nKiss Anna\r\nTelefonszám: +36 30 123 4567";
+
+  it("nem nyitja meg vakon a levelezőt, hanem megkérdezi, hogyan küldje el", () => {
+    const dialog = fillAndSubmit();
+    expect(openMailto).not.toHaveBeenCalled();
+    const mailApp = within(dialog).getByRole("link", { name: "Levelezőprogram (Outlook, Apple Mail…)" });
+    expect(mailtoParams(mailApp.getAttribute("href")!).get("body")).toBe(expectedBody);
+    expect(within(dialog).getByText("info@alpha-dent.eu", { selector: "dd" })).toBeInTheDocument();
+    expect(within(dialog).getByText("Időpontkérés", { selector: "dd" })).toBeInTheDocument();
+  });
+
+  it("a Gmail és az Outlook.com gomb új lapon, kitöltött levéllel nyílik", () => {
+    const dialog = fillAndSubmit();
+    const gmail = within(dialog).getByRole("link", { name: "Gmail" });
+    expect(gmail).toHaveAttribute("target", "_blank");
+    const gmailUrl = new URL(gmail.getAttribute("href")!);
+    expect(gmailUrl.origin).toBe("https://mail.google.com");
+    expect(gmailUrl.searchParams.get("to")).toBe("info@alpha-dent.eu");
+    expect(gmailUrl.searchParams.get("su")).toBe("Időpontkérés");
+    expect(gmailUrl.searchParams.get("body")).toBe(expectedBody);
+
+    const outlook = within(dialog).getByRole("link", { name: "Outlook.com" });
+    expect(outlook).toHaveAttribute("target", "_blank");
+    const outlookUrl = new URL(outlook.getAttribute("href")!);
+    expect(outlookUrl.origin).toBe("https://outlook.live.com");
+    expect(outlookUrl.searchParams.get("to")).toBe("info@alpha-dent.eu");
+    expect(outlookUrl.searchParams.get("subject")).toBe("Időpontkérés");
+    expect(outlookUrl.searchParams.get("body")).toBe(expectedBody);
+  });
+
+  it("a másolás gomb a levél szövegét a vágólapra teszi, és jelzi", async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, "clipboard", { value: { writeText }, configurable: true });
+    const dialog = fillAndSubmit();
+    await act(async () => {
+      fireEvent.click(within(dialog).getByRole("button", { name: "Levél szövegének másolása" }));
+    });
+    expect(writeText).toHaveBeenCalledWith("Jövő héten jó lenne.\n\nKiss Anna\nTelefonszám: +36 30 123 4567");
+    expect(within(dialog).getByRole("button", { name: "Kimásolva" })).toBeInTheDocument();
+    expect(within(dialog).getByRole("status")).toHaveTextContent("Illessze be egy új levélbe");
+  });
+
+  it("ha a másolás nem sikerül, más lehetőséget ajánl", async () => {
+    Object.defineProperty(navigator, "clipboard", {
+      value: { writeText: vi.fn().mockRejectedValue(new Error("denied")) },
+      configurable: true,
+    });
+    const dialog = fillAndSubmit();
+    await act(async () => {
+      fireEvent.click(within(dialog).getByRole("button", { name: "Levél szövegének másolása" }));
+    });
+    expect(within(dialog).getByRole("status")).toHaveTextContent("A másolás nem sikerült");
+  });
+
+  it("vissza lehet menni szerkeszteni, és a „Kész” bezárja", () => {
+    fillAndSubmit();
+    fireEvent.click(screen.getByRole("button", { name: "Vissza a szerkesztéshez" }));
+    expect(screen.getByRole("textbox", { name: "Név" })).toHaveValue("Kiss Anna");
+    fireEvent.click(screen.getByRole("button", { name: "Tovább a küldéshez" }));
+    fireEvent.click(screen.getByRole("button", { name: "Kész" }));
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("minden nyelven megvannak a számítógépes nézet szövegei", async () => {
+    const { bookingResources } = await import("../../lib/i18n/booking");
+    for (const locale of ["hu", "en", "de", "it"] as const) {
+      const dialog = bookingResources[locale].booking.dialog as Record<string, string>;
+      for (const key of ["chooseTitle", "chooseText", "mailApp", "gmail", "outlook", "copy", "copied", "copiedHint", "copyFailed", "to"]) {
+        expect(dialog[key], `${locale}.${key}`).toBeTruthy();
+      }
     }
   });
 });

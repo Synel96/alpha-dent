@@ -192,7 +192,7 @@ function hu(): PrivacyPolicy {
           },
           {
             kind: "p",
-            text: "Az időpontkérő űrlap (az „Időpontot kérek” gombok) nem küld és nem tárol adatot: a beírt nevet, telefonszámot, tárgyat és üzenetet csak az Ön böngészője használja fel arra, hogy az Ön saját levelezőprogramjában előkészítse az időpontkérő levelet. Az adatok csak akkor jutnak el hozzánk, ha a levelet Ön a levelezőprogramjából elküldi; ettől kezdve a 3.3. pont szabályai szerint kezeljük őket. Kérjük, az üzenetben ne írjon részletes egészségügyi adatokat – ezeket a rendelésen beszéljük meg.",
+            text: "Az időpontkérő űrlap (az „Időpontot kérek” gombok) nem küld és nem tárol adatot: a beírt nevet, telefonszámot, tárgyat és üzenetet csak az Ön böngészője használja fel arra, hogy az Ön saját levelezőprogramjában előkészítse az időpontkérő levelet. Az adatok csak akkor jutnak el hozzánk, ha a levelet Ön a levelezőprogramjából elküldi; ettől kezdve a 3.3. pont szabályai szerint kezeljük őket. Számítógépen a levelet a Gmail vagy az Outlook.com webes felületén is megnyithatja, illetve kimásolhatja; ilyenkor a levél az Ön saját Google- vagy Microsoft-fiókjából megy el, és az adott szolgáltató adatkezelési tájékoztatója is irányadó. Kérjük, az üzenetben ne írjon részletes egészségügyi adatokat – ezeket a rendelésen beszéljük meg.",
           },
           {
             kind: "p",
@@ -424,7 +424,7 @@ function en(): PrivacyPolicy {
           },
           {
             kind: "p",
-            text: "The appointment request form (the “Book an appointment” buttons) neither sends nor stores any data: the name, phone number, subject and message you enter are only used by your own browser to draft the appointment request e-mail in your own e-mail app. The data reach us only when you send that e-mail from your e-mail app; from then on we process them as described in 3.3. Please do not include detailed health information in the message – we will discuss it at your appointment.",
+            text: "The appointment request form (the “Book an appointment” buttons) neither sends nor stores any data: the name, phone number, subject and message you enter are only used by your own browser to draft the appointment request e-mail in your own e-mail app. The data reach us only when you send that e-mail from your e-mail app; from then on we process them as described in 3.3. On a computer you can also open the e-mail in Gmail or Outlook.com on the web, or copy its text; it is then sent from your own Google or Microsoft account, and that provider's privacy policy also applies. Please do not include detailed health information in the message – we will discuss it at your appointment.",
           },
           {
             kind: "p",
@@ -656,7 +656,7 @@ function de(): PrivacyPolicy {
           },
           {
             kind: "p",
-            text: "Das Terminanfrageformular (die Schaltflächen „Termin anfragen“) sendet und speichert keine Daten: Name, Telefonnummer, Betreff und Nachricht, die Sie eingeben, verwendet nur Ihr eigener Browser, um die Terminanfrage in Ihrem eigenen E-Mail-Programm vorzubereiten. Die Daten erreichen uns erst, wenn Sie diese E-Mail aus Ihrem E-Mail-Programm absenden; ab dann verarbeiten wir sie gemäß Punkt 3.3. Bitte schreiben Sie keine ausführlichen Gesundheitsangaben in die Nachricht – diese besprechen wir beim Termin.",
+            text: "Das Terminanfrageformular (die Schaltflächen „Termin anfragen“) sendet und speichert keine Daten: Name, Telefonnummer, Betreff und Nachricht, die Sie eingeben, verwendet nur Ihr eigener Browser, um die Terminanfrage in Ihrem eigenen E-Mail-Programm vorzubereiten. Die Daten erreichen uns erst, wenn Sie diese E-Mail aus Ihrem E-Mail-Programm absenden; ab dann verarbeiten wir sie gemäß Punkt 3.3. Am Computer können Sie die E-Mail auch in Gmail oder Outlook.com im Browser öffnen oder ihren Text kopieren; sie wird dann von Ihrem eigenen Google- oder Microsoft-Konto gesendet, und es gilt auch die Datenschutzerklärung des jeweiligen Anbieters. Bitte schreiben Sie keine ausführlichen Gesundheitsangaben in die Nachricht – diese besprechen wir beim Termin.",
           },
           {
             kind: "p",
@@ -888,7 +888,7 @@ function it(): PrivacyPolicy {
           },
           {
             kind: "p",
-            text: "Il modulo di richiesta appuntamento (i pulsanti «Richiedi un appuntamento») non invia né conserva alcun dato: nome, numero di telefono, oggetto e messaggio inseriti sono usati solo dal Suo browser per preparare l'e-mail di richiesta nel Suo programma di posta. I dati ci raggiungono solo quando Lei invia tale e-mail dal Suo programma di posta; da quel momento li trattiamo secondo il punto 3.3. La preghiamo di non indicare nel messaggio dati sanitari dettagliati: ne parleremo durante l'appuntamento.",
+            text: "Il modulo di richiesta appuntamento (i pulsanti «Richiedi un appuntamento») non invia né conserva alcun dato: nome, numero di telefono, oggetto e messaggio inseriti sono usati solo dal Suo browser per preparare l'e-mail di richiesta nel Suo programma di posta. I dati ci raggiungono solo quando Lei invia tale e-mail dal Suo programma di posta; da quel momento li trattiamo secondo il punto 3.3. Dal computer può anche aprire l'e-mail in Gmail o Outlook.com sul web, oppure copiarne il testo; in tal caso viene inviata dal Suo account Google o Microsoft e si applica anche l'informativa del rispettivo fornitore. La preghiamo di non indicare nel messaggio dati sanitari dettagliati: ne parleremo durante l'appuntamento.",
           },
           {
             kind: "p",
