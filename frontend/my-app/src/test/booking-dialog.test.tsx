@@ -75,8 +75,89 @@ describe("Időpontkérő modal", () => {
     expect(mailtoParams(href).get("body")).toBe(
       "Holnap délelőtt jó lenne.\r\n\r\nKiss Anna\r\nTelefonszám: +36 30 123 4567"
     );
-    // Stays open, in case no mail app opened.
-    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    // A short confirmation follows, with the same e-mail one tap away in
+    // case no mail app opened; the fields keep their values.
+    const confirmation = screen.getByRole("dialog", { name: "Megnyílt a levelezője?" });
+    expect(within(confirmation).getByRole("link", { name: "Levelező megnyitása újra" })).toHaveAttribute("href", href);
+    fireEvent.click(within(confirmation).getByRole("button", { name: "Vissza a szerkesztéshez" }));
+    expect(screen.getByRole("textbox", { name: "Név" })).toHaveValue(" Kiss Anna ");
+    expect(screen.getByRole("textbox", { name: "Tárgy" })).toHaveValue("Fogfájás");
+  });
+
+  it("ha kiveszi a pipát, a név és a telefonszám nem kerül a levélbe, és nem kötelező", () => {
+    renderWithProvider();
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    const dialog = screen.getByRole("dialog");
+    const checkbox = within(dialog).getByRole("checkbox", { name: "Név és telefonszám beillesztése az üzenet végére" });
+    expect(checkbox).toBeChecked();
+    fireEvent.click(checkbox);
+    expect(within(dialog).getByRole("textbox", { name: "Név" })).not.toBeRequired();
+    expect(within(dialog).getByRole("textbox", { name: "Telefonszám" })).not.toBeRequired();
+    fireEvent.change(within(dialog).getByRole("textbox", { name: "Név" }), { target: { value: "Kiss Anna" } });
+    fireEvent.change(within(dialog).getByRole("textbox", { name: "Üzenet" }), { target: { value: "Csak az üzenet." } });
+    fireEvent.click(within(dialog).getByRole("button", { name: "Tovább a küldéshez" }));
+
+    expect(mailtoParams(openMailto.mock.calls[0][0] as string).get("body")).toBe("Csak az üzenet.");
+  });
+
+  it("az „Alap üzenet törlése” kiüríti az üzenetet egyedi levélhez, és vissza is állítható", () => {
+    renderWithProvider("implantologia");
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    const dialog = screen.getByRole("dialog");
+    const message = within(dialog).getByRole("textbox", { name: "Üzenet" }) as HTMLTextAreaElement;
+    const template = message.value;
+
+    fireEvent.click(within(dialog).getByRole("button", { name: "Alap üzenet törlése" }));
+    expect(message).toHaveValue("");
+    expect(message).toHaveFocus();
+
+    fireEvent.change(message, { target: { value: "Saját levél" } });
+    expect(within(dialog).getByRole("button", { name: "Üzenet törlése" })).toBeInTheDocument();
+    fireEvent.click(within(dialog).getByRole("button", { name: "Üzenet törlése" }));
+    expect(message).toHaveValue("");
+
+    fireEvent.click(within(dialog).getByRole("button", { name: "Alap üzenet visszaállítása" }));
+    expect(message).toHaveValue(template);
+    expect(template).toContain("Kezelés: Implantológia");
+  });
+
+  it("küldéskor a levelező megnyitása előtt leveszi a fókuszt a mezőről (mobilon bezárul a billentyűzet)", () => {
+    renderWithProvider();
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    fireEvent.change(screen.getByRole("textbox", { name: "Név" }), { target: { value: "Kiss Anna" } });
+    const phone = screen.getByRole("textbox", { name: "Telefonszám" });
+    fireEvent.change(phone, { target: { value: "+36301234567" } });
+    phone.focus();
+    expect(phone).toHaveFocus();
+    // What has focus at the moment the mail app is opened - by then the
+    // field must have let go of it (the form itself only goes afterwards).
+    let focusedWhenOpened: Element | null = null;
+    openMailto.mockImplementationOnce(() => (focusedWhenOpened = document.activeElement));
+    // Submitting from the keyboard ("Enter" in the phone field).
+    fireEvent.submit(phone.closest("form")!);
+    expect(openMailto).toHaveBeenCalledTimes(1);
+    expect(focusedWhenOpened).not.toBe(phone);
+  });
+
+  it("a háttér nincs elmosva (backdrop-filter), és a panel a görgethető rétegben van, nem fixen középre igazítva", () => {
+    renderWithProvider();
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    const dialog = screen.getByRole("dialog");
+    const overlay = dialog.parentElement!;
+    expect(overlay.className).toContain("overflow-y-auto");
+    expect(overlay.className).toContain("fixed");
+    expect(overlay.className).not.toMatch(/backdrop-blur/);
+    expect(dialog.className).not.toMatch(/\bfixed\b|translate/);
+  });
+
+  it("a „Kész” gomb bezárja a modalt", () => {
+    renderWithProvider();
+    fireEvent.click(screen.getByRole("link", { name: "Időpontot kérek" }));
+    fireEvent.change(screen.getByRole("textbox", { name: "Név" }), { target: { value: "Kiss Anna" } });
+    fireEvent.change(screen.getByRole("textbox", { name: "Telefonszám" }), { target: { value: "+36301234567" } });
+    fireEvent.click(screen.getByRole("button", { name: "Tovább a küldéshez" }));
+    fireEvent.click(screen.getByRole("button", { name: "Kész" }));
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
   it("újranyitáskor a sablonnal indul, nem az előző szöveggel", () => {
