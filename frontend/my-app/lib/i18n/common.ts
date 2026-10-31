@@ -12,6 +12,10 @@ export const commonResources = {
     common: {
       menuOpen: "Menü megnyitása",
       menuClose: "Menü bezárása",
+      actionBar: {
+        collapse: "A sáv elrejtése",
+        expand: "Hívás és időpontkérés megjelenítése",
+      },
       navigation: "Navigáció",
       language: "Nyelv",
       carousel: {
@@ -111,6 +115,10 @@ export const commonResources = {
     common: {
       menuOpen: "Open menu",
       menuClose: "Close menu",
+      actionBar: {
+        collapse: "Hide this bar",
+        expand: "Show call and appointment buttons",
+      },
       navigation: "Navigation",
       language: "Language",
       carousel: {
@@ -210,6 +218,10 @@ export const commonResources = {
     common: {
       menuOpen: "Menü öffnen",
       menuClose: "Menü schließen",
+      actionBar: {
+        collapse: "Leiste ausblenden",
+        expand: "Anruf- und Terminschaltflächen anzeigen",
+      },
       navigation: "Navigation",
       language: "Sprache",
       carousel: {
@@ -309,6 +321,10 @@ export const commonResources = {
     common: {
       menuOpen: "Apri il menu",
       menuClose: "Chiudi il menu",
+      actionBar: {
+        collapse: "Nascondi la barra",
+        expand: "Mostra i pulsanti per chiamare e prenotare",
+      },
       navigation: "Navigazione",
       language: "Lingua",
       carousel: {
