@@ -4,12 +4,13 @@ import { SITE_URL } from "./seo";
 
 // Privacy notice (GDPR Art. 13) for the website and for contacting the
 // clinic through it. Written from what the site actually does - no cookies,
-// no analytics, no embeds; hosting on Vercel, images from Cloudinary,
+// no embeds, cookieless visitor analytics (Vercel Web Analytics: no data on
+// the device, so no consent banner); hosting on Vercel, images from Cloudinary,
 // contact by e-mail/phone, and an appointment request form that only drafts
 // an e-mail in the visitor's own mail app (components/ui/booking-dialog.tsx:
 // the site itself sends and stores nothing) - so it has to be revisited
-// whenever one of those changes (e.g. adding analytics, or a form that
-// sends its data to a server).
+// whenever one of those changes (e.g. cookie-based analytics or ads, or a
+// form that sends its data to a server).
 //
 // The Hungarian text is authoritative; the others are translations with
 // the same structure and the same legal references.
@@ -184,6 +185,16 @@ function hu(): PrivacyPolicy {
                   "Ha a kezelésre sor kerül, az Eüak. 30. §-a szerint: az egészségügyi dokumentációt legalább 30 évig, a képalkotó diagnosztikai felvételt 10 évig őrizzük meg. Ha a kezelésre nem kerül sor, az adatokat az árajánlat megküldését követő legfeljebb 1 év elteltével töröljük."
                 ),
               },
+              {
+                title: "3.5. Látogatottsági statisztika (sütik nélkül)",
+                rows: row(
+                  "Annak mérése, hányan és milyen forrásból (például keresőből) látogatják a weboldalt, és mely oldalakat nézik meg, hogy a weboldalt és a tájékoztatást javíthassuk.",
+                  "A megtekintett oldal címe, a hivatkozó oldal, az ország, valamint az eszköz, az operációs rendszer és a böngésző típusa. Sütit nem használunk, és az Ön eszközén nem tárolunk adatot; az IP-címet nem tároljuk. Az egy napon belüli ismételt oldalmegtekintéseket a kérés adataiból képzett, naponta megújuló, visszafejthetetlen kivonat kapcsolja össze, így Önt nem tudjuk azonosítani.",
+                  "GDPR 6. cikk (1) bekezdés f) pont (jogos érdek: a weboldal működésének és tartalmának fejlesztése).",
+                  "Az adatokat kizárólag összesített statisztikaként, a szolgáltatás által meghatározott ideig őrizzük; a kivonat 24 óra elteltével megszűnik.",
+                  `sütimentes látogatottságmérés: ${VERCEL} (Vercel Web Analytics)`
+                ),
+              },
             ],
           },
           {
@@ -206,7 +217,7 @@ function hu(): PrivacyPolicy {
         blocks: [
           {
             kind: "p",
-            text: "A weboldal nem használ sütiket, és nem tárol adatot az Ön eszközén. Nem használunk látogatottságmérő, remarketing vagy más követő eszközt, ezért az Eht. 155. § (4) bekezdése szerinti hozzájárulás kérésére nincs szükség. A választott nyelvet a weboldal címe (például /hu, /de) határozza meg.",
+            text: "A weboldal nem használ sütiket. Egyetlen beállítást tárol a böngészőben a munkamenet végéig (sessionStorage): hogy a mobilos alsó Hívás / Időpontot kérek sávot kinyitotta vagy összecsukta-e; ez személyes adatot nem tartalmaz, és az Ön által kért funkcióhoz szükséges. A látogatottságot sütik nélkül mérjük (3.5. pont); remarketing vagy más követő eszközt nem használunk, ezért az Eht. 155. § (4) bekezdése szerinti hozzájárulás kérésére nincs szükség. A választott nyelvet a weboldal címe (például /hu, /de) határozza meg.",
           },
         ],
       },
@@ -220,7 +231,7 @@ function hu(): PrivacyPolicy {
           },
           {
             kind: "list",
-            items: [`Tárhelyszolgáltatás: ${VERCEL}`, `Képtárolás és -kiszolgálás: ${CLOUDINARY}`],
+            items: [`Tárhelyszolgáltatás és sütimentes látogatottságmérés: ${VERCEL}`, `Képtárolás és -kiszolgálás: ${CLOUDINARY}`],
           },
           {
             kind: "p",
@@ -416,6 +427,16 @@ function en(): PrivacyPolicy {
                   "If treatment takes place, under Eüak. Section 30: medical records are kept for at least 30 years, diagnostic imaging for 10 years. If no treatment takes place, the data are deleted no later than 1 year after the quote is sent."
                 ),
               },
+              {
+                title: "3.5. Visitor statistics (without cookies)",
+                rows: row(
+                  "Measuring how many people visit the website, where they come from (e.g. a search engine) and which pages they view, so that we can improve the website and our information.",
+                  "The address of the page viewed, the referring page, the country, and the type of device, operating system and browser. We use no cookies and store no data on your device; IP addresses are not stored. Repeated page views within one day are linked by an irreversible hash of the request data that is renewed daily, so you cannot be identified.",
+                  "GDPR Art. 6(1)(f) (legitimate interest: improving the website's operation and content).",
+                  "The data are kept only as aggregated statistics, for the period set by the service; the hash expires after 24 hours.",
+                  `cookieless visitor analytics: ${VERCEL} (Vercel Web Analytics)`
+                ),
+              },
             ],
           },
           {
@@ -438,7 +459,7 @@ function en(): PrivacyPolicy {
         blocks: [
           {
             kind: "p",
-            text: "This website uses no cookies and stores no data on your device. We use no analytics, remarketing or other tracking tools, so no consent under Section 155(4) of the Eht. is required. The language is set by the website address (e.g. /en, /de).",
+            text: "This website uses no cookies. It keeps one setting in your browser until the end of the session (sessionStorage): whether you opened or folded the call / appointment bar at the bottom of the mobile view; it contains no personal data and is needed for the function you asked for. We measure visits without cookies (see 3.5); we use no remarketing or other tracking tools, so no consent under Section 155(4) of the Eht. is required. The language is set by the website address (e.g. /en, /de).",
           },
         ],
       },
@@ -452,7 +473,7 @@ function en(): PrivacyPolicy {
           },
           {
             kind: "list",
-            items: [`Hosting: ${VERCEL}`, `Image storage and delivery: ${CLOUDINARY}`],
+            items: [`Hosting and cookieless visitor analytics: ${VERCEL}`, `Image storage and delivery: ${CLOUDINARY}`],
           },
           {
             kind: "p",
@@ -648,6 +669,16 @@ function de(): PrivacyPolicy {
                   "Bei erfolgter Behandlung gemäß § 30 Eüak.: Patientendokumentation mindestens 30 Jahre, bildgebende Diagnostik 10 Jahre. Kommt es zu keiner Behandlung, werden die Daten spätestens 1 Jahr nach Übermittlung des Kostenvoranschlags gelöscht."
                 ),
               },
+              {
+                title: "3.5. Besucherstatistik (ohne Cookies)",
+                rows: row(
+                  "Messung, wie viele Personen die Website besuchen, woher sie kommen (z. B. über eine Suchmaschine) und welche Seiten sie aufrufen, um die Website und unsere Informationen zu verbessern.",
+                  "Adresse der aufgerufenen Seite, verweisende Seite, Land sowie Art von Gerät, Betriebssystem und Browser. Wir verwenden keine Cookies und speichern keine Daten auf Ihrem Gerät; IP-Adressen werden nicht gespeichert. Wiederholte Seitenaufrufe innerhalb eines Tages werden über einen täglich erneuerten, nicht rückrechenbaren Hashwert der Anfragedaten verknüpft, sodass Sie nicht identifiziert werden können.",
+                  "Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse: Verbesserung von Betrieb und Inhalt der Website).",
+                  "Die Daten werden nur als zusammengefasste Statistik für die vom Dienst festgelegte Dauer gespeichert; der Hashwert verfällt nach 24 Stunden.",
+                  `cookielose Besucherstatistik: ${VERCEL} (Vercel Web Analytics)`
+                ),
+              },
             ],
           },
           {
@@ -670,7 +701,7 @@ function de(): PrivacyPolicy {
         blocks: [
           {
             kind: "p",
-            text: "Diese Website verwendet keine Cookies und speichert keine Daten auf Ihrem Gerät. Wir setzen keine Analyse-, Remarketing- oder sonstigen Tracking-Werkzeuge ein, daher ist keine Einwilligung nach § 155 Abs. 4 Eht. erforderlich. Die Sprache wird über die Website-Adresse festgelegt (z. B. /de, /en).",
+            text: "Diese Website verwendet keine Cookies. Sie speichert bis zum Ende der Sitzung eine einzige Einstellung im Browser (sessionStorage): ob Sie die Anruf-/Terminleiste am unteren Rand der mobilen Ansicht geöffnet oder eingeklappt haben; sie enthält keine personenbezogenen Daten und ist für die von Ihnen gewünschte Funktion erforderlich. Besuche messen wir ohne Cookies (Punkt 3.5); Remarketing- oder sonstige Tracking-Werkzeuge setzen wir nicht ein, daher ist keine Einwilligung nach § 155 Abs. 4 Eht. erforderlich. Die Sprache wird über die Website-Adresse festgelegt (z. B. /de, /en).",
           },
         ],
       },
@@ -684,7 +715,7 @@ function de(): PrivacyPolicy {
           },
           {
             kind: "list",
-            items: [`Hosting: ${VERCEL}`, `Bildspeicherung und -auslieferung: ${CLOUDINARY}`],
+            items: [`Hosting und cookielose Besucherstatistik: ${VERCEL}`, `Bildspeicherung und -auslieferung: ${CLOUDINARY}`],
           },
           {
             kind: "p",
@@ -880,6 +911,16 @@ function it(): PrivacyPolicy {
                   "In caso di trattamento, ai sensi dell'art. 30 Eüak.: documentazione sanitaria per almeno 30 anni, immagini diagnostiche per 10 anni. Se il trattamento non avviene, i dati sono cancellati entro 1 anno dall'invio del preventivo."
                 ),
               },
+              {
+                title: "3.5. Statistiche sulle visite (senza cookie)",
+                rows: row(
+                  "Misurare quante persone visitano il sito, da dove provengono (ad es. da un motore di ricerca) e quali pagine visualizzano, per migliorare il sito e le nostre informazioni.",
+                  "Indirizzo della pagina visualizzata, pagina di provenienza, paese e tipo di dispositivo, sistema operativo e browser. Non utilizziamo cookie e non memorizziamo dati sul Suo dispositivo; gli indirizzi IP non vengono conservati. Le visualizzazioni ripetute nello stesso giorno sono collegate da un hash irreversibile dei dati della richiesta, rinnovato ogni giorno, per cui Lei non può essere identificato.",
+                  "Art. 6, par. 1, lett. f) GDPR (legittimo interesse: migliorare il funzionamento e i contenuti del sito).",
+                  "I dati sono conservati solo come statistiche aggregate, per il periodo stabilito dal servizio; l'hash scade dopo 24 ore.",
+                  `statistiche delle visite senza cookie: ${VERCEL} (Vercel Web Analytics)`
+                ),
+              },
             ],
           },
           {
@@ -902,7 +943,7 @@ function it(): PrivacyPolicy {
         blocks: [
           {
             kind: "p",
-            text: "Questo sito non utilizza cookie e non memorizza dati sul Suo dispositivo. Non utilizziamo strumenti di analisi, remarketing o altri strumenti di tracciamento, pertanto non è necessario il consenso ai sensi dell'art. 155, comma 4, Eht. La lingua è determinata dall'indirizzo del sito (ad es. /it, /en).",
+            text: "Questo sito non utilizza cookie. Conserva nel browser, fino alla fine della sessione, una sola impostazione (sessionStorage): se ha aperto o chiuso la barra per chiamare / prenotare in fondo alla visualizzazione mobile; non contiene dati personali ed è necessaria per la funzione da Lei richiesta. Misuriamo le visite senza cookie (punto 3.5); non utilizziamo strumenti di remarketing o altri strumenti di tracciamento, pertanto non è necessario il consenso ai sensi dell'art. 155, comma 4, Eht. La lingua è determinata dall'indirizzo del sito (ad es. /it, /en).",
           },
         ],
       },
@@ -916,7 +957,7 @@ function it(): PrivacyPolicy {
           },
           {
             kind: "list",
-            items: [`Hosting: ${VERCEL}`, `Archiviazione e distribuzione delle immagini: ${CLOUDINARY}`],
+            items: [`Hosting e statistiche delle visite senza cookie: ${VERCEL}`, `Archiviazione e distribuzione delle immagini: ${CLOUDINARY}`],
           },
           {
             kind: "p",
