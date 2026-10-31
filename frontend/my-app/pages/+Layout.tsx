@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import "./Layout.css";
 import "../lib/i18n";
+import { startAnalytics } from "../lib/analytics";
 import { localizeHref } from "../lib/locale";
 import { Footer } from "../components/ui/footer";
 import { LoadingScreen } from "../components/ui/loading-screen";
@@ -159,6 +160,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
     const observer = new ResizeObserver(updateHeight);
     observer.observe(header);
     return () => observer.disconnect();
+  }, []);
+
+  // Cookieless visitor statistics (lib/analytics.ts), started once in the
+  // browser; later page changes are picked up by the script itself.
+  React.useEffect(() => {
+    startAnalytics();
   }, []);
 
   React.useEffect(() => {

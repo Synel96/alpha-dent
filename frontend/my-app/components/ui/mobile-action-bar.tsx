@@ -14,6 +14,7 @@ const HERO_PASSED = 0.8;
 // Whether the visitor opened or folded the bar, kept for the rest of their
 // visit (sessionStorage), so it stays the way they left it on every page.
 // With no choice made yet it's folded: only the calendar button shows.
+// Disclosed in the privacy notice's cookies section (lib/privacy-policy.ts).
 const COLLAPSED_KEY = "alphadent:actionBarCollapsed";
 
 function readCollapsed(): boolean {
