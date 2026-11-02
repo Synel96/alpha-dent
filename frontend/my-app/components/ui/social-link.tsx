@@ -47,5 +47,5 @@ export function SocialLink({ label, href, icon, className, soonClassName }: Soci
 export function SocialSoonNote({ className }: { className?: string }) {
   const { t } = useTranslation();
   if (!CLINIC.socialComingSoon) return null;
-  return <span className={cn("text-xs text-white/40", className)}>{t("contactPage.cards.socialSoon")}</span>;
+  return <span className={cn("text-xs text-white/65", className)}>{t("contactPage.cards.socialSoon")}</span>;
 }
