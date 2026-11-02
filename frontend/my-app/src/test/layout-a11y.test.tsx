@@ -7,6 +7,7 @@ vi.mock("vike-react/usePageContext", () => ({
 vi.mock("vike/client/router", () => ({ navigate: vi.fn() }));
 vi.mock("../../lib/analytics", () => ({ startAnalytics: vi.fn() }));
 
+import { BookingDialogProvider } from "../../components/ui/booking-dialog";
 import { Layout } from "../../pages/+Layout";
 
 describe("Akadálymentesség a fő elrendezésben", () => {
@@ -45,5 +46,27 @@ describe("Akadálymentesség a fő elrendezésben", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Menü megnyitása" }));
     await waitFor(() => guards().forEach((guard) => expect(guard.tabIndex).toBe(0)));
+  });
+
+  it("tablettől felfelé a fejlécben egy naptár ikon (felirat nélkül, de akadálymentes névvel) nyitja az időpontkérő modalt", () => {
+    render(
+      <BookingDialogProvider>
+        <Layout>
+          <p>Oldal tartalma</p>
+        </Layout>
+      </BookingDialogProvider>
+    );
+    const icon = screen.getByTestId("header-booking");
+    expect(icon).toHaveAccessibleName("Időpontot kérek");
+    expect(icon).toHaveAttribute("title", "Időpontot kérek");
+    // Icon only: no visible text.
+    expect(icon.textContent).toBe("");
+    // Hidden on phones (they have the bottom bar), shown from md.
+    expect(icon.className).toMatch(/(^|\s)hidden(\s|$)/);
+    expect(icon.className).toContain("md:inline-flex");
+    expect(icon.closest("header")).not.toBeNull();
+
+    fireEvent.click(icon);
+    expect(screen.getByRole("dialog", { name: "Időpontkérés" })).toBeInTheDocument();
   });
 });
