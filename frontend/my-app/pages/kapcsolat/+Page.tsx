@@ -5,6 +5,7 @@ import { CtaButton } from "../../components/ui/cta-button";
 import { PageContainer } from "../../components/ui/page-container";
 import { RevealGroup } from "../../components/ui/reveal-section";
 import { ServiceImage } from "../../components/ui/service-image";
+import { SocialLink, SocialSoonNote } from "../../components/ui/social-link";
 import { TextImageReveal } from "../../components/ui/text-image-reveal";
 import { CLINIC, CLINIC_ADDRESS_LINE } from "../../lib/clinic-info";
 import { formatClockTime, weekdayName, WEEKLY_HOURS } from "../../lib/opening-hours";
@@ -185,20 +186,18 @@ function Page() {
             <h2 className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-gold-light">
               {t("contactPage.cards.social")}
             </h2>
-            <div className="flex gap-4">
+            <div className="flex items-center gap-4">
               {SOCIAL_LINKS.map(({ icon, label, href }) => (
-                <a
+                <SocialLink
                   key={label}
+                  label={label}
                   href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={label}
+                  icon={icon}
                   className="inline-flex items-center justify-center text-brand-gold-muted hover:text-brand-gold-light transition-colors"
-                  title={label}
-                >
-                  {icon}
-                </a>
+                  soonClassName="inline-flex items-center justify-center"
+                />
               ))}
+              <SocialSoonNote />
             </div>
           </article>
         </section>

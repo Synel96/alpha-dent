@@ -364,9 +364,10 @@ export function Hero({
             ) : null}
           </div>
           {hasCopy ? (
-            // Darken in from the left, where the copy sits. Below md the quote spans
-            // nearly the full width, so the right side needs darkening there too.
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/10 md:from-black/55 md:via-black/20 md:to-transparent" />
+            // Darken in from the left, where the copy sits, strongly enough that the
+            // gold quote stays readable over any video frame. The right side keeps a
+            // lighter tint so the clip still shows through behind the status card.
+            <div className="absolute inset-0 bg-gradient-to-r from-black/[0.78] via-black/55 via-45% to-black/25" />
           ) : null}
           {/* Only the bottom third fades into the page background, so the video
               stays bright and the hero still flows into the next section. */}

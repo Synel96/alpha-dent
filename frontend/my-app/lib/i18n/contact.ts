@@ -16,6 +16,7 @@ export const contactResources = {
         languages: "Nyelvek",
         parking: "Parkolás",
         social: "Közösségi média",
+        socialSoon: "Hamarosan",
       },
       actions: {
         openMap: "Megnyitás térképen",
@@ -55,6 +56,7 @@ export const contactResources = {
         languages: "Languages",
         parking: "Parking",
         social: "Social media",
+        socialSoon: "Coming soon",
       },
       actions: {
         openMap: "Open in maps",
@@ -93,6 +95,7 @@ export const contactResources = {
         languages: "Sprachen",
         parking: "Parken",
         social: "Soziale Medien",
+        socialSoon: "Demnächst",
       },
       actions: {
         openMap: "In Karten öffnen",
@@ -131,6 +134,7 @@ export const contactResources = {
         languages: "Lingue",
         parking: "Parcheggio",
         social: "Social media",
+        socialSoon: "Prossimamente",
       },
       actions: {
         openMap: "Apri in mappa",

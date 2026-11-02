@@ -13,6 +13,7 @@ import { LoadingScreen } from "../components/ui/loading-screen";
 import { MobileActionBar } from "../components/ui/mobile-action-bar";
 import { AlphadentLogo } from "../components/ui/alphadent-logo";
 import { PageBackground } from "../components/ui/page-background";
+import { SocialLink, SocialSoonNote } from "../components/ui/social-link";
 import {
   subscribeHeroProgress,
   getHeroProgress,
@@ -328,19 +329,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
               <div className="hidden lg:flex items-center gap-2">
                 {SOCIAL_LINKS.map(({ icon, label, href }) => (
-                  <a
+                  <SocialLink
                     key={label}
+                    label={label}
                     href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={label}
+                    icon={icon}
                     // A dark gold-ringed bubble keeps the icons readable while
                     // the navbar is still transparent over the hero photo.
                     className="inline-flex size-9 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/60 text-brand-gold-light backdrop-blur-sm transition-colors hover:border-brand-gold hover:bg-brand-gold/15 hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 [&>svg]:size-[18px]"
-                    title={label}
-                  >
-                    {icon}
-                  </a>
+                    soonClassName="inline-flex size-9 items-center justify-center rounded-full border border-white/15 bg-brand-black/60 backdrop-blur-sm [&>svg]:size-[18px]"
+                  />
                 ))}
               </div>
 
@@ -494,20 +492,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <p className="mb-3 text-xs uppercase tracking-wide text-brand-gold-muted">
               {t("contactPage.cards.social")}
             </p>
-            <div className="flex gap-4">
+            <div className="flex items-center gap-4">
               {SOCIAL_LINKS.map(({ icon, label, href }) => (
-                <a
+                <SocialLink
                   key={label}
+                  label={label}
                   href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={label}
+                  icon={icon}
                   className="inline-flex items-center justify-center text-brand-gold-muted hover:text-brand-gold-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 w-6 h-6"
-                  title={label}
-                >
-                  {icon}
-                </a>
+                  soonClassName="inline-flex items-center justify-center w-6 h-6"
+                />
               ))}
+              <SocialSoonNote />
             </div>
           </div>
         </nav>
