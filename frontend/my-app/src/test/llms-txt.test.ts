@@ -19,10 +19,11 @@ describe("llms.txt", () => {
     expect(text).toMatch(/^> .{80,}/m);
   });
 
-  it("minden belső linkje a sitemapban is szereplő, valódi oldalra mutat", () => {
+  it("minden linkje valódi oldalra (sitemap) vagy a klinika közösségi profiljára mutat", () => {
     const realUrls = new Set([
       ...PAGE_PATHNAMES.flatMap((pathname) => LOCALES.map((locale) => `${SITE_URL}${localizeHref(locale, pathname)}`)),
       `${SITE_URL}/sitemap.xml`,
+      ...CLINIC.socialProfiles,
     ]);
     expect(links.length).toBeGreaterThan(5);
     for (const href of links) expect(realUrls, href).toContain(href);
