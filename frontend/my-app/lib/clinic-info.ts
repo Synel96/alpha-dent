@@ -21,10 +21,10 @@ export const CLINIC = {
   phoneE164: "+36208080600",
   email: "info@alpha-dent.eu",
   foundingYear: 1996,
-  // The clinic's Instagram and Facebook pages are still empty. While this is
-  // true the icons show greyed out with a "coming soon" note instead of
-  // linking to them; flip it to false once there are posts.
-  socialComingSoon: true,
+  // While true, the Instagram and Facebook icons show greyed out with a
+  // "coming soon" note instead of linking to the profiles (for when the
+  // pages are still empty). The profiles are live now.
+  socialComingSoon: false,
   // Canonical profile URLs (no share-tracking query string).
   socialProfiles: [
     "https://www.instagram.com/alphadent_eu",
