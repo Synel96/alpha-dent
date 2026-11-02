@@ -114,6 +114,16 @@ describe("Mobil alsó sáv (Hívás + Időpontot kérek)", () => {
     expect(isShown(bar())).toBe(false);
   });
 
+  it("látható állapotban elnevezett régió (landmark), rejtve nem az", () => {
+    renderBar();
+    expect(screen.getByRole("region", { name: "Gyors kapcsolat" })).toContainElement(handle());
+  });
+
+  it("rejtve (nyitott menü) a régiónak nincs neve, így nem jelenik meg a képernyőolvasó régiólistájában", () => {
+    renderBar(true);
+    expect(screen.queryByRole("region")).not.toBeInTheDocument();
+  });
+
   it("nyitott menü mellett egyik sem látszik, és rejtve nem fókuszálható", () => {
     renderBar(true);
     expect(isShown(bar())).toBe(false);

@@ -12,7 +12,9 @@ export const commonResources = {
     common: {
       menuOpen: "Menü megnyitása",
       menuClose: "Menü bezárása",
+      skipToContent: "Ugrás a tartalomra",
       actionBar: {
+        label: "Gyors kapcsolat",
         collapse: "A sáv elrejtése",
         expand: "Hívás és időpontkérés megjelenítése",
       },
@@ -115,7 +117,9 @@ export const commonResources = {
     common: {
       menuOpen: "Open menu",
       menuClose: "Close menu",
+      skipToContent: "Skip to content",
       actionBar: {
+        label: "Quick contact",
         collapse: "Hide this bar",
         expand: "Show call and appointment buttons",
       },
@@ -218,7 +222,9 @@ export const commonResources = {
     common: {
       menuOpen: "Menü öffnen",
       menuClose: "Menü schließen",
+      skipToContent: "Zum Inhalt springen",
       actionBar: {
+        label: "Schnellkontakt",
         collapse: "Leiste ausblenden",
         expand: "Anruf- und Terminschaltflächen anzeigen",
       },
@@ -321,7 +327,9 @@ export const commonResources = {
     common: {
       menuOpen: "Apri il menu",
       menuClose: "Chiudi il menu",
+      skipToContent: "Vai al contenuto",
       actionBar: {
+        label: "Contatto rapido",
         collapse: "Nascondi la barra",
         expand: "Mostra i pulsanti per chiamare e prenotare",
       },

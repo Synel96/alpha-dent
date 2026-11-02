@@ -46,6 +46,26 @@ export function PushDrawerContent({
   children,
   ...props
 }: PushDrawerContentProps) {
+  // Radix puts invisible focus guards (tabindex 0) at the start and end of
+  // <body> while any dialog content is mounted - and this panel always is,
+  // see forceMount below. With the drawer closed they'd be an invisible
+  // first Tab stop on every page (before even the skip link), so they leave
+  // the tab order then. (The booking modal keeps focus in with its own
+  // looping focus scope, so it doesn't rely on them.) Radix's portal only
+  // mounts the content - and adds the guards - a render later, so newly
+  // added guards are caught as they appear.
+  React.useEffect(() => {
+    const apply = () =>
+      document.querySelectorAll<HTMLElement>("[data-radix-focus-guard]").forEach((guard) => {
+        const tabIndex = open ? 0 : -1;
+        if (guard.tabIndex !== tabIndex) guard.tabIndex = tabIndex;
+      });
+    apply();
+    const observer = new MutationObserver(apply);
+    observer.observe(document.body, { childList: true });
+    return () => observer.disconnect();
+  }, [open]);
+
   return (
     <DialogPrimitive.Portal forceMount>
       {/* Our own scrim, not Radix's <Overlay> (that one no-ops when

@@ -27,8 +27,8 @@ describe("LanguageSwitcher", () => {
 
   it("a gombokat a nyelv saját nevén olvassa fel, a látható kóddal együtt", () => {
     render(<LanguageSwitcher />);
-    expect(screen.getByRole("button", { name: "Deutsch (DE)" })).toHaveAttribute("lang", "de");
-    expect(screen.getByRole("button", { name: "Magyar (HU)" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "DE – Deutsch" })).toHaveAttribute("lang", "de");
+    expect(screen.getByRole("button", { name: "HU – Magyar" })).toBeInTheDocument();
   });
 
   it("az aktuális nyelv gombja van kiemelve (aria-current)", () => {
