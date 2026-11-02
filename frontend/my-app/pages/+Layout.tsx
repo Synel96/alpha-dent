@@ -1,5 +1,5 @@
 import React from "react";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { CalendarCheck, Mail, MapPin, Phone } from "lucide-react";
 import { navigate } from "vike/client/router";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
@@ -7,6 +7,7 @@ import "./Layout.css";
 import "../lib/i18n";
 import { startAnalytics } from "../lib/analytics";
 import { localizeHref } from "../lib/locale";
+import { useBookingCta } from "../components/ui/booking-dialog";
 import { Footer } from "../components/ui/footer";
 import { LoadingScreen } from "../components/ui/loading-screen";
 import { MobileActionBar } from "../components/ui/mobile-action-bar";
@@ -107,6 +108,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const headerRef = React.useRef<HTMLElement | null>(null);
   const { locale } = usePageContext();
   const { t, i18n } = useTranslation();
+  const booking = useBookingCta();
 
   // The URL locale prefix is the source of truth for the active language.
   // This must run synchronously during render (not in an effect) so that
@@ -309,6 +311,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
 
             <div className="flex items-center gap-4">
+              {/* Tablets and up: the appointment request as a calendar icon in
+                  the (fixed) header, so it's always a click away without
+                  covering anything. Phones have the bottom action bar
+                  instead (MobileActionBar, which stops at md). */}
+              <a
+                href={booking.href}
+                onClick={booking.onClick}
+                aria-label={t("home.intro.ctaButton")}
+                title={t("home.intro.ctaButton")}
+                data-testid="header-booking"
+                className="hidden size-10 items-center justify-center rounded-full border border-brand-gold/80 bg-brand-gold/15 text-brand-gold-light backdrop-blur-sm transition-colors hover:border-brand-gold hover:bg-brand-gold/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 md:inline-flex"
+              >
+                <CalendarCheck aria-hidden className="size-5" />
+              </a>
+
               <div className="hidden lg:flex items-center gap-2">
                 {SOCIAL_LINKS.map(({ icon, label, href }) => (
                   <a
