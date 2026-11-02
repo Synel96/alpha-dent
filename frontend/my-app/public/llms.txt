@@ -1,0 +1,34 @@
+# Alphadent Fogászati Klinika Sopron
+
+> Alphadent is a dental clinic in Sopron, Hungary, right at the Austrian border, in practice since 1996. It offers dental implants, oral surgery, cosmetic dentistry and tooth-preserving treatments. The website is available in Hungarian, English, German and Italian.
+
+- Address: Arany János u. 13., 9400 Sopron, Hungary (next to Sopron railway station, about one hour by car from Vienna; free parking in the clinic's closed courtyard)
+- Phone: +36 20 80 80 600
+- Email: info@alpha-dent.eu
+- Opening hours: Tuesday–Friday 8:00–17:00, Saturday 8:00–13:00, closed on Sunday and Monday (Europe/Budapest time)
+- Appointments: by phone, by email, or with the "Book an appointment" button on any page, which opens a pre-filled appointment request email
+- Languages spoken: Hungarian, German, English
+
+## Main pages (English)
+
+- [Home](https://alpha-dent.eu/en): Overview of the clinic, its services and how to book an appointment
+- [Our clinic](https://alpha-dent.eu/en/our-clinic): The clinic, its 15-strong team, its equipment and its in-house dental lab
+- [Services](https://alpha-dent.eu/en/services): All treatments offered
+- [Implantology](https://alpha-dent.eu/en/services/implantology): Dental implants (CAMLOG), from planning and bone grafting to the final crown
+- [Oral surgery](https://alpha-dent.eu/en/services/oral-surgery): Tooth extraction, wisdom tooth removal, bone grafting and other procedures
+- [Cosmetic dentistry](https://alpha-dent.eu/en/services/cosmetic-dentistry): Aesthetic fillings, inlays and onlays, crowns, bridges, zirconia restorations and teeth whitening
+- [Tooth-preserving treatments](https://alpha-dent.eu/en/services/tooth-preserving-treatments): Machine-assisted root canal treatment and other treatments that save natural teeth
+- [FAQ](https://alpha-dent.eu/en/faq): Answers to common questions, including travel from Austria
+- [Contact](https://alpha-dent.eu/en/contact): Address, opening hours, map and contact details
+
+## Other languages
+
+- [Magyar (Hungarian)](https://alpha-dent.eu/hu): Alphadent Fogászati Klinika Sopron
+- [Deutsch (German)](https://alpha-dent.eu/de): Zahnklinik Alphadent in Sopron, direkt an der österreichischen Grenze
+- [Italiano (Italian)](https://alpha-dent.eu/it): Clinica odontoiatrica Alphadent a Sopron
+
+## Optional
+
+- [Gallery](https://alpha-dent.eu/en/gallery): Photos of the clinic
+- [Privacy policy](https://alpha-dent.eu/en/privacy-policy)
+- [Sitemap](https://alpha-dent.eu/sitemap.xml)
