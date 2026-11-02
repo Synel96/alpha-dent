@@ -14,7 +14,7 @@ const SMILE_IMAGE = "https://res.cloudinary.com/dmwulp3dl/image/upload/v17927663
 
 function Page() {
   const { t } = useTranslation();
-  const bookingCta = useBookingCta("esztetikaiFogaszat");
+  const bookingCta = useBookingCta("service-page", "esztetikaiFogaszat");
   const { locale } = usePageContext();
 
   const paragraphs = t("services.esztetikaiFogaszat.paragraphs", {

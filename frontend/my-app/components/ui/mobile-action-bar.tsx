@@ -44,7 +44,7 @@ function writeCollapsed(collapsed: boolean) {
 // sits in the corner, and opens the bar (which can be folded again).
 export function MobileActionBar({ hidden = false }: { hidden?: boolean }) {
   const { t } = useTranslation();
-  const booking = useBookingCta();
+  const booking = useBookingCta("mobile-bar");
   const heroProgress = React.useSyncExternalStore(
     subscribeHeroProgress,
     getHeroProgress,
@@ -82,7 +82,7 @@ export function MobileActionBar({ hidden = false }: { hidden?: boolean }) {
     // A named region (landmark) while there's something in it, so screen
     // reader users find it in the page's region list; unnamed, and so no
     // landmark at all, while both the bar and its button are hidden.
-    <section aria-label={available ? t("common.actionBar.label") : undefined}>
+    <section data-analytics-place="mobile-bar" aria-label={available ? t("common.actionBar.label") : undefined}>
       <div
         data-testid="mobile-action-bar"
         aria-hidden={barShown ? undefined : true}

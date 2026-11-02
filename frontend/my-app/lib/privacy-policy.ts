@@ -188,8 +188,8 @@ function hu(): PrivacyPolicy {
               {
                 title: "3.5. Látogatottsági statisztika (sütik nélkül)",
                 rows: row(
-                  "Annak mérése, hányan és milyen forrásból (például keresőből) látogatják a weboldalt, és mely oldalakat nézik meg, hogy a weboldalt és a tájékoztatást javíthassuk.",
-                  "A megtekintett oldal címe, a hivatkozó oldal, az ország, valamint az eszköz, az operációs rendszer és a böngésző típusa. Sütit nem használunk, és az Ön eszközén nem tárolunk adatot; az IP-címet nem tároljuk. Az egy napon belüli ismételt oldalmegtekintéseket a kérés adataiból képzett, naponta megújuló, visszafejthetetlen kivonat kapcsolja össze, így Önt nem tudjuk azonosítani.",
+                  "Annak mérése, hányan és milyen forrásból (például keresőből) látogatják a weboldalt, mely oldalakat nézik meg, és hányszor használják az időpontkérést, illetve a telefonszámot és az e-mail-címet, hogy a weboldalt és a tájékoztatást javíthassuk.",
+                  "A megtekintett oldal címe, a hivatkozó oldal, az ország, valamint az eszköz, az operációs rendszer és a böngésző típusa; a megnyomott gomb típusa és helye (például: időpontkérés indítása a fejlécből, levél megnyitása Gmailben, hívás a láblécből). Az időpontkérő űrlapba írt adatokat (név, telefonszám, üzenet) nem mérjük. Sütit nem használunk, és az Ön eszközén nem tárolunk adatot; az IP-címet nem tároljuk. Az egy napon belüli ismételt oldalmegtekintéseket a kérés adataiból képzett, naponta megújuló, visszafejthetetlen kivonat kapcsolja össze, így Önt nem tudjuk azonosítani.",
                   "GDPR 6. cikk (1) bekezdés f) pont (jogos érdek: a weboldal működésének és tartalmának fejlesztése).",
                   "Az adatokat kizárólag összesített statisztikaként, a szolgáltatás által meghatározott ideig őrizzük; a kivonat 24 óra elteltével megszűnik.",
                   `sütimentes látogatottságmérés: ${VERCEL} (Vercel Web Analytics)`
@@ -430,8 +430,8 @@ function en(): PrivacyPolicy {
               {
                 title: "3.5. Visitor statistics (without cookies)",
                 rows: row(
-                  "Measuring how many people visit the website, where they come from (e.g. a search engine) and which pages they view, so that we can improve the website and our information.",
-                  "The address of the page viewed, the referring page, the country, and the type of device, operating system and browser. We use no cookies and store no data on your device; IP addresses are not stored. Repeated page views within one day are linked by an irreversible hash of the request data that is renewed daily, so you cannot be identified.",
+                  "Measuring how many people visit the website, where they come from (e.g. a search engine) which pages they view, and how often the appointment request, the phone number and the e-mail address are used, so that we can improve the website and our information.",
+                  "The address of the page viewed, the referring page, the country, and the type of device, operating system and browser; the type and place of the button used (e.g. starting an appointment request from the header, opening the e-mail in Gmail, calling from the footer). What you type into the appointment request form (name, phone number, message) is never measured. We use no cookies and store no data on your device; IP addresses are not stored. Repeated page views within one day are linked by an irreversible hash of the request data that is renewed daily, so you cannot be identified.",
                   "GDPR Art. 6(1)(f) (legitimate interest: improving the website's operation and content).",
                   "The data are kept only as aggregated statistics, for the period set by the service; the hash expires after 24 hours.",
                   `cookieless visitor analytics: ${VERCEL} (Vercel Web Analytics)`
@@ -672,8 +672,8 @@ function de(): PrivacyPolicy {
               {
                 title: "3.5. Besucherstatistik (ohne Cookies)",
                 rows: row(
-                  "Messung, wie viele Personen die Website besuchen, woher sie kommen (z. B. über eine Suchmaschine) und welche Seiten sie aufrufen, um die Website und unsere Informationen zu verbessern.",
-                  "Adresse der aufgerufenen Seite, verweisende Seite, Land sowie Art von Gerät, Betriebssystem und Browser. Wir verwenden keine Cookies und speichern keine Daten auf Ihrem Gerät; IP-Adressen werden nicht gespeichert. Wiederholte Seitenaufrufe innerhalb eines Tages werden über einen täglich erneuerten, nicht rückrechenbaren Hashwert der Anfragedaten verknüpft, sodass Sie nicht identifiziert werden können.",
+                  "Messung, wie viele Personen die Website besuchen, woher sie kommen (z. B. über eine Suchmaschine) welche Seiten sie aufrufen und wie oft die Terminanfrage, die Telefonnummer und die E-Mail-Adresse genutzt werden, um die Website und unsere Informationen zu verbessern.",
+                  "Adresse der aufgerufenen Seite, verweisende Seite, Land sowie Art von Gerät, Betriebssystem und Browser; Art und Ort der genutzten Schaltfläche (z. B. Terminanfrage über die Kopfzeile gestartet, E-Mail in Gmail geöffnet, Anruf aus der Fußzeile). Was Sie in das Terminanfrageformular eingeben (Name, Telefonnummer, Nachricht), wird nie gemessen. Wir verwenden keine Cookies und speichern keine Daten auf Ihrem Gerät; IP-Adressen werden nicht gespeichert. Wiederholte Seitenaufrufe innerhalb eines Tages werden über einen täglich erneuerten, nicht rückrechenbaren Hashwert der Anfragedaten verknüpft, sodass Sie nicht identifiziert werden können.",
                   "Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse: Verbesserung von Betrieb und Inhalt der Website).",
                   "Die Daten werden nur als zusammengefasste Statistik für die vom Dienst festgelegte Dauer gespeichert; der Hashwert verfällt nach 24 Stunden.",
                   `cookielose Besucherstatistik: ${VERCEL} (Vercel Web Analytics)`
@@ -914,8 +914,8 @@ function it(): PrivacyPolicy {
               {
                 title: "3.5. Statistiche sulle visite (senza cookie)",
                 rows: row(
-                  "Misurare quante persone visitano il sito, da dove provengono (ad es. da un motore di ricerca) e quali pagine visualizzano, per migliorare il sito e le nostre informazioni.",
-                  "Indirizzo della pagina visualizzata, pagina di provenienza, paese e tipo di dispositivo, sistema operativo e browser. Non utilizziamo cookie e non memorizziamo dati sul Suo dispositivo; gli indirizzi IP non vengono conservati. Le visualizzazioni ripetute nello stesso giorno sono collegate da un hash irreversibile dei dati della richiesta, rinnovato ogni giorno, per cui Lei non può essere identificato.",
+                  "Misurare quante persone visitano il sito, da dove provengono (ad es. da un motore di ricerca) quali pagine visualizzano e quanto spesso vengono usati la richiesta di appuntamento, il numero di telefono e l'indirizzo e-mail, per migliorare il sito e le nostre informazioni.",
+                  "Indirizzo della pagina visualizzata, pagina di provenienza, paese e tipo di dispositivo, sistema operativo e browser; tipo e posizione del pulsante usato (ad es. richiesta di appuntamento avviata dall'intestazione, e-mail aperta in Gmail, chiamata dal piè di pagina). Ciò che scrive nel modulo di richiesta (nome, numero di telefono, messaggio) non viene mai misurato. Non utilizziamo cookie e non memorizziamo dati sul Suo dispositivo; gli indirizzi IP non vengono conservati. Le visualizzazioni ripetute nello stesso giorno sono collegate da un hash irreversibile dei dati della richiesta, rinnovato ogni giorno, per cui Lei non può essere identificato.",
                   "Art. 6, par. 1, lett. f) GDPR (legittimo interesse: migliorare il funzionamento e i contenuti del sito).",
                   "I dati sono conservati solo come statistiche aggregate, per il periodo stabilito dal servizio; l'hash scade dopo 24 ore.",
                   `statistiche delle visite senza cookie: ${VERCEL} (Vercel Web Analytics)`

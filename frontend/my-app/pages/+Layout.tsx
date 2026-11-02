@@ -108,7 +108,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const headerRef = React.useRef<HTMLElement | null>(null);
   const { locale } = usePageContext();
   const { t, i18n } = useTranslation();
-  const booking = useBookingCta();
+  const booking = useBookingCta("header");
 
   // The URL locale prefix is the source of truth for the active language.
   // This must run synchronously during render (not in an effect) so that
@@ -449,7 +449,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <LanguageSwitcher />
           </div>
 
-          <div className="mt-6 border-t border-brand-border pt-4">
+          <div data-analytics-place="menu" className="mt-6 border-t border-brand-border pt-4">
             <p className="mb-3 text-xs uppercase tracking-wide text-brand-gold-muted">
               {t("contactPage.eyebrow")}
             </p>

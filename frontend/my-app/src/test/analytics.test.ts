@@ -27,6 +27,8 @@ describe("Sütimentes látogatottságmérés (Vercel Web Analytics)", () => {
       const text = JSON.stringify(privacyPolicy(locale));
       expect(text, locale).toContain("3.5.");
       expect(text, locale).toContain("Vercel Web Analytics");
+      // The custom events: button use is measured, the form's contents never.
+      expect(text, locale).toMatch(/Gmail/);
       // The cookies section must no longer say "no analytics".
       const cookies = JSON.stringify(privacyPolicy(locale).sections.find((section) => section.id === "sutik"));
       expect(cookies, locale).toContain("3.5");

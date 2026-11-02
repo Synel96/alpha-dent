@@ -15,7 +15,7 @@ import { BookingDialogProvider, useBookingCta } from "../../components/ui/bookin
 import type { ServiceSlug } from "../../lib/service-cards";
 
 function BookingLink({ service }: { service?: ServiceSlug }) {
-  const { href, onClick } = useBookingCta(service);
+  const { href, onClick } = useBookingCta("hero", service);
   return (
     <a href={href} onClick={onClick}>
       Időpontot kérek
