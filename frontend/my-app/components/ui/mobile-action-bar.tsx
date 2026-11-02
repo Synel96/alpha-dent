@@ -79,7 +79,10 @@ export function MobileActionBar({ hidden = false }: { hidden?: boolean }) {
   const handleShown = available && collapsed;
 
   return (
-    <>
+    // A named region (landmark) while there's something in it, so screen
+    // reader users find it in the page's region list; unnamed, and so no
+    // landmark at all, while both the bar and its button are hidden.
+    <section aria-label={available ? t("common.actionBar.label") : undefined}>
       <div
         data-testid="mobile-action-bar"
         aria-hidden={barShown ? undefined : true}
@@ -139,6 +142,6 @@ export function MobileActionBar({ hidden = false }: { hidden?: boolean }) {
       >
         <CalendarCheck aria-hidden className="size-5" />
       </button>
-    </>
+    </section>
   );
 }

@@ -199,6 +199,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <PushDrawer open={open} onOpenChange={setOpen}>
       <div className="bg-brand-black font-sans antialiased text-brand-gold">
+        {/* The first Tab stop on every page: lets keyboard and screen reader
+            users jump past the header and menu (WCAG 2.4.1). Hidden until
+            focused. */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[70] focus:rounded-lg focus:border focus:border-brand-gold focus:bg-brand-black focus:px-4 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-brand-gold-light focus:outline-none focus:ring-2 focus:ring-brand-gold-light/70"
+        >
+          {t("common.skipToContent")}
+        </a>
         <LoadingScreen visible={loading} />
         <PageBackground />
 
@@ -360,7 +369,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         {/* The bottom padding keeps the footer clear of the mobile action bar. */}
         <PushDrawerBody open={open} className="flex flex-col pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pb-0">
-          <main className="flex-1" style={{ paddingTop: "var(--nav-height, 72px)" }}>
+          {/* tabIndex -1: the skip link's target, so focus actually lands here. */}
+          <main id="main-content" tabIndex={-1} className="flex-1 outline-none" style={{ paddingTop: "var(--nav-height, 72px)" }}>
             {children}
           </main>
 

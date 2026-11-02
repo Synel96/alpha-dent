@@ -11,8 +11,10 @@ const LANGUAGE_LABELS: Record<Locale, string> = {
   it: "IT",
 };
 
-// Each language named in itself, as is usual in language pickers; the
-// visible code stays part of the accessible name (WCAG 2.5.3).
+// Each language named in itself, as is usual in language pickers. The
+// accessible name starts with the visible code, as its own word ("HU –
+// Magyar", not "Magyar (HU)"), so voice control users can say what they see
+// (WCAG 2.5.3 Label in Name).
 const LANGUAGE_NAMES: Record<Locale, string> = {
   hu: "Magyar",
   en: "English",
@@ -20,7 +22,7 @@ const LANGUAGE_NAMES: Record<Locale, string> = {
   it: "Italiano",
 };
 
-const optionLabel = (code: Locale) => `${LANGUAGE_NAMES[code]} (${LANGUAGE_LABELS[code]})`;
+const optionLabel = (code: Locale) => `${LANGUAGE_LABELS[code]} – ${LANGUAGE_NAMES[code]}`;
 
 const FOCUS_RING =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70";
