@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { localizeHref } from "@/lib/locale";
 import { AlphadentLogo } from "./alphadent-logo";
+import { SocialLink, SocialSoonNote } from "./social-link";
 import { SynelWebWordmark } from "./synelweb-wordmark";
 
 const SOCIAL_LINKS = [
@@ -71,18 +72,16 @@ export function Footer() {
           </a>
           <div className="mt-5 flex items-center gap-4">
             {SOCIAL_LINKS.map(({ icon, label, href }) => (
-              <a
+              <SocialLink
                 key={label}
+                label={label}
                 href={href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={label}
-                title={label}
+                icon={icon}
                 className="inline-flex items-center justify-center text-brand-gold-muted transition-colors hover:text-brand-gold-light"
-              >
-                {icon}
-              </a>
+                soonClassName="inline-flex items-center justify-center"
+              />
             ))}
+            <SocialSoonNote />
           </div>
         </div>
 
