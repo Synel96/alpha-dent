@@ -9,6 +9,7 @@ import {
   openMailto,
   signedBookingMessage,
 } from "@/lib/booking";
+import { trackEvent, type BookingSource } from "@/lib/analytics";
 import { CLINIC } from "@/lib/clinic-info";
 import { localizeHref, type Locale } from "@/lib/locale";
 import type { ServiceSlug } from "@/lib/service-cards";
@@ -23,7 +24,7 @@ import { cn } from "@/lib/utils";
 // instead: mail app, Gmail, Outlook.com, or copy the text. The buttons keep their mailto: href, so without
 // JavaScript (or with a modified click) they open the mail app directly.
 
-type OpenBooking = (service?: ServiceSlug) => void;
+type OpenBooking = (service: ServiceSlug | undefined, source: BookingSource) => void;
 
 const BookingContext = React.createContext<OpenBooking | null>(null);
 
@@ -33,7 +34,8 @@ export function BookingDialogProvider({ children }: { children: React.ReactNode 
   // Remounts the form on every open, so it starts from the template again.
   const [session, setSession] = React.useState(0);
 
-  const openBooking = React.useCallback<OpenBooking>((nextService) => {
+  const openBooking = React.useCallback<OpenBooking>((nextService, source) => {
+    trackEvent({ name: "Booking Open", props: { source, service: nextService ?? "none" } });
     setService(nextService);
     setSession((value) => value + 1);
     setOpen(true);
@@ -113,8 +115,10 @@ function BookingForm({ service }: { service?: ServiceSlug }) {
     // while the mail app takes over.
     if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
     if (isDesktopPointer()) {
+      trackEvent({ name: "Booking Submit", props: { device: "desktop" } });
       setSent("desktop");
     } else {
+      trackEvent({ name: "Booking Submit", props: { device: "mobile" } });
       setSent("mobile");
       openMailto(mailtoHref);
     }
@@ -288,6 +292,7 @@ function SendOptions({ subject, body, mailtoHref }: { subject: string; body: str
   const [copyState, setCopyState] = React.useState<"idle" | "copied" | "failed">("idle");
 
   const copy = async () => {
+    trackEvent({ name: "Booking Channel", props: { channel: "copy" } });
     try {
       await navigator.clipboard.writeText(body);
       setCopyState("copied");
@@ -298,16 +303,32 @@ function SendOptions({ subject, body, mailtoHref }: { subject: string; body: str
 
   return (
     <div className="space-y-3">
-      <a href={mailtoHref} className={cn(PRIMARY_BUTTON_CLASS, "w-full")}>
+      <a
+        href={mailtoHref}
+        onClick={() => trackEvent({ name: "Booking Channel", props: { channel: "mail-app" } })}
+        className={cn(PRIMARY_BUTTON_CLASS, "w-full")}
+      >
         <Send aria-hidden className="size-4" />
         {t("booking.dialog.mailApp")}
       </a>
       <div className="grid gap-3 sm:grid-cols-2">
-        <a href={webmail.gmail} target="_blank" rel="noopener noreferrer" className={cn(PRIMARY_BUTTON_CLASS, "font-medium")}>
+        <a
+          href={webmail.gmail}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackEvent({ name: "Booking Channel", props: { channel: "gmail" } })}
+          className={cn(PRIMARY_BUTTON_CLASS, "font-medium")}
+        >
           <ExternalLink aria-hidden className="size-4" />
           {t("booking.dialog.gmail")}
         </a>
-        <a href={webmail.outlook} target="_blank" rel="noopener noreferrer" className={cn(PRIMARY_BUTTON_CLASS, "font-medium")}>
+        <a
+          href={webmail.outlook}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackEvent({ name: "Booking Channel", props: { channel: "outlook" } })}
+          className={cn(PRIMARY_BUTTON_CLASS, "font-medium")}
+        >
           <ExternalLink aria-hidden className="size-4" />
           {t("booking.dialog.outlook")}
         </a>
@@ -378,7 +399,7 @@ function DialogHeader({
 function ContactFallback() {
   const { t } = useTranslation();
   return (
-    <p className="text-center text-xs leading-relaxed text-brand-gold-muted">
+    <p data-analytics-place="booking-dialog" className="text-center text-xs leading-relaxed text-brand-gold-muted">
       {t("booking.dialog.fallback")}{" "}
       <a href={`tel:${CLINIC.phoneE164}`} className="whitespace-nowrap text-white underline-offset-4 hover:underline">
         {CLINIC.phoneDisplay}
@@ -394,7 +415,7 @@ function ContactFallback() {
 // href + onClick for an "Időpontot kérek" link: a plain click opens the
 // modal; outside <BookingDialogProvider> (e.g. in page tests) or with a
 // modifier key it stays an ordinary mailto: link.
-export function useBookingCta(service?: ServiceSlug) {
+export function useBookingCta(source: BookingSource, service?: ServiceSlug) {
   const { t } = useTranslation();
   const openBooking = React.useContext(BookingContext);
   const href = bookingMailto(
@@ -406,7 +427,7 @@ export function useBookingCta(service?: ServiceSlug) {
     ? (event: React.MouseEvent<HTMLAnchorElement>) => {
         if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         event.preventDefault();
-        openBooking(service);
+        openBooking(service, source);
       }
     : undefined;
 

@@ -16,7 +16,7 @@ const PAGE_IMAGE = "https://res.cloudinary.com/dmwulp3dl/image/upload/v179276588
 
 function Page() {
   const { t } = useTranslation();
-  const bookingCta = useBookingCta("fogmegtartoKezelesek");
+  const bookingCta = useBookingCta("service-page", "fogmegtartoKezelesek");
   const { locale } = usePageContext();
 
   const paragraphs = t("services.fogmegtartoKezelesek.paragraphs", {

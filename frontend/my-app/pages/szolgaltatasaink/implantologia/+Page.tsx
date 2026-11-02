@@ -16,7 +16,7 @@ type Item = { title: string; text: string };
 
 function Page() {
   const { t } = useTranslation();
-  const bookingCta = useBookingCta("implantologia");
+  const bookingCta = useBookingCta("service-page", "implantologia");
   const { locale } = usePageContext();
 
   const cases = t("services.implantologia.cases", { returnObjects: true }) as Item[];

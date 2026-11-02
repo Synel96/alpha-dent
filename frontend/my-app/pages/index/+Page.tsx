@@ -69,7 +69,8 @@ function Page() {
   const whyUsParagraphs = t("home.whyUs.paragraphs", { returnObjects: true }) as string[];
   const missionParagraphs = t("home.mission.paragraphs", { returnObjects: true }) as string[];
 
-  const bookingCta = useBookingCta();
+  const heroBooking = useBookingCta("hero");
+  const contactBooking = useBookingCta("home-contact");
 
   return (
     <>
@@ -89,13 +90,13 @@ function Page() {
             <span className="block text-brand-gold-light/85 sm:inline">{t("home.hero.brandLine")}</span>
           </>
         }
-        ctaHref={bookingCta.href}
-        onCtaClick={bookingCta.onClick}
+        ctaHref={heroBooking.href}
+        onCtaClick={heroBooking.onClick}
         ctaLabel={t("home.intro.ctaButton")}
         secondaryAction={
           // Phones only: one tap to call. From md up the status card beside
           // the copy already has the number.
-          <a href={`tel:${CLINIC.phoneE164}`} className={cn(GHOST_BUTTON_CLASS, "md:hidden")}>
+          <a href={`tel:${CLINIC.phoneE164}`} data-analytics-place="hero" className={cn(GHOST_BUTTON_CLASS, "md:hidden")}>
             <Phone aria-hidden className="size-4" />
             {t("home.hero.call")}
           </a>
@@ -276,8 +277,8 @@ function Page() {
             </p>
             <div className="pt-2">
               <CtaButton
-                href={bookingCta.href}
-                onClick={bookingCta.onClick}
+                href={contactBooking.href}
+                onClick={contactBooking.onClick}
                 badge={t("nav.contact")}
                 title={t("home.intro.ctaButton")}
               />

@@ -53,7 +53,7 @@ function Section({
 
 function Page() {
   const { t } = useTranslation();
-  const bookingCta = useBookingCta();
+  const bookingCta = useBookingCta("clinic-page");
   const { locale } = usePageContext();
   const list = (key: string) => t(key, { returnObjects: true }) as string[];
 

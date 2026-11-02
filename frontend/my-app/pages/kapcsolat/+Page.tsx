@@ -58,7 +58,7 @@ function Page() {
   const { todayWeekday } = useOpenStatus();
 
   return (
-    <PageContainer className="py-10 md:py-14 space-y-10 md:space-y-12">
+    <PageContainer data-analytics-place="contact-page" className="py-10 md:py-14 space-y-10 md:space-y-12">
       <RevealGroup skip={1}>
         <TextImageReveal
           eyebrow={t("contactPage.eyebrow")}

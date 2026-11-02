@@ -23,7 +23,7 @@ type ComfortItem = { title: string; text: string };
 
 function Page() {
   const { t } = useTranslation();
-  const bookingCta = useBookingCta("szajsebeszet");
+  const bookingCta = useBookingCta("service-page", "szajsebeszet");
   const { locale } = usePageContext();
 
   const items = t("services.szajsebeszet.items", { returnObjects: true }) as string[];

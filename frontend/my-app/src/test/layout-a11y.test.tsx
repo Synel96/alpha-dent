@@ -5,7 +5,7 @@ vi.mock("vike-react/usePageContext", () => ({
   usePageContext: () => ({ locale: "hu", urlPathname: "/hu" }),
 }));
 vi.mock("vike/client/router", () => ({ navigate: vi.fn() }));
-vi.mock("../../lib/analytics", () => ({ startAnalytics: vi.fn() }));
+vi.mock("../../lib/analytics", () => ({ startAnalytics: vi.fn(), trackEvent: vi.fn() }));
 
 import { BookingDialogProvider } from "../../components/ui/booking-dialog";
 import { Layout } from "../../pages/+Layout";
