@@ -8,9 +8,11 @@ import vercelConfig from "../../vercel.json";
 const domainRedirects = vercelConfig.redirects.filter((redirect) => "has" in redirect);
 const pathRedirects = vercelConfig.redirects.filter((redirect) => !("has" in redirect));
 
-const validUrls = new Set(
-  PAGE_PATHNAMES.flatMap((page) => LOCALES.map((locale) => localizeHref(locale, page)))
-);
+const validUrls = new Set([
+  ...PAGE_PATHNAMES.flatMap((page) => LOCALES.map((locale) => localizeHref(locale, page))),
+  // The old WordPress sitemap points crawlers to the current one.
+  "/sitemap.xml",
+]);
 
 describe("vercel.json átirányítások", () => {
   it("minden átirányítás egy létező, lefordított oldalra mutat, és végleges (301/308)", () => {
@@ -55,6 +57,16 @@ describe("vercel.json átirányítások", () => {
     ]);
     // First, so they win over the path redirects (Vercel applies the first match).
     expect(vercelConfig.redirects.slice(0, 2)).toEqual(domainRedirects);
+  });
+
+  it("a régi WordPress-oldal címei, amiket a robotok még keresnek, át vannak irányítva", () => {
+    const destinationOf = new Map(pathRedirects.map((r) => [r.source, r.destination]));
+    expect(destinationOf.get("/wp-sitemap.xml")).toBe("/sitemap.xml");
+    expect(destinationOf.get("/Datenschutz")).toBe("/de/datenschutz");
+    expect(destinationOf.get("/politica-sulla-riservatezza")).toBe("/it/privacy");
+    expect(destinationOf.get("/en/h")).toBe("/en");
+    // Old image attachment pages (/alphadent-6/h, /alpha-dent-4/h, /alphadent-9-3).
+    expect(destinationOf.get("/:slug(alpha-?dent-[^/]+)/:rest*")).toBe("/hu/galeria");
   });
 
   it("a perjelre végződő címek (pl. a régi WordPress-oldal /de/ címei) a perjel nélküli változatra irányítanak", () => {
