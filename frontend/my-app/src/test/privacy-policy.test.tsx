@@ -37,12 +37,14 @@ describe("Adatkezelési tájékoztató", () => {
   it("a cégadatokat a közös forrásból veszi, és a ki nem töltött mezők nem jelennek meg", () => {
     for (const locale of LOCALES) {
       const text = textOf(locale);
-      expect(text).toContain("Alphadent Kft.");
+      expect(text).toContain("AlphaDent Fogtechnikai Kft.");
       expect(text).toContain("9400 Sopron, Arany János u. 13.");
       expect(text).toContain("info@alpha-dent.eu");
       expect(text).toContain("08-09-017400");
       expect(text).toContain("14027493-2-08");
       expect(text).toContain("Guzsván Csaba");
+      expect(text).toContain("591-10/2011");
+      expect(text).toContain("GY-06/NEO/18696-2/2021");
       // Only the director's name: no birth date or private address on a public page.
       expect(text).not.toContain("Zerge");
       expect(text).not.toMatch(/\bnull\b|\bundefined\b/);

@@ -41,7 +41,9 @@ export const CLINIC_ADDRESS_LINE = `${CLINIC.postalCode} ${CLINIC.city}, ${CLINI
 // simply not shown on the page - fill them in from the company register
 // (e-cegjegyzek.hu) when available.
 export const COMPANY = {
-  legalName: "Alphadent Kft.",
+  // Full company name with the legal form abbreviated (in full: AlphaDent
+  // Fogtechnikai Korlátolt Felelősségű Társaság; short name: AlphaDent Kft.).
+  legalName: "AlphaDent Fogtechnikai Kft.",
   // Registered seat, as in the company register.
   registeredSeat: "9400 Sopron, Arany J. utca 13." as string | null,
   // Cégjegyzékszám.
@@ -54,7 +56,8 @@ export const COMPANY = {
   // Data protection officer's contact, only if one has been appointed.
   dataProtectionOfficer: null as string | null,
   // Healthcare operating licence: number and issuing authority.
-  operatingLicence: null as string | null,
+  operatingLicence:
+    "591-10/2011 (módosítva: GY-06/NEO/18696-2/2021, Győr-Moson-Sopron Megyei Kormányhivatal Soproni Járási Hivatal)" as string | null,
 };
 
 // Date the current privacy notice takes effect (YYYY-MM-DD).

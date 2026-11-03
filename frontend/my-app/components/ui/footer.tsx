@@ -1,6 +1,7 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
+import { COMPANY } from "@/lib/clinic-info";
 import { localizeHref } from "@/lib/locale";
 import { AlphadentLogo } from "./alphadent-logo";
 import { SocialLink, SocialSoonNote } from "./social-link";
@@ -143,7 +144,7 @@ export function Footer() {
 
       <div className="flex flex-col items-center gap-2 border-t border-brand-border px-6 py-5 text-center text-xs tracking-wide text-brand-gold-muted sm:flex-row sm:justify-center sm:gap-4">
         <span>
-          &copy; {new Date().getFullYear()} Alphadent Kft. - {t("footer.allRightsReserved")}
+          &copy; {new Date().getFullYear()} {COMPANY.legalName} - {t("footer.allRightsReserved")}
         </span>
         <a
           href={localizeHref(locale, "/adatkezelesi-tajekoztato")}
