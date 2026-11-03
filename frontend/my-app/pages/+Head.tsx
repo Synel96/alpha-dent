@@ -33,7 +33,9 @@ export function Head() {
       ))}
       {/* The clinic's logo mark: favicon.ico for browsers and crawlers that
           only look at the site root, the SVG for the rest, a PNG for iOS
-          home screens. ?v= makes browsers drop a cached older icon - bump it
+          home screens (also copied to /apple-touch-icon.png and
+          /apple-touch-icon-precomposed.png for Apple clients that only look
+          at the root). ?v= makes browsers drop a cached older icon - bump it
           whenever the icons change. */}
       <link rel="icon" href="/favicon.ico?v=2" sizes="32x32" />
       <link rel="icon" href="/brand/favicon.svg?v=2" type="image/svg+xml" />
