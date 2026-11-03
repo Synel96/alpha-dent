@@ -217,6 +217,66 @@
       "source": "/it/tortenetunk",
       "destination": "/it",
       "permanent": true
+    },
+    {
+      "source": "/wp-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/hu",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/en/contact",
+      "permanent": true
+    },
+    {
+      "source": "/Datenschutz",
+      "destination": "/de/datenschutz",
+      "permanent": true
+    },
+    {
+      "source": "/datenschutz",
+      "destination": "/de/datenschutz",
+      "permanent": true
+    },
+    {
+      "source": "/impressum",
+      "destination": "/de/datenschutz",
+      "permanent": true
+    },
+    {
+      "source": "/politica-sulla-riservatezza",
+      "destination": "/it/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-choose-a-great-dentist-2",
+      "destination": "/en",
+      "permanent": true
+    },
+    {
+      "source": "/zuhause/:path*",
+      "destination": "/de",
+      "permanent": true
+    },
+    {
+      "source": "/en/h",
+      "destination": "/en",
+      "permanent": true
+    },
+    {
+      "source": "/category/:path*",
+      "destination": "/hu",
+      "permanent": true
+    },
+    {
+      "source": "/:slug(alpha-?dent-[^/]+)/:rest*",
+      "destination": "/hu/galeria",
+      "permanent": true
     }
   ],
   "headers": [
