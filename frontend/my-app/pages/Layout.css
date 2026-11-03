@@ -36,6 +36,15 @@
   * {
     border-color: #1c1c20;
   }
+
+  /* WCAG 2.4.7: every link and control shows where keyboard focus is, in
+     the same gold as the components' own focus-visible rings (brand
+     gold-light at 70%). Those that draw a ring of their own turn this
+     outline off with focus-visible:outline-none. */
+  :focus-visible {
+    outline: 2px solid rgb(228 196 106 / 0.7);
+    outline-offset: 2px;
+  }
 }
 
 /* Loading screen - glowing alpha animation. The glow is a blurred ::before
