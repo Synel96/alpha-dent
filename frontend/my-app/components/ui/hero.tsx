@@ -199,6 +199,50 @@ export function Hero({
     return () => observer.disconnect();
   }, [videoUrl]);
 
+  // The browser can pause the video on its own: a locked screen, a switch to
+  // another app or tab, a battery saver (iOS especially). Nothing scrolls, so
+  // the observer above never fires again and the hero would stay frozen on
+  // that frame - wherever it happened to be on that device. So whenever the
+  // page is shown again, play it again (unless the visitor paused it).
+  React.useEffect(() => {
+    if (!videoUrl) return;
+    const resume = () => {
+      if (document.visibilityState === "visible") playIfWanted();
+    };
+    document.addEventListener("visibilitychange", resume);
+    window.addEventListener("pageshow", resume);
+    window.addEventListener("focus", resume);
+    return () => {
+      document.removeEventListener("visibilitychange", resume);
+      window.removeEventListener("pageshow", resume);
+      window.removeEventListener("focus", resume);
+    };
+  }, [videoUrl]);
+
+  // A playing video whose time stops moving has stalled (a decoder hiccup, or
+  // a damaged copy in the browser cache that ends early without "ended", so
+  // the loop never restarts it). Every couple of seconds check that it moves;
+  // if not, restart it from the beginning.
+  React.useEffect(() => {
+    if (!videoUrl) return;
+    let lastTime = -1;
+    const timer = window.setInterval(() => {
+      const video = videoRef.current;
+      if (!video || video.paused || !inViewRef.current || document.visibilityState !== "visible") {
+        lastTime = -1;
+        return;
+      }
+      if (video.currentTime === lastTime) {
+        video.currentTime = 0;
+        void video.play().catch(() => {});
+        lastTime = -1;
+        return;
+      }
+      lastTime = video.currentTime;
+    }, 2000);
+    return () => window.clearInterval(timer);
+  }, [videoUrl]);
+
   React.useEffect(() => {
     if (!aside) return;
     const query = window.matchMedia(PHONE_QUERY);
