@@ -53,6 +53,10 @@ const FIT_FILL_CLASS = "h-full w-full scale-110 object-cover blur-2xl brightness
 // sharp video (seconds) before it is put back on its time.
 const MAX_VIDEO_STALLS = 3;
 const FILL_MAX_DRIFT = 0.5;
+// After the page is shown again, a phone takes a moment to bring the video
+// decoder back. The watchdog leaves the video alone meanwhile, or it would
+// take that pause for a stall and jump the video around (seen as flicker).
+const RESUME_GRACE_MS = 4000;
 
 // The video covers the full-height hero (on portrait phones FIT_HEIGHT of
 // it), so it is scaled by that height as well as the screen width. Pick the
@@ -191,6 +195,8 @@ export function Hero({
   // Set once the stall watchdog has given up on this device: the still photo
   // stays, and nothing (scrolling back, returning to the tab) restarts it.
   const gaveUpRef = React.useRef(false);
+  // When the page was last shown again (see RESUME_GRACE_MS).
+  const resumedAtRef = React.useRef(0);
 
   // Starts downloading the whole video as soon as the page itself has loaded
   // (no lazy loading - it doesn't wait for a scroll), and only hands it to the
@@ -260,7 +266,17 @@ export function Hero({
   React.useEffect(() => {
     if (!videoUrl) return;
     const resume = () => {
-      if (document.visibilityState === "visible") playIfWanted();
+      if (document.visibilityState !== "visible") return;
+      resumedAtRef.current = performance.now();
+      const video = videoRef.current;
+      // Paused by the phone while away: until it plays again it may show a
+      // blank or stale frame. Show the photo underneath meanwhile; it fades
+      // back to the video once that is playing (onPlaying), instead of
+      // flashing.
+      if (video?.paused && !userPausedRef.current && !gaveUpRef.current && inViewRef.current) {
+        setVideoVisible(false);
+      }
+      playIfWanted();
     };
     document.addEventListener("visibilitychange", resume);
     window.addEventListener("pageshow", resume);
@@ -277,15 +293,20 @@ export function Hero({
   // the loop never restarts it). Every couple of seconds check that it moves;
   // if not, restart it from the beginning. If it keeps stalling, this device
   // can't play it: fade back to the still photo instead of restarting forever.
-  // The blurred fill (portrait phones) is kept on the sharp video's time here
-  // too, so it neither drifts away from it nor stays frozen on its own.
+  // The blurred fill (portrait phones) is restarted with it.
   React.useEffect(() => {
     if (!videoUrl) return;
     let lastTime = -1;
     let stalls = 0;
     const timer = window.setInterval(() => {
       const video = videoRef.current;
-      if (!video || video.paused || !inViewRef.current || document.visibilityState !== "visible") {
+      if (
+        !video ||
+        video.paused ||
+        !inViewRef.current ||
+        document.visibilityState !== "visible" ||
+        performance.now() - resumedAtRef.current < RESUME_GRACE_MS
+      ) {
         lastTime = -1;
         return;
       }
@@ -305,16 +326,16 @@ export function Hero({
           setVideoVisible(false);
           return;
         }
-        video.currentTime = 0;
-        if (fill) fill.currentTime = 0;
+        // First try to nudge the decoder where it is (no visible jump), and
+        // only then start over from the beginning.
+        const restartAt = stalls === 1 ? video.currentTime : 0;
+        video.currentTime = restartAt;
+        if (fill) fill.currentTime = restartAt;
         void video.play().catch(() => {});
         return;
       }
       stalls = 0;
       lastTime = video.currentTime;
-      if (fill && !fill.paused && Math.abs(fill.currentTime - video.currentTime) > FILL_MAX_DRIFT) {
-        fill.currentTime = video.currentTime;
-      }
     }, 2000);
     return () => window.clearInterval(timer);
   }, [videoUrl]);
@@ -344,8 +365,15 @@ export function Hero({
     const video = videoRef.current;
     const fill = fillVideoRef.current;
     if (!video || !fill) return;
-    if (video.paused) fill.pause();
-    else void fill.play().catch(() => {});
+    if (video.paused) {
+      fill.pause();
+      return;
+    }
+    // Put it back on the sharp video's time once, when playback (re)starts -
+    // e.g. after the phone paused the two at slightly different moments - not
+    // over and over, which would show as flicker.
+    if (Math.abs(fill.currentTime - video.currentTime) > FILL_MAX_DRIFT) fill.currentTime = video.currentTime;
+    void fill.play().catch(() => {});
   };
   React.useEffect(syncFill, [fitMode, videoUrl]);
 
