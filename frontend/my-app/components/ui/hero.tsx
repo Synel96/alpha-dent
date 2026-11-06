@@ -48,6 +48,11 @@ const FIT_HEIGHT = 0.6;
 const FIT_BAND_CLASS =
   "max-md:portrait:inset-auto max-md:portrait:inset-x-0 max-md:portrait:top-1/2 max-md:portrait:h-[60%] max-md:portrait:-translate-y-1/2 max-md:portrait:[mask-image:linear-gradient(to_bottom,transparent,black_22%,black_78%,transparent)]";
 const FIT_FILL_CLASS = "h-full w-full scale-110 object-cover blur-2xl brightness-75";
+// Stall watchdog (see the effect in Hero): restarts before giving up and
+// showing the still photo, and how far the blurred fill may drift from the
+// sharp video (seconds) before it is put back on its time.
+const MAX_VIDEO_STALLS = 3;
+const FILL_MAX_DRIFT = 0.5;
 
 // The video covers the full-height hero (on portrait phones FIT_HEIGHT of
 // it), so it is scaled by that height as well as the screen width. Pick the
@@ -160,9 +165,15 @@ export function Hero({
   const [videoUrl, setVideoUrl] = React.useState<string | null>(null);
   const [videoVisible, setVideoVisible] = React.useState(false);
   const [userPaused, setUserPaused] = React.useState(false);
+  // Whether the video is actually playing right now (its play/pause events),
+  // which the pause button shows - the browser can pause it too.
+  const [videoPlaying, setVideoPlaying] = React.useState(false);
   const userPausedRef = React.useRef(false);
   userPausedRef.current = userPaused;
   const inViewRef = React.useRef(true);
+  // Set once the stall watchdog has given up on this device: the still photo
+  // stays, and nothing (scrolling back, returning to the tab) restarts it.
+  const gaveUpRef = React.useRef(false);
 
   // Starts downloading the whole video as soon as the page itself has loaded
   // (no lazy loading - it doesn't wait for a scroll), and only hands it to the
@@ -206,7 +217,7 @@ export function Hero({
 
   const playIfWanted = () => {
     const video = videoRef.current;
-    if (video && inViewRef.current && !userPausedRef.current) void video.play().catch(() => {});
+    if (video && inViewRef.current && !userPausedRef.current && !gaveUpRef.current) void video.play().catch(() => {});
   };
 
   // Plays only while the hero is on screen (and the visitor hasn't paused it),
@@ -247,23 +258,46 @@ export function Hero({
   // A playing video whose time stops moving has stalled (a decoder hiccup, or
   // a damaged copy in the browser cache that ends early without "ended", so
   // the loop never restarts it). Every couple of seconds check that it moves;
-  // if not, restart it from the beginning.
+  // if not, restart it from the beginning. If it keeps stalling, this device
+  // can't play it: fade back to the still photo instead of restarting forever.
+  // The blurred fill (portrait phones) is kept on the sharp video's time here
+  // too, so it neither drifts away from it nor stays frozen on its own.
   React.useEffect(() => {
     if (!videoUrl) return;
     let lastTime = -1;
+    let stalls = 0;
     const timer = window.setInterval(() => {
       const video = videoRef.current;
       if (!video || video.paused || !inViewRef.current || document.visibilityState !== "visible") {
         lastTime = -1;
         return;
       }
-      if (video.currentTime === lastTime) {
-        video.currentTime = 0;
-        void video.play().catch(() => {});
-        lastTime = -1;
+      const fill = fillVideoRef.current;
+      if (lastTime < 0) {
+        // First look since a (re)start: just remember where it is.
+        lastTime = video.currentTime;
         return;
       }
+      if (video.currentTime === lastTime) {
+        stalls += 1;
+        lastTime = -1;
+        if (stalls >= MAX_VIDEO_STALLS) {
+          window.clearInterval(timer);
+          gaveUpRef.current = true;
+          video.pause();
+          setVideoVisible(false);
+          return;
+        }
+        video.currentTime = 0;
+        if (fill) fill.currentTime = 0;
+        void video.play().catch(() => {});
+        return;
+      }
+      stalls = 0;
       lastTime = video.currentTime;
+      if (fill && !fill.paused && Math.abs(fill.currentTime - video.currentTime) > FILL_MAX_DRIFT) {
+        fill.currentTime = video.currentTime;
+      }
     }, 2000);
     return () => window.clearInterval(timer);
   }, [videoUrl]);
@@ -298,12 +332,20 @@ export function Hero({
   };
   React.useEffect(syncFill, [fitMode, videoUrl]);
 
+  // Goes by whether the video really is playing, not by the last tap: when
+  // the browser pauses it on its own (and won't let the page restart it, as
+  // in iOS Low Power Mode), the button shows Play, and one tap - a user
+  // gesture, which the browser does allow - starts it again.
   const toggleVideo = () => {
     const video = videoRef.current;
     if (!video) return;
-    if (userPaused) void video.play().catch(() => {});
-    else video.pause();
-    setUserPaused(!userPaused);
+    if (video.paused) {
+      setUserPaused(false);
+      void video.play().catch(() => {});
+    } else {
+      setUserPaused(true);
+      video.pause();
+    }
   };
 
   React.useLayoutEffect(() => {
@@ -423,8 +465,14 @@ export function Hero({
                 // Already fully downloaded; start once it is decoded and ready.
                 onCanPlayThrough={playIfWanted}
                 onPlaying={() => setVideoVisible(true)}
-                onPlay={syncFill}
-                onPause={syncFill}
+                onPlay={() => {
+                  setVideoPlaying(true);
+                  syncFill();
+                }}
+                onPause={() => {
+                  setVideoPlaying(false);
+                  syncFill();
+                }}
                 className={cn(
                   "absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out",
                   videoVisible ? "opacity-100" : "opacity-0"
@@ -448,11 +496,11 @@ export function Hero({
           <button
             type="button"
             onClick={toggleVideo}
-            aria-label={userPaused ? t("common.heroVideo.play") : t("common.heroVideo.pause")}
-            aria-pressed={userPaused}
+            aria-label={videoPlaying ? t("common.heroVideo.pause") : t("common.heroVideo.play")}
+            aria-pressed={!videoPlaying}
             className="absolute bottom-5 right-5 z-20 inline-flex size-10 items-center justify-center rounded-full border border-brand-gold/40 bg-brand-black/60 text-brand-gold-light backdrop-blur-sm transition-colors hover:border-brand-gold hover:bg-brand-gold/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70 sm:bottom-6 sm:right-6"
           >
-            {userPaused ? <Play aria-hidden className="size-4" /> : <Pause aria-hidden className="size-4" />}
+            {videoPlaying ? <Pause aria-hidden className="size-4" /> : <Play aria-hidden className="size-4" />}
           </button>
         ) : null}
 
