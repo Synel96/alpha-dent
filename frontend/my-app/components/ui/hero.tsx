@@ -197,6 +197,11 @@ export function Hero({
   const gaveUpRef = React.useRef(false);
   // When the page was last shown again (see RESUME_GRACE_MS).
   const resumedAtRef = React.useRef(0);
+  // The browser refused to start the video on its own (iOS Low Power Mode
+  // refuses every autoplay, muted or not, on every site). Only a tap can
+  // start it then: the play button shows, and the visitor's first tap
+  // anywhere on the page starts it too.
+  const [autoplayBlocked, setAutoplayBlocked] = React.useState(false);
 
   // Starts downloading the whole video as soon as the page itself has loaded
   // (no lazy loading - it doesn't wait for a scroll), and only hands it to the
@@ -240,8 +245,28 @@ export function Hero({
 
   const playIfWanted = () => {
     const video = videoRef.current;
-    if (video && inViewRef.current && !userPausedRef.current && !gaveUpRef.current) void video.play().catch(() => {});
+    if (!video || !inViewRef.current || userPausedRef.current || gaveUpRef.current) return;
+    video.play().catch((error: unknown) => {
+      // Refused (NotAllowedError in iOS Low Power Mode, but browsers word it
+      // differently): offer the play button. An AbortError only means a
+      // pause() cut this play() short - nothing to offer then.
+      if (!(error instanceof DOMException && error.name === "AbortError")) setAutoplayBlocked(true);
+    });
   };
+
+  // While autoplay is refused: the visitor's first tap anywhere (a menu, a
+  // button, the page itself) is a gesture the browser lets start the video.
+  // Scrolling doesn't count as one in iOS, so it waits for a real tap.
+  React.useEffect(() => {
+    if (!autoplayBlocked) return;
+    const startOnTap = () => playIfWanted();
+    document.addEventListener("touchend", startOnTap, { capture: true, passive: true });
+    document.addEventListener("click", startOnTap, { capture: true });
+    return () => {
+      document.removeEventListener("touchend", startOnTap, { capture: true });
+      document.removeEventListener("click", startOnTap, { capture: true });
+    };
+  }, [autoplayBlocked]);
 
   // Plays only while the hero is on screen (and the visitor hasn't paused it),
   // so a scrolled-away video costs no CPU or battery.
@@ -381,10 +406,14 @@ export function Hero({
   // the browser pauses it on its own (and won't let the page restart it, as
   // in iOS Low Power Mode), the button shows Play, and one tap - a user
   // gesture, which the browser does allow - starts it again.
+  // videoPlaying (the play/pause events), not video.paused: when autoplay is
+  // refused, the page-wide first-tap listener has already called play() on
+  // this very tap, so video.paused is already false here - going by it, the
+  // button would stop the video it was tapped to start.
   const toggleVideo = () => {
     const video = videoRef.current;
     if (!video) return;
-    if (video.paused) {
+    if (!videoPlaying) {
       setUserPaused(false);
       void video.play().catch(() => {});
     } else {
@@ -509,7 +538,10 @@ export function Hero({
                 disablePictureInPicture
                 // Already fully downloaded; start once it is decoded and ready.
                 onCanPlayThrough={playIfWanted}
-                onPlaying={() => setVideoVisible(true)}
+                onPlaying={() => {
+                  setVideoVisible(true);
+                  setAutoplayBlocked(false);
+                }}
                 onPlay={() => {
                   setVideoPlaying(true);
                   syncFill();
@@ -536,8 +568,9 @@ export function Hero({
           <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-black to-transparent" />
         </div>
 
-        {/* WCAG 2.2.2: moving content that plays on its own needs a way to stop it. */}
-        {videoVisible ? (
+        {/* WCAG 2.2.2: moving content that plays on its own needs a way to stop it.
+            Also the way to start it where the browser won't do so by itself. */}
+        {videoVisible || autoplayBlocked ? (
           <button
             type="button"
             onClick={toggleVideo}
