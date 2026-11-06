@@ -56,18 +56,23 @@ export function cloudinarySrcSet(
   return widths.map((width) => `${cloudinaryUrl(url, { ...options, width })} ${width}w`).join(", ");
 }
 
-// A Cloudinary video in the given container format, scaled down to at most
-// `width` pixels wide (never up). q_auto:best: the hero video is large and
-// prominent, and the default q_auto bitrate showed blocky compression on it.
-// Cloudinary transcodes to whatever the extension asks for, so one upload
-// serves both WebM (VP9, smaller) and MP4 (H.264, for Safari/iOS).
-// ac_none drops the audio track: the video always plays muted, and the WebM's
-// Vorbis audio is a codec Safari can't play at all.
-export function cloudinaryVideoUrl(url: string, { width, extension }: { width: number; extension: "webm" | "mp4" }): string {
+// The encodings the hero video is served in: WebM (VP9), MP4 with HEVC
+// (H.265, what Apple devices decode in hardware) and MP4 with H.264 (plays
+// everywhere, but is the largest of the three).
+export type VideoFormat = "webm" | "hevc" | "mp4";
+
+// A Cloudinary video in the given format, scaled down to at most `width`
+// pixels wide (never up). q_auto:best: the hero video is large and prominent,
+// and the default q_auto bitrate showed blocky compression on it. Cloudinary
+// transcodes to whatever the extension (and vc_h265 for HEVC) asks for, so one
+// upload serves all three. ac_none drops the audio track: the video always
+// plays muted, so it would only add bytes.
+export function cloudinaryVideoUrl(url: string, { width, format }: { width: number; format: VideoFormat }): string {
   if (!isCloudinaryUrl(url)) return url;
   const insertAt = url.indexOf(UPLOAD_MARKER) + UPLOAD_MARKER.length;
-  const withTransform = `${url.slice(0, insertAt)}w_${width},c_limit,q_auto:best,ac_none/${url.slice(insertAt)}`;
-  return withTransform.replace(/\.[a-z0-9]+$/i, `.${extension}`);
+  const codec = format === "hevc" ? ",vc_h265" : "";
+  const withTransform = `${url.slice(0, insertAt)}w_${width},c_limit,q_auto:best,ac_none${codec}/${url.slice(insertAt)}`;
+  return withTransform.replace(/\.[a-z0-9]+$/i, format === "webm" ? ".webm" : ".mp4");
 }
 
 // Roughly matched to the grids these widths are used in (see

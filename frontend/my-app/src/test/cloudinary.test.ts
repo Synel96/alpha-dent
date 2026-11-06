@@ -58,11 +58,17 @@ describe("Cloudinary videó", () => {
   const video = "https://res.cloudinary.com/demo/video/upload/v1/clip_abc.webm";
 
   it("a videót a kért konténerformátumban, legfeljebb a megadott szélességben, hang nélkül kéri", () => {
-    expect(cloudinaryVideoUrl(video, { width: 1280, extension: "mp4" })).toBe(
+    expect(cloudinaryVideoUrl(video, { width: 1280, format: "mp4" })).toBe(
       "https://res.cloudinary.com/demo/video/upload/w_1280,c_limit,q_auto:best,ac_none/v1/clip_abc.mp4"
     );
-    expect(cloudinaryVideoUrl(video, { width: 1920, extension: "webm" })).toBe(
+    expect(cloudinaryVideoUrl(video, { width: 1920, format: "webm" })).toBe(
       "https://res.cloudinary.com/demo/video/upload/w_1920,c_limit,q_auto:best,ac_none/v1/clip_abc.webm"
+    );
+  });
+
+  it("HEVC-t MP4 konténerben, vc_h265-tel kér", () => {
+    expect(cloudinaryVideoUrl(video, { width: 1920, format: "hevc" })).toBe(
+      "https://res.cloudinary.com/demo/video/upload/w_1920,c_limit,q_auto:best,ac_none,vc_h265/v1/clip_abc.mp4"
     );
   });
 });

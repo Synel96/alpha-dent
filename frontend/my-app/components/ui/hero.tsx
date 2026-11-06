@@ -2,7 +2,7 @@ import React from "react";
 import { Pause, Play, type LucideIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
-import { cloudinaryUrl, cloudinarySrcSet, cloudinaryVideoUrl } from "@/lib/cloudinary";
+import { cloudinaryUrl, cloudinarySrcSet, cloudinaryVideoUrl, type VideoFormat } from "@/lib/cloudinary";
 import { CtaButton } from "@/components/ui/cta-button";
 
 // Layout's navbar reads this to fade from transparent (over the hero media)
@@ -65,30 +65,47 @@ function heroVideoWidth(): number {
   return HERO_VIDEO_WIDTHS.find((width) => width >= needed) ?? HERO_VIDEO_WIDTHS[HERO_VIDEO_WIDTHS.length - 1];
 }
 
-// WebM (VP9) is smaller, but only where the device decodes it in hardware.
-// iPhones and iPads report they can play VP9, yet many decode it in software,
-// which can't keep up with this clip: it froze a moment after it started, on
-// each device at a different frame. H.264 (MP4) is hardware-decoded
-// everywhere, so anything not known to be smooth and power-efficient gets that.
-async function heroVideoExtension(width: number): Promise<"webm" | "mp4"> {
-  if (!document.createElement("video").canPlayType('video/webm; codecs="vp9"')) return "mp4";
+// Whether this device can decode `contentType` smoothly and in hardware
+// ("power efficient"). Without the Media Capabilities API, canPlayType's yes
+// is all there is to go by.
+async function decodesWell(contentType: string, width: number): Promise<boolean> {
+  if (!document.createElement("video").canPlayType(contentType)) return false;
   const capabilities = navigator.mediaCapabilities;
-  if (!capabilities?.decodingInfo) return "webm";
+  if (!capabilities?.decodingInfo) return true;
   try {
     const info = await capabilities.decodingInfo({
       type: "file",
-      video: {
-        contentType: 'video/webm; codecs="vp09.00.40.08"',
-        width,
-        height: Math.round((width * 9) / 16),
-        bitrate: 1_000_000,
-        framerate: 30,
-      },
+      video: { contentType, width, height: Math.round((width * 9) / 16), bitrate: 1_000_000, framerate: 30 },
     });
-    return info.supported && info.smooth && info.powerEfficient ? "webm" : "mp4";
+    return info.supported && info.smooth && info.powerEfficient;
   } catch {
-    return "mp4";
+    return false;
   }
+}
+
+// Apple devices: iPhone, iPad, Mac Safari (every browser on iOS is Safari's
+// engine underneath, and reports Apple as its vendor too).
+function isAppleWebKit(): boolean {
+  return navigator.vendor === "Apple Computer, Inc.";
+}
+
+// Main profile, level 4.0: 1080p at 30 fps.
+const HEVC_TYPE = 'video/mp4; codecs="hvc1.1.6.L120.90"';
+// VP9 profile 0, level 4.0, 8-bit.
+const VP9_TYPE = 'video/webm; codecs="vp09.00.40.08"';
+
+// The smallest encoding this device plays smoothly in hardware:
+// - Apple devices: HEVC (about 1.7 MB at 1920 wide), which they have decoded
+//   in hardware since the iPhone 7. They report they can play VP9 too, but
+//   the WebM froze on iPhones and iPads a moment after it started (decoded in
+//   software, it can't keep up), each device at a different frame.
+// - Everything else: WebM (VP9, about 1.3 MB) where it is hardware-decoded,
+//   else HEVC if that is, else H.264 MP4 (about 4 MB, but it plays anywhere).
+async function heroVideoFormat(width: number): Promise<VideoFormat> {
+  if (isAppleWebKit() && (await decodesWell(HEVC_TYPE, width))) return "hevc";
+  if (await decodesWell(VP9_TYPE, width)) return "webm";
+  if (await decodesWell(HEVC_TYPE, width)) return "hevc";
+  return "mp4";
 }
 
 // Whether to fetch the background video at all: never for visitors who ask
@@ -189,9 +206,9 @@ export function Hero({
     let objectUrl: string | null = null;
     const start = () => {
       const width = heroVideoWidth();
-      heroVideoExtension(width)
-        .then((extension) =>
-          fetch(cloudinaryVideoUrl(videoSrc, { width, extension }), {
+      heroVideoFormat(width)
+        .then((format) =>
+          fetch(cloudinaryVideoUrl(videoSrc, { width, format }), {
             credentials: "omit",
             mode: "cors",
             referrerPolicy: "no-referrer",
