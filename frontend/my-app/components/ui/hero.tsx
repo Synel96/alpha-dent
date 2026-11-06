@@ -60,9 +60,30 @@ function heroVideoWidth(): number {
   return HERO_VIDEO_WIDTHS.find((width) => width >= needed) ?? HERO_VIDEO_WIDTHS[HERO_VIDEO_WIDTHS.length - 1];
 }
 
-// WebM (VP9) is smaller; MP4 (H.264) for browsers without it, e.g. older Safari.
-function heroVideoExtension(): "webm" | "mp4" {
-  return document.createElement("video").canPlayType('video/webm; codecs="vp9"') ? "webm" : "mp4";
+// WebM (VP9) is smaller, but only where the device decodes it in hardware.
+// iPhones and iPads report they can play VP9, yet many decode it in software,
+// which can't keep up with this clip: it froze a moment after it started, on
+// each device at a different frame. H.264 (MP4) is hardware-decoded
+// everywhere, so anything not known to be smooth and power-efficient gets that.
+async function heroVideoExtension(width: number): Promise<"webm" | "mp4"> {
+  if (!document.createElement("video").canPlayType('video/webm; codecs="vp9"')) return "mp4";
+  const capabilities = navigator.mediaCapabilities;
+  if (!capabilities?.decodingInfo) return "webm";
+  try {
+    const info = await capabilities.decodingInfo({
+      type: "file",
+      video: {
+        contentType: 'video/webm; codecs="vp09.00.40.08"',
+        width,
+        height: Math.round((width * 9) / 16),
+        bitrate: 1_000_000,
+        framerate: 30,
+      },
+    });
+    return info.supported && info.smooth && info.powerEfficient ? "webm" : "mp4";
+  } catch {
+    return "mp4";
+  }
 }
 
 // Whether to fetch the background video at all: never for visitors who ask
@@ -156,12 +177,16 @@ export function Hero({
     const controller = new AbortController();
     let objectUrl: string | null = null;
     const start = () => {
-      fetch(cloudinaryVideoUrl(videoSrc, { width: heroVideoWidth(), extension: heroVideoExtension() }), {
-        credentials: "omit",
-        mode: "cors",
-        referrerPolicy: "no-referrer",
-        signal: controller.signal,
-      })
+      const width = heroVideoWidth();
+      heroVideoExtension(width)
+        .then((extension) =>
+          fetch(cloudinaryVideoUrl(videoSrc, { width, extension }), {
+            credentials: "omit",
+            mode: "cors",
+            referrerPolicy: "no-referrer",
+            signal: controller.signal,
+          })
+        )
         .then((response) => (response.ok ? response.blob() : Promise.reject(new Error(String(response.status)))))
         .then((blob) => {
           objectUrl = URL.createObjectURL(blob);

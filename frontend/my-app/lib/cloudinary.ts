@@ -61,10 +61,12 @@ export function cloudinarySrcSet(
 // prominent, and the default q_auto bitrate showed blocky compression on it.
 // Cloudinary transcodes to whatever the extension asks for, so one upload
 // serves both WebM (VP9, smaller) and MP4 (H.264, for Safari/iOS).
+// ac_none drops the audio track: the video always plays muted, and the WebM's
+// Vorbis audio is a codec Safari can't play at all.
 export function cloudinaryVideoUrl(url: string, { width, extension }: { width: number; extension: "webm" | "mp4" }): string {
   if (!isCloudinaryUrl(url)) return url;
   const insertAt = url.indexOf(UPLOAD_MARKER) + UPLOAD_MARKER.length;
-  const withTransform = `${url.slice(0, insertAt)}w_${width},c_limit,q_auto:best/${url.slice(insertAt)}`;
+  const withTransform = `${url.slice(0, insertAt)}w_${width},c_limit,q_auto:best,ac_none/${url.slice(insertAt)}`;
   return withTransform.replace(/\.[a-z0-9]+$/i, `.${extension}`);
 }
 
