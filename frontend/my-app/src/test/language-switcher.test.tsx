@@ -5,19 +5,20 @@ vi.mock("vike-react/usePageContext", () => ({
   usePageContext: vi.fn(),
 }));
 
-vi.mock("vike/client/router", () => ({
-  navigate: vi.fn(),
-}));
-
 import { usePageContext } from "vike-react/usePageContext";
-import { navigate } from "vike/client/router";
 import {
   LanguageSwitcher,
   LanguageSwitcherCompact,
 } from "../../components/ui/language-switcher";
 
 const mockPageContext = usePageContext as ReturnType<typeof vi.fn>;
-const mockNavigate = navigate as ReturnType<typeof vi.fn>;
+// Switching language is a full page load (window.location.assign): the
+// browser only has the current language's strings, see lib/i18n.ts.
+const mockNavigate = vi.fn();
+Object.defineProperty(window, "location", {
+  configurable: true,
+  value: { ...window.location, assign: mockNavigate },
+});
 
 describe("LanguageSwitcher", () => {
   beforeEach(() => {

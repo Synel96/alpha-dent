@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import "../../lib/i18n";
-import i18n from "../../lib/i18n";
+import "./i18n";
+import i18n from "./i18n";
 import { CLINIC } from "../../lib/clinic-info";
 import { SocialLink, SocialSoonNote } from "../../components/ui/social-link";
 

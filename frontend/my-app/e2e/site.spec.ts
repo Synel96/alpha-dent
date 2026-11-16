@@ -30,6 +30,26 @@ test.describe("pages and languages", () => {
   }
 });
 
+test.describe("language switching", () => {
+  test("loads the other language's page, in that language, with no raw translation keys", async ({ page }) => {
+    const errors: string[] = [];
+    page.on("pageerror", (error) => errors.push(error.message));
+    await page.goto("/hu/kapcsolat");
+    await page.locator('header button[aria-haspopup="menu"]:visible').click();
+    await page.getByRole("menuitem", { name: /^DE/ }).click();
+    await expect(page).toHaveURL(/\/de\/kontakt$/);
+    await expect(page.locator("html")).toHaveAttribute("lang", "de");
+    await expect(page.locator("h1")).not.toHaveText(/[a-z]+\.[a-zA-Z]+\./);
+    // Client-side navigation within the new language still has every string.
+    await page.locator('header a[href="/de/faq"]:visible').first().click();
+    await expect(page).toHaveURL(/\/de\/faq$/);
+    await expect(page.locator("main")).toContainText("Wo liegt die Praxis");
+    const body = await page.locator("body").innerText();
+    expect(body).not.toMatch(/\b(common|nav|faqPage|services|booking|clinic|gallery|contact)\.[a-zA-Z]/);
+    expect(errors).toEqual([]);
+  });
+});
+
 test.describe("appointment request dialog", () => {
   test("opens from the hero and closes with Escape", async ({ page }) => {
     await page.goto("/hu");

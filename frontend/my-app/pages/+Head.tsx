@@ -8,6 +8,7 @@ import {
   ogLocale,
   ogLocaleAlternates,
 } from "../lib/seo";
+import { TRANSLATIONS_ELEMENT_ID } from "../lib/i18n";
 import { pageStructuredData, serializeJsonLd } from "../lib/structured-data";
 
 const FONT_PRELOADS = ["/fonts/geist-1.8.2-latin-wght-normal.woff2", "/fonts/geist-1.8.2-latin-wght-italic.woff2"];
@@ -16,7 +17,7 @@ const FONT_PRELOADS = ["/fonts/geist-1.8.2-latin-wght-normal.woff2", "/fonts/gei
 // itself (see +title.ts, +description.ts, +image.ts); the rest of the link
 // preview and the schema.org markup are added here.
 export function Head() {
-  const { locale, urlPathname } = usePageContext();
+  const { locale, urlPathname, translations } = usePageContext();
   const canonical = absoluteLocalizedUrl(locale, urlPathname);
 
   return (
@@ -55,6 +56,14 @@ export function Head() {
       <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
       <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
 
+      {/* The page's locale's strings, which the browser starts from
+          (lib/i18n.ts) - so it never downloads the other languages. JSON,
+          not code: the CSP allows it. */}
+      <script
+        type="application/json"
+        id={TRANSLATIONS_ELEMENT_ID}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd({ locale, translation: translations }) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(pageStructuredData(locale, urlPathname)) }}

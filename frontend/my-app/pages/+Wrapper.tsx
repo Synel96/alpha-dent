@@ -9,14 +9,15 @@ import i18n, { createRequestI18n } from "../lib/i18n";
 // Also hosts the appointment request modal (components/ui/booking-dialog.tsx),
 // so every page's "Időpontot kérek" buttons can open it.
 function Wrapper({ children }: { children: React.ReactNode }) {
-  const { locale } = usePageContext();
+  const { locale, translations } = usePageContext();
 
   // See lib/i18n.ts: isolate each server render onto its own i18next
-  // instance so concurrent prerenders can't leak locale state into each
-  // other.
+  // instance, with just its locale's strings, so concurrent prerenders
+  // can't leak locale state into each other.
   if (typeof window === "undefined") {
+    if (!translations) throw new Error(`No translations for ${locale}: pages/+onBeforeRender.ts didn't run`);
     return (
-      <I18nextProvider i18n={createRequestI18n(locale)}>
+      <I18nextProvider i18n={createRequestI18n(locale, translations)}>
         <BookingDialogProvider>{children}</BookingDialogProvider>
       </I18nextProvider>
     );

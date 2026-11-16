@@ -7,6 +7,7 @@ vi.mock("vike-react/usePageContext", () => ({
 vi.mock("vike/client/router", () => ({ navigate: vi.fn() }));
 vi.mock("../../lib/analytics", () => ({ startAnalytics: vi.fn(), trackEvent: vi.fn() }));
 
+import "./i18n";
 import { BookingDialogProvider } from "../../components/ui/booking-dialog";
 import { Layout } from "../../pages/+Layout";
 

@@ -1,111 +1,76 @@
-import i18n from "i18next";
+import i18n, { type InitOptions } from "i18next";
 import { initReactI18next } from "react-i18next";
 
-import { bookingResources } from "./i18n/booking";
-import { clinicResources } from "./i18n/clinic";
-import { commonResources } from "./i18n/common";
-import { contactResources } from "./i18n/contact";
-import { errorResources } from "./i18n/error";
-import { faqResources } from "./i18n/faq";
-import { galleryResources } from "./i18n/gallery";
-import { metaResources } from "./i18n/meta";
-import { servicesResources } from "./i18n/services";
 import { DEFAULT_LOCALE, LOCALES, type Locale } from "./locale";
 
-const resources = {
-  hu: {
-    translation: {
-      ...commonResources.hu,
-      ...errorResources.hu,
-      ...contactResources.hu,
-      ...clinicResources.hu,
-      ...faqResources.hu,
-      ...galleryResources.hu,
-      ...servicesResources.hu,
-      ...metaResources.hu,
-      ...bookingResources.hu,
-    },
-  },
-  en: {
-    translation: {
-      ...commonResources.en,
-      ...errorResources.en,
-      ...contactResources.en,
-      ...clinicResources.en,
-      ...faqResources.en,
-      ...galleryResources.en,
-      ...servicesResources.en,
-      ...metaResources.en,
-      ...bookingResources.en,
-    },
-  },
-  de: {
-    translation: {
-      ...commonResources.de,
-      ...errorResources.de,
-      ...contactResources.de,
-      ...clinicResources.de,
-      ...faqResources.de,
-      ...galleryResources.de,
-      ...servicesResources.de,
-      ...metaResources.de,
-      ...bookingResources.de,
-    },
-  },
-  it: {
-    translation: {
-      ...commonResources.it,
-      ...errorResources.it,
-      ...contactResources.it,
-      ...clinicResources.it,
-      ...faqResources.it,
-      ...galleryResources.it,
-      ...servicesResources.it,
-      ...metaResources.it,
-      ...bookingResources.it,
-    },
-  },
-} as const;
+// Translations are not bundled here: a page only ever needs its own locale's
+// strings, so the prerender writes exactly those into the page's HTML (see
+// pages/+Head.tsx and pages/+onBeforeRender.ts), and the browser reads them
+// back from there before the first render. The other three languages are
+// never downloaded. Switching language is a full page load for the same
+// reason (components/ui/language-switcher.tsx).
 
-function syncResourceBundles() {
-  for (const lng of LOCALES) {
-    i18n.addResourceBundle(lng, "translation", resources[lng].translation, true, true);
-  }
+export type Translation = Record<string, unknown>;
+
+// The id of the <script type="application/json"> that carries them. A JSON
+// script is data, not code, so the CSP (script-src 'self') allows it.
+export const TRANSLATIONS_ELEMENT_ID = "i18n-translations";
+
+export type EmbeddedTranslations = { locale: Locale; translation: Translation };
+
+const OPTIONS: InitOptions = {
+  fallbackLng: DEFAULT_LOCALE,
+  supportedLngs: LOCALES,
+  ns: ["translation"],
+  defaultNS: "translation",
+  interpolation: {
+    escapeValue: false,
+  },
+  react: {
+    useSuspense: false,
+  },
+  // Resources are given up front, so init is synchronous: the first render
+  // (and hydration) already has every string.
+  initAsync: false,
+};
+
+export function addTranslations(locale: Locale, translation: Translation) {
+  i18n.addResourceBundle(locale, "translation", translation, true, true);
+}
+
+function readEmbeddedTranslations(): EmbeddedTranslations | null {
+  if (typeof document === "undefined") return null;
+  const element = document.getElementById(TRANSLATIONS_ELEMENT_ID);
+  if (!element?.textContent) return null;
+  return JSON.parse(element.textContent) as EmbeddedTranslations;
 }
 
 if (!i18n.isInitialized) {
   // The active language is driven by the URL locale prefix (see
   // pages/+onBeforeRoute.ts), not by browser detection or localStorage.
-  // pages/+Layout.tsx syncs i18n to pageContext.locale on every render.
+  // pages/+Wrapper.tsx and pages/+Layout.tsx keep i18n on pageContext.locale.
+  const embedded = readEmbeddedTranslations();
   i18n.use(initReactI18next).init({
-    resources,
-    lng: DEFAULT_LOCALE,
-    fallbackLng: DEFAULT_LOCALE,
-    supportedLngs: LOCALES,
-    ns: ["translation"],
-    defaultNS: "translation",
-    interpolation: {
-      escapeValue: false,
-    },
-    react: {
-      useSuspense: false,
-    },
+    ...OPTIONS,
+    resources: embedded ? { [embedded.locale]: { translation: embedded.translation } } : {},
+    lng: embedded?.locale ?? DEFAULT_LOCALE,
   });
-} else {
-  // Keep server/client resources in sync across HMR and route-level module loads.
-  syncResourceBundles();
 }
 
 // Vike's prerender step can render many pages concurrently in the same
-// Node process. The default export above is a single shared, mutable
-// i18next instance - if every page's render mutated its `language` via
-// i18n.changeLanguage() (as pages/+Layout.tsx does), concurrent renders
-// could stomp on each other's locale mid-render, baking page A's content
-// into page B's HTML. pages/+Wrapper.tsx uses this to give every *server*
-// render its own isolated instance; the client keeps using the shared
-// singleton above, which is safe since only one page is ever active there.
-export function createRequestI18n(locale: Locale) {
-  return i18n.cloneInstance({ lng: locale });
+// Node process, so every *server* render gets its own isolated instance
+// (pages/+Wrapper.tsx) with just its page's locale - a shared, mutable
+// instance would let page A's locale leak into page B's HTML. The client
+// keeps using the shared singleton above, which is safe since only one page
+// is ever active there.
+export function createRequestI18n(locale: Locale, translation: Translation) {
+  const instance = i18n.createInstance();
+  instance.use(initReactI18next).init({
+    ...OPTIONS,
+    resources: { [locale]: { translation } },
+    lng: locale,
+  });
+  return instance;
 }
 
 export default i18n;

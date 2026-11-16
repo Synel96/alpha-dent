@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, afterEach } from "vitest";
-import i18n from "../../lib/i18n";
+import i18n from "./i18n";
 import { ClinicHighlights } from "../../components/ui/clinic-highlights";
 
 describe("Bizalmi számok (főoldal + Klinikánk)", () => {

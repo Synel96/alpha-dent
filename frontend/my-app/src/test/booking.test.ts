@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { bookingMailto, bookingWebmailLinks, isDesktopPointer } from "../../lib/booking";
 import { bookingResources } from "../../lib/i18n/booking";
-import i18n from "../../lib/i18n";
+import i18n from "./i18n";
 import { LOCALES } from "../../lib/locale";
 
 describe("Időpontkérő e-mail", () => {

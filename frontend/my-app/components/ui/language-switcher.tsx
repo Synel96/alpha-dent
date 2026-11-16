@@ -1,5 +1,4 @@
 import React from "react";
-import { navigate } from "vike/client/router";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
 import { LOCALES, localizeHref, type Locale } from "@/lib/locale";
@@ -32,8 +31,10 @@ function useLocaleSwitch() {
 
   return (target: Locale) => {
     if (target === locale) return;
-    if (typeof document !== "undefined") document.documentElement.lang = target;
-    void navigate(localizeHref(target, urlPathname));
+    // A full page load, not client-side navigation: the browser only has the
+    // current language's strings (lib/i18n.ts), and the new page's HTML
+    // brings the other's.
+    window.location.assign(localizeHref(target, urlPathname));
   };
 }
 

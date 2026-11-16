@@ -13,7 +13,7 @@ vi.mock("../../lib/booking", async (importOriginal) => ({
   isDesktopPointer: () => desktop,
 }));
 
-import "../../lib/i18n";
+import "./i18n";
 import { BookingDialogProvider, useBookingCta } from "../../components/ui/booking-dialog";
 import { startAnalytics } from "../../lib/analytics";
 

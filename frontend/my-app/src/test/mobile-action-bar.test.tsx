@@ -19,7 +19,7 @@ const setHeroProgress = (value: number) =>
     listeners.forEach((listener) => listener());
   });
 
-import "../../lib/i18n";
+import "./i18n";
 import { BookingDialogProvider } from "../../components/ui/booking-dialog";
 import { MobileActionBar } from "../../components/ui/mobile-action-bar";
 

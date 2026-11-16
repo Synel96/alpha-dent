@@ -8,6 +8,10 @@ declare global {
   namespace Vike {
     interface PageContext {
       locale: Locale;
+      // The page's locale's strings - server-side only (pages/+onBeforeRender.ts),
+      // never passed to the client as such: pages/+Head.tsx writes them into
+      // the HTML instead.
+      translations?: Record<string, unknown>;
     }
   }
 }
