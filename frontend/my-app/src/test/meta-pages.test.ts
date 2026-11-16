@@ -12,7 +12,7 @@ const PAGES = Object.keys(metaResources.hu.meta.pages) as MetaPage[];
 
 describe("Per-oldal title/description", () => {
   it("a +title / +description fájlok a saját oldaluk lefordított szövegét adják", () => {
-    expect(rootTitle({ locale: "hu" })).toBe("Alphadent Fogászati Klinika Sopron | Implantológia, Szájsebészet");
+    expect(rootTitle({ locale: "hu" })).toBe("Alphadent Fogászat Sopron | Implantológia, Szájsebészet");
     expect(rootDescription({ locale: "de" })).toContain("Zahnklinik in Sopron");
     expect(implantTitle({ locale: "de" })).toBe("Zahnimplantate in Sopron, Ungarn | Alphadent");
     expect(contactTitle({ locale: "hu" })).toContain("Arany János u. 13.");
@@ -53,5 +53,22 @@ describe("Per-oldal title/description", () => {
       const titles = PAGES.map((page) => metaResources[locale].meta.pages[page].title);
       expect(new Set(titles).size).toBe(titles.length);
     }
+  });
+});
+
+describe("Oldalcímek hossza", () => {
+  it("egyik nyelven sem hosszabb 60 karakternél, hogy a Google ne vágja le a találatban", async () => {
+    const { metaResources } = await import("../../lib/i18n/meta");
+    const titles: string[] = [];
+    const collect = (node: unknown) => {
+      if (!node || typeof node !== "object") return;
+      for (const [key, value] of Object.entries(node)) {
+        if (key === "title" && typeof value === "string") titles.push(value);
+        else collect(value);
+      }
+    };
+    collect(metaResources);
+    expect(titles.length).toBeGreaterThan(40);
+    expect(titles.filter((title) => title.length > 60)).toEqual([]);
   });
 });

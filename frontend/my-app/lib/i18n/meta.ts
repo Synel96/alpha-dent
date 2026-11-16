@@ -23,7 +23,7 @@ export const metaResources = {
     meta: {
       pages: {
         home: {
-          title: "Alphadent Fogászati Klinika Sopron | Implantológia, Szájsebészet",
+          title: "Alphadent Fogászat Sopron | Implantológia, Szájsebészet",
           description:
             "Fogászati klinika Sopronban 1996 óta: implantológia, szájsebészet, esztétikai fogászat és saját fogtechnikai labor. CAMLOG arany referenciarendelő.",
         },
@@ -48,7 +48,7 @@ export const metaResources = {
             "Szájsebészet Sopronban: foghúzás, bölcsességfog-eltávolítás, gyökércsúcs-amputáció, csontpótlás, sinus lift. Kíméletes kezelés, alapos érzéstelenítés.",
         },
         esztetikaiFogaszat: {
-          title: "Esztétikai fogászat Sopronban – korona, fehérítés | Alphadent",
+          title: "Esztétikai fogászat Sopron – korona, fehérítés | Alphadent",
           description:
             "Esztétikai fogászat Sopronban: kerámia és cirkónium koronák, hidak, inlay, onlay, fogfehérítés. Természetes mosoly, saját fogtechnikai laborunkból.",
         },
@@ -84,12 +84,12 @@ export const metaResources = {
     meta: {
       pages: {
         home: {
-          title: "Alphadent Dental Clinic Sopron, Hungary | Implants & Oral Surgery",
+          title: "Alphadent Dental Clinic Sopron, Hungary | Implants & Surgery",
           description:
             "Dental clinic in Sopron, Hungary since 1996: implants, oral surgery, cosmetic dentistry and our own dental lab. CAMLOG Gold reference clinic.",
         },
         clinic: {
-          title: "Our Dental Clinic in Sopron, Hungary – Practice & Lab | Alphadent",
+          title: "Our Dental Clinic in Sopron – Practice & Lab | Alphadent",
           description:
             "Get to know our dental clinic in Sopron: a modern practice and our own CAD/CAM dental lab since 1996, and a CAMLOG Gold reference clinic for implants.",
         },
@@ -104,7 +104,7 @@ export const metaResources = {
             "Dental implants in Sopron, Hungary, from a single tooth to a full arch. CAMLOG Gold reference clinic, zirconia implants, in-house lab. Book a consultation.",
         },
         szajsebeszet: {
-          title: "Oral Surgery in Sopron – Extractions, Wisdom Teeth | Alphadent",
+          title: "Oral Surgery Sopron – Extractions, Wisdom Teeth | Alphadent",
           description:
             "Oral surgery in Sopron: extractions, wisdom tooth removal, apicoectomy, bone grafting and sinus lift. Gentle care with thorough local anaesthesia.",
         },
@@ -145,12 +145,12 @@ export const metaResources = {
     meta: {
       pages: {
         home: {
-          title: "Alphadent Zahnklinik Sopron, Ungarn | Implantate & Oralchirurgie",
+          title: "Alphadent Zahnklinik Sopron, Ungarn | Implantate & Chirurgie",
           description:
             "Zahnklinik in Sopron, Ungarn, seit 1996: Implantologie, Oralchirurgie, ästhetische Zahnmedizin und eigenes Dentallabor. CAMLOG Gold-Referenzpraxis.",
         },
         clinic: {
-          title: "Unsere Zahnklinik in Sopron, Ungarn – Praxis & Labor | Alphadent",
+          title: "Unsere Zahnklinik in Sopron – Praxis & Labor | Alphadent",
           description:
             "Lernen Sie unsere Zahnklinik in Sopron kennen: moderne Praxis und eigenes CAD/CAM-Dentallabor seit 1996, CAMLOG Gold-Referenzpraxis für Implantologie.",
         },
@@ -170,7 +170,7 @@ export const metaResources = {
             "Oralchirurgie in Sopron: Zahnextraktion, Weisheitszahnentfernung, Wurzelspitzenresektion, Knochenaufbau und Sinuslift – schonend und gut betäubt.",
         },
         esztetikaiFogaszat: {
-          title: "Ästhetische Zahnmedizin in Sopron – Kronen, Bleaching | Alphadent",
+          title: "Zahnästhetik in Sopron – Kronen, Bleaching | Alphadent",
           description:
             "Ästhetische Zahnmedizin in Sopron: Keramik- und Zirkonkronen, Brücken, Inlays, Onlays und Bleaching – aus unserem eigenen Dentallabor.",
         },
@@ -206,12 +206,12 @@ export const metaResources = {
     meta: {
       pages: {
         home: {
-          title: "Alphadent Clinica Dentale Sopron, Ungheria | Impianti e Chirurgia",
+          title: "Alphadent Clinica Dentale Sopron, Ungheria | Impianti",
           description:
             "Clinica dentale a Sopron, Ungheria, dal 1996: implantologia, chirurgia orale, odontoiatria estetica e laboratorio interno. Centro CAMLOG Gold.",
         },
         clinic: {
-          title: "La nostra clinica dentale a Sopron – studio e laboratorio | Alphadent",
+          title: "Clinica dentale a Sopron – studio e laboratorio | Alphadent",
           description:
             "Scopri la nostra clinica dentale a Sopron: studio moderno e laboratorio odontotecnico CAD/CAM interno dal 1996, centro di riferimento CAMLOG Gold.",
         },
@@ -226,12 +226,12 @@ export const metaResources = {
             "Impianti dentali a Sopron, Ungheria: da un singolo dente all'arcata completa. Centro CAMLOG Gold, impianti in zirconia, laboratorio interno.",
         },
         szajsebeszet: {
-          title: "Chirurgia orale a Sopron – estrazioni, denti del giudizio | Alphadent",
+          title: "Chirurgia orale Sopron – denti del giudizio | Alphadent",
           description:
             "Chirurgia orale a Sopron: estrazioni, denti del giudizio, apicectomia, innesti ossei e rialzo del seno mascellare. Cure delicate con anestesia accurata.",
         },
         esztetikaiFogaszat: {
-          title: "Odontoiatria estetica a Sopron – corone, sbiancamento | Alphadent",
+          title: "Estetica dentale Sopron – corone, sbiancamento | Alphadent",
           description:
             "Odontoiatria estetica a Sopron: corone in ceramica e zirconia, ponti, intarsi e sbiancamento, realizzati nel nostro laboratorio per un sorriso naturale.",
         },
