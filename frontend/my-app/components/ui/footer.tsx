@@ -68,7 +68,7 @@ export function Footer() {
             href={localizeHref(locale, "/")}
             className="inline-flex rounded-md text-brand-logo transition-colors hover:text-brand-logo-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-light/70"
           >
-            <AlphadentLogo className="h-10 w-auto" />
+            <AlphadentLogo reuse className="h-10 w-auto" />
             <span className="sr-only">Alphadent</span>
           </a>
           <div className="mt-5 flex items-center gap-4">

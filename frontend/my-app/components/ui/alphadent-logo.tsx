@@ -7,13 +7,24 @@ const LOGO_PATH =
 
 type AlphadentLogoProps = {
   className?: string;
+  // Draw the copy the page already has (the header's) instead of carrying the
+  // whole outline again: every page has the logo twice, and the outline is
+  // ~4.7 KB of HTML. Only for a logo that is always on the page together with
+  // the header's one (the footer's).
+  reuse?: boolean;
 };
 
+const LOGO_PATH_ID = "alphadent-logo-path";
+
 // Decorative on its own: the surrounding link carries the accessible name.
-export function AlphadentLogo({ className }: AlphadentLogoProps) {
+export function AlphadentLogo({ className, reuse = false }: AlphadentLogoProps) {
   return (
     <svg viewBox="0 0 1000 328" aria-hidden focusable="false" className={className}>
-      <path fill="currentColor" fillRule="evenodd" d={LOGO_PATH} />
+      {reuse ? (
+        <use href={`#${LOGO_PATH_ID}`} />
+      ) : (
+        <path id={LOGO_PATH_ID} fill="currentColor" fillRule="evenodd" d={LOGO_PATH} />
+      )}
     </svg>
   );
 }
