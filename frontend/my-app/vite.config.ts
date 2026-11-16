@@ -63,6 +63,6 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./src/test/setup.ts"],
     include: ["**/__tests__/**/*.{ts,tsx}", "**/*.test.{ts,tsx}"],
-    exclude: ["node_modules", "dist"],
+    exclude: ["node_modules", "dist", "e2e"],
   },
 });
