@@ -173,6 +173,7 @@ export function Hero({
   const sectionRef = React.useRef<HTMLElement | null>(null);
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
   const fillVideoRef = React.useRef<HTMLVideoElement | null>(null);
+  const videoButtonRef = React.useRef<HTMLButtonElement | null>(null);
   // Whether the blurred fill is showing (FIT_QUERY): only then is its second
   // <video> mounted, so other screens don't decode the clip twice.
   const [fitMode, setFitMode] = React.useState(false);
@@ -275,7 +276,14 @@ export function Hero({
   // Scrolling doesn't count as one in iOS, so it waits for a real tap.
   React.useEffect(() => {
     if (!autoplayBlocked) return;
-    const startOnTap = () => playIfWanted();
+    // Not on the video's own button: that tap is the button's to handle. A
+    // tap fires touchend before click, so this would start the video first,
+    // and if its play event got through before the click, the button would
+    // see it playing and stop it again.
+    const startOnTap = (event: Event) => {
+      if (event.target instanceof Node && videoButtonRef.current?.contains(event.target)) return;
+      playIfWanted();
+    };
     document.addEventListener("touchend", startOnTap, { capture: true, passive: true });
     document.addEventListener("click", startOnTap, { capture: true });
     return () => {
@@ -590,6 +598,7 @@ export function Hero({
             Also the way to start it where the browser won't do so by itself. */}
         {videoVisible || autoplayBlocked ? (
           <button
+            ref={videoButtonRef}
             type="button"
             onClick={toggleVideo}
             aria-label={videoPlaying ? t("common.heroVideo.pause") : t("common.heroVideo.play")}
