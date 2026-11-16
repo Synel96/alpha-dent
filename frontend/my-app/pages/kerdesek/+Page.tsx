@@ -1,6 +1,7 @@
 import { Globe, MapPin, Stethoscope, Wallet, type LucideIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePageContext } from "vike-react/usePageContext";
+import { FAQ_TOPICS, type FaqTopicKey } from "../../lib/faq-topics";
 import { localizeHref } from "../../lib/locale";
 import { CtaButton } from "../../components/ui/cta-button";
 import { FaqAccordion } from "../../components/ui/faq-accordion";
@@ -8,23 +9,14 @@ import { PageContainer } from "../../components/ui/page-container";
 import { RevealSection } from "../../components/ui/reveal-section";
 import { TextImageReveal } from "../../components/ui/text-image-reveal";
 
-type FaqTopic = {
-  key: "location" | "international" | "treatment" | "costs";
-  // Anchor of the topic's section - the same in every language, so a link
-  // like /hu/kerdesek#megkozelites can point at a topic.
-  anchor: string;
-  icon: LucideIcon;
-  questions: readonly string[];
+// Topics and their questions: lib/faq-topics.ts (shared with the page's
+// FAQPage markup). Only the icons are picked here.
+const TOPIC_ICONS: Record<FaqTopicKey, LucideIcon> = {
+  location: MapPin,
+  international: Globe,
+  treatment: Stethoscope,
+  costs: Wallet,
 };
-
-// Getting here comes first: it's what most visitors from the area (and from
-// across the Austrian border) want to know.
-const FAQ_TOPICS: readonly FaqTopic[] = [
-  { key: "location", anchor: "megkozelites", icon: MapPin, questions: ["q16", "q17", "q18"] },
-  { key: "international", anchor: "kulfoldi-pacienseknek", icon: Globe, questions: ["q1", "q15", "q9", "q7"] },
-  { key: "treatment", anchor: "kezeles", icon: Stethoscope, questions: ["q3", "q13", "q14", "q10", "q8"] },
-  { key: "costs", anchor: "koltsegek", icon: Wallet, questions: ["q2", "q4", "q5", "q6"] },
-];
 
 const ICON_RING =
   "inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-brand-gold/45 bg-brand-black/40 text-brand-gold-light";
@@ -47,7 +39,9 @@ function Page() {
 
       <nav aria-label={t("faqPage.topicsLabel")}>
         <ul className="flex flex-wrap gap-2">
-          {FAQ_TOPICS.map(({ key, anchor, icon: Icon }) => (
+          {FAQ_TOPICS.map(({ key, anchor }) => {
+            const Icon = TOPIC_ICONS[key];
+            return (
             <li key={key}>
               <a
                 href={`#${anchor}`}
@@ -57,11 +51,14 @@ function Page() {
                 {t(`faqPage.topics.${key}.title`)}
               </a>
             </li>
-          ))}
+            );
+          })}
         </ul>
       </nav>
 
-      {FAQ_TOPICS.map(({ key, anchor, icon: Icon, questions }, topicIndex) => (
+      {FAQ_TOPICS.map(({ key, anchor, questions }, topicIndex) => {
+        const Icon = TOPIC_ICONS[key];
+        return (
         // scroll-mt: the fixed navbar mustn't cover the heading after a jump.
         <section key={key} id={anchor} aria-labelledby={`${anchor}-title`} className="scroll-mt-24 space-y-4">
           <div className="flex items-center gap-3">
@@ -81,7 +78,8 @@ function Page() {
             }))}
           />
         </section>
-      ))}
+        );
+      })}
 
       <RevealSection>
         <section className="rounded-2xl border border-brand-gold/25 bg-[radial-gradient(circle_at_10%_0%,rgba(228,196,106,0.16),transparent_45%),linear-gradient(140deg,rgba(17,17,20,0.96),rgba(8,8,10,0.96))] p-6 md:p-8">

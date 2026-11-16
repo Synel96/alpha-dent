@@ -1,6 +1,8 @@
 import { CLINIC } from "./clinic-info";
 import { commonResources } from "./i18n/common";
 import { contactResources } from "./i18n/contact";
+import { faqResources } from "./i18n/faq";
+import { FAQ_QUESTIONS } from "./faq-topics";
 import { servicesResources } from "./i18n/services";
 import { pageMeta } from "./i18n/meta";
 import { DEFAULT_LOCALE, type Locale } from "./locale";
@@ -127,12 +129,32 @@ export function breadcrumbStructuredData(locale: Locale, pathname: string) {
   };
 }
 
-// Everything a page's <head> carries: the clinic and website, plus the
-// page's breadcrumbs.
+// The FAQ page's questions and answers, which Google can show as expandable
+// questions under the result (it does so for health sites). The same
+// questions, in the same order, as the page shows (lib/faq-topics.ts).
+export function faqStructuredData(locale: Locale) {
+  const items = faqResources[locale].faqPage.items as Record<string, { question: string; answer: string }>;
+  return {
+    "@type": "FAQPage",
+    "@id": `${absoluteLocalizedUrl(locale, "/kerdesek")}#faq`,
+    inLanguage: locale,
+    mainEntity: FAQ_QUESTIONS.map((key) => ({
+      "@type": "Question",
+      name: items[key].question,
+      acceptedAnswer: { "@type": "Answer", text: items[key].answer },
+    })),
+  };
+}
+
+// Everything a page's <head> carries: the clinic and website, the page's
+// breadcrumbs, and on the FAQ page its questions.
 export function pageStructuredData(locale: Locale, pathname: string) {
   const data = clinicStructuredData(locale);
-  const breadcrumbs = breadcrumbStructuredData(locale, pathname);
-  return breadcrumbs ? { ...data, "@graph": [...data["@graph"], breadcrumbs] } : data;
+  const extra = [
+    breadcrumbStructuredData(locale, pathname),
+    pathname === "/kerdesek" ? faqStructuredData(locale) : null,
+  ].filter((node) => node !== null);
+  return extra.length ? { ...data, "@graph": [...data["@graph"], ...extra] } : data;
 }
 
 // For a <script type="application/ld+json">: escape "<" so no string in the

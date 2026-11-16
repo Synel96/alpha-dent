@@ -30,7 +30,13 @@ export type AnalyticsEvent =
   // On a computer: how they chose to send it.
   | { name: "Booking Channel"; props: { channel: "mail-app" | "gmail" | "outlook" | "copy" } }
   // A plain call or e-mail link (tel:, or mailto: without a prepared e-mail).
-  | { name: "Call Click" | "Email Click"; props: { place: string } };
+  | { name: "Call Click" | "Email Click"; props: { place: string } }
+  // The hero's background video (components/ui/hero.tsx): which encoding
+  // this device was sent, and what became of it - "playing", "blocked" (the
+  // browser refused to start it, e.g. iOS Low Power Mode) or "gave-up" (it
+  // kept stalling and the photo was put back). Shows a device that can't
+  // play it before anyone has to report it.
+  | { name: "Hero Video"; props: { format: "webm" | "hevc" | "mp4"; result: "playing" | "blocked" | "gave-up" } };
 
 export function trackEvent(event: AnalyticsEvent) {
   track(event.name, event.props);

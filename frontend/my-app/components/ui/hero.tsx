@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { cloudinaryUrl, cloudinarySrcSet, cloudinaryVideoUrl, type VideoFormat } from "@/lib/cloudinary";
 import { CtaButton } from "@/components/ui/cta-button";
+import { trackEvent } from "@/lib/analytics";
 
 // Layout's navbar reads this to fade from transparent (over the hero media)
 // to fully opaque by the time the hero's bottom edge reaches the top of the
@@ -202,6 +203,17 @@ export function Hero({
   // start it then: the play button shows, and the visitor's first tap
   // anywhere on the page starts it too.
   const [autoplayBlocked, setAutoplayBlocked] = React.useState(false);
+  // The encoding that was downloaded, and the outcomes already reported for
+  // it (see the "Hero Video" event in lib/analytics.ts): each at most once
+  // per page view.
+  const videoFormatRef = React.useRef<VideoFormat | null>(null);
+  const reportedRef = React.useRef(new Set<string>());
+  const reportVideo = (result: "playing" | "blocked" | "gave-up") => {
+    const format = videoFormatRef.current;
+    if (!format || reportedRef.current.has(result)) return;
+    reportedRef.current.add(result);
+    trackEvent({ name: "Hero Video", props: { format, result } });
+  };
 
   // Starts downloading the whole video as soon as the page itself has loaded
   // (no lazy loading - it doesn't wait for a scroll), and only hands it to the
@@ -218,14 +230,15 @@ export function Hero({
     const start = () => {
       const width = heroVideoWidth();
       heroVideoFormat(width)
-        .then((format) =>
-          fetch(cloudinaryVideoUrl(videoSrc, { width, format }), {
+        .then((format) => {
+          videoFormatRef.current = format;
+          return fetch(cloudinaryVideoUrl(videoSrc, { width, format }), {
             credentials: "omit",
             mode: "cors",
             referrerPolicy: "no-referrer",
             signal: controller.signal,
-          })
-        )
+          });
+        })
         .then((response) => (response.ok ? response.blob() : Promise.reject(new Error(String(response.status)))))
         .then((blob) => {
           objectUrl = URL.createObjectURL(blob);
@@ -250,7 +263,10 @@ export function Hero({
       // Refused (NotAllowedError in iOS Low Power Mode, but browsers word it
       // differently): offer the play button. An AbortError only means a
       // pause() cut this play() short - nothing to offer then.
-      if (!(error instanceof DOMException && error.name === "AbortError")) setAutoplayBlocked(true);
+      if (!(error instanceof DOMException && error.name === "AbortError")) {
+        setAutoplayBlocked(true);
+        reportVideo("blocked");
+      }
     });
   };
 
@@ -347,6 +363,7 @@ export function Hero({
         if (stalls >= MAX_VIDEO_STALLS) {
           window.clearInterval(timer);
           gaveUpRef.current = true;
+          reportVideo("gave-up");
           video.pause();
           setVideoVisible(false);
           return;
@@ -541,6 +558,7 @@ export function Hero({
                 onPlaying={() => {
                   setVideoVisible(true);
                   setAutoplayBlocked(false);
+                  reportVideo("playing");
                 }}
                 onPlay={() => {
                   setVideoPlaying(true);

@@ -5,12 +5,15 @@ import { resolve } from "node:path";
 import {
   breadcrumbStructuredData,
   clinicStructuredData,
+  faqStructuredData,
   openingHoursSpecification,
   pageStructuredData,
   serializeJsonLd,
 } from "../../lib/structured-data";
 import { LOCALES, PAGE_PATHNAMES } from "../../lib/locale";
 import { ogImageUrl } from "../../lib/seo";
+import { FAQ_QUESTIONS, FAQ_TOPICS } from "../../lib/faq-topics";
+import { faqResources } from "../../lib/i18n/faq";
 
 describe("schema.org strukturált adat", () => {
   const graph = clinicStructuredData("hu")["@graph"];
@@ -102,5 +105,31 @@ describe("morzsamenü (BreadcrumbList)", () => {
   it("a fejlécbe kerülő adatban a rendelő mellett ott a morzsamenü", () => {
     const types = pageStructuredData("hu", "/kapcsolat")["@graph"].map((node) => node["@type"]);
     expect(types).toEqual(["Dentist", "WebSite", "BreadcrumbList"]);
+  });
+});
+
+describe("GYIK strukturált adat (FAQPage)", () => {
+  it("minden nyelven pontosan azokat a kérdéseket adja, az oldal sorrendjében, amiket az oldal mutat", () => {
+    expect(FAQ_QUESTIONS).toEqual(FAQ_TOPICS.flatMap((topic) => topic.questions));
+    for (const locale of LOCALES) {
+      const faq = faqStructuredData(locale);
+      const items = faqResources[locale].faqPage.items as Record<string, { question: string; answer: string }>;
+      expect(faq["@type"]).toBe("FAQPage");
+      expect(faq.inLanguage).toBe(locale);
+      expect(faq.mainEntity.map((entry) => entry.name)).toEqual(FAQ_QUESTIONS.map((key) => items[key].question));
+      for (const entry of faq.mainEntity) {
+        expect(entry["@type"]).toBe("Question");
+        expect(entry.name.trim().length).toBeGreaterThan(5);
+        expect(entry.acceptedAnswer.text.trim().length).toBeGreaterThan(10);
+      }
+    }
+  });
+
+  it("csak a GYIK oldalon kerül a fejlécbe", () => {
+    const types = (pathname: string) =>
+      (pageStructuredData("de", pathname)["@graph"] as Array<{ "@type": string }>).map((node) => node["@type"]);
+    expect(types("/kerdesek")).toContain("FAQPage");
+    expect(types("/")).not.toContain("FAQPage");
+    expect(types("/kapcsolat")).not.toContain("FAQPage");
   });
 });
