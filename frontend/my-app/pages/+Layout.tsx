@@ -224,7 +224,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
               forces the browser off the compositor thread every frame. */}
           <div
             aria-hidden
-            className="absolute inset-0 border-b border-brand-border bg-brand-black/90 backdrop-blur transition-opacity duration-200"
+            // No backdrop-filter: on a bar fixed over the whole scrolling page it
+            // is what phones repaint last, and visibly, after coming back from
+            // another app. At this opacity the blur was barely visible anyway.
+            className="absolute inset-0 border-b border-brand-border bg-brand-black/95 transition-opacity duration-200"
             style={{ opacity: heroProgress }}
           />
           <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4">

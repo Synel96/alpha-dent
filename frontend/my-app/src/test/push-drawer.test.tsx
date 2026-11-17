@@ -32,8 +32,11 @@ describe("PushDrawer", () => {
     const panel = document.body.querySelector('[role="dialog"]') as HTMLElement;
     expect(panel.style.transform).toContain("translateX(100%)");
 
+    // Not even an identity transform or will-change while closed: either
+    // keeps the whole page on its own layer in the phone's graphics memory.
     const body = container.querySelector(".page-body") as HTMLElement;
-    expect(body.style.transform).toBe("translateX(0) scale(1)");
+    expect(body.style.transform).toBe("");
+    expect(body.style.willChange).toBe("");
   });
 
   it("megnyitáskor a panel a helyére csúszik, az oldal pedig pontosan a panel szélességével eltolódik", () => {

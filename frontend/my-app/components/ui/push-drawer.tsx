@@ -8,7 +8,8 @@ import { cn } from "@/lib/utils";
 // on the panel itself. All animation lives here so <PushDrawerBody> (wraps
 // the rest of the page) and <PushDrawerContent> (the panel) only need to
 // read the same `open` boolean to stay in sync - nothing page-specific.
-const TRANSITION = "420ms cubic-bezier(0.22,1,0.36,1)";
+const TRANSITION_MS = 420;
+const TRANSITION = `${TRANSITION_MS}ms cubic-bezier(0.22,1,0.36,1)`;
 
 // Mirrors the panel's own width classes below (w-3/4, max-w-sm) so the
 // page push always matches the panel's rendered width, without having to
@@ -134,8 +135,26 @@ type PushDrawerBodyProps = {
 // Wraps the rest of the page (header + main + footer). Shifts left by
 // exactly the drawer panel's width and scales down a touch, so the page
 // visibly "slides aside" for the drawer rather than being covered by it.
+//
+// The transform and will-change are only there while the drawer is open or
+// sliding shut. Always on, they kept a second copy of the entire page (every
+// screenful of it) in the phone's graphics memory; phones drop that memory
+// when the browser goes to the background, and repainting it all on return
+// showed as the page flickering. `isolate` keeps the stacking context the
+// transform used to give, so nothing inside can rise above the header.
 export function PushDrawerBody({ open, children, className }: PushDrawerBodyProps) {
   const [panelWidth, setPanelWidth] = React.useState(0);
+  // True from opening until the closing slide has finished.
+  const [moving, setMoving] = React.useState(open);
+
+  React.useEffect(() => {
+    if (open) {
+      setMoving(true);
+      return;
+    }
+    const timer = window.setTimeout(() => setMoving(false), TRANSITION_MS + 50);
+    return () => window.clearTimeout(timer);
+  }, [open]);
 
   React.useEffect(() => {
     const updateWidth = () => setPanelWidth(getPanelWidth());
@@ -146,12 +165,16 @@ export function PushDrawerBody({ open, children, className }: PushDrawerBodyProp
 
   return (
     <div
-      className={cn("min-h-screen", className)}
-      style={{
-        transform: open ? `translateX(-${panelWidth}px) scale(0.97)` : "translateX(0) scale(1)",
-        transition: `transform ${TRANSITION}`,
-        willChange: "transform",
-      }}
+      className={cn("isolate min-h-screen", className)}
+      style={
+        open || moving
+          ? {
+              transform: open ? `translateX(-${panelWidth}px) scale(0.97)` : "translateX(0) scale(1)",
+              transition: `transform ${TRANSITION}`,
+              willChange: "transform",
+            }
+          : undefined
+      }
     >
       {children}
     </div>

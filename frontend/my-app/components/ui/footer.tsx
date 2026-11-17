@@ -61,7 +61,7 @@ export function Footer() {
   const { locale } = usePageContext();
 
   return (
-    <footer data-analytics-place="footer" className="border-t border-brand-border bg-brand-black/80 backdrop-blur-sm text-brand-gold">
+    <footer data-analytics-place="footer" className="border-t border-brand-border bg-brand-black/85 text-brand-gold">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div>
           <a

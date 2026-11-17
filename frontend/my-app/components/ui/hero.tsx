@@ -317,14 +317,9 @@ export function Hero({
     const resume = () => {
       if (document.visibilityState !== "visible") return;
       resumedAtRef.current = performance.now();
-      const video = videoRef.current;
-      // Paused by the phone while away: until it plays again it may show a
-      // blank or stale frame. Show the photo underneath meanwhile; it fades
-      // back to the video once that is playing (onPlaying), instead of
-      // flashing.
-      if (video?.paused && !userPausedRef.current && !gaveUpRef.current && inViewRef.current) {
-        setVideoVisible(false);
-      }
+      // The video keeps showing the frame it was paused on and just plays
+      // on from there. (It used to be swapped for the photo until it played
+      // again - a fade out and back in on every return, i.e. a flicker.)
       playIfWanted();
     };
     document.addEventListener("visibilitychange", resume);
